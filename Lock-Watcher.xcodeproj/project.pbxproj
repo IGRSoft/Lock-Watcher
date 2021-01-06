@@ -7,13 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */; };
 		A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */; };
-		A5C6DBF425796A90009DE750 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* ContentView.swift */; };
+		A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
 		A5C6DC0525796A93009DE750 /* Lock_WatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0425796A93009DE750 /* Lock_WatcherTests.swift */; };
 		A5C6DC1025796A93009DE750 /* Lock_WatcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0F25796A93009DE750 /* Lock_WatcherUITests.swift */; };
 		A5C6DC3225796B80009DE750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DC2E25796B80009DE750 /* Assets.xcassets */; };
 		A5C6DC3325796B80009DE750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DC3025796B80009DE750 /* Preview Assets.xcassets */; };
 		A5C6DC4625796CCB009DE750 /* PhotoSnap in Frameworks */ = {isa = PBXBuildFile; productRef = A5C6DC4525796CCB009DE750 /* PhotoSnap */; };
+		A5E6D75725A5BB6C00EEA7DD /* XPCPower.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D75625A5BB6C00EEA7DD /* XPCPower.m */; };
+		A5E6D75925A5BB6C00EEA7DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D75825A5BB6C00EEA7DD /* main.m */; };
+		A5E6D75D25A5BB6C00EEA7DD /* XPCPower.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A5E6D76825A5BC1B00EEA7DD /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E6D76725A5BC1B00EEA7DD /* IOKit.framework */; };
+		A5E6D76F25A5BC8B00EEA7DD /* XPCPowerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */; };
+		A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */; };
+		A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */; };
+		A5E6D78E25A5CD2E00EEA7DD /* TrigerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78D25A5CD2E00EEA7DD /* TrigerManager.swift */; };
+		A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79425A5D13000EEA7DD /* BaseListener.swift */; };
+		A5E6D79F25A5D1AE00EEA7DD /* PowerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */; };
+		A5E6D7A625A5D1EB00EEA7DD /* SettingsDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D7A525A5D1EB00EEA7DD /* SettingsDto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,12 +43,34 @@
 			remoteGlobalIDString = A5C6DBED25796A90009DE750;
 			remoteInfo = "Lock-Watcher";
 		};
+		A5E6D75B25A5BB6C00EEA7DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5E6D75125A5BB6B00EEA7DD;
+			remoteInfo = XPCPower;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A5E6D76125A5BB6C00EEA7DD /* Embed XPC Services */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				A5E6D75D25A5BB6C00EEA7DD /* XPCPower.xpc in Embed XPC Services */,
+			);
+			name = "Embed XPC Services";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
 		A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherApp.swift; sourceTree = "<group>"; };
-		A5C6DBF325796A90009DE750 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A5C6DBF325796A90009DE750 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A5C6DC0025796A93009DE750 /* Lock-WatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lock-WatcherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DC0425796A93009DE750 /* Lock_WatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherTests.swift; sourceTree = "<group>"; };
 		A5C6DC0625796A93009DE750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +81,20 @@
 		A5C6DC2E25796B80009DE750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5C6DC3025796B80009DE750 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A5C6DC3125796B80009DE750 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCPower.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5E6D75525A5BB6C00EEA7DD /* XPCPower.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XPCPower.h; sourceTree = "<group>"; };
+		A5E6D75625A5BB6C00EEA7DD /* XPCPower.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XPCPower.m; sourceTree = "<group>"; };
+		A5E6D75825A5BB6C00EEA7DD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A5E6D75A25A5BB6C00EEA7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5E6D76725A5BC1B00EEA7DD /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		A5E6D76D25A5BC8A00EEA7DD /* XPCPower-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XPCPower-Bridging-Header.h"; sourceTree = "<group>"; };
+		A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCPowerProtocol.swift; sourceTree = "<group>"; };
+		A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefManager.swift; sourceTree = "<group>"; };
+		A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		A5E6D78D25A5CD2E00EEA7DD /* TrigerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigerManager.swift; sourceTree = "<group>"; };
+		A5E6D79425A5D13000EEA7DD /* BaseListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListener.swift; sourceTree = "<group>"; };
+		A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerListener.swift; sourceTree = "<group>"; };
+		A5E6D7A525A5D1EB00EEA7DD /* SettingsDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +120,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5E6D74F25A5BB6B00EEA7DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E6D76825A5BC1B00EEA7DD /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -82,7 +138,9 @@
 				A5C6DBF025796A90009DE750 /* Source */,
 				A5C6DC0325796A93009DE750 /* Tests */,
 				A5C6DC0E25796A93009DE750 /* UITests */,
+				A5E6D75325A5BB6C00EEA7DD /* XPCPower */,
 				A5C6DBEF25796A90009DE750 /* Products */,
+				A5E6D76625A5BC1B00EEA7DD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +150,7 @@
 				A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */,
 				A5C6DC0025796A93009DE750 /* Lock-WatcherTests.xctest */,
 				A5C6DC0B25796A93009DE750 /* Lock-WatcherUITests.xctest */,
+				A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,8 +158,11 @@
 		A5C6DBF025796A90009DE750 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A5E6D7A425A5D1C200EEA7DD /* Models */,
+				A5E6D79325A5D11200EEA7DD /* Listeners */,
+				A5E6D77C25A5CB8900EEA7DD /* Managers */,
 				A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */,
-				A5C6DBF325796A90009DE750 /* ContentView.swift */,
+				A5C6DBF325796A90009DE750 /* SettingsView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -142,6 +204,55 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		A5E6D75325A5BB6C00EEA7DD /* XPCPower */ = {
+			isa = PBXGroup;
+			children = (
+				A5E6D75525A5BB6C00EEA7DD /* XPCPower.h */,
+				A5E6D75625A5BB6C00EEA7DD /* XPCPower.m */,
+				A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */,
+				A5E6D75825A5BB6C00EEA7DD /* main.m */,
+				A5E6D75A25A5BB6C00EEA7DD /* Info.plist */,
+				A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */,
+				A5E6D76D25A5BC8A00EEA7DD /* XPCPower-Bridging-Header.h */,
+			);
+			path = XPCPower;
+			sourceTree = "<group>";
+		};
+		A5E6D76625A5BC1B00EEA7DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5E6D76725A5BC1B00EEA7DD /* IOKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A5E6D77C25A5CB8900EEA7DD /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */,
+				A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */,
+				A5E6D78D25A5CD2E00EEA7DD /* TrigerManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		A5E6D79325A5D11200EEA7DD /* Listeners */ = {
+			isa = PBXGroup;
+			children = (
+				A5E6D79425A5D13000EEA7DD /* BaseListener.swift */,
+				A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */,
+			);
+			path = Listeners;
+			sourceTree = "<group>";
+		};
+		A5E6D7A425A5D1C200EEA7DD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A5E6D7A525A5D1EB00EEA7DD /* SettingsDto.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -152,10 +263,12 @@
 				A5C6DBEA25796A90009DE750 /* Sources */,
 				A5C6DBEB25796A90009DE750 /* Frameworks */,
 				A5C6DBEC25796A90009DE750 /* Resources */,
+				A5E6D76125A5BB6C00EEA7DD /* Embed XPC Services */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A5E6D75C25A5BB6C00EEA7DD /* PBXTargetDependency */,
 			);
 			name = "Lock-Watcher";
 			packageProductDependencies = (
@@ -201,6 +314,23 @@
 			productReference = A5C6DC0B25796A93009DE750 /* Lock-WatcherUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		A5E6D75125A5BB6B00EEA7DD /* XPCPower */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5E6D75E25A5BB6C00EEA7DD /* Build configuration list for PBXNativeTarget "XPCPower" */;
+			buildPhases = (
+				A5E6D74E25A5BB6B00EEA7DD /* Sources */,
+				A5E6D74F25A5BB6B00EEA7DD /* Frameworks */,
+				A5E6D75025A5BB6B00EEA7DD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XPCPower;
+			productName = XPCPower;
+			productReference = A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -208,7 +338,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					A5C6DBED25796A90009DE750 = {
 						CreatedOnToolsVersion = 12.2;
@@ -220,6 +350,10 @@
 					A5C6DC0A25796A93009DE750 = {
 						CreatedOnToolsVersion = 12.2;
 						TestTargetID = A5C6DBED25796A90009DE750;
+					};
+					A5E6D75125A5BB6B00EEA7DD = {
+						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
 					};
 				};
 			};
@@ -242,6 +376,7 @@
 				A5C6DBED25796A90009DE750 /* Lock-Watcher */,
 				A5C6DBFF25796A93009DE750 /* Lock-WatcherTests */,
 				A5C6DC0A25796A93009DE750 /* Lock-WatcherUITests */,
+				A5E6D75125A5BB6B00EEA7DD /* XPCPower */,
 			);
 		};
 /* End PBXProject section */
@@ -270,6 +405,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5E6D75025A5BB6B00EEA7DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -277,8 +419,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C6DBF425796A90009DE750 /* ContentView.swift in Sources */,
+				A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */,
+				A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */,
+				A5E6D79F25A5D1AE00EEA7DD /* PowerListener.swift in Sources */,
+				A5E6D78E25A5CD2E00EEA7DD /* TrigerManager.swift in Sources */,
+				A5E6D7A625A5D1EB00EEA7DD /* SettingsDto.swift in Sources */,
 				A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */,
+				A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */,
+				A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */,
+				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +447,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5E6D74E25A5BB6B00EEA7DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E6D75925A5BB6C00EEA7DD /* main.m in Sources */,
+				A5E6D75725A5BB6C00EEA7DD /* XPCPower.m in Sources */,
+				A5E6D76F25A5BC8B00EEA7DD /* XPCPowerProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -310,6 +469,11 @@
 			isa = PBXTargetDependency;
 			target = A5C6DBED25796A90009DE750 /* Lock-Watcher */;
 			targetProxy = A5C6DC0C25796A93009DE750 /* PBXContainerItemProxy */;
+		};
+		A5E6D75C25A5BB6C00EEA7DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5E6D75125A5BB6B00EEA7DD /* XPCPower */;
+			targetProxy = A5E6D75B25A5BB6C00EEA7DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -432,9 +596,11 @@
 		A5C6DC1525796A93009DE750 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Resources/Lock_Watcher.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "Resources/Preview\\ Content/Preview\\ Assets.xcassets";
@@ -456,9 +622,11 @@
 		A5C6DC1625796A93009DE750 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Resources/Lock_Watcher.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "Resources/Preview\\ Content/Preview\\ Assets.xcassets";
@@ -561,6 +729,55 @@
 			};
 			name = Release;
 		};
+		A5E6D75F25A5BB6C00EEA7DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = XPCPower/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A5E6D76025A5BB6C00EEA7DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = XPCPower/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -600,6 +817,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		A5E6D75E25A5BB6C00EEA7DD /* Build configuration list for PBXNativeTarget "XPCPower" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5E6D75F25A5BB6C00EEA7DD /* Debug */,
+				A5E6D76025A5BB6C00EEA7DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -608,7 +834,7 @@
 			repositoryURL = "https://github.com/iKorich/PhotoSnap.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.1.0;
+				minimumVersion = 0.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

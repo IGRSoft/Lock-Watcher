@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct Lock_WatcherApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SettingsView()
         }
     }
 }
