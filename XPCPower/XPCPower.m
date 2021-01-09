@@ -30,23 +30,13 @@ typedef void (^FoudChangesInPowerBlock)(NSInteger);
     self.foudChangesInPowerBlock = [replyBlock copy];
     _powerMode = IGRPowerModeUnknown;
     
-    
-    [self runCustomLoop];
+    [self startCustomLoop];
 }
 
 - (void)stopCheckPower{
     self.foudChangesInPowerBlock = nil;
     
-    if (_runLoopSource && _runLoop){
-        CFRunLoopRemoveSource(_runLoop,_runLoopSource,kCFRunLoopDefaultMode);
-    }
-    if (_runLoopSource){
-        CFRelease(_runLoopSource);
-    }
-}
-
-- (void)updateReplay:(void (^)(NSInteger))replyBlock {
-    self.foudChangesInPowerBlock = [replyBlock copy];
+    [self stopCustomLoop];
 }
 
 void IGRPowerMonitorCallback(void *context) {
@@ -76,7 +66,7 @@ void IGRPowerMonitorCallback(void *context) {
     }
 }
 
-- (void)runCustomLoop {
+- (void)startCustomLoop {
     _runLoop = CFRunLoopGetCurrent();
     _runLoopSource = IOPSCreateLimitedPowerNotification(IGRPowerMonitorCallback, (__bridge void *)(self));
     
@@ -87,6 +77,15 @@ void IGRPowerMonitorCallback(void *context) {
     IGRPowerMonitorCallback((__bridge void *)(self)); // get current power state
     
     CFRunLoopRun();
+}
+
+- (void)stopCustomLoop {
+    if (_runLoopSource && _runLoop) {
+        CFRunLoopRemoveSource(_runLoop,_runLoopSource,kCFRunLoopDefaultMode);
+    }
+    if (_runLoopSource){
+        CFRelease(_runLoopSource);
+    }
 }
 
 @end

@@ -11,15 +11,11 @@ public protocol BaseListenerProtocol {
     typealias ListenerAction = ((Bool) -> Void)
     
     var listenerAction: ListenerAction? { get set }
+    var isRunning: Bool { get }
     
     func start(_ action: @escaping ListenerAction)
     func stop()
 }
 
 class BaseListener {
-    internal var settings: SettingsDto?
-    
-    init(settings: SettingsDto) {
-        self.settings = settings
-    }
 }

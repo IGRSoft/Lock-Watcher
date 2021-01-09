@@ -11,5 +11,4 @@ import Foundation
 public protocol XPCPowerProtocol {
     @objc func startCheckPower(_ replyBlock: @escaping (NSInteger) -> Void)
     @objc func stopCheckPower()
-    @objc func updateReplay(_ replyBlock: @escaping (NSInteger) -> Void)
 }

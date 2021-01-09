@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import os
 
 class PowerListener: BaseListener, BaseListenerProtocol {
     enum PowerMode : Int {
@@ -13,60 +14,66 @@ class PowerListener: BaseListener, BaseListenerProtocol {
         case ac = 1
     }
     
+    private let kServiceName = "com.igrsoft.XPCPower"
+    
     var listenerAction: ListenerAction?
-    var connection: NSXPCConnection?
     
+    var isRunning = false
     
-    var service: XPCPowerProtocol {
-        let connection = NSXPCConnection(serviceName: "com.igrsoft.XPCPower")
+    private var connection: NSXPCConnection?
+    
+    private var service: XPCPowerProtocol {
+        let connection = NSXPCConnection(serviceName: kServiceName)
         connection.remoteObjectInterface = NSXPCInterface(with: XPCPowerProtocol.self)
         connection.resume()
         
         connection.interruptionHandler = {
-            print("Service interupted.")
+            os_log(.error, "Service XPCPower interupted")
         }
         
         connection.invalidationHandler = {
-            print("Service invalidated")
+            os_log(.error, "Service XPCPower invalidated")
         }
         
         let service = connection.remoteObjectProxyWithErrorHandler { error in
-            print("Received error:", error)
+            os_log(.error, "Received error: \(error.localizedDescription)")
         } as? XPCPowerProtocol
         
         self.connection = connection
         
         return service!
     }
-    
-    var _changesInPowerBlock: ((NSInteger) -> Void)?
-    
+        
     func changesInPowerBlock() -> ((NSInteger) -> Void) {
         let callback: ((NSInteger) -> Void) = { [weak self] mode in
-            let powerMode = PowerMode.init(rawValue: mode)
-            self?.listenerAction?(powerMode == .battery)
+            self?.isRunning = false
             
-            print("Power moved to \(powerMode == .battery ? "Battery" : "AC Power")")
+            let powerMode = PowerMode.init(rawValue: mode)
+            os_log(.debug, "Power switched to \(powerMode == .battery ? "Battery" : "AC Power")")
+            
+            self?.listenerAction?(powerMode == .battery)
         }
         
         return callback
     }
     
     func start(_ action: @escaping ListenerAction) {
-        stop()
+        os_log(.debug, "PowerListener started")
         
-        if settings?.isPowerListeningEnable == true {
-            print("PowerListener started")
-            
-            self.listenerAction = action
-            
-            service.startCheckPower(self.changesInPowerBlock())
-        }
+        self.listenerAction = action
+        
+        service.startCheckPower(self.changesInPowerBlock())
+        
+        isRunning = true
     }
     
     func stop() {
         self.listenerAction = nil
         (connection?.remoteObjectProxy as? XPCPowerProtocol)?.stopCheckPower()
         connection?.invalidate()
+        
+        os_log(.debug, "PowerListener stoped")
+        
+        isRunning = false
     }
 }

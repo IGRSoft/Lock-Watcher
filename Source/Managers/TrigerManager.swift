@@ -6,32 +6,57 @@
 //
 
 import Foundation
+import os
 
 class TrigerManager {
+    
+    enum ListenerName: String {
+        case onWakeUpListener, onWrongPassword, onBatteryPowerListener
+    }
     
     typealias TrigerBlock = ((Bool) -> Void)
     
     private var settings: SettingsDto?
     
-    private var listeners: [BaseListenerProtocol] = []
+    private var listeners: [ListenerName : BaseListenerProtocol] = [.onWakeUpListener : WakeUpListener(),
+                                                                    .onWrongPassword : WrongPasswordListener(),
+                                                                    .onBatteryPowerListener : PowerListener()]
     
-    init(settings: SettingsDto) {
-        self.settings = settings
-        self.listeners = [PowerListener(settings: settings)]
-    }
-    
-    public func start(_ trigerBlock: @escaping TrigerBlock = {trigered in}) {
-        self.stop()
+    public func start(settings: SettingsDto, _ trigerBlock: @escaping TrigerBlock = {trigered in}) {
+        os_log(.debug, "Starting all trigers")
         
-        for listener in self.listeners {
-            listener.start() { trigered in 
-                trigerBlock(trigered)
+        let runListener:(BaseListenerProtocol, Bool) -> Void = {listener, isEnabled in
+            if isEnabled == true {
+                if listener.isRunning == false {
+                    listener.start() { trigered in
+                        trigerBlock(trigered)
+                    }
+                }
+            }
+            else if listener.isRunning == true {
+                listener.stop()
             }
         }
+        
+        let enableOnWakeUpListener = settings.isUseSnapshotOnWakeUp == true
+        let wakeUpListener = listeners[.onWakeUpListener]
+        runListener(wakeUpListener!, enableOnWakeUpListener)
+        
+        let enableOnWrongPasswordListener = settings.isUseSnapshotOnWrongPassword == true
+        let wrongPasswordListener = listeners[.onWrongPassword]
+        runListener(wrongPasswordListener!, enableOnWrongPasswordListener)
+        
+        let enableOnBatteryPowerListener = settings.isUseSnapshotOnSwitchToBatteryPower == true
+        let powerListener = listeners[.onBatteryPowerListener]
+        runListener(powerListener!, enableOnBatteryPowerListener)
+        
+        self.settings = settings
     }
     
     public func stop() {
-        for listener in self.listeners {
+        os_log(.debug, "Stop all trigers")
+        
+        for listener in self.listeners.values {
             listener.stop()
         }
     }
