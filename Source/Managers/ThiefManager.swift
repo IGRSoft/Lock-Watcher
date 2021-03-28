@@ -31,10 +31,9 @@ class ThiefManager: NSObject, ObservableObject {
     init(_ watchBlock: @escaping WatchBlock = {trigered in}) {
         super.init()
         
-        self.setupLocationManager()
-        self.startWatching(watchBlock)
-        
-        detectedTriger()
+        setupLocationManager()
+        startWatching(watchBlock)
+        notificationManager.setupSettings(settings: settings)
     }
     
     private func setupLocationManager() {
@@ -46,17 +45,17 @@ class ThiefManager: NSObject, ObservableObject {
         os_log(.debug, "Start Watching")
         
         self.watchBlock = watchBlock
-        trigerManager.start(settings: settings) {[unowned self] trigered in
+        trigerManager.start(settings: settings) {[weak self] trigered in
             watchBlock(trigered)
             
             if trigered.trigerType != .empty {
                 DispatchQueue.main.async {
-                    self._lastThiefDetection.trigerType = trigered.trigerType
-                    self.detectedTriger()
+                    self?._lastThiefDetection.trigerType = trigered.trigerType
+                    self?.detectedTriger()
                 }
             }
             
-            self.startWatching(watchBlock)
+            self?.startWatching(watchBlock)
         }
     }
     
@@ -66,8 +65,8 @@ class ThiefManager: NSObject, ObservableObject {
     }
     
     public func restartWatching() {
-        trigerManager.start(settings: settings) {[unowned self] trigered in
-            self.watchBlock(trigered)
+        trigerManager.start(settings: settings) {[weak self] trigered in
+            self?.watchBlock(trigered)
         }
     }
     
@@ -82,10 +81,10 @@ class ThiefManager: NSObject, ObservableObject {
         #else
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = true
-        ps.fetchSnapshot() { [unowned self] photoModel in
+        ps.fetchSnapshot() { [weak self] photoModel in
             if let img = photoModel.images.last {
                 os_log(.debug, "\(img)")
-                self.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: Date()))
+                self?.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: Date()))
             }
         }
         #endif
@@ -95,7 +94,6 @@ class ThiefManager: NSObject, ObservableObject {
         _lastThiefDetection.snapshot = snapshot
         let filepath = FileSystemUtil.store(image: snapshot, forKey: filename)
         let _ = notificationManager.send(photo: filepath?.path,
-                                         to: self.settings.mailRecipient,
                                          coordinate: _lastThiefDetection.coordinate)
     }
 }

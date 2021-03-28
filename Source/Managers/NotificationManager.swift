@@ -10,9 +10,21 @@ import AppKit
 import CoreLocation
 
 class NotificationManager {
-    let mailNotifier = MailNotifier()
+    private let mailNotifier = MailNotifier()
     
-    func send(photo path: String?, to mail: String, coordinate: CLLocationCoordinate2D) -> Bool {
-        return mailNotifier.send(photo: path, to: mail, coordinate: coordinate)
+    private var settings: SettingsDto?
+    
+    func setupSettings(settings: SettingsDto) {
+        self.settings = settings
+    }
+    
+    func send(photo path: String?, coordinate: CLLocationCoordinate2D) -> Bool {
+        var result = false
+        
+        if settings?.isSendNotificationToMail == true, let mail = settings?.mailRecipient {
+            result = mailNotifier.send(photo: path, to: mail, coordinate: coordinate)
+        }
+        
+        return result
     }
 }

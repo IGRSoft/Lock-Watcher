@@ -37,11 +37,11 @@ class PowerListener: BaseListener, BaseListenerProtocol {
         
         let service = connection.remoteObjectProxyWithErrorHandler { error in
             os_log(.error, "Received error: \(error.localizedDescription)")
-        } as? XPCPowerProtocol
+        } as! XPCPowerProtocol
         
         self.connection = connection
         
-        return service!
+        return service
     }
     
     func start(_ action: @escaping ListenerAction) {

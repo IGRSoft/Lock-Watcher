@@ -20,6 +20,13 @@
 		A533D83C25AA12110046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
 		A533D84325AA126B0046B7C8 /* Mail.app in Resources */ = {isa = PBXBuildFile; fileRef = A533D84225AA126B0046B7C8 /* Mail.app */; };
 		A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
+		A54E4A2226108E9600E7B1D4 /* XPCAuthentication.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = A54E4A1726108E9600E7B1D4 /* XPCAuthentication.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
+		A54E4A2F26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
+		A54E4A582610AA3D00E7B1D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A562610AA3C00E7B1D4 /* main.swift */; };
+		A54E4A592610AA3D00E7B1D4 /* XPCAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */; };
+		A54E4A8A2610D3E500E7B1D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A892610D3E500E7B1D4 /* Constants.swift */; };
+		A54E4A8B2610D3E500E7B1D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A892610D3E500E7B1D4 /* Constants.swift */; };
 		A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */; };
 		A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */; };
 		A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
@@ -65,6 +72,13 @@
 			remoteGlobalIDString = A533D82525AA11F40046B7C8;
 			remoteInfo = XPCMail;
 		};
+		A54E4A2026108E9600E7B1D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A54E4A1626108E9600E7B1D4;
+			remoteInfo = XPCAuthentication;
+		};
 		A5C6DC0125796A93009DE750 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
@@ -95,6 +109,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
 			dstSubfolderSpec = 16;
 			files = (
+				A54E4A2226108E9600E7B1D4 /* XPCAuthentication.xpc in Embed XPC Services */,
 				A533D83125AA11F40046B7C8 /* XPCMail.xpc in Embed XPC Services */,
 				A5E6D75D25A5BB6C00EEA7DD /* XPCPower.xpc in Embed XPC Services */,
 			);
@@ -119,6 +134,13 @@
 		A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCMailProtocol.swift; sourceTree = "<group>"; };
 		A533D84225AA126B0046B7C8 /* Mail.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Mail.app; path = ../../../../../System/Applications/Mail.app; sourceTree = "<group>"; };
 		A533D86425AA26D80046B7C8 /* XPCMail.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCMail.entitlements; sourceTree = "<group>"; };
+		A54E4A1726108E9600E7B1D4 /* XPCAuthentication.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCAuthentication.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		A54E4A1F26108E9600E7B1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCAuthenticationProtocol.swift; sourceTree = "<group>"; };
+		A54E4A442610A76D00E7B1D4 /* XPCAuthentication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCAuthentication.entitlements; sourceTree = "<group>"; };
+		A54E4A562610AA3C00E7B1D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCAuthentication.swift; sourceTree = "<group>"; };
+		A54E4A892610D3E500E7B1D4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
 		A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherApp.swift; sourceTree = "<group>"; };
@@ -151,6 +173,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		A533D82325AA11F40046B7C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A54E4A1426108E9600E7B1D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -222,6 +251,26 @@
 			path = XPCMail;
 			sourceTree = "<group>";
 		};
+		A54E4A1826108E9600E7B1D4 /* XPCAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				A54E4A562610AA3C00E7B1D4 /* main.swift */,
+				A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */,
+				A54E4A442610A76D00E7B1D4 /* XPCAuthentication.entitlements */,
+				A54E4A1F26108E9600E7B1D4 /* Info.plist */,
+				A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */,
+			);
+			path = XPCAuthentication;
+			sourceTree = "<group>";
+		};
+		A54E4A882610D3CA00E7B1D4 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A54E4A892610D3E500E7B1D4 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		A5C6DBE525796A90009DE750 = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +280,7 @@
 				A5C6DC0E25796A93009DE750 /* UITests */,
 				A5E6D75325A5BB6C00EEA7DD /* XPCPower */,
 				A533D82725AA11F40046B7C8 /* XPCMail */,
+				A54E4A1826108E9600E7B1D4 /* XPCAuthentication */,
 				A5C6DBEF25796A90009DE750 /* Products */,
 				A5E6D76625A5BC1B00EEA7DD /* Frameworks */,
 			);
@@ -244,6 +294,7 @@
 				A5C6DC0B25796A93009DE750 /* Lock-WatcherUITests.xctest */,
 				A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */,
 				A533D82625AA11F40046B7C8 /* XPCMail.xpc */,
+				A54E4A1726108E9600E7B1D4 /* XPCAuthentication.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,6 +302,7 @@
 		A5C6DBF025796A90009DE750 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A54E4A882610D3CA00E7B1D4 /* Constants */,
 				A533D80125AA0EF00046B7C8 /* Notifiers */,
 				A533D7D225A9E23F0046B7C8 /* Utils */,
 				A5E6D7A425A5D1C200EEA7DD /* Models */,
@@ -373,6 +425,23 @@
 			productReference = A533D82625AA11F40046B7C8 /* XPCMail.xpc */;
 			productType = "com.apple.product-type.xpc-service";
 		};
+		A54E4A1626108E9600E7B1D4 /* XPCAuthentication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A54E4A2526108E9600E7B1D4 /* Build configuration list for PBXNativeTarget "XPCAuthentication" */;
+			buildPhases = (
+				A54E4A1326108E9600E7B1D4 /* Sources */,
+				A54E4A1426108E9600E7B1D4 /* Frameworks */,
+				A54E4A1526108E9600E7B1D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XPCAuthentication;
+			productName = XPCAuthentication;
+			productReference = A54E4A1726108E9600E7B1D4 /* XPCAuthentication.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
 		A5C6DBED25796A90009DE750 /* Lock-Watcher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5C6DC1425796A93009DE750 /* Build configuration list for PBXNativeTarget "Lock-Watcher" */;
@@ -388,6 +457,7 @@
 			dependencies = (
 				A5E6D75C25A5BB6C00EEA7DD /* PBXTargetDependency */,
 				A533D83025AA11F40046B7C8 /* PBXTargetDependency */,
+				A54E4A2126108E9600E7B1D4 /* PBXTargetDependency */,
 			);
 			name = "Lock-Watcher";
 			packageProductDependencies = (
@@ -464,6 +534,10 @@
 						CreatedOnToolsVersion = 12.3;
 						LastSwiftMigration = 1230;
 					};
+					A54E4A1626108E9600E7B1D4 = {
+						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
+					};
 					A5C6DBED25796A90009DE750 = {
 						CreatedOnToolsVersion = 12.2;
 					};
@@ -503,6 +577,7 @@
 				A5C6DC0A25796A93009DE750 /* Lock-WatcherUITests */,
 				A5E6D75125A5BB6B00EEA7DD /* XPCPower */,
 				A533D82525AA11F40046B7C8 /* XPCMail */,
+				A54E4A1626108E9600E7B1D4 /* XPCAuthentication */,
 			);
 		};
 /* End PBXProject section */
@@ -513,6 +588,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A533D84325AA126B0046B7C8 /* Mail.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A54E4A1526108E9600E7B1D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +661,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A54E4A1326108E9600E7B1D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A54E4A582610AA3D00E7B1D4 /* main.swift in Sources */,
+				A54E4A592610AA3D00E7B1D4 /* XPCAuthentication.swift in Sources */,
+				A54E4A2F26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
+				A54E4A8B2610D3E500E7B1D4 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5C6DBEA25796A90009DE750 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -594,11 +687,13 @@
 				A5E6D7A625A5D1EB00EEA7DD /* SettingsDto.swift in Sources */,
 				A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */,
 				A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */,
+				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 				A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */,
 				A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */,
 				A533D80325AA0F1A0046B7C8 /* MailNotifier.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 				A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */,
+				A54E4A8A2610D3E500E7B1D4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +731,11 @@
 			target = A533D82525AA11F40046B7C8 /* XPCMail */;
 			targetProxy = A533D82F25AA11F40046B7C8 /* PBXContainerItemProxy */;
 		};
+		A54E4A2126108E9600E7B1D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A54E4A1626108E9600E7B1D4 /* XPCAuthentication */;
+			targetProxy = A54E4A2026108E9600E7B1D4 /* PBXContainerItemProxy */;
+		};
 		A5C6DC0225796A93009DE750 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A5C6DBED25796A90009DE750 /* Lock-Watcher */;
@@ -659,7 +759,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = XPCMail/XPCMail.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
@@ -684,7 +784,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = XPCMail/XPCMail.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
@@ -699,6 +799,53 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCMail/XPCMail-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A54E4A2326108E9600E7B1D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = XPCAuthentication/XPCAuthentication.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				INFOPLIST_FILE = XPCAuthentication/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A54E4A2426108E9600E7B1D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = XPCAuthentication/XPCAuthentication.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				INFOPLIST_FILE = XPCAuthentication/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -825,7 +972,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Resources/Lock_Watcher.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "Resources/Preview\\ Content/Preview\\ Assets.xcassets";
@@ -851,7 +998,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Resources/Lock_Watcher.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "Resources/Preview\\ Content/Preview\\ Assets.xcassets";
@@ -958,7 +1105,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
@@ -982,7 +1129,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
@@ -1009,6 +1156,15 @@
 			buildConfigurations = (
 				A533D83325AA11F40046B7C8 /* Debug */,
 				A533D83425AA11F40046B7C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A54E4A2526108E9600E7B1D4 /* Build configuration list for PBXNativeTarget "XPCAuthentication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A54E4A2326108E9600E7B1D4 /* Debug */,
+				A54E4A2426108E9600E7B1D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
