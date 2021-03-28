@@ -43,26 +43,25 @@ class PowerListener: BaseListener, BaseListenerProtocol {
         
         return service!
     }
-        
-    func changesInPowerBlock() -> ((NSInteger) -> Void) {
-        let callback: ((NSInteger) -> Void) = { [weak self] mode in
-            self?.isRunning = false
-            
-            let powerMode = PowerMode.init(rawValue: mode)
-            os_log(.debug, "Power switched to \(powerMode == .battery ? "Battery" : "AC Power")")
-            
-            self?.listenerAction?(powerMode == .battery)
-        }
-        
-        return callback
-    }
     
     func start(_ action: @escaping ListenerAction) {
         os_log(.debug, "PowerListener started")
         
         self.listenerAction = action
         
-        service.startCheckPower(self.changesInPowerBlock())
+        service.startCheckPower { [weak self] mode in
+            self?.isRunning = false
+            
+            let powerMode = PowerMode.init(rawValue: mode)
+            os_log(.debug, "Power switched to \(powerMode == .battery ? "Battery" : "AC Power")")
+            
+            let thief = ThiefDto()
+            if powerMode == .battery {
+                thief.trigerType = .onBatteryPower
+            }
+            
+            self?.listenerAction?(thief)
+        }
         
         isRunning = true
     }

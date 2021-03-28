@@ -14,7 +14,7 @@ class TrigerManager {
         case onWakeUpListener, onWrongPassword, onBatteryPowerListener
     }
     
-    typealias TrigerBlock = ((Bool) -> Void)
+    typealias TrigerBlock = ((ThiefDto) -> Void)
     
     private var settings: SettingsDto?
     

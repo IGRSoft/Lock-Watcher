@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol BaseListenerProtocol {
-    typealias ListenerAction = ((Bool) -> Void)
+    typealias ListenerAction = ((ThiefDto) -> Void)
     
     var listenerAction: ListenerAction? { get set }
     var isRunning: Bool { get }

@@ -11,6 +11,15 @@
 		A533D7BC25A8FCC20046B7C8 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */; };
 		A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */; };
 		A533D7CD25A9D9E30046B7C8 /* WrongPasswordListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */; };
+		A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */; };
+		A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */; };
+		A533D80325AA0F1A0046B7C8 /* MailNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */; };
+		A533D82B25AA11F40046B7C8 /* XPCMail.m in Sources */ = {isa = PBXBuildFile; fileRef = A533D82A25AA11F40046B7C8 /* XPCMail.m */; };
+		A533D82D25AA11F40046B7C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A533D82C25AA11F40046B7C8 /* main.m */; };
+		A533D83125AA11F40046B7C8 /* XPCMail.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = A533D82625AA11F40046B7C8 /* XPCMail.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A533D83C25AA12110046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
+		A533D84325AA126B0046B7C8 /* Mail.app in Resources */ = {isa = PBXBuildFile; fileRef = A533D84225AA126B0046B7C8 /* Mail.app */; };
+		A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
 		A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */; };
 		A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */; };
 		A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
@@ -32,7 +41,30 @@
 		A5E6D7A625A5D1EB00EEA7DD /* SettingsDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D7A525A5D1EB00EEA7DD /* SettingsDto.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		A533D84925AA12AF0046B7C8 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.app";
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).h",
+			);
+			script = "sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXContainerItemProxy section */
+		A533D82F25AA11F40046B7C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A533D82525AA11F40046B7C8;
+			remoteInfo = XPCMail;
+		};
 		A5C6DC0125796A93009DE750 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
@@ -63,6 +95,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
 			dstSubfolderSpec = 16;
 			files = (
+				A533D83125AA11F40046B7C8 /* XPCMail.xpc in Embed XPC Services */,
 				A5E6D75D25A5BB6C00EEA7DD /* XPCPower.xpc in Embed XPC Services */,
 			);
 			name = "Embed XPC Services";
@@ -74,6 +107,18 @@
 		A533D7B425A8F9A60046B7C8 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpListener.swift; sourceTree = "<group>"; };
 		A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongPasswordListener.swift; sourceTree = "<group>"; };
+		A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemUtil.swift; sourceTree = "<group>"; };
+		A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefDto.swift; sourceTree = "<group>"; };
+		A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailNotifier.swift; sourceTree = "<group>"; };
+		A533D82625AA11F40046B7C8 /* XPCMail.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCMail.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		A533D82925AA11F40046B7C8 /* XPCMail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XPCMail.h; sourceTree = "<group>"; };
+		A533D82A25AA11F40046B7C8 /* XPCMail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XPCMail.m; sourceTree = "<group>"; };
+		A533D82C25AA11F40046B7C8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A533D82E25AA11F40046B7C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A533D83A25AA12110046B7C8 /* XPCMail-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XPCMail-Bridging-Header.h"; sourceTree = "<group>"; };
+		A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCMailProtocol.swift; sourceTree = "<group>"; };
+		A533D84225AA126B0046B7C8 /* Mail.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Mail.app; path = ../../../../../System/Applications/Mail.app; sourceTree = "<group>"; };
+		A533D86425AA26D80046B7C8 /* XPCMail.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCMail.entitlements; sourceTree = "<group>"; };
 		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
 		A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherApp.swift; sourceTree = "<group>"; };
@@ -105,6 +150,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A533D82325AA11F40046B7C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5C6DBEB25796A90009DE750 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -139,6 +191,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A533D7D225A9E23F0046B7C8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A533D80125AA0EF00046B7C8 /* Notifiers */ = {
+			isa = PBXGroup;
+			children = (
+				A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */,
+			);
+			path = Notifiers;
+			sourceTree = "<group>";
+		};
+		A533D82725AA11F40046B7C8 /* XPCMail */ = {
+			isa = PBXGroup;
+			children = (
+				A533D86425AA26D80046B7C8 /* XPCMail.entitlements */,
+				A533D84225AA126B0046B7C8 /* Mail.app */,
+				A533D82925AA11F40046B7C8 /* XPCMail.h */,
+				A533D82A25AA11F40046B7C8 /* XPCMail.m */,
+				A533D82C25AA11F40046B7C8 /* main.m */,
+				A533D82E25AA11F40046B7C8 /* Info.plist */,
+				A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */,
+				A533D83A25AA12110046B7C8 /* XPCMail-Bridging-Header.h */,
+			);
+			path = XPCMail;
+			sourceTree = "<group>";
+		};
 		A5C6DBE525796A90009DE750 = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +230,7 @@
 				A5C6DC0325796A93009DE750 /* Tests */,
 				A5C6DC0E25796A93009DE750 /* UITests */,
 				A5E6D75325A5BB6C00EEA7DD /* XPCPower */,
+				A533D82725AA11F40046B7C8 /* XPCMail */,
 				A5C6DBEF25796A90009DE750 /* Products */,
 				A5E6D76625A5BC1B00EEA7DD /* Frameworks */,
 			);
@@ -159,6 +243,7 @@
 				A5C6DC0025796A93009DE750 /* Lock-WatcherTests.xctest */,
 				A5C6DC0B25796A93009DE750 /* Lock-WatcherUITests.xctest */,
 				A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */,
+				A533D82625AA11F40046B7C8 /* XPCMail.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,6 +251,8 @@
 		A5C6DBF025796A90009DE750 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A533D80125AA0EF00046B7C8 /* Notifiers */,
+				A533D7D225A9E23F0046B7C8 /* Utils */,
 				A5E6D7A425A5D1C200EEA7DD /* Models */,
 				A5E6D79325A5D11200EEA7DD /* Listeners */,
 				A5E6D77C25A5CB8900EEA7DD /* Managers */,
@@ -260,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				A5E6D7A525A5D1EB00EEA7DD /* SettingsDto.swift */,
+				A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -267,6 +355,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A533D82525AA11F40046B7C8 /* XPCMail */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A533D83225AA11F40046B7C8 /* Build configuration list for PBXNativeTarget "XPCMail" */;
+			buildPhases = (
+				A533D82425AA11F40046B7C8 /* Resources */,
+				A533D82225AA11F40046B7C8 /* Sources */,
+				A533D82325AA11F40046B7C8 /* Frameworks */,
+			);
+			buildRules = (
+				A533D84925AA12AF0046B7C8 /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = XPCMail;
+			productName = XPCMail;
+			productReference = A533D82625AA11F40046B7C8 /* XPCMail.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
 		A5C6DBED25796A90009DE750 /* Lock-Watcher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5C6DC1425796A93009DE750 /* Build configuration list for PBXNativeTarget "Lock-Watcher" */;
@@ -281,6 +387,7 @@
 			);
 			dependencies = (
 				A5E6D75C25A5BB6C00EEA7DD /* PBXTargetDependency */,
+				A533D83025AA11F40046B7C8 /* PBXTargetDependency */,
 			);
 			name = "Lock-Watcher";
 			packageProductDependencies = (
@@ -353,6 +460,10 @@
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					A533D82525AA11F40046B7C8 = {
+						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
+					};
 					A5C6DBED25796A90009DE750 = {
 						CreatedOnToolsVersion = 12.2;
 					};
@@ -391,11 +502,20 @@
 				A5C6DBFF25796A93009DE750 /* Lock-WatcherTests */,
 				A5C6DC0A25796A93009DE750 /* Lock-WatcherUITests */,
 				A5E6D75125A5BB6B00EEA7DD /* XPCPower */,
+				A533D82525AA11F40046B7C8 /* XPCMail */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A533D82425AA11F40046B7C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A533D84325AA126B0046B7C8 /* Mail.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5C6DBEC25796A90009DE750 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,13 +569,26 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A533D82225AA11F40046B7C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A533D82D25AA11F40046B7C8 /* main.m in Sources */,
+				A533D83C25AA12110046B7C8 /* XPCMailProtocol.swift in Sources */,
+				A533D82B25AA11F40046B7C8 /* XPCMail.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5C6DBEA25796A90009DE750 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */,
 				A533D7CD25A9D9E30046B7C8 /* WrongPasswordListener.swift in Sources */,
 				A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */,
+				A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */,
 				A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */,
+				A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */,
 				A5E6D79F25A5D1AE00EEA7DD /* PowerListener.swift in Sources */,
 				A5E6D78E25A5CD2E00EEA7DD /* TrigerManager.swift in Sources */,
 				A5E6D7A625A5D1EB00EEA7DD /* SettingsDto.swift in Sources */,
@@ -463,6 +596,7 @@
 				A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */,
 				A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */,
 				A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */,
+				A533D80325AA0F1A0046B7C8 /* MailNotifier.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 				A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */,
 			);
@@ -497,6 +631,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A533D83025AA11F40046B7C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A533D82525AA11F40046B7C8 /* XPCMail */;
+			targetProxy = A533D82F25AA11F40046B7C8 /* PBXContainerItemProxy */;
+		};
 		A5C6DC0225796A93009DE750 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A5C6DBED25796A90009DE750 /* Lock-Watcher */;
@@ -515,6 +654,55 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A533D83325AA11F40046B7C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = XPCMail/XPCMail.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = XPCMail/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "XPCMail/XPCMail-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A533D83425AA11F40046B7C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = XPCMail/XPCMail.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = XPCMail/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "XPCMail/XPCMail-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		A5C6DC1225796A93009DE750 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -781,7 +969,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -806,7 +993,6 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -818,6 +1004,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A533D83225AA11F40046B7C8 /* Build configuration list for PBXNativeTarget "XPCMail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A533D83325AA11F40046B7C8 /* Debug */,
+				A533D83425AA11F40046B7C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A5C6DBE925796A90009DE750 /* Build configuration list for PBXProject "Lock-Watcher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

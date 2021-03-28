@@ -11,6 +11,9 @@ import LaunchAtLogin
 struct SettingsView: View {
     @ObservedObject private var thiefManager = ThiefManager()
     
+    @State private var image = Image(systemName: "swift")
+    @State private var dateText = ""
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16.0) {
             LaunchAtLogin.Toggle()
@@ -27,13 +30,28 @@ struct SettingsView: View {
                 .onChange(of: thiefManager.settings.isUseSnapshotOnSwitchToBatteryPower, perform: { value in
                     thiefManager.restartWatching()
                 })
+            HStack(alignment: .center, spacing: 16.0, content: {
+                Toggle(isOn: $thiefManager.settings.isSendNotificationToMail) {
+                    Text("Send to Mail")
+                }
+                TextField("user@example.com", text: $thiefManager.settings.mailRecipient)
+                    .disabled(thiefManager.settings.isSendNotificationToMail == false)
+            })
+            VStack(alignment: .leading, spacing: 16.0) {
+                Divider()
+                Text("Last Snapshot:")
+                image
+                    .resizable()
+                    .scaledToFit().frame(width: 300, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                Text(dateText)
+            }
             Divider()
             Button("Quit") {
                 exit(0)
             }
         }
         .padding(16.0)
-        .frame(width: 300.0)
+        .frame(width: 332.0)
     }
 }
 

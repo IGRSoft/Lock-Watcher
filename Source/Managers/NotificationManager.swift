@@ -7,9 +7,12 @@
 
 import Foundation
 import AppKit
+import CoreLocation
 
 class NotificationManager {
-    func send(photo: NSImage, message: String) -> Bool {
-        return true
+    let mailNotifier = MailNotifier()
+    
+    func send(photo path: String?, to mail: String, coordinate: CLLocationCoordinate2D) -> Bool {
+        return mailNotifier.send(photo: path, to: mail, coordinate: coordinate)
     }
 }
