@@ -35,16 +35,6 @@ struct Lock_WatcherApp: App {
             statusBarItem?.button?.action = #selector(AppDelegate.togglePopover(_:))
         }
         
-        func applicationDidChangeOcclusionState(_ notification: Notification) {
-            let name = NSApp.occlusionState.contains(.visible) ?
-                Constants.kScreenUnlockedNotificationName :
-                Constants.kScreenLockedNotificationName
-            
-            DistributedNotificationCenter.default().postNotificationName(name,
-                                                                         object: nil, userInfo: nil,
-                                                                         options: [.deliverImmediately, .postToAllSessions])
-        }
-        
         @objc func showPopover(_ sender: AnyObject?) {
             if let button = statusBarItem?.button {
                 popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)

@@ -72,13 +72,6 @@ class ThiefManager: NSObject, ObservableObject {
     
     public func detectedTriger() {
         os_log(.debug, "Detected trigered action")
-        #if DEBUG
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
-        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss.SSS"
-        self.processSnapshot(NSImage(systemSymbolName: "swift", accessibilityDescription: "swift")!,
-                             filename: dateFormatter.string(from: Date()))
-        #else
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = true
         ps.fetchSnapshot() { [weak self] photoModel in
@@ -87,7 +80,6 @@ class ThiefManager: NSObject, ObservableObject {
                 self?.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: Date()))
             }
         }
-        #endif
     }
     
     func processSnapshot(_ snapshot: NSImage, filename: String) {

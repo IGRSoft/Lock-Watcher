@@ -11,6 +11,8 @@ import os
 class WakeUpListener: BaseListener, BaseListenerProtocol {
     var listenerAction: ListenerAction?
     
+    // class let screensDidWakeNotification: NSNotification.Name
+
     var isRunning: Bool = false
     
     func start(_ action: @escaping ListenerAction) {

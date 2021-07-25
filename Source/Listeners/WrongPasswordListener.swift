@@ -8,6 +8,7 @@
 import Foundation
 import LocalAuthentication
 import os
+import AppKit
 
 class WrongPasswordListener: BaseListener, BaseListenerProtocol {
     private let kServiceName = "com.igrsoft.XPCAuthentication"
@@ -17,7 +18,7 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
     var isRunning = false
     var isScreenLocked = false
     
-    var lastLoginDate = Date()
+    var lastScreenLockDate = Date()
     
     private var connection: NSXPCConnection?
     
@@ -46,18 +47,24 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
     override init() {
         super.init()
         
-        let nc = DistributedNotificationCenter.default()
-        nc.addObserver(self, selector: #selector(screenLocked(_:)) , name: Constants.kScreenLockedNotificationName, object: nil)
-        nc.addObserver(self, selector: #selector(screenUnlocked(_:)) , name: Constants.kScreenUnlockedNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(occlusionStateChanged(_:)),
+                                               name: NSApplication.didChangeOcclusionStateNotification,
+                                               object: nil)
     }
     
-    @objc private func screenLocked(_ sender: AnyObject?) {
-        lastLoginDate = Date()
-        isScreenLocked = true
-    }
-    
-    @objc private func screenUnlocked(_ sender: AnyObject?) {
-        isScreenLocked = false
+    @objc private func occlusionStateChanged(_ notification: Notification) {
+        if NSApp.occlusionState.contains(.visible) {
+            os_log(.debug, "WrongPasswordListener screen unlocked")
+            isScreenLocked = false
+        } else {
+            os_log(.debug, "WrongPasswordListener screen locked")
+            
+            lastScreenLockDate = Date()
+            isScreenLocked = true
+            
+            readDate()
+        }
     }
     
     func start(_ action: @escaping ListenerAction) {
@@ -65,33 +72,28 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
         
         self.listenerAction = action
         
-        readDate()
-        
         isRunning = true
     }
     
     func readDate() {
-        if isScreenLocked {
-            service.detectedAuthenticationFailedFromDate(lastLoginDate) { [weak self] (detectedFailed) in
-                self?.isRunning = false
+        os_log(.debug, "WrongPasswordListener detecting AuthenticationFailed from \(self.lastScreenLockDate)")
+        
+        service.detectedAuthenticationFailedFromDate(lastScreenLockDate) { [weak self] (detectedFailed) in
+            self?.isRunning = false
+            
+            if detectedFailed {
+                self?.lastScreenLockDate = Date()
+                os_log(.debug, "Detected Authentication Failed")
+                let thief = ThiefDto()
+                thief.trigerType = .onWrongPassword
                 
-                if detectedFailed {
-                    self?.lastLoginDate = Date()
-                    os_log(.debug, "Detected Authentication Failed")
-                    let thief = ThiefDto()
-                    thief.trigerType = .onWrongPassword
-                    
-                    self?.listenerAction?(thief)
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self?.listenerAction?(thief)
+            }
+            
+            if self?.isScreenLocked == true {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self?.readDate()
                 }
-            }
-        }
-        else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.readDate()
             }
         }
     }

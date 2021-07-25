@@ -12,11 +12,11 @@
       },
       {
         "package": "PhotoSnap",
-        "repositoryURL": "https://github.com/iKorich/PhotoSnap.git",
+        "repositoryURL": "https://github.com/IGRSoft/PhotoSnap.git",
         "state": {
           "branch": null,
-          "revision": "e6632149eaf91e4a8c88547e720e52e846b608ec",
-          "version": "0.2.0"
+          "revision": "8ad96ef777d2f9517d78d1e1cedc940cc9fe4686",
+          "version": "0.2.1"
         }
       }
     ]

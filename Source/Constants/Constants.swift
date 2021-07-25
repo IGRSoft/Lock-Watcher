@@ -8,7 +8,4 @@
 import Foundation
 
 class Constants {
-    
-    static let kScreenLockedNotificationName = Notification.Name("com.igrsoft.Lock-Watcher.scree.locked")
-    static let kScreenUnlockedNotificationName = Notification.Name("com.igrsoft.Lock-Watcher.scree.unlocked")
 }
