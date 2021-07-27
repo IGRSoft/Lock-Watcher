@@ -31,7 +31,7 @@ struct Lock_WatcherApp: App {
             popover.contentViewController = NSViewController()
             popover.contentViewController?.view = NSHostingView(rootView: contentView)
             statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-            statusBarItem?.button?.title = "Watcher"
+            statusBarItem?.button?.image = NSImage(named: "menuBarIcon")
             statusBarItem?.button?.action = #selector(AppDelegate.togglePopover(_:))
         }
         

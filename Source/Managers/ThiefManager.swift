@@ -17,10 +17,7 @@ class ThiefManager: NSObject, ObservableObject {
     
     @Published var settings = SettingsDto.current()
     
-    private var _lastThiefDetection = ThiefDto()
-    public var lastThiefDetection: ThiefDto {
-        return _lastThiefDetection
-    }
+    @Published private(set) var lastThiefDetection = ThiefDto()
     
     private var watchBlock: WatchBlock = {trigered in}
     
@@ -50,7 +47,7 @@ class ThiefManager: NSObject, ObservableObject {
             
             if trigered.trigerType != .empty {
                 DispatchQueue.main.async {
-                    self?._lastThiefDetection.trigerType = trigered.trigerType
+                    self?.lastThiefDetection.trigerType = trigered.trigerType
                     self?.detectedTriger()
                 }
             }
@@ -83,16 +80,16 @@ class ThiefManager: NSObject, ObservableObject {
     }
     
     func processSnapshot(_ snapshot: NSImage, filename: String) {
-        _lastThiefDetection.snapshot = snapshot
+        lastThiefDetection.snapshot = snapshot
         let filepath = FileSystemUtil.store(image: snapshot, forKey: filename)
         let _ = notificationManager.send(photo: filepath?.path,
-                                         coordinate: _lastThiefDetection.coordinate)
+                                         coordinate: lastThiefDetection.coordinate)
     }
 }
 
 extension ThiefManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self._lastThiefDetection.coordinate = locations.last!.coordinate
+        self.lastThiefDetection.coordinate = locations.last!.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

@@ -9,13 +9,13 @@ import Foundation
 import CoreLocation
 import AppKit
 
-public class ThiefDto {
+public class ThiefDto: ObservableObject {
     enum TrigerType {
         case empty, onWakeUp, onWrongPassword, onBatteryPower
     }
     
     var coordinate = CLLocationCoordinate2D()
     var trigerType: TrigerType? = .empty
-    var snapshot = NSImage(systemSymbolName: "swift", accessibilityDescription: "swift")!
+    @Published var snapshot: NSImage?
     var date: Date = Date()
 }

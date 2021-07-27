@@ -33,7 +33,6 @@
 		A5C6DC0525796A93009DE750 /* Lock_WatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0425796A93009DE750 /* Lock_WatcherTests.swift */; };
 		A5C6DC1025796A93009DE750 /* Lock_WatcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0F25796A93009DE750 /* Lock_WatcherUITests.swift */; };
 		A5C6DC3225796B80009DE750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DC2E25796B80009DE750 /* Assets.xcassets */; };
-		A5C6DC3325796B80009DE750 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DC3025796B80009DE750 /* Preview Assets.xcassets */; };
 		A5C6DC4625796CCB009DE750 /* PhotoSnap in Frameworks */ = {isa = PBXBuildFile; productRef = A5C6DC4525796CCB009DE750 /* PhotoSnap */; };
 		A5E6D75725A5BB6C00EEA7DD /* XPCPower.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D75625A5BB6C00EEA7DD /* XPCPower.m */; };
 		A5E6D75925A5BB6C00EEA7DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D75825A5BB6C00EEA7DD /* main.m */; };
@@ -153,7 +152,6 @@
 		A5C6DC1125796A93009DE750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5C6DC2D25796B80009DE750 /* Lock_Watcher.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lock_Watcher.entitlements; sourceTree = "<group>"; };
 		A5C6DC2E25796B80009DE750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A5C6DC3025796B80009DE750 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A5C6DC3125796B80009DE750 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCPower.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E6D75525A5BB6C00EEA7DD /* XPCPower.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XPCPower.h; sourceTree = "<group>"; };
@@ -338,18 +336,9 @@
 			children = (
 				A5C6DC2D25796B80009DE750 /* Lock_Watcher.entitlements */,
 				A5C6DC2E25796B80009DE750 /* Assets.xcassets */,
-				A5C6DC2F25796B80009DE750 /* Preview Content */,
 				A5C6DC3125796B80009DE750 /* Info.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		A5C6DC2F25796B80009DE750 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				A5C6DC3025796B80009DE750 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		A5E6D75325A5BB6C00EEA7DD /* XPCPower */ = {
@@ -528,7 +517,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					A533D82525AA11F40046B7C8 = {
 						CreatedOnToolsVersion = 12.3;
@@ -602,7 +591,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C6DC3325796B80009DE750 /* Preview Assets.xcassets in Resources */,
 				A5C6DC3225796B80009DE750 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -817,6 +805,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -842,6 +831,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -982,7 +972,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_ASSET_PATHS = "Resources/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1009,7 +998,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_ASSET_PATHS = "Resources/Preview\\ Content/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
