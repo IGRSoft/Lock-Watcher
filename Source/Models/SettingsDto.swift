@@ -16,6 +16,7 @@ class SettingsDto: ObservableObject, Codable {
         case isUseSnapshotOnWakeUp
         case isUseSnapshotOnWrongPassword
         case isUseSnapshotOnSwitchToBatteryPower
+        case isUseSnapshotOnUSBMount
         
         case isSendNotificationToMail
         case mailRecipient
@@ -26,17 +27,26 @@ class SettingsDto: ObservableObject, Codable {
             save()
         }
     }
+    
     @Published var isUseSnapshotOnWakeUp: Bool = false {
         didSet {
             save()
         }
     }
+    
     @Published var isUseSnapshotOnWrongPassword: Bool = false {
         didSet {
             save()
         }
     }
+    
     @Published var isUseSnapshotOnSwitchToBatteryPower: Bool = false {
+        didSet {
+            save()
+        }
+    }
+    
+    @Published var isUseSnapshotOnUSBMount: Bool = false {
         didSet {
             save()
         }
@@ -61,6 +71,7 @@ class SettingsDto: ObservableObject, Codable {
         try container.encode(isUseSnapshotOnWakeUp, forKey: .isUseSnapshotOnWakeUp)
         try container.encode(isUseSnapshotOnWrongPassword, forKey: .isUseSnapshotOnWrongPassword)
         try container.encode(isUseSnapshotOnSwitchToBatteryPower, forKey: .isUseSnapshotOnSwitchToBatteryPower)
+        try container.encode(isUseSnapshotOnUSBMount, forKey: .isUseSnapshotOnUSBMount)
         
         try container.encode(isSendNotificationToMail, forKey: .isSendNotificationToMail)
         try container.encode(mailRecipient, forKey: .mailRecipient)
@@ -74,6 +85,7 @@ class SettingsDto: ObservableObject, Codable {
         isUseSnapshotOnWakeUp = try container.decode(Bool.self, forKey: .isUseSnapshotOnWakeUp)
         isUseSnapshotOnWrongPassword = try container.decode(Bool.self, forKey: .isUseSnapshotOnWrongPassword)
         isUseSnapshotOnSwitchToBatteryPower = try container.decode(Bool.self, forKey: .isUseSnapshotOnSwitchToBatteryPower)
+        isUseSnapshotOnUSBMount = try container.decode(Bool.self, forKey: .isUseSnapshotOnUSBMount)
         
         isSendNotificationToMail = try container.decode(Bool.self, forKey: .isSendNotificationToMail)
         mailRecipient = try container.decode(String.self, forKey: .mailRecipient)

@@ -9,15 +9,17 @@ import Foundation
 import AppKit
 import os
 import PhotoSnap
+import Combine
 
 class ThiefManager: NSObject, ObservableObject {
     typealias WatchBlock = ((ThiefDto) -> Void)
     
     private let notificationManager = NotificationManager()
+    public let objectWillChange = ObservableObjectPublisher()
     
     @Published var settings = SettingsDto.current()
     
-    @Published private(set) var lastThiefDetection = ThiefDto()
+    @Published var lastThiefDetection = ThiefDto()
     
     private var watchBlock: WatchBlock = {trigered in}
     
@@ -74,16 +76,20 @@ class ThiefManager: NSObject, ObservableObject {
         ps.fetchSnapshot() { [weak self] photoModel in
             if let img = photoModel.images.last {
                 os_log(.debug, "\(img)")
-                self?.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: Date()))
+                let date = Date()
+                self?.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
             }
         }
     }
     
-    func processSnapshot(_ snapshot: NSImage, filename: String) {
+    func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {
         lastThiefDetection.snapshot = snapshot
+        lastThiefDetection.date = date
         let filepath = FileSystemUtil.store(image: snapshot, forKey: filename)
         let _ = notificationManager.send(photo: filepath?.path,
                                          coordinate: lastThiefDetection.coordinate)
+        
+        objectWillChange.send()
     }
 }
 

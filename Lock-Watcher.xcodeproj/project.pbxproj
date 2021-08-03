@@ -28,6 +28,7 @@
 		A54E4A8A2610D3E500E7B1D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A892610D3E500E7B1D4 /* Constants.swift */; };
 		A54E4A8B2610D3E500E7B1D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A892610D3E500E7B1D4 /* Constants.swift */; };
 		A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */; };
+		A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0788C26B9A78400A7D578 /* USBListener.swift */; };
 		A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */; };
 		A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
 		A5C6DC0525796A93009DE750 /* Lock_WatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0425796A93009DE750 /* Lock_WatcherTests.swift */; };
@@ -141,6 +142,7 @@
 		A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCAuthentication.swift; sourceTree = "<group>"; };
 		A54E4A892610D3E500E7B1D4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
+		A5A0788C26B9A78400A7D578 /* USBListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBListener.swift; sourceTree = "<group>"; };
 		A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherApp.swift; sourceTree = "<group>"; };
 		A5C6DBF325796A90009DE750 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */,
 				A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */,
 				A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */,
+				A5A0788C26B9A78400A7D578 /* USBListener.swift */,
 			);
 			path = Listeners;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */,
 				A533D7CD25A9D9E30046B7C8 /* WrongPasswordListener.swift in Sources */,
 				A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */,
+				A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */,
 				A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */,
 				A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */,
 				A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */,

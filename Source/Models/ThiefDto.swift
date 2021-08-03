@@ -9,13 +9,17 @@ import Foundation
 import CoreLocation
 import AppKit
 
-public class ThiefDto: ObservableObject {
+public class ThiefDto: Equatable {
+    public static func == (lhs: ThiefDto, rhs: ThiefDto) -> Bool {
+        return lhs.date == rhs.date
+    }
+    
     enum TrigerType {
-        case empty, onWakeUp, onWrongPassword, onBatteryPower
+        case empty, onWakeUp, onWrongPassword, onBatteryPower, usbConnected
     }
     
     var coordinate = CLLocationCoordinate2D()
     var trigerType: TrigerType? = .empty
-    @Published var snapshot: NSImage?
+    var snapshot: NSImage?
     var date: Date = Date()
 }

@@ -9,11 +9,7 @@ import SwiftUI
 import LaunchAtLogin
 
 struct SettingsView: View {
-    @ObservedObject private var thiefManager = ThiefManager()
-    //@ObservedObject private var image = thiefManager.lastThiefDetection.$snapshot
-    
-    //@State private var image: Image?
-    @State private var dateText = ""
+    @EnvironmentObject private var thiefManager: ThiefManager
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16.0) {
@@ -31,6 +27,14 @@ struct SettingsView: View {
                 .onChange(of: thiefManager.settings.isUseSnapshotOnSwitchToBatteryPower, perform: { value in
                     thiefManager.restartWatching()
                 })
+            UseSnapshotOnUSBMount(isUseSnapshotOnUSBMount: $thiefManager.settings.isUseSnapshotOnUSBMount)
+                .onChange(of: thiefManager.settings.isUseSnapshotOnUSBMount, perform: { value in
+                    thiefManager.restartWatching()
+                })
+            LastThiefDetection(lastThiefDetection: $thiefManager.lastThiefDetection)
+                .onChange(of: thiefManager.lastThiefDetection.snapshot, perform: { value in
+                    thiefManager.restartWatching()
+                })
             HStack(alignment: .center, spacing: 16.0, content: {
                 Toggle(isOn: $thiefManager.settings.isSendNotificationToMail) {
                     Text("Send to Mail")
@@ -39,20 +43,16 @@ struct SettingsView: View {
                     .disabled(thiefManager.settings.isSendNotificationToMail == false)
             })
             
-            VStack(alignment: .leading, spacing: 16.0) {
-                if let img = thiefManager.lastThiefDetection.snapshot, let imageValue = Image(nsImage: img) {
-                    Divider()
-                    Text("Last Snapshot:")
-                    imageValue
-                        .resizable()
-                        .scaledToFit().frame(width: 300, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    Text(dateText)
-                }
-            }
             Divider()
-            Button("Quit") {
-                exit(0)
-            }
+            
+            HStack(alignment: .center, spacing: 16.0, content: {
+                Button("Quit") {
+                    exit(0)
+                }
+                Button("Debug") {
+                    thiefManager.detectedTriger()
+                }
+            })
             
         }
         .padding(16.0)
@@ -62,7 +62,7 @@ struct SettingsView: View {
 
 struct UseSnapshotOnWakeUpView: View {
     @Binding var isUseSnapshotOnWakeUp : Bool
-
+    
     var body: some View {
         Toggle(isOn: $isUseSnapshotOnWakeUp) {
             Text("Take Snapshot On WakeUp")
@@ -72,7 +72,7 @@ struct UseSnapshotOnWakeUpView: View {
 
 struct UseSnapshotOnWrongPassword: View {
     @Binding var isUseSnapshotOnWrongPassword : Bool
-
+    
     var body: some View {
         Toggle(isOn: $isUseSnapshotOnWrongPassword) {
             Text("Take Snapshot On Wrong Password")
@@ -82,13 +82,49 @@ struct UseSnapshotOnWrongPassword: View {
 
 struct UseSnapshotOnSwitchToBatteryPower: View {
     @Binding var isUseSnapshotOnSwitchToBatteryPower : Bool
-
+    
     var body: some View {
         Toggle(isOn: $isUseSnapshotOnSwitchToBatteryPower) {
             Text("Take Snapshot On Switch To Battery Power")
         }
     }
 }
+
+struct UseSnapshotOnUSBMount: View {
+    @Binding var isUseSnapshotOnUSBMount : Bool
+    
+    var body: some View {
+        Toggle(isOn: $isUseSnapshotOnUSBMount) {
+            Text("Take Snapshot On USB Mount")
+        }
+    }
+}
+
+struct LastThiefDetection: View {
+    @Binding var lastThiefDetection : ThiefDto
+    
+    static let taskDateFormat: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        return formatter
+    }()
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16.0) {
+            if let img = lastThiefDetection.snapshot, let imageValue = Image(nsImage: img) {
+                Divider()
+                Text("Last Snapshot:")
+                imageValue
+                    .resizable()
+                    .scaledToFit().frame(width: 300, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                Text("\(lastThiefDetection.date, formatter: Self.taskDateFormat)")
+                Divider()
+            }
+        }
+    }
+}
+
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

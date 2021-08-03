@@ -24,7 +24,7 @@ struct Lock_WatcherApp: App {
         
         func applicationDidFinishLaunching(_ notification: Notification) {
                         
-            let contentView = SettingsView()
+            let contentView = SettingsView().environmentObject(ThiefManager())
 
             popover.behavior = .transient
             popover.animates = false
