@@ -85,8 +85,11 @@ class ThiefManager: NSObject, ObservableObject {
     func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {
         lastThiefDetection.snapshot = snapshot
         lastThiefDetection.date = date
-        let filepath = FileSystemUtil.store(image: snapshot, forKey: filename)
-        let _ = notificationManager.send(photo: filepath?.path,
+        guard let filepath = FileSystemUtil.store(image: snapshot, forKey: filename) else {
+            assert(false, "wrong file path")
+            return
+        }
+        let _ = notificationManager.send(photo: filepath.path,
                                          coordinate: lastThiefDetection.coordinate)
         
         objectWillChange.send()

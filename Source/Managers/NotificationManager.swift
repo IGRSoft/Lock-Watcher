@@ -11,6 +11,7 @@ import CoreLocation
 
 class NotificationManager {
     private let mailNotifier = MailNotifier()
+    private let icloudNotifier = iCloudNotifier()
     
     private var settings: SettingsDto?
     
@@ -18,11 +19,15 @@ class NotificationManager {
         self.settings = settings
     }
     
-    func send(photo path: String?, coordinate: CLLocationCoordinate2D) -> Bool {
+    func send(photo path: String, coordinate: CLLocationCoordinate2D) -> Bool {
         var result = false
         
         if settings?.isSendNotificationToMail == true, let mail = settings?.mailRecipient {
             result = mailNotifier.send(photo: path, to: mail, coordinate: coordinate)
+        }
+        
+        if settings?.isICloudSyncEnable == true {
+            result = icloudNotifier.send(photo: path, coordinate: coordinate)
         }
         
         return result

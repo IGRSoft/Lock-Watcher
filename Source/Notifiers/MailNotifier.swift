@@ -36,8 +36,8 @@ class MailNotifier {
         return service!
     }
     
-    func send(photo path: String?, to mail: String, coordinate: CLLocationCoordinate2D) -> Bool {
-        service.sendMail(mail, coordinates: coordinate, attachment: path!)
+    func send(photo path: String, to mail: String, coordinate: CLLocationCoordinate2D) -> Bool {
+        service.sendMail(mail, coordinates: coordinate, attachment: path)
         return true
     }
 }

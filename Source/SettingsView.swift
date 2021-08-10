@@ -43,17 +43,22 @@ struct SettingsView: View {
                     .disabled(thiefManager.settings.isSendNotificationToMail == false)
             })
             
-            Divider()
+            Toggle(isOn: $thiefManager.settings.isICloudSyncEnable) {
+                Text("Sync with iCloud")
+            }
             
-            HStack(alignment: .center, spacing: 16.0, content: {
+            VStack(content: {
+                Divider()
+                
                 Button("Quit") {
                     exit(0)
                 }
+                #if DEBUG
                 Button("Debug") {
                     thiefManager.detectedTriger()
                 }
+                #endif
             })
-            
         }
         .padding(16.0)
         .frame(width: 332.0)

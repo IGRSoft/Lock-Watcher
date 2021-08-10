@@ -20,6 +20,8 @@ class SettingsDto: ObservableObject, Codable {
         
         case isSendNotificationToMail
         case mailRecipient
+        
+        case isICloudSyncEnable
     }
     
     @Published var isFirstLaunch: Bool = false {
@@ -57,7 +59,14 @@ class SettingsDto: ObservableObject, Codable {
             save()
         }
     }
+    
     @Published var mailRecipient: String = "" {
+        didSet {
+            save()
+        }
+    }
+    
+    @Published var isICloudSyncEnable: Bool = false {
         didSet {
             save()
         }
@@ -75,6 +84,8 @@ class SettingsDto: ObservableObject, Codable {
         
         try container.encode(isSendNotificationToMail, forKey: .isSendNotificationToMail)
         try container.encode(mailRecipient, forKey: .mailRecipient)
+        
+        try container.encode(isICloudSyncEnable, forKey: .isICloudSyncEnable)
     }
     
     required init(from decoder: Decoder) throws {
@@ -89,6 +100,8 @@ class SettingsDto: ObservableObject, Codable {
         
         isSendNotificationToMail = try container.decode(Bool.self, forKey: .isSendNotificationToMail)
         mailRecipient = try container.decode(String.self, forKey: .mailRecipient)
+        
+        isICloudSyncEnable = try container.decode(Bool.self, forKey: .isICloudSyncEnable)
     }
     
     init() { }
