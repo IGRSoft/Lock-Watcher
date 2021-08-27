@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A519997A26D92D4400F482BC /* SwiftyDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = A519997926D92D4400F482BC /* SwiftyDropbox */; };
+		A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519997B26D92E6100F482BC /* DropboxNotifier.swift */; };
 		A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7B425A8F9A60046B7C8 /* EmptyView.swift */; };
 		A533D7BC25A8FCC20046B7C8 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */; };
 		A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */; };
@@ -121,6 +123,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A519997B26D92E6100F482BC /* DropboxNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxNotifier.swift; sourceTree = "<group>"; };
 		A533D7B425A8F9A60046B7C8 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpListener.swift; sourceTree = "<group>"; };
 		A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongPasswordListener.swift; sourceTree = "<group>"; };
@@ -196,6 +199,7 @@
 			files = (
 				A533D7BC25A8FCC20046B7C8 /* LaunchAtLogin in Frameworks */,
 				A5C6DC4625796CCB009DE750 /* PhotoSnap in Frameworks */,
+				A519997A26D92D4400F482BC /* SwiftyDropbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +241,7 @@
 			children = (
 				A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */,
 				A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */,
+				A519997B26D92E6100F482BC /* DropboxNotifier.swift */,
 			);
 			path = Notifiers;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 			packageProductDependencies = (
 				A5C6DC4525796CCB009DE750 /* PhotoSnap */,
 				A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */,
+				A519997926D92D4400F482BC /* SwiftyDropbox */,
 			);
 			productName = "Lock-Watcher";
 			productReference = A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */;
@@ -573,6 +579,7 @@
 			packageReferences = (
 				A5C6DC4425796CCB009DE750 /* XCRemoteSwiftPackageReference "PhotoSnap" */,
 				A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+				A519997826D92D4400F482BC /* XCRemoteSwiftPackageReference "SwiftyDropbox" */,
 			);
 			productRefGroup = A5C6DBEF25796A90009DE750 /* Products */;
 			projectDirPath = "";
@@ -701,6 +708,7 @@
 				A533D80325AA0F1A0046B7C8 /* MailNotifier.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 				A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */,
+				A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */,
 				A54E4A8A2610D3E500E7B1D4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -917,7 +925,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -972,7 +980,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -1235,6 +1243,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A519997826D92D4400F482BC /* XCRemoteSwiftPackageReference "SwiftyDropbox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dropbox/SwiftyDropbox.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
+			};
+		};
 		A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
@@ -1254,6 +1270,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A519997926D92D4400F482BC /* SwiftyDropbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A519997826D92D4400F482BC /* XCRemoteSwiftPackageReference "SwiftyDropbox" */;
+			productName = SwiftyDropbox;
+		};
 		A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyDropbox
 
 class SettingsDto: ObservableObject, Codable {
     static let kSettingsDtoKey = "Settings"
@@ -22,55 +23,25 @@ class SettingsDto: ObservableObject, Codable {
         case mailRecipient
         
         case isICloudSyncEnable
+        
+        case isDropboxEnable
+        case dropboxName
     }
     
-    @Published var isFirstLaunch: Bool = false {
-        didSet {
-            save()
-        }
-    }
+    @Published var isFirstLaunch: Bool = false 
     
-    @Published var isUseSnapshotOnWakeUp: Bool = false {
-        didSet {
-            save()
-        }
-    }
+    @Published var isUseSnapshotOnWakeUp: Bool = false
+    @Published var isUseSnapshotOnWrongPassword: Bool = false
+    @Published var isUseSnapshotOnSwitchToBatteryPower: Bool = false
+    @Published var isUseSnapshotOnUSBMount: Bool = false
     
-    @Published var isUseSnapshotOnWrongPassword: Bool = false {
-        didSet {
-            save()
-        }
-    }
+    @Published var isSendNotificationToMail: Bool = false
+    @Published var mailRecipient: String = ""
     
-    @Published var isUseSnapshotOnSwitchToBatteryPower: Bool = false {
-        didSet {
-            save()
-        }
-    }
+    @Published var isICloudSyncEnable: Bool = false
     
-    @Published var isUseSnapshotOnUSBMount: Bool = false {
-        didSet {
-            save()
-        }
-    }
-    
-    @Published var isSendNotificationToMail: Bool = false {
-        didSet {
-            save()
-        }
-    }
-    
-    @Published var mailRecipient: String = "" {
-        didSet {
-            save()
-        }
-    }
-    
-    @Published var isICloudSyncEnable: Bool = false {
-        didSet {
-            save()
-        }
-    }
+    @Published var isDropboxEnable: Bool = false
+    @Published var dropboxName: String = ""
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -86,6 +57,9 @@ class SettingsDto: ObservableObject, Codable {
         try container.encode(mailRecipient, forKey: .mailRecipient)
         
         try container.encode(isICloudSyncEnable, forKey: .isICloudSyncEnable)
+        
+        try container.encode(isDropboxEnable, forKey: .isDropboxEnable)
+        try container.encode(dropboxName, forKey: .dropboxName)
     }
     
     required init(from decoder: Decoder) throws {
@@ -102,15 +76,21 @@ class SettingsDto: ObservableObject, Codable {
         mailRecipient = try container.decode(String.self, forKey: .mailRecipient)
         
         isICloudSyncEnable = try container.decode(Bool.self, forKey: .isICloudSyncEnable)
+        
+        isDropboxEnable = try container.decode(Bool.self, forKey: .isDropboxEnable)
+        dropboxName = try container.decode(String.self, forKey: .dropboxName)
     }
     
-    init() { }
+    init() {}
     
     static func current() -> SettingsDto {
         if let savedSettings = UserDefaults.standard.object(forKey: kSettingsDtoKey) as? Data {
             let decoder = JSONDecoder()
-            if let settings = try? decoder.decode(SettingsDto.self, from: savedSettings) {
+            do {
+                let settings = try decoder.decode(SettingsDto.self, from: savedSettings)
                 return settings
+            } catch {
+                print(error)
             }
         }
         

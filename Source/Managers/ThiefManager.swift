@@ -17,7 +17,12 @@ class ThiefManager: NSObject, ObservableObject {
     private let notificationManager = NotificationManager()
     public let objectWillChange = ObservableObjectPublisher()
     
-    @Published var settings = SettingsDto.current()
+    var settings: SettingsDto? {
+        didSet {
+            startWatching(watchBlock)
+            notificationManager.setupSettings(settings: settings)
+        }
+    }
     
     @Published var lastThiefDetection = ThiefDto()
     
@@ -31,8 +36,6 @@ class ThiefManager: NSObject, ObservableObject {
         super.init()
         
         setupLocationManager()
-        startWatching(watchBlock)
-        notificationManager.setupSettings(settings: settings)
     }
     
     private func setupLocationManager() {
@@ -89,8 +92,7 @@ class ThiefManager: NSObject, ObservableObject {
             assert(false, "wrong file path")
             return
         }
-        let _ = notificationManager.send(photo: filepath.path,
-                                         coordinate: lastThiefDetection.coordinate)
+        let _ = notificationManager.send(photo: filepath.path, coordinate: lastThiefDetection.coordinate)
         
         objectWillChange.send()
     }
@@ -105,8 +107,7 @@ extension ThiefManager: CLLocationManagerDelegate {
         os_log(.debug, "\(error.localizedDescription)")
     }
     
-    func locationManager(_ manager: CLLocationManager,
-                         didChangeAuthorization status: CLAuthorizationStatus) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         os_log(.debug, "location manager auth status changed to: " )
         switch status {
         case .restricted:

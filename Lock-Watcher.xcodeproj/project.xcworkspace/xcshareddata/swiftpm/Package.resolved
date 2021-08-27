@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "f96b619bcb2383b43d898402283924b80e2c4bae",
+          "version": "5.4.3"
+        }
+      },
+      {
         "package": "LaunchAtLogin",
         "repositoryURL": "https://github.com/sindresorhus/LaunchAtLogin",
         "state": {
@@ -17,6 +26,15 @@
           "branch": null,
           "revision": "8ad96ef777d2f9517d78d1e1cedc940cc9fe4686",
           "version": "0.2.1"
+        }
+      },
+      {
+        "package": "SwiftyDropbox",
+        "repositoryURL": "https://github.com/dropbox/SwiftyDropbox.git",
+        "state": {
+          "branch": null,
+          "revision": "49ddd48aed6bef8690bca143d4b1a95b833f4f3e",
+          "version": "8.1.0"
         }
       }
     ]

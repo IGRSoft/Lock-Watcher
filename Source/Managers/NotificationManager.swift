@@ -12,11 +12,14 @@ import CoreLocation
 class NotificationManager {
     private let mailNotifier = MailNotifier()
     private let icloudNotifier = iCloudNotifier()
+    private var dropboxNotifier = DropboxNotifier()
     
     private var settings: SettingsDto?
     
-    func setupSettings(settings: SettingsDto) {
+    func setupSettings(settings: SettingsDto?) {
         self.settings = settings
+        
+        dropboxNotifier.register(settings: settings)
     }
     
     func send(photo path: String, coordinate: CLLocationCoordinate2D) -> Bool {
@@ -28,6 +31,10 @@ class NotificationManager {
         
         if settings?.isICloudSyncEnable == true {
             result = icloudNotifier.send(photo: path, coordinate: coordinate)
+        }
+        
+        if settings?.isDropboxEnable == true {
+            result = dropboxNotifier.send(photo: path, coordinate: coordinate)
         }
         
         return result

@@ -23,8 +23,12 @@ struct Lock_WatcherApp: App {
         var statusBarItem: NSStatusItem?
         
         func applicationDidFinishLaunching(_ notification: Notification) {
-                        
-            let contentView = SettingsView().environmentObject(ThiefManager())
+            let settings = SettingsDto.current()
+            let thiefManager = ThiefManager()
+            thiefManager.settings = settings
+            let contentView = SettingsView()
+                .environmentObject(settings)
+                .environmentObject(thiefManager)
 
             popover.behavior = .transient
             popover.animates = false

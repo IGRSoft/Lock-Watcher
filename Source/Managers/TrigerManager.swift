@@ -22,7 +22,7 @@ class TrigerManager {
                                                                     .onWrongPassword : WrongPasswordListener(),
                                                                     .onBatteryPowerListener : PowerListener()]
     
-    public func start(settings: SettingsDto, _ trigerBlock: @escaping TrigerBlock = {trigered in}) {
+    public func start(settings: SettingsDto?, _ trigerBlock: @escaping TrigerBlock = {trigered in}) {
         os_log(.debug, "Starting all trigers")
         
         let runListener:(BaseListenerProtocol, Bool) -> Void = {listener, isEnabled in
@@ -38,15 +38,15 @@ class TrigerManager {
             }
         }
         
-        let enableOnWakeUpListener = settings.isUseSnapshotOnWakeUp == true
+        let enableOnWakeUpListener = settings?.isUseSnapshotOnWakeUp == true
         let wakeUpListener = listeners[.onWakeUpListener]
         runListener(wakeUpListener!, enableOnWakeUpListener)
         
-        let enableOnWrongPasswordListener = settings.isUseSnapshotOnWrongPassword == true
+        let enableOnWrongPasswordListener = settings?.isUseSnapshotOnWrongPassword == true
         let wrongPasswordListener = listeners[.onWrongPassword]
         runListener(wrongPasswordListener!, enableOnWrongPasswordListener)
         
-        let enableOnBatteryPowerListener = settings.isUseSnapshotOnSwitchToBatteryPower == true
+        let enableOnBatteryPowerListener = settings?.isUseSnapshotOnSwitchToBatteryPower == true
         let powerListener = listeners[.onBatteryPowerListener]
         runListener(powerListener!, enableOnBatteryPowerListener)
         

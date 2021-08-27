@@ -29,7 +29,7 @@ class iCloudNotifier {
                 try FileManager.default.removeItem(at: localURL)
             }
             try data?.write(to: iCloudURL)
-        } catch let error  {
+        } catch {
             print(error)
         }
         
