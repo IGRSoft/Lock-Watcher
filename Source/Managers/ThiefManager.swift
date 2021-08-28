@@ -25,6 +25,7 @@ class ThiefManager: NSObject, ObservableObject {
     }
     
     @Published var lastThiefDetection = ThiefDto()
+    private(set) var databaseManager = DatabaseManager()
     
     private var watchBlock: WatchBlock = {trigered in}
     
@@ -35,6 +36,7 @@ class ThiefManager: NSObject, ObservableObject {
     init(_ watchBlock: @escaping WatchBlock = {trigered in}) {
         super.init()
         
+        databaseManager.setupSettings(settings)
         setupLocationManager()
     }
     
@@ -92,7 +94,10 @@ class ThiefManager: NSObject, ObservableObject {
             assert(false, "wrong file path")
             return
         }
-        let _ = notificationManager.send(photo: filepath.path, coordinate: lastThiefDetection.coordinate)
+        
+        lastThiefDetection.filepath = filepath
+        let _ = notificationManager.send(lastThiefDetection)
+        let _ = databaseManager.send(lastThiefDetection)
         
         objectWillChange.send()
     }

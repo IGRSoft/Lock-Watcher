@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		A519997A26D92D4400F482BC /* SwiftyDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = A519997926D92D4400F482BC /* SwiftyDropbox */; };
 		A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519997B26D92E6100F482BC /* DropboxNotifier.swift */; };
+		A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519998026DA41C700F482BC /* DatabaseManager.swift */; };
+		A519998426DA4AD400F482BC /* EasyStash in Frameworks */ = {isa = PBXBuildFile; productRef = A519998326DA4AD400F482BC /* EasyStash */; };
+		A519998626DA4BFB00F482BC /* DatabaseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519998526DA4BFB00F482BC /* DatabaseDto.swift */; };
+		A51999A226DA764A00F482BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A519999A26DA764A00F482BC /* Localizable.strings */; };
+		A51999A326DA764A00F482BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A519999D26DA764A00F482BC /* Assets.xcassets */; };
 		A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7B425A8F9A60046B7C8 /* EmptyView.swift */; };
 		A533D7BC25A8FCC20046B7C8 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */; };
 		A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */; };
@@ -37,7 +42,6 @@
 		A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
 		A5C6DC0525796A93009DE750 /* Lock_WatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0425796A93009DE750 /* Lock_WatcherTests.swift */; };
 		A5C6DC1025796A93009DE750 /* Lock_WatcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0F25796A93009DE750 /* Lock_WatcherUITests.swift */; };
-		A5C6DC3225796B80009DE750 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5C6DC2E25796B80009DE750 /* Assets.xcassets */; };
 		A5C6DC4625796CCB009DE750 /* PhotoSnap in Frameworks */ = {isa = PBXBuildFile; productRef = A5C6DC4525796CCB009DE750 /* PhotoSnap */; };
 		A5E6D75725A5BB6C00EEA7DD /* XPCPower.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D75625A5BB6C00EEA7DD /* XPCPower.m */; };
 		A5E6D75925A5BB6C00EEA7DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D75825A5BB6C00EEA7DD /* main.m */; };
@@ -124,6 +128,16 @@
 
 /* Begin PBXFileReference section */
 		A519997B26D92E6100F482BC /* DropboxNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxNotifier.swift; sourceTree = "<group>"; };
+		A519998026DA41C700F482BC /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		A519998526DA4BFB00F482BC /* DatabaseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDto.swift; sourceTree = "<group>"; };
+		A519999B26DA764A00F482BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A519999C26DA764A00F482BC /* Lock_Watcher.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lock_Watcher.entitlements; sourceTree = "<group>"; };
+		A519999D26DA764A00F482BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A519999E26DA764A00F482BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A519999F26DA764A00F482BC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A51999A026DA764A00F482BC /* icon.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.xcf; sourceTree = "<group>"; };
+		A51999A126DA764A00F482BC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A51999A626DA771600F482BC /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A533D7B425A8F9A60046B7C8 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpListener.swift; sourceTree = "<group>"; };
 		A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongPasswordListener.swift; sourceTree = "<group>"; };
@@ -159,9 +173,6 @@
 		A5C6DC0B25796A93009DE750 /* Lock-WatcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lock-WatcherUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DC0F25796A93009DE750 /* Lock_WatcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherUITests.swift; sourceTree = "<group>"; };
 		A5C6DC1125796A93009DE750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5C6DC2D25796B80009DE750 /* Lock_Watcher.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lock_Watcher.entitlements; sourceTree = "<group>"; };
-		A5C6DC2E25796B80009DE750 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A5C6DC3125796B80009DE750 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCPower.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E6D75525A5BB6C00EEA7DD /* XPCPower.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XPCPower.h; sourceTree = "<group>"; };
 		A5E6D75625A5BB6C00EEA7DD /* XPCPower.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XPCPower.m; sourceTree = "<group>"; };
@@ -199,6 +210,7 @@
 			files = (
 				A533D7BC25A8FCC20046B7C8 /* LaunchAtLogin in Frameworks */,
 				A5C6DC4625796CCB009DE750 /* PhotoSnap in Frameworks */,
+				A519998426DA4AD400F482BC /* EasyStash in Frameworks */,
 				A519997A26D92D4400F482BC /* SwiftyDropbox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +240,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A519999926DA764A00F482BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A519999A26DA764A00F482BC /* Localizable.strings */,
+				A519999C26DA764A00F482BC /* Lock_Watcher.entitlements */,
+				A519999D26DA764A00F482BC /* Assets.xcassets */,
+				A51999A026DA764A00F482BC /* icon.xcf */,
+				A51999A126DA764A00F482BC /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		A533D7D225A9E23F0046B7C8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,7 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				A5C6DBF025796A90009DE750 /* Source */,
-				A5C6DC2C25796B80009DE750 /* Resources */,
+				A519999926DA764A00F482BC /* Resources */,
 				A5C6DC0325796A93009DE750 /* Tests */,
 				A5C6DC0E25796A93009DE750 /* UITests */,
 				A5E6D75325A5BB6C00EEA7DD /* XPCPower */,
@@ -352,16 +376,6 @@
 			path = UITests;
 			sourceTree = "<group>";
 		};
-		A5C6DC2C25796B80009DE750 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A5C6DC2D25796B80009DE750 /* Lock_Watcher.entitlements */,
-				A5C6DC2E25796B80009DE750 /* Assets.xcassets */,
-				A5C6DC3125796B80009DE750 /* Info.plist */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		A5E6D75325A5BB6C00EEA7DD /* XPCPower */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +404,7 @@
 				A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */,
 				A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */,
 				A5E6D78D25A5CD2E00EEA7DD /* TrigerManager.swift */,
+				A519998026DA41C700F482BC /* DatabaseManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -411,6 +426,7 @@
 			children = (
 				A5E6D7A525A5D1EB00EEA7DD /* SettingsDto.swift */,
 				A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */,
+				A519998526DA4BFB00F482BC /* DatabaseDto.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -475,6 +491,7 @@
 				A5C6DC4525796CCB009DE750 /* PhotoSnap */,
 				A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */,
 				A519997926D92D4400F482BC /* SwiftyDropbox */,
+				A519998326DA4AD400F482BC /* EasyStash */,
 			);
 			productName = "Lock-Watcher";
 			productReference = A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */;
@@ -573,13 +590,16 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ru,
 				Base,
+				uk,
 			);
 			mainGroup = A5C6DBE525796A90009DE750;
 			packageReferences = (
 				A5C6DC4425796CCB009DE750 /* XCRemoteSwiftPackageReference "PhotoSnap" */,
 				A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				A519997826D92D4400F482BC /* XCRemoteSwiftPackageReference "SwiftyDropbox" */,
+				A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */,
 			);
 			productRefGroup = A5C6DBEF25796A90009DE750 /* Products */;
 			projectDirPath = "";
@@ -615,7 +635,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C6DC3225796B80009DE750 /* Assets.xcassets in Resources */,
+				A51999A326DA764A00F482BC /* Assets.xcassets in Resources */,
+				A51999A226DA764A00F482BC /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +709,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A519998626DA4BFB00F482BC /* DatabaseDto.swift in Sources */,
 				A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */,
 				A533D7CD25A9D9E30046B7C8 /* WrongPasswordListener.swift in Sources */,
 				A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */,
@@ -706,6 +728,7 @@
 				A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */,
 				A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */,
 				A533D80325AA0F1A0046B7C8 /* MailNotifier.swift in Sources */,
+				A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 				A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */,
 				A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */,
@@ -768,6 +791,20 @@
 			targetProxy = A5E6D75B25A5BB6C00EEA7DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A519999A26DA764A00F482BC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A519999B26DA764A00F482BC /* en */,
+				A519999E26DA764A00F482BC /* Base */,
+				A519999F26DA764A00F482BC /* ru */,
+				A51999A626DA771600F482BC /* uk */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A533D83325AA11F40046B7C8 /* Debug */ = {
@@ -1251,6 +1288,14 @@
 				minimumVersion = 8.1.0;
 			};
 		};
+		A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onmyway133/EasyStash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.8;
+			};
+		};
 		A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
@@ -1274,6 +1319,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A519997826D92D4400F482BC /* XCRemoteSwiftPackageReference "SwiftyDropbox" */;
 			productName = SwiftyDropbox;
+		};
+		A519998326DA4AD400F482BC /* EasyStash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */;
+			productName = EasyStash;
 		};
 		A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;

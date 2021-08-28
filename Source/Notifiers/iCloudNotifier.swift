@@ -10,8 +10,11 @@ import CoreLocation
 
 class iCloudNotifier {
     
-    func send(photo path: String, coordinate: CLLocationCoordinate2D) -> Bool {
-        let localURL = URL(fileURLWithPath: path)
+    func send(_ thiefDto: ThiefDto) -> Bool {
+        guard let localURL = thiefDto.filepath else {
+            assert(false, "wrong file path")
+            return false
+        }
         
         guard var iCloudURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents") else {
             assert(false, "Wrong urls")
@@ -21,7 +24,7 @@ class iCloudNotifier {
         iCloudURL.appendPathComponent(localURL.lastPathComponent)
         
         var image = NSImage(contentsOf: localURL)
-        image = image?.imageWithText(text: String(describing: coordinate))
+        image = image?.imageWithText(text: String(describing: thiefDto.coordinate))
         
         do {
             let data = image?.tiffRepresentation

@@ -31,8 +31,7 @@ class FileSystemUtil {
         return documentURL.appendingPathComponent(key + ".png")
     }
     
-    class func store(image: NSImage,
-                     forKey key: String) -> URL? {
+    class func store(image: NSImage, forKey key: String) -> URL? {
         if let filePath = filePath(forKey: key) {
             guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil} // TODO: handle error
             let newRep = NSBitmapImageRep(cgImage: cgImage)
@@ -43,6 +42,7 @@ class FileSystemUtil {
             }
             catch {
                 os_log(.debug, "error saving: \(error.localizedDescription)")
+                return nil
             }
             
             return filePath

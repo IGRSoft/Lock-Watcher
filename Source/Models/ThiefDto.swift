@@ -21,5 +21,6 @@ public class ThiefDto: Equatable {
     var coordinate = CLLocationCoordinate2D()
     var trigerType: TrigerType? = .empty
     var snapshot: NSImage?
+    var filepath: URL?
     var date: Date = Date()
 }

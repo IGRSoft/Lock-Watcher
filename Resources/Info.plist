@@ -33,10 +33,12 @@
 	<string>public.app-category.lifestyle</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>LSUIElement</key>
+	<string>1</string>
 	<key>NSAppleEventsUsageDescription</key>
 	<string>sdfsd dsf ds</string>
 	<key>NSCameraUsageDescription</key>
-	<string>I'm folowing you :)</string>
+	<string>I&apos;m folowing you :)</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Allows us to locate you</string>
 	<key>NSLocationUsageDescription</key>

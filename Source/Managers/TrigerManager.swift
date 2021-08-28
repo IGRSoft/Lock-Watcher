@@ -11,7 +11,7 @@ import os
 class TrigerManager {
     
     enum ListenerName: String {
-        case onWakeUpListener, onWrongPassword, onBatteryPowerListener
+        case onWakeUpListener, onWrongPassword, onBatteryPowerListener, onUSBConnectionListenet
     }
     
     typealias TrigerBlock = ((ThiefDto) -> Void)
@@ -20,7 +20,8 @@ class TrigerManager {
     
     private var listeners: [ListenerName : BaseListenerProtocol] = [.onWakeUpListener : WakeUpListener(),
                                                                     .onWrongPassword : WrongPasswordListener(),
-                                                                    .onBatteryPowerListener : PowerListener()]
+                                                                    .onBatteryPowerListener : PowerListener(),
+                                                                    .onUSBConnectionListenet : USBListener()]
     
     public func start(settings: SettingsDto?, _ trigerBlock: @escaping TrigerBlock = {trigered in}) {
         os_log(.debug, "Starting all trigers")
@@ -49,6 +50,10 @@ class TrigerManager {
         let enableOnBatteryPowerListener = settings?.isUseSnapshotOnSwitchToBatteryPower == true
         let powerListener = listeners[.onBatteryPowerListener]
         runListener(powerListener!, enableOnBatteryPowerListener)
+        
+        let enableOnUSBConnectionListenet = settings?.isUseSnapshotOnUSBMount == true
+        let usbListener = listeners[.onUSBConnectionListenet]
+        runListener(usbListener!, enableOnUSBConnectionListenet)
         
         self.settings = settings
     }

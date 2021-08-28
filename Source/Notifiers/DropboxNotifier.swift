@@ -19,7 +19,7 @@ class DropboxNotifier {
     
     lazy var client = DropboxClientsManager.authorizedClient
     
-    func register(settings: SettingsDto?) {
+    func register(with settings: SettingsDto?) {
         self.settings = settings
         
         DropboxClientsManager.setupWithAppKeyDesktop("wg60852o20nf6eh")
@@ -30,18 +30,23 @@ class DropboxNotifier {
                                                      andEventID: AEEventID(kAEGetURL))
     }
     
-    func send(photo path: String, coordinate: CLLocationCoordinate2D) -> Bool {
+    func send(_ thiefDto: ThiefDto) -> Bool {
         var result = true
         
-        var image = NSImage(contentsOf: URL(fileURLWithPath: path))
-        image = image?.imageWithText(text: String(describing: coordinate))
+        guard let filepath = thiefDto.filepath else {
+            assert(false, "wrong file path")
+            return false
+        }
+        
+        var image = NSImage(contentsOf: filepath)
+        image = image?.imageWithText(text: String(describing: thiefDto.coordinate))
         
         do {
             guard let data = image?.tiffRepresentation else {
                 throw DropboxNotifierError.emptyData
             }
             
-            let _ = client?.files.upload(path: "/\(path.split(separator: "/").last ?? "image.png")", input: data)
+            let _ = client?.files.upload(path: "/\(filepath.path.split(separator: "/").last ?? "image.png")", input: data)
                 .response { response, error in
                     if let response = response {
                         print(response)

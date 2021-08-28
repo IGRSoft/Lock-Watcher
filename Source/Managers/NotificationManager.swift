@@ -19,22 +19,22 @@ class NotificationManager {
     func setupSettings(settings: SettingsDto?) {
         self.settings = settings
         
-        dropboxNotifier.register(settings: settings)
+        dropboxNotifier.register(with: settings)
     }
-    
-    func send(photo path: String, coordinate: CLLocationCoordinate2D) -> Bool {
+        
+    func send(_ thiefDto: ThiefDto) -> Bool {
         var result = false
         
         if settings?.isSendNotificationToMail == true, let mail = settings?.mailRecipient {
-            result = mailNotifier.send(photo: path, to: mail, coordinate: coordinate)
+            result = mailNotifier.send(thiefDto, to: mail)
         }
         
         if settings?.isICloudSyncEnable == true {
-            result = icloudNotifier.send(photo: path, coordinate: coordinate)
+            result = icloudNotifier.send(thiefDto)
         }
         
         if settings?.isDropboxEnable == true {
-            result = dropboxNotifier.send(photo: path, coordinate: coordinate)
+            result = dropboxNotifier.send(thiefDto)
         }
         
         return result

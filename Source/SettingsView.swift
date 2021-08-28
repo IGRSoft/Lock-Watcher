@@ -8,6 +8,15 @@
 import SwiftUI
 import LaunchAtLogin
 
+enum Translation {
+    static func keep(last: Int) -> String {
+        return String.localizedStringWithFormat(NSLocalizedString("Keep last %d", comment: ""), last)
+    }
+    static func synkedDropbox(name: String) -> String {
+        return String.localizedStringWithFormat(NSLocalizedString("Synced with Dropbox: %@", comment: ""), name)
+    }
+}
+
 struct SettingsView: View {
     @EnvironmentObject private var thiefManager: ThiefManager {
         didSet {
@@ -16,36 +25,42 @@ struct SettingsView: View {
     }
     @EnvironmentObject private var settings: SettingsDto
     
+    @State var isInfoHidden = true
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12.0) {
-            VStack(alignment: .leading, spacing: 16.0) {
-                LaunchAtLogin.Toggle()
+            VStack(spacing: 16.0) {
+                LaunchAtLogin.Toggle(LocalizedStringKey("LaunchAtLogin"))
             }
             
             Divider()
             
-            VStack(alignment: .leading, spacing: 16.0) {
+            VStack(alignment: .leading, spacing: 8.0) {
                 UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.isUseSnapshotOnWakeUp)
                     .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { value in
                         thiefManager.restartWatching()
                         settings.save()
                     })
-                UseSnapshotOnWrongPassword(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
+                UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
                     .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { value in
                         thiefManager.restartWatching()
                         settings.save()
                     })
-                UseSnapshotOnSwitchToBatteryPower(isUseSnapshotOnSwitchToBatteryPower: $settings.isUseSnapshotOnSwitchToBatteryPower)
+                UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.isUseSnapshotOnSwitchToBatteryPower)
                     .onChange(of: settings.isUseSnapshotOnSwitchToBatteryPower, perform: { value in
                         thiefManager.restartWatching()
                         settings.save()
                     })
-                UseSnapshotOnUSBMount(isUseSnapshotOnUSBMount: $settings.isUseSnapshotOnUSBMount)
+                UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: $settings.isUseSnapshotOnUSBMount)
                     .onChange(of: settings.isUseSnapshotOnUSBMount, perform: { value in
                         thiefManager.restartWatching()
                         settings.save()
                     })
-                LastThiefDetection(lastThiefDetection: $thiefManager.lastThiefDetection)
+                KeepLastCountView(keepLastActionsCount: $settings.keepLastActionsCount)
+                    .onChange(of: thiefManager.lastThiefDetection.snapshot, perform: { value in
+                        settings.save()
+                    })
+                LastThiefDetectionView(lastThiefDetection: $thiefManager.lastThiefDetection)
                     .onChange(of: thiefManager.lastThiefDetection.snapshot, perform: { value in
                         thiefManager.restartWatching()
                         settings.save()
@@ -54,8 +69,8 @@ struct SettingsView: View {
             
             Divider()
             
-            VStack(alignment: .leading, spacing: 16.0) {
-                SendNotificationToMail(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
+            VStack(alignment: .leading, spacing: 8.0) {
+                SendNotificationToMailView(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
                     .onChange(of: settings.isSendNotificationToMail, perform: { value in
                         settings.save()
                     })
@@ -72,12 +87,13 @@ struct SettingsView: View {
             }
             Divider()
             
-            VStack(alignment: .center, spacing: 16.0) {
-                ExitView(thiefManager: thiefManager)
+            VStack() {
+                InfoView(thiefManager: thiefManager, isInfoHidden: $isInfoHidden)
             }
+            .frame(width: 324.0)
         }
         .padding(16.0)
-        .frame(width: 350.0)
+        .frame(width: 340.0)
     }
 }
 
@@ -86,49 +102,59 @@ struct UseSnapshotOnWakeUpView: View {
     
     var body: some View {
         Toggle(isOn: $isUseSnapshotOnWakeUp) {
-            Text("Take Snapshot On WakeUp")
+            Text("SnapshotOnWakeUp")
         }
     }
 }
 
-struct UseSnapshotOnWrongPassword: View {
+struct UseSnapshotOnWrongPasswordView: View {
     @Binding var isUseSnapshotOnWrongPassword : Bool
     
     var body: some View {
         Toggle(isOn: $isUseSnapshotOnWrongPassword) {
-            Text("Take Snapshot On Wrong Password")
+            Text("SnapshotOnWrongPassword")
         }
     }
 }
 
-struct UseSnapshotOnSwitchToBatteryPower: View {
+struct UseSnapshotOnSwitchToBatteryPowerView: View {
     @Binding var isUseSnapshotOnSwitchToBatteryPower : Bool
     
     var body: some View {
         Toggle(isOn: $isUseSnapshotOnSwitchToBatteryPower) {
-            Text("Take Snapshot On Switch To Battery Power")
+            Text("SnapshotOnSwitchToBatteryPower")
         }
     }
 }
 
-struct UseSnapshotOnUSBMount: View {
+struct UseSnapshotOnUSBMountView: View {
     @Binding var isUseSnapshotOnUSBMount : Bool
     
     var body: some View {
         Toggle(isOn: $isUseSnapshotOnUSBMount) {
-            Text("Take Snapshot On USB Mount")
+            Text("SnapshotOnUSBMount")
         }
     }
 }
 
-struct SendNotificationToMail: View {
+struct KeepLastCountView: View {
+    @Binding var keepLastActionsCount : Int
+    
+    var body: some View {
+        Stepper(value: $keepLastActionsCount, in: 1...30) {
+            Text(Translation.keep(last: keepLastActionsCount))
+        }
+    }
+}
+
+struct SendNotificationToMailView: View {
     @Binding var isSendNotificationToMail : Bool
     @Binding var mailRecipient : String
     
     var body: some View {
-        HStack(alignment: .center, spacing: 16.0, content: {
+        HStack(spacing: 8.0, content: {
             Toggle(isOn: $isSendNotificationToMail) {
-                Text("Send to Mail")
+                Text("SendToMail")
             }
             TextField("user@example.com", text: $mailRecipient)
                 .disabled(isSendNotificationToMail == false)
@@ -141,7 +167,7 @@ struct ICloudSyncEnableView: View {
     
     var body: some View {
         Toggle(isOn: $isICloudSyncEnable) {
-            Text("Sync with iCloud")
+            Text("SyncWithiCloud")
         }
     }
 }
@@ -151,14 +177,14 @@ struct DropboxEnableView: View {
     @Binding var dropboxName : String
     
     var body: some View {
-        HStack(alignment: .center, spacing: 16.0, content: {
+        HStack(spacing: 8.0, content: {
             
             if let name = dropboxName, name.isEmpty == false {
                 Toggle(isOn: $isDropboxEnable) {
-                    let text: String = "Sync with Dropbox: \(name)"
+                    let text = Translation.synkedDropbox(name: name)
                     Text(text)
                 }
-                Button("logout") {
+                Button("Logout") {
                     DropboxNotifier.logout()
                     dropboxName = ""
                 }
@@ -166,7 +192,7 @@ struct DropboxEnableView: View {
                 
             } else {
                 Toggle(isOn: $isDropboxEnable) {
-                    Text("Sync with Dropbox")
+                    Text("SyncWithDropbox")
                 }
                 Button("Authorize") {
                     DropboxNotifier.authorize(on: NSViewController())
@@ -177,26 +203,49 @@ struct DropboxEnableView: View {
     }
 }
 
-struct ExitView: View {
+struct InfoView: View {
     var thiefManager: ThiefManager
     
+    @Binding var isInfoHidden: Bool
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            Button("Quit") {
-                exit(0)
+        VStack(alignment: .center) {
+            if isInfoHidden {
+                Button("􀁹") {
+                    isInfoHidden = false
+                }.buttonStyle(BorderlessButtonStyle())
+            } else {
+                Button("􀁷") {
+                    isInfoHidden = true
+                }.buttonStyle(BorderlessButtonStyle())
+                
+                VStack(alignment: .center) {
+                    #if DEBUG
+                    Button("Debug") {
+                        thiefManager.detectedTriger()
+                    }
+                    #endif
+                    
+                    Button("LastSnapshots") {
+                        //add preview
+                        thiefManager.databaseManager.latestImages()
+                    }
+                    Button("Notices") {
+                        exit(0)
+                    }
+                    Button("Quit") {
+                        exit(0)
+                    }
+                    Text("© IGR Software 2008 - 2021")
+                }
             }
-            #if DEBUG
-            Button("Debug") {
-                thiefManager.detectedTriger()
-            }
-            #endif
         }
     }
 }
 
-struct LastThiefDetection: View {
+struct LastThiefDetectionView: View {
     @Binding var lastThiefDetection : ThiefDto
-    
+        
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -208,10 +257,15 @@ struct LastThiefDetection: View {
         VStack(alignment: .leading, spacing: 16.0) {
             if let img = lastThiefDetection.snapshot, let imageValue = Image(nsImage: img) {
                 Divider()
-                Text("Last Snapshot:")
+                Text("LastSnapshot")
                 imageValue
                     .resizable()
                     .scaledToFit().frame(width: 300, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .onTapGesture {
+                        if let filepath = lastThiefDetection.filepath {
+                            NSWorkspace.shared.open(filepath)
+                        }
+                    }
                 Text("\(lastThiefDetection.date, formatter: Self.taskDateFormat)")
                 Divider()
             }

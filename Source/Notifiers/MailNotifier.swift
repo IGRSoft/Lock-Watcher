@@ -36,8 +36,13 @@ class MailNotifier {
         return service!
     }
     
-    func send(photo path: String, to mail: String, coordinate: CLLocationCoordinate2D) -> Bool {
-        service.sendMail(mail, coordinates: coordinate, attachment: path)
+    func send(_ thiefDto: ThiefDto, to mail: String) -> Bool {
+        guard let filepath = thiefDto.filepath?.path else {
+            assert(false, "wrong file path")
+            return false
+        }
+        
+        service.sendMail(mail, coordinates: thiefDto.coordinate, attachment: filepath)
         return true
     }
 }

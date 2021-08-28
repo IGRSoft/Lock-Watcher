@@ -28,7 +28,9 @@ class SettingsDto: ObservableObject, Codable {
         case dropboxName
     }
     
-    @Published var isFirstLaunch: Bool = false 
+    @Published var isFirstLaunch: Bool = false
+    
+    @Published var keepLastActionsCount: Int = 10
     
     @Published var isUseSnapshotOnWakeUp: Bool = false
     @Published var isUseSnapshotOnWrongPassword: Bool = false

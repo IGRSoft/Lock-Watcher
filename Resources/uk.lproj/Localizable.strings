@@ -1,0 +1,55 @@
+/*
+  Localizable.strings
+  Lock Watcher
+  
+  Created by Vitalii Parovishnyk.
+  Copyright 2021 IGR Soft. All rights reserved.
+*/
+
+/* Description was not specified */
+"LaunchAtLogin" = "Запустити на логіні";
+
+ /* Description was not specified */
+"SnapshotOnWakeUp" = "Зробити знімок при пробудженні";
+
+/* Description was not specified */
+"SnapshotOnWrongPassword" = "Зробити знімок при невірному паролі";
+
+/* Description was not specified */
+"SnapshotOnSwitchToBatteryPower" = "Зробити знімок при зміні живлення";
+
+/* Description was not specified */
+"SnapshotOnUSBMount" = "Зробити знімок при підключенні в USB";
+
+/* Description was not specified */
+"Keep last %d" = "Залишити останні %d";
+
+/* Description was not specified */
+"LastSnapshots" = "Останні знімки";
+
+/* Description was not specified */
+"SendToMail" = "Надіслати листа до";
+
+/* Description was not specified */
+"SyncWithiCloud" = "Синхронізувати з iCloud";
+
+/* Description was not specified */
+"SyncWithDropbox" = "Синхронізувати з Dropbox";
+
+/* Description was not specified */
+"Synced with Dropbox: %@" = "Синхронізовано з: %@";
+
+/* Description was not specified */
+"Logout" = "Вийти";
+
+/* Description was not specified */
+"Authorize" = "Підключити";
+
+/* Description was not specified */
+"Quit" = "Вихід";
+
+/* Description was not specified */
+"Notices" = "Офіційне повідомлення";
+
+/* Description was not specified */
+"LastSnapshot" = "Останній знімок:";
