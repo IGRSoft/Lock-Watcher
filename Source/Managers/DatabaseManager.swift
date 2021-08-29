@@ -8,7 +8,11 @@
 import Foundation
 import EasyStash
 
-class DatabaseManager {
+class DatabaseManager: Equatable {
+    public static func == (lhs: DatabaseManager, rhs: DatabaseManager) -> Bool {
+        return lhs.storage?.folderUrl == rhs.storage?.folderUrl
+    }
+    
     private let kImagesKey = "images"
     
     private var settings: SettingsDto?

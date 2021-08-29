@@ -8,5 +8,9 @@
 	<array>
 		<string>(allow file-read* process-exec (subpath &quot;/usr/bin&quot;))</string>
 	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.temporary-exception.files.absolute-path.read-only</key>
+	<string>/usr/bin</string>
 </dict>
 </plist>

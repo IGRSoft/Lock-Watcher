@@ -28,9 +28,9 @@ class iCloudNotifier {
         
         do {
             let data = image?.tiffRepresentation
-            if FileManager.default.fileExists(atPath: localURL.path) {
-                try FileManager.default.removeItem(at: localURL)
-            }
+//            if FileManager.default.fileExists(atPath: localURL.path) {
+//                try FileManager.default.removeItem(at: localURL)
+//            }
             try data?.write(to: iCloudURL)
         } catch {
             print(error)

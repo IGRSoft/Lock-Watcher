@@ -10,6 +10,7 @@ import AppKit
 import os
 import PhotoSnap
 import Combine
+import CoreLocation
 
 class ThiefManager: NSObject, ObservableObject {
     typealias WatchBlock = ((ThiefDto) -> Void)
@@ -24,8 +25,8 @@ class ThiefManager: NSObject, ObservableObject {
         }
     }
     
-    @Published var lastThiefDetection = ThiefDto()
-    private(set) var databaseManager = DatabaseManager()
+    private var lastThiefDetection = ThiefDto()
+    @Published var databaseManager = DatabaseManager()
     
     private var watchBlock: WatchBlock = {trigered in}
     

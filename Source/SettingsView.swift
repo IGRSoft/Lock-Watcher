@@ -57,12 +57,7 @@ struct SettingsView: View {
                         settings.save()
                     })
                 KeepLastCountView(keepLastActionsCount: $settings.keepLastActionsCount)
-                    .onChange(of: thiefManager.lastThiefDetection.snapshot, perform: { value in
-                        settings.save()
-                    })
-                LastThiefDetectionView(lastThiefDetection: $thiefManager.lastThiefDetection)
-                    .onChange(of: thiefManager.lastThiefDetection.snapshot, perform: { value in
-                        thiefManager.restartWatching()
+                    .onChange(of: settings.keepLastActionsCount, perform: { value in
                         settings.save()
                     })
             }
@@ -70,10 +65,10 @@ struct SettingsView: View {
             Divider()
             
             VStack(alignment: .leading, spacing: 8.0) {
-                SendNotificationToMailView(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
+                /*SendNotificationToMailView(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
                     .onChange(of: settings.isSendNotificationToMail, perform: { value in
                         settings.save()
-                    })
+                    })*/
                 
                 ICloudSyncEnableView(isICloudSyncEnable: $settings.isICloudSyncEnable)
                     .onChange(of: settings.isICloudSyncEnable, perform: { value in
@@ -86,6 +81,12 @@ struct SettingsView: View {
                     })
             }
             Divider()
+            
+            LastThiefDetectionView(databaseManager: $thiefManager.databaseManager)
+                .onChange(of: thiefManager.databaseManager, perform: { value in
+                    thiefManager.restartWatching()
+                    settings.save()
+                })
             
             VStack() {
                 InfoView(thiefManager: thiefManager, isInfoHidden: $isInfoHidden)
@@ -211,25 +212,25 @@ struct InfoView: View {
     var body: some View {
         VStack(alignment: .center) {
             if isInfoHidden {
-                Button("􀁹") {
+                Button(action: {
                     isInfoHidden = false
+                }) {
+                    Image(systemName: "chevron.compact.down").font(.system(size: 28))
                 }.buttonStyle(BorderlessButtonStyle())
             } else {
-                Button("􀁷") {
+                Button(action: {
                     isInfoHidden = true
+                }) {
+                    Image(systemName: "chevron.compact.up").font(.system(size: 28))
                 }.buttonStyle(BorderlessButtonStyle())
                 
                 VStack(alignment: .center) {
-                    #if DEBUG
+#if DEBUG
                     Button("Debug") {
                         thiefManager.detectedTriger()
                     }
-                    #endif
+#endif
                     
-                    Button("LastSnapshots") {
-                        //add preview
-                        thiefManager.databaseManager.latestImages()
-                    }
                     Button("Notices") {
                         exit(0)
                     }
@@ -244,8 +245,8 @@ struct InfoView: View {
 }
 
 struct LastThiefDetectionView: View {
-    @Binding var lastThiefDetection : ThiefDto
-        
+    @Binding var databaseManager: DatabaseManager
+    
     static let taskDateFormat: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -254,19 +255,29 @@ struct LastThiefDetectionView: View {
     }()
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16.0) {
-            if let img = lastThiefDetection.snapshot, let imageValue = Image(nsImage: img) {
-                Divider()
+        VStack(alignment: .center, spacing: 16.0) {
+            if let latestImages = databaseManager.latestImages(),
+               let lastImage = latestImages.last,
+               let imageData = lastImage.data,
+               let image = NSImage(data: imageData),
+               let imageValue = Image(nsImage: image),
+               let date = lastImage.date {
                 Text("LastSnapshot")
                 imageValue
                     .resizable()
-                    .scaledToFit().frame(width: 300, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .scaledToFit().frame(width: 324, height: 180, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
-                        if let filepath = lastThiefDetection.filepath {
+                        if let filepath = lastImage.path {
                             NSWorkspace.shared.open(filepath)
                         }
                     }
-                Text("\(lastThiefDetection.date, formatter: Self.taskDateFormat)")
+                Text("\(date, formatter: Self.taskDateFormat)")
+                if latestImages.count > 1 {
+                    Button("LastSnapshots") {
+#warning("add preview")
+                    }
+                }
+                
                 Divider()
             }
         }
@@ -276,8 +287,11 @@ struct LastThiefDetectionView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
-            .environmentObject(SettingsDto.current())
-            .environmentObject(ThiefManager())
+        //ForEach(["en", "ru", "uk"], id: \.self) { id in
+            SettingsView()
+                .environmentObject(SettingsDto.current())
+                .environmentObject(ThiefManager())
+                //.environment(\.locale, .init(identifier: id))
+        //}
     }
 }

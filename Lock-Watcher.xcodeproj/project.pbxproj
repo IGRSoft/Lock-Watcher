@@ -20,10 +20,8 @@
 		A533D7CD25A9D9E30046B7C8 /* WrongPasswordListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */; };
 		A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */; };
 		A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */; };
-		A533D80325AA0F1A0046B7C8 /* MailNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */; };
 		A533D82B25AA11F40046B7C8 /* XPCMail.m in Sources */ = {isa = PBXBuildFile; fileRef = A533D82A25AA11F40046B7C8 /* XPCMail.m */; };
 		A533D82D25AA11F40046B7C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A533D82C25AA11F40046B7C8 /* main.m */; };
-		A533D83125AA11F40046B7C8 /* XPCMail.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = A533D82625AA11F40046B7C8 /* XPCMail.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A533D83C25AA12110046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
 		A533D84325AA126B0046B7C8 /* Mail.app in Resources */ = {isa = PBXBuildFile; fileRef = A533D84225AA126B0046B7C8 /* Mail.app */; };
 		A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
@@ -73,13 +71,6 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
-		A533D82F25AA11F40046B7C8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A533D82525AA11F40046B7C8;
-			remoteInfo = XPCMail;
-		};
 		A54E4A2026108E9600E7B1D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
@@ -118,7 +109,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 				A54E4A2226108E9600E7B1D4 /* XPCAuthentication.xpc in Embed XPC Services */,
-				A533D83125AA11F40046B7C8 /* XPCMail.xpc in Embed XPC Services */,
 				A5E6D75D25A5BB6C00EEA7DD /* XPCPower.xpc in Embed XPC Services */,
 			);
 			name = "Embed XPC Services";
@@ -135,7 +125,6 @@
 		A519999D26DA764A00F482BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A519999E26DA764A00F482BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A519999F26DA764A00F482BC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A51999A026DA764A00F482BC /* icon.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.xcf; sourceTree = "<group>"; };
 		A51999A126DA764A00F482BC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A51999A626DA771600F482BC /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A533D7B425A8F9A60046B7C8 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
@@ -161,6 +150,11 @@
 		A54E4A562610AA3C00E7B1D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCAuthentication.swift; sourceTree = "<group>"; };
 		A54E4A892610D3E500E7B1D4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A56D11DE26DBB1ED00BEBEC2 /* XPCAuthentication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCAuthentication.entitlements; sourceTree = "<group>"; };
+		A56D11DF26DBB1ED00BEBEC2 /* XPCPower.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCPower.entitlements; sourceTree = "<group>"; };
+		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A57FDCB026DB99B700954ED7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A57FDCB126DB99B800954ED7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
 		A5A0788C26B9A78400A7D578 /* USBListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBListener.swift; sourceTree = "<group>"; };
 		A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudNotifier.swift; sourceTree = "<group>"; };
@@ -243,10 +237,12 @@
 		A519999926DA764A00F482BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A519999A26DA764A00F482BC /* Localizable.strings */,
 				A519999C26DA764A00F482BC /* Lock_Watcher.entitlements */,
+				A56D11DE26DBB1ED00BEBEC2 /* XPCAuthentication.entitlements */,
+				A56D11DF26DBB1ED00BEBEC2 /* XPCPower.entitlements */,
+				A519999A26DA764A00F482BC /* Localizable.strings */,
+				A57FDCAF26DB99B600954ED7 /* InfoPlist.strings */,
 				A519999D26DA764A00F482BC /* Assets.xcassets */,
-				A51999A026DA764A00F482BC /* icon.xcf */,
 				A51999A126DA764A00F482BC /* Info.plist */,
 			);
 			path = Resources;
@@ -483,7 +479,6 @@
 			);
 			dependencies = (
 				A5E6D75C25A5BB6C00EEA7DD /* PBXTargetDependency */,
-				A533D83025AA11F40046B7C8 /* PBXTargetDependency */,
 				A54E4A2126108E9600E7B1D4 /* PBXTargetDependency */,
 			);
 			name = "Lock-Watcher";
@@ -557,7 +552,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					A533D82525AA11F40046B7C8 = {
 						CreatedOnToolsVersion = 12.3;
@@ -727,7 +722,6 @@
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 				A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */,
 				A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */,
-				A533D80325AA0F1A0046B7C8 /* MailNotifier.swift in Sources */,
 				A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 				A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */,
@@ -765,11 +759,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A533D83025AA11F40046B7C8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A533D82525AA11F40046B7C8 /* XPCMail */;
-			targetProxy = A533D82F25AA11F40046B7C8 /* PBXContainerItemProxy */;
-		};
 		A54E4A2126108E9600E7B1D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A54E4A1626108E9600E7B1D4 /* XPCAuthentication */;
@@ -802,6 +791,16 @@
 				A51999A626DA771600F482BC /* uk */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		A57FDCAF26DB99B600954ED7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A57FDCAE26DB99B600954ED7 /* en */,
+				A57FDCB026DB99B700954ED7 /* ru */,
+				A57FDCB126DB99B800954ED7 /* uk */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -864,7 +863,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = XPCAuthentication/XPCAuthentication.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/XPCAuthentication.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -890,7 +889,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = XPCAuthentication/XPCAuthentication.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/XPCAuthentication.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -915,6 +914,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -962,12 +962,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				ITSAppUsesNonExemptEncryption = NO;
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -976,6 +978,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1017,11 +1020,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				ITSAppUsesNonExemptEncryption = NO;
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
@@ -1164,6 +1169,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Resources/XPCPower.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1190,6 +1196,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Resources/XPCPower.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
