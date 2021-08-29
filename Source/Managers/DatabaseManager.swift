@@ -15,7 +15,7 @@ class DatabaseManager: Equatable {
     
     private let kImagesKey = "images"
     
-    private var settings: SettingsDto?
+    private var settings: AppSettings?
     
     private var storage: Storage? = nil
     
@@ -26,7 +26,7 @@ class DatabaseManager: Equatable {
         storage = try? Storage(options: options)
     }
     
-    func setupSettings(_ settings: SettingsDto?) {
+    func setupSettings(_ settings: AppSettings?) {
         self.settings = settings
     }
     

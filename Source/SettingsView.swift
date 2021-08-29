@@ -18,12 +18,8 @@ enum Translation {
 }
 
 struct SettingsView: View {
-    @EnvironmentObject private var thiefManager: ThiefManager {
-        didSet {
-            thiefManager.settings = settings
-        }
-    }
-    @EnvironmentObject private var settings: SettingsDto
+    @ObservedObject private var thiefManager = ThiefManager()
+    @ObservedObject private var settings = AppSettings()
     
     @State var isInfoHidden = true
     
@@ -37,29 +33,34 @@ struct SettingsView: View {
             
             VStack(alignment: .leading, spacing: 8.0) {
                 UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.isUseSnapshotOnWakeUp)
-                    .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { value in
-                        thiefManager.restartWatching()
-                        settings.save()
+                    .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { [weak thiefManager] value in
+                        thiefManager?.restartWatching()
                     })
                 UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
-                    .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { value in
-                        thiefManager.restartWatching()
-                        settings.save()
+                    .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { [weak thiefManager] value in
+                        thiefManager?.restartWatching()
                     })
                 UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.isUseSnapshotOnSwitchToBatteryPower)
-                    .onChange(of: settings.isUseSnapshotOnSwitchToBatteryPower, perform: { value in
-                        thiefManager.restartWatching()
-                        settings.save()
+                    .onChange(of: settings.isUseSnapshotOnSwitchToBatteryPower, perform: { [weak thiefManager] value in
+                        thiefManager?.restartWatching()
                     })
                 UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: $settings.isUseSnapshotOnUSBMount)
-                    .onChange(of: settings.isUseSnapshotOnUSBMount, perform: { value in
-                        thiefManager.restartWatching()
-                        settings.save()
+                    .onChange(of: settings.isUseSnapshotOnUSBMount, perform: { [weak thiefManager] value in
+                        thiefManager?.restartWatching()
                     })
+            }
+            
+            Divider()
+            
+            VStack(alignment: .leading, spacing: 8.0) {
                 KeepLastCountView(keepLastActionsCount: $settings.keepLastActionsCount)
-                    .onChange(of: settings.keepLastActionsCount, perform: { value in
-                        settings.save()
+                
+                AddLocationToSnapshotView(addLocationToSnapshot: $settings.addLocationToSnapshot)
+                    .onChange(of: settings.addLocationToSnapshot, perform: { [weak thiefManager] value in
+                        thiefManager?.setupLocationManager(enable: value)
                     })
+                
+                SaveSnapshotToDiskView(isSaveSnapshotToDisk: $settings.isSaveSnapshotToDisk)
             }
             
             Divider()
@@ -71,22 +72,12 @@ struct SettingsView: View {
                     })*/
                 
                 ICloudSyncEnableView(isICloudSyncEnable: $settings.isICloudSyncEnable)
-                    .onChange(of: settings.isICloudSyncEnable, perform: { value in
-                        settings.save()
-                    })
                 
                 DropboxEnableView(isDropboxEnable: $settings.isDropboxEnable, dropboxName: $settings.dropboxName)
-                    .onChange(of: settings.isDropboxEnable, perform: { value in
-                        settings.save()
-                    })
             }
             Divider()
             
             LastThiefDetectionView(databaseManager: $thiefManager.databaseManager)
-                .onChange(of: thiefManager.databaseManager, perform: { value in
-                    thiefManager.restartWatching()
-                    settings.save()
-                })
             
             VStack() {
                 InfoView(thiefManager: thiefManager, isInfoHidden: $isInfoHidden)
@@ -160,6 +151,26 @@ struct SendNotificationToMailView: View {
             TextField("user@example.com", text: $mailRecipient)
                 .disabled(isSendNotificationToMail == false)
         })
+    }
+}
+
+struct AddLocationToSnapshotView: View {
+    @Binding var addLocationToSnapshot : Bool
+    
+    var body: some View {
+        Toggle(isOn: $addLocationToSnapshot) {
+            Text("AddLocationToSnapshot")
+        }
+    }
+}
+
+struct SaveSnapshotToDiskView: View {
+    @Binding var isSaveSnapshotToDisk : Bool
+    
+    var body: some View {
+        Toggle(isOn: $isSaveSnapshotToDisk) {
+            Text("SaveSnapshotToDisk")
+        }
     }
 }
 
@@ -284,13 +295,10 @@ struct LastThiefDetectionView: View {
     }
 }
 
-
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         //ForEach(["en", "ru", "uk"], id: \.self) { id in
             SettingsView()
-                .environmentObject(SettingsDto.current())
-                .environmentObject(ThiefManager())
                 //.environment(\.locale, .init(identifier: id))
         //}
     }

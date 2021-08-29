@@ -18,7 +18,7 @@ public class ThiefDto: Equatable {
         case empty, onWakeUp, onWrongPassword, onBatteryPower, usbConnected
     }
     
-    var coordinate = CLLocationCoordinate2D()
+    var coordinate: CLLocationCoordinate2D?
     var trigerType: TrigerType? = .empty
     var snapshot: NSImage?
     var filepath: URL?

@@ -18,7 +18,7 @@ class ThiefManager: NSObject, ObservableObject {
     private let notificationManager = NotificationManager()
     public let objectWillChange = ObservableObjectPublisher()
     
-    var settings: SettingsDto? {
+    var settings = AppSettings() {
         didSet {
             startWatching(watchBlock)
             notificationManager.setupSettings(settings: settings)
@@ -32,18 +32,25 @@ class ThiefManager: NSObject, ObservableObject {
     
     lazy var trigerManager = TrigerManager()
     
-    private var locationManager = CLLocationManager()
+    private(set) var locationManager = CLLocationManager()
     
     init(_ watchBlock: @escaping WatchBlock = {trigered in}) {
         super.init()
         
         databaseManager.setupSettings(settings)
-        setupLocationManager()
+        if (settings.addLocationToSnapshot) {
+            setupLocationManager(enable: true)
+        }
     }
     
-    private func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
+    func setupLocationManager(enable: Bool) {
+        if enable {
+            locationManager.delegate = self
+            locationManager.startUpdatingLocation()
+        } else {
+            locationManager.delegate = nil
+            locationManager.stopUpdatingLocation()
+        }
     }
     
     public func startWatching(_ watchBlock: @escaping WatchBlock = {trigered in}) {
@@ -78,7 +85,12 @@ class ThiefManager: NSObject, ObservableObject {
     public func detectedTriger() {
         os_log(.debug, "Detected trigered action")
         let ps = PhotoSnap()
-        ps.photoSnapConfiguration.isSaveToFile = true
+        ps.photoSnapConfiguration.isSaveToFile = settings.isSaveSnapshotToDisk
+        #if DEBUG
+        let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
+        let date = Date()
+        self.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
+        #else
         ps.fetchSnapshot() { [weak self] photoModel in
             if let img = photoModel.images.last {
                 os_log(.debug, "\(img)")
@@ -86,6 +98,7 @@ class ThiefManager: NSObject, ObservableObject {
                 self?.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
             }
         }
+        #endif
     }
     
     func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {
@@ -106,7 +119,7 @@ class ThiefManager: NSObject, ObservableObject {
 
 extension ThiefManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.lastThiefDetection.coordinate = locations.last!.coordinate
+        self.lastThiefDetection.coordinate = locations.last?.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

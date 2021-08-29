@@ -31,6 +31,12 @@
 "SendToMail" = "Отправить писво на";
 
 /* Description was not specified */
+"AddLocationToSnapshot" = "Добавить геопозицию на снимок";
+
+/* Description was not specified */
+"SaveSnapshotToDisk" = "Сохранить снимок на диск";
+
+/* Description was not specified */
 "SyncWithiCloud" = "Синхронизировать с iCloud";
 
 /* Description was not specified */

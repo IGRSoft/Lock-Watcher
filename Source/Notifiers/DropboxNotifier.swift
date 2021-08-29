@@ -15,11 +15,11 @@ class DropboxNotifier {
         case emptyData
     }
     
-    private var settings: SettingsDto?
+    private var settings: AppSettings?
     
     lazy var client = DropboxClientsManager.authorizedClient
     
-    func register(with settings: SettingsDto?) {
+    func register(with settings: AppSettings?) {
         self.settings = settings
         
         DropboxClientsManager.setupWithAppKeyDesktop("wg60852o20nf6eh")
@@ -39,7 +39,9 @@ class DropboxNotifier {
         }
         
         var image = NSImage(contentsOf: filepath)
-        image = image?.imageWithText(text: String(describing: thiefDto.coordinate))
+        if let coordinate = thiefDto.coordinate {
+            image = image?.imageWithText(text: String(describing: coordinate))
+        }
         
         do {
             guard let data = image?.tiffRepresentation else {
@@ -91,12 +93,10 @@ class DropboxNotifier {
                             currentAccount?.response(completionHandler: { user, error in
                                 if let displayName = user?.name.displayName {
                                     self?.settings?.dropboxName = displayName
-                                    self?.settings?.save()
                                 }
                             })
                         case .cancel, .error:
                             self?.settings?.dropboxName = ""
-                            self?.settings?.save()
                         }
                     }
                 }

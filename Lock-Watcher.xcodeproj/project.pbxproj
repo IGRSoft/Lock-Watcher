@@ -33,6 +33,7 @@
 		A54E4A592610AA3D00E7B1D4 /* XPCAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */; };
 		A54E4A8A2610D3E500E7B1D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A892610D3E500E7B1D4 /* Constants.swift */; };
 		A54E4A8B2610D3E500E7B1D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A892610D3E500E7B1D4 /* Constants.swift */; };
+		A56D11E126DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D11E026DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift */; };
 		A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */; };
 		A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0788C26B9A78400A7D578 /* USBListener.swift */; };
 		A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */; };
@@ -51,7 +52,7 @@
 		A5E6D78E25A5CD2E00EEA7DD /* TrigerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78D25A5CD2E00EEA7DD /* TrigerManager.swift */; };
 		A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79425A5D13000EEA7DD /* BaseListener.swift */; };
 		A5E6D79F25A5D1AE00EEA7DD /* PowerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */; };
-		A5E6D7A625A5D1EB00EEA7DD /* SettingsDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D7A525A5D1EB00EEA7DD /* SettingsDto.swift */; };
+		A5E6D7A625A5D1EB00EEA7DD /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -146,12 +147,12 @@
 		A54E4A1726108E9600E7B1D4 /* XPCAuthentication.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCAuthentication.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54E4A1F26108E9600E7B1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCAuthenticationProtocol.swift; sourceTree = "<group>"; };
-		A54E4A442610A76D00E7B1D4 /* XPCAuthentication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCAuthentication.entitlements; sourceTree = "<group>"; };
 		A54E4A562610AA3C00E7B1D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCAuthentication.swift; sourceTree = "<group>"; };
 		A54E4A892610D3E500E7B1D4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A56D11DE26DBB1ED00BEBEC2 /* XPCAuthentication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCAuthentication.entitlements; sourceTree = "<group>"; };
 		A56D11DF26DBB1ED00BEBEC2 /* XPCPower.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCPower.entitlements; sourceTree = "<group>"; };
+		A56D11E026DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+IGRExtension.swift"; sourceTree = "<group>"; };
 		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A57FDCB026DB99B700954ED7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A57FDCB126DB99B800954ED7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -180,7 +181,7 @@
 		A5E6D78D25A5CD2E00EEA7DD /* TrigerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigerManager.swift; sourceTree = "<group>"; };
 		A5E6D79425A5D13000EEA7DD /* BaseListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListener.swift; sourceTree = "<group>"; };
 		A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerListener.swift; sourceTree = "<group>"; };
-		A5E6D7A525A5D1EB00EEA7DD /* SettingsDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDto.swift; sourceTree = "<group>"; };
+		A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				A5457A8B26C1FB1400386738 /* NSImage+IGRExtension.swift */,
+				A56D11E026DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -294,7 +296,6 @@
 			children = (
 				A54E4A562610AA3C00E7B1D4 /* main.swift */,
 				A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */,
-				A54E4A442610A76D00E7B1D4 /* XPCAuthentication.entitlements */,
 				A54E4A1F26108E9600E7B1D4 /* Info.plist */,
 				A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */,
 			);
@@ -420,7 +421,7 @@
 		A5E6D7A425A5D1C200EEA7DD /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A5E6D7A525A5D1EB00EEA7DD /* SettingsDto.swift */,
+				A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */,
 				A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */,
 				A519998526DA4BFB00F482BC /* DatabaseDto.swift */,
 			);
@@ -711,11 +712,12 @@
 				A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */,
 				A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */,
 				A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */,
+				A56D11E126DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift in Sources */,
 				A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */,
 				A5E6D79F25A5D1AE00EEA7DD /* PowerListener.swift in Sources */,
 				A5E6D78E25A5CD2E00EEA7DD /* TrigerManager.swift in Sources */,
 				A5457A8C26C1FB1400386738 /* NSImage+IGRExtension.swift in Sources */,
-				A5E6D7A625A5D1EB00EEA7DD /* SettingsDto.swift in Sources */,
+				A5E6D7A625A5D1EB00EEA7DD /* AppSettings.swift in Sources */,
 				A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */,
 				A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */,
 				A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */,

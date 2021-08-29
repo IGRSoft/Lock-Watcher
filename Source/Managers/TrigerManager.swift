@@ -16,14 +16,14 @@ class TrigerManager {
     
     typealias TrigerBlock = ((ThiefDto) -> Void)
     
-    private var settings: SettingsDto?
+    private var settings: AppSettings?
     
     private var listeners: [ListenerName : BaseListenerProtocol] = [.onWakeUpListener : WakeUpListener(),
                                                                     .onWrongPassword : WrongPasswordListener(),
                                                                     .onBatteryPowerListener : PowerListener(),
                                                                     .onUSBConnectionListenet : USBListener()]
     
-    public func start(settings: SettingsDto?, _ trigerBlock: @escaping TrigerBlock = {trigered in}) {
+    public func start(settings: AppSettings?, _ trigerBlock: @escaping TrigerBlock = {trigered in}) {
         os_log(.debug, "Starting all trigers")
         
         let runListener:(BaseListenerProtocol, Bool) -> Void = {listener, isEnabled in

@@ -31,6 +31,12 @@
 "SendToMail" = "Send to Mail";
 
 /* Description was not specified */
+"AddLocationToSnapshot" = "Add location info to snapshot";
+
+/* Description was not specified */
+"SaveSnapshotToDisk" = "Save snapshot to disk";
+
+/* Description was not specified */
 "SyncWithiCloud" = "Sync with iCloud";
 
 /* Description was not specified */

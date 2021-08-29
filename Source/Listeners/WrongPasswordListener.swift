@@ -51,8 +51,6 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
                                                selector: #selector(occlusionStateChanged(_:)),
                                                name: NSApplication.didChangeOcclusionStateNotification,
                                                object: nil)
-        
-        readDate()
     }
     
     @objc private func occlusionStateChanged(_ notification: Notification) {

@@ -14,9 +14,9 @@ class NotificationManager {
     private let icloudNotifier = iCloudNotifier()
     private var dropboxNotifier = DropboxNotifier()
     
-    private var settings: SettingsDto?
+    private var settings: AppSettings?
     
-    func setupSettings(settings: SettingsDto?) {
+    func setupSettings(settings: AppSettings?) {
         self.settings = settings
         
         dropboxNotifier.register(with: settings)

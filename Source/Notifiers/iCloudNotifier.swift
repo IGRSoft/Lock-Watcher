@@ -23,14 +23,13 @@ class iCloudNotifier {
         
         iCloudURL.appendPathComponent(localURL.lastPathComponent)
         
-        var image = NSImage(contentsOf: localURL)
-        image = image?.imageWithText(text: String(describing: thiefDto.coordinate))
+        var image = thiefDto.snapshot
+        if let coordinate = thiefDto.coordinate {
+            image = image?.imageWithText(text: String(describing: coordinate))
+        }
         
         do {
             let data = image?.tiffRepresentation
-//            if FileManager.default.fileExists(atPath: localURL.path) {
-//                try FileManager.default.removeItem(at: localURL)
-//            }
             try data?.write(to: iCloudURL)
         } catch {
             print(error)
