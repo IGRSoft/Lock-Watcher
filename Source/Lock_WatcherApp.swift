@@ -23,15 +23,36 @@ struct Lock_WatcherApp: App {
         var statusBarItem: NSStatusItem?
         
         func applicationDidFinishLaunching(_ notification: Notification) {
-            let contentView = SettingsView()
-            
+            createPopover()
+            createStatusBarIcon()
+            hideDockIcon()
+        }
+        
+        func createPopover() {
             popover.behavior = .transient
             popover.animates = false
             popover.contentViewController = NSViewController()
-            popover.contentViewController?.view = NSHostingView(rootView: contentView)
+            popover.contentViewController?.view = NSHostingView(rootView: SettingsView())
+        }
+        
+        func createStatusBarIcon() {
             statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-            statusBarItem?.button?.image = NSImage(named: "menuBarIcon")
+            let icon = NSImage(named: "MenuIcon")
+            icon?.isTemplate = true // best for dark mode
+            statusBarItem?.button?.imageScaling = .scaleProportionallyDown
+            statusBarItem?.button?.image = icon
             statusBarItem?.button?.action = #selector(AppDelegate.togglePopover(_:))
+            statusBarItem?.length = NSStatusItem.squareLength
+        }
+        
+        func hideDockIcon() {
+            if NSApp.activationPolicy() != .accessory {
+              NSApp.setActivationPolicy(.accessory)
+              DispatchQueue.main.async {
+                NSApplication.shared.activate(ignoringOtherApps: true)
+                NSApplication.shared.windows.first!.makeKeyAndOrderFront(self)
+              }
+            }
         }
         
         @objc func showPopover(_ sender: AnyObject?) {

@@ -1,8 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "Icon.pdf",
-      "idiom" : "mac"
+      "filename" : "menu-icon.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {
