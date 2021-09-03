@@ -36,10 +36,12 @@ struct SettingsView: View {
                     .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { [weak thiefManager] value in
                         thiefManager?.restartWatching()
                     })
+                #if NON_MAS_CONFIG
                 UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
                     .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { [weak thiefManager] value in
                         thiefManager?.restartWatching()
                     })
+                #endif
                 UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.isUseSnapshotOnSwitchToBatteryPower)
                     .onChange(of: settings.isUseSnapshotOnSwitchToBatteryPower, perform: { [weak thiefManager] value in
                         thiefManager?.restartWatching()
@@ -66,10 +68,12 @@ struct SettingsView: View {
             Divider()
             
             VStack(alignment: .leading, spacing: 8.0) {
-                /*SendNotificationToMailView(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
+                #if NON_MAS_CONFIG
+                SendNotificationToMailView(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
                     .onChange(of: settings.isSendNotificationToMail, perform: { value in
                         settings.save()
-                    })*/
+                    })
+                #endif
                 
                 ICloudSyncEnableView(isICloudSyncEnable: $settings.isICloudSyncEnable)
                 
@@ -257,18 +261,13 @@ struct InfoView: View {
 
 struct LastThiefDetectionView: View {
     @Binding var databaseManager: DatabaseManager
-    
-    static let taskDateFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
-        return formatter
-    }()
+    @State var isPreviewActive: Bool = false
     
     var body: some View {
-        VStack(alignment: .center, spacing: 16.0) {
-            if let latestImages = databaseManager.latestImages(),
-               let lastImage = latestImages.last,
+        let latestImages = databaseManager.latestImages()
+        
+        VStack(alignment: .center, spacing: 8.0) {
+            if let lastImage = latestImages.dtos.last,
                let imageData = lastImage.data,
                let image = NSImage(data: imageData),
                let imageValue = Image(nsImage: image),
@@ -282,10 +281,15 @@ struct LastThiefDetectionView: View {
                             NSWorkspace.shared.open(filepath)
                         }
                     }
-                Text("\(date, formatter: Self.taskDateFormat)")
-                if latestImages.count > 1 {
+                Text("\(date, formatter: Date.dateFormat)")
+                if latestImages.dtos.count > 1 {
                     Button("LastSnapshots") {
-#warning("add preview")
+                        isPreviewActive = true
+                    }
+                    .popover(isPresented: $isPreviewActive, arrowEdge: .leading) {
+                        Preview()
+                            .frame(width: 168 * 4, height: 126.0 * ceil(Double(latestImages.dtos.count) / 4.0) + 36.0, alignment: .center)
+                            .environmentObject(latestImages)
                     }
                 }
                 
@@ -294,6 +298,8 @@ struct LastThiefDetectionView: View {
         }
     }
 }
+
+
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

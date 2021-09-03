@@ -10,7 +10,9 @@ import AppKit
 import CoreLocation
 
 class NotificationManager {
-    //private let mailNotifier = MailNotifier()
+    #if NON_MAS_CONFIG
+    private let mailNotifier = MailNotifier()
+    #endif
     private let icloudNotifier = iCloudNotifier()
     private var dropboxNotifier = DropboxNotifier()
     
@@ -25,9 +27,11 @@ class NotificationManager {
     func send(_ thiefDto: ThiefDto) -> Bool {
         var result = false
         
-        //if settings?.isSendNotificationToMail == true, let mail = settings?.mailRecipient {
-            //result = mailNotifier.send(thiefDto, to: mail)
-        //}
+        #if NON_MAS_CONFIG
+        if settings?.isSendNotificationToMail == true, let mail = settings?.mailRecipient {
+            result = mailNotifier.send(thiefDto, to: mail)
+        }
+        #endif
         
         if settings?.isICloudSyncEnable == true {
             result = icloudNotifier.send(thiefDto)

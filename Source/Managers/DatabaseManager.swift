@@ -33,10 +33,10 @@ class DatabaseManager: Equatable {
     func send(_ thiefDto: ThiefDto) -> Bool {
         let dto = DatabaseDto(with: thiefDto)
         
-        var images = latestImages()
+        let images = latestImages()
         
         images.append(dto)
-        images = images.suffix(settings?.keepLastActionsCount ?? 10)
+        images.dtos = images.dtos.suffix(settings?.keepLastActionsCount ?? 10)
         
         do {
             try storage?.save(object: images, forKey: kImagesKey)
@@ -48,11 +48,11 @@ class DatabaseManager: Equatable {
         return true
     }
     
-    func latestImages() -> [DatabaseDto] {
-        var images: [DatabaseDto] = [DatabaseDto]()
+    func latestImages() -> DatabaseDtoList {
+        var images: DatabaseDtoList = DatabaseDtoList(dtos: [DatabaseDto]())
         do {
-            if let imgs = try storage?.load(forKey: kImagesKey, as: [DatabaseDto].self) {
-                images.append(contentsOf: imgs)
+            if let imgs = try storage?.load(forKey: kImagesKey, as: DatabaseDtoList.self) {
+                images = imgs
             }
         } catch {
             print("images is empty")
