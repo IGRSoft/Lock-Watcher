@@ -18,7 +18,9 @@ enum Translation {
 }
 
 struct SettingsView: View {
-    @ObservedObject private var thiefManager = ThiefManager()
+    @ObservedObject private var thiefManager = ThiefManager { _ in
+    }
+    
     @ObservedObject private var settings = AppSettings()
     
     @State var isInfoHidden = true
@@ -36,6 +38,10 @@ struct SettingsView: View {
                     .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { [weak thiefManager] value in
                         thiefManager?.restartWatching()
                     })
+                /*UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.isUseSnapshotOnLogin)
+                    .onChange(of: settings.isUseSnapshotOnLogin, perform: { [weak thiefManager] value in
+                        thiefManager?.restartWatching()
+                    })*/
                 #if NON_MAS_CONFIG
                 UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
                     .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { [weak thiefManager] value in
@@ -70,9 +76,7 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 8.0) {
                 #if NON_MAS_CONFIG
                 SendNotificationToMailView(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
-                    .onChange(of: settings.isSendNotificationToMail, perform: { value in
-                        settings.save()
-                    })
+                    .onChange(of: settings.isSendNotificationToMail, perform: {_ in })
                 #endif
                 
                 ICloudSyncEnableView(isICloudSyncEnable: $settings.isICloudSyncEnable)
@@ -99,6 +103,16 @@ struct UseSnapshotOnWakeUpView: View {
     var body: some View {
         Toggle(isOn: $isUseSnapshotOnWakeUp) {
             Text("SnapshotOnWakeUp")
+        }
+    }
+}
+
+struct UseSnapshotOnLoginView: View {
+    @Binding var isUseSnapshotOnLogin : Bool
+    
+    var body: some View {
+        Toggle(isOn: $isUseSnapshotOnLogin) {
+            Text("SnapshotOnLogin")
         }
     }
 }

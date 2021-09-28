@@ -18,12 +18,7 @@ class ThiefManager: NSObject, ObservableObject {
     private let notificationManager = NotificationManager()
     public let objectWillChange = ObservableObjectPublisher()
     
-    var settings = AppSettings() {
-        didSet {
-            startWatching(watchBlock)
-            notificationManager.setupSettings(settings: settings)
-        }
-    }
+    var settings: AppSettings?
     
     private var lastThiefDetection = ThiefDto()
     @Published var databaseManager = DatabaseManager()
@@ -37,10 +32,17 @@ class ThiefManager: NSObject, ObservableObject {
     init(_ watchBlock: @escaping WatchBlock = {trigered in}) {
         super.init()
         
+        self.watchBlock = watchBlock
+        
+        settings = AppSettings()
+        
         databaseManager.setupSettings(settings)
-        if (settings.addLocationToSnapshot) {
+        if (settings?.addLocationToSnapshot == true) {
             setupLocationManager(enable: true)
         }
+        
+        startWatching(watchBlock)
+        notificationManager.setupSettings(settings: settings)
     }
     
     func setupLocationManager(enable: Bool) {
@@ -53,7 +55,7 @@ class ThiefManager: NSObject, ObservableObject {
         }
     }
     
-    public func startWatching(_ watchBlock: @escaping WatchBlock = {trigered in}) {
+    private func startWatching(_ watchBlock: @escaping WatchBlock = {trigered in}) {
         os_log(.debug, "Start Watching")
         
         self.watchBlock = watchBlock
@@ -85,7 +87,7 @@ class ThiefManager: NSObject, ObservableObject {
     public func detectedTriger() {
         os_log(.debug, "Detected trigered action")
         let ps = PhotoSnap()
-        ps.photoSnapConfiguration.isSaveToFile = settings.isSaveSnapshotToDisk
+        ps.photoSnapConfiguration.isSaveToFile = settings?.isSaveSnapshotToDisk == true
         #if DEBUG
         let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
         let date = Date()

@@ -13,6 +13,9 @@
 "SnapshotOnWakeUp" = "Take Snapshot On WakeUp";
 
 /* Description was not specified */
+"SnapshotOnLogin" = "Take Snapshot On Login";
+
+/* Description was not specified */
 "SnapshotOnWrongPassword" = "Take Snapshot On Wrong Password";
 
 /* Description was not specified */

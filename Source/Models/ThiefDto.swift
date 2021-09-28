@@ -15,7 +15,7 @@ public class ThiefDto: Equatable {
     }
     
     enum TrigerType {
-        case empty, onWakeUp, onWrongPassword, onBatteryPower, usbConnected
+        case empty, onWakeUp, onWrongPassword, onBatteryPower, usbConnected, logedIn
     }
     
     var coordinate: CLLocationCoordinate2D?

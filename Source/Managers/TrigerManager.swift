@@ -11,7 +11,7 @@ import os
 class TrigerManager {
     
     enum ListenerName: String {
-        case onWakeUpListener, onWrongPassword, onBatteryPowerListener, onUSBConnectionListenet
+        case onWakeUpListener, onWrongPassword, onBatteryPowerListener, onUSBConnectionListenet, onLoginListenet
     }
     
     typealias TrigerBlock = ((ThiefDto) -> Void)
@@ -22,11 +22,13 @@ class TrigerManager {
     private var listeners: [ListenerName : BaseListenerProtocol] = [.onWakeUpListener : WakeUpListener(),
                                                                     .onWrongPassword : WrongPasswordListener(),
                                                                     .onBatteryPowerListener : PowerListener(),
-                                                                    .onUSBConnectionListenet : USBListener()]
+                                                                    .onUSBConnectionListenet : USBListener(),
+                                                                    .onLoginListenet : LoginListener()]
     #else
     private var listeners: [ListenerName : BaseListenerProtocol] = [.onWakeUpListener : WakeUpListener(),
                                                                     .onBatteryPowerListener : PowerListener(),
-                                                                    .onUSBConnectionListenet : USBListener()]
+                                                                    .onUSBConnectionListenet : USBListener(),
+                                                                    .onLoginListenet : LoginListener()]
     #endif
     
     public func start(settings: AppSettings?, _ trigerBlock: @escaping TrigerBlock = {trigered in}) {
@@ -45,23 +47,27 @@ class TrigerManager {
             }
         }
         
-        let enableOnWakeUpListener = settings?.isUseSnapshotOnWakeUp == true
+        let isUseSnapshotOnWakeUp = settings?.isUseSnapshotOnWakeUp == true
         let wakeUpListener = listeners[.onWakeUpListener]
-        runListener(wakeUpListener!, enableOnWakeUpListener)
+        runListener(wakeUpListener!, isUseSnapshotOnWakeUp)
         
         #if NON_MAS_CONFIG
-        let enableOnWrongPasswordListener = settings?.isUseSnapshotOnWrongPassword == true
+        let isUseSnapshotOnWrongPassword = settings?.isUseSnapshotOnWrongPassword == true
         let wrongPasswordListener = listeners[.onWrongPassword]
-        runListener(wrongPasswordListener!, enableOnWrongPasswordListener)
+        runListener(wrongPasswordListener!, isUseSnapshotOnWrongPassword)
         #endif
         
-        let enableOnBatteryPowerListener = settings?.isUseSnapshotOnSwitchToBatteryPower == true
+        let isUseSnapshotOnSwitchToBatteryPower = settings?.isUseSnapshotOnSwitchToBatteryPower == true
         let powerListener = listeners[.onBatteryPowerListener]
-        runListener(powerListener!, enableOnBatteryPowerListener)
+        runListener(powerListener!, isUseSnapshotOnSwitchToBatteryPower)
         
-        let enableOnUSBConnectionListenet = settings?.isUseSnapshotOnUSBMount == true
+        let isUseSnapshotOnUSBMount = settings?.isUseSnapshotOnUSBMount == true
         let usbListener = listeners[.onUSBConnectionListenet]
-        runListener(usbListener!, enableOnUSBConnectionListenet)
+        runListener(usbListener!, isUseSnapshotOnUSBMount)
+        
+        let isUseSnapshotOnLogin = settings?.isUseSnapshotOnLogin == true
+        let loginListener = listeners[.onLoginListenet]
+        runListener(loginListener!, isUseSnapshotOnLogin)
         
         self.settings = settings
     }

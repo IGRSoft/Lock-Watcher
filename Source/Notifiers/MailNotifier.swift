@@ -42,7 +42,8 @@ class MailNotifier {
             return false
         }
         
-        service.sendMail(mail, coordinates: thiefDto.coordinate, attachment: filepath)
+        service.sendMail(mail, coordinates: thiefDto.coordinate ?? kCLLocationCoordinate2DInvalid, attachment: filepath)
+        
         return true
     }
 }

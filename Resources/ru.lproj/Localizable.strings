@@ -13,6 +13,9 @@
 "SnapshotOnWakeUp" = "Сделать снимок при пробуждении";
 
 /* Description was not specified */
+"SnapshotOnLogin" = "Сделать снимок при входе";
+
+/* Description was not specified */
 "SnapshotOnWrongPassword" = "Сделать снимок при неверном пароле";
 
 /* Description was not specified */

@@ -28,7 +28,10 @@
     
     NSString *_messageContent = @"Someone trigered action for Lock Watcher\n\n";
     _messageContent = [_messageContent stringByAppendingFormat:@"Time: %@\n\n", dateString];
-    _messageContent = [_messageContent stringByAppendingFormat:@"Location: http://maps.apple.com/?sll=%@,%@&z=10&t=s\n\n", @(coordinates.latitude), @(coordinates.longitude)];
+    
+    if (CLLocationCoordinate2DIsValid(coordinates)) {
+        _messageContent = [_messageContent stringByAppendingFormat:@"Location: http://maps.apple.com/?sll=%@,%@&z=10&t=s\n\n", @(coordinates.latitude), @(coordinates.longitude)];
+    }
     
     _messageContent = [_messageContent stringByAppendingString:@"--\n"];
     _messageContent = [_messageContent stringByAppendingString:@"Lock Watcher\n"];

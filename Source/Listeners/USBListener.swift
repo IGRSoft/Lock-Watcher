@@ -30,10 +30,10 @@ class USBListener: BaseListener, BaseListenerProtocol {
         isRunning = false
         listenerAction = nil
         
-        NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.screensDidWakeNotification, object: nil)
+        NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.didMountNotification, object: nil)
     }
     
-    @objc func receiveUSBNotification (_ notif: Notification) {
+    @objc func receiveUSBNotification(_ notif: Notification) {
         let thief = ThiefDto()
         thief.trigerType = .usbConnected
                     

@@ -25,6 +25,8 @@
 		A533D84325AA126B0046B7C8 /* Mail.app in Resources */ = {isa = PBXBuildFile; fileRef = A533D84225AA126B0046B7C8 /* Mail.app */; };
 		A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
 		A5457A8C26C1FB1400386738 /* NSImage+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5457A8B26C1FB1400386738 /* NSImage+IGRExtension.swift */; };
+		A54A1F7A2703769800176069 /* LoginListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A1F792703769800176069 /* LoginListener.swift */; };
+		A54A1F7B2703769800176069 /* LoginListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A1F792703769800176069 /* LoginListener.swift */; };
 		A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
 		A54E4A2F26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
 		A54E4A582610AA3D00E7B1D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A562610AA3C00E7B1D4 /* main.swift */; };
@@ -205,6 +207,7 @@
 		A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCMailProtocol.swift; sourceTree = "<group>"; };
 		A533D84225AA126B0046B7C8 /* Mail.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Mail.app; path = ../../../../../System/Applications/Mail.app; sourceTree = "<group>"; };
 		A5457A8B26C1FB1400386738 /* NSImage+IGRExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+IGRExtension.swift"; sourceTree = "<group>"; };
+		A54A1F792703769800176069 /* LoginListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginListener.swift; sourceTree = "<group>"; };
 		A54E4A1726108E9600E7B1D4 /* XPCAuthentication.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCAuthentication.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54E4A1F26108E9600E7B1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCAuthenticationProtocol.swift; sourceTree = "<group>"; };
@@ -501,6 +504,7 @@
 				A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */,
 				A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */,
 				A5A0788C26B9A78400A7D578 /* USBListener.swift */,
+				A54A1F792703769800176069 /* LoginListener.swift */,
 			);
 			path = Listeners;
 			sourceTree = "<group>";
@@ -851,6 +855,7 @@
 				A58FC72E26E2814E007674F6 /* WrongPasswordListener.swift in Sources */,
 				A58FC72F26E2814E007674F6 /* BaseListener.swift in Sources */,
 				A58FC73026E2814E007674F6 /* USBListener.swift in Sources */,
+				A54A1F7B2703769800176069 /* LoginListener.swift in Sources */,
 				A58FC73126E2814E007674F6 /* FileSystemUtil.swift in Sources */,
 				A58FC73226E2814E007674F6 /* SettingsView.swift in Sources */,
 				A58FC73326E2814E007674F6 /* UserDefault+IGRExtension.swift in Sources */,
@@ -899,6 +904,7 @@
 				A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */,
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 				A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */,
+				A54A1F7A2703769800176069 /* LoginListener.swift in Sources */,
 				A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */,
 				A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
@@ -998,7 +1004,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = XPCMail/XPCMail.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/XPCMail.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1025,7 +1031,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = XPCMail/XPCMail.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/XPCMail.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1306,7 +1312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "XPCMail/XPCMail-non-mas.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/XPCMail-non-mas.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1779,7 +1785,7 @@
 			repositoryURL = "https://github.com/dropbox/SwiftyDropbox.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.1.0;
+				minimumVersion = 8.2.0;
 			};
 		};
 		A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */ = {
@@ -1795,7 +1801,7 @@
 			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
+				minimumVersion = 4.1.0;
 			};
 		};
 		A58FC72426E2814E007674F6 /* XCRemoteSwiftPackageReference "PhotoSnap" */ = {
@@ -1835,7 +1841,7 @@
 			repositoryURL = "https://github.com/IGRSoft/PhotoSnap.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.2.0;
+				minimumVersion = 0.2.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

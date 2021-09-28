@@ -29,6 +29,12 @@ final class AppSettings: ObservableObject {
         }
     }
     
+    @UserDefault("UseSnapshotOnLogin", defaultValue: false) var isUseSnapshotOnLogin: Bool {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
     @UserDefault("UseSnapshotOnWrongPassword", defaultValue: false) var isUseSnapshotOnWrongPassword: Bool {
         willSet {
             objectWillChange.send()

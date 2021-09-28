@@ -44,15 +44,6 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
         return service
     }
     
-    override init() {
-        super.init()
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(occlusionStateChanged(_:)),
-                                               name: NSApplication.didChangeOcclusionStateNotification,
-                                               object: nil)
-    }
-    
     @objc private func occlusionStateChanged(_ notification: Notification) {
         if NSApp.occlusionState.contains(.visible) {
             os_log(.debug, "WrongPasswordListener screen unlocked")
@@ -71,6 +62,11 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
         os_log(.debug, "WrongPasswordListener started")
         
         self.listenerAction = action
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(occlusionStateChanged(_:)),
+                                               name: NSApplication.didChangeOcclusionStateNotification,
+                                               object: nil)
         
         isRunning = true
     }
@@ -102,6 +98,8 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
         self.listenerAction = nil
         (connection?.remoteObjectProxy as? XPCPowerProtocol)?.stopCheckPower()
         connection?.invalidate()
+        
+        NotificationCenter.default.removeObserver(self, name: NSApplication.didChangeOcclusionStateNotification, object: nil)
         
         os_log(.debug, "WrongPasswordListener stoped")
         
