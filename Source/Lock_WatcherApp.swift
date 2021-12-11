@@ -47,11 +47,11 @@ struct Lock_WatcherApp: App {
         
         func hideDockIcon() {
             if NSApp.activationPolicy() != .accessory {
-              NSApp.setActivationPolicy(.accessory)
-              DispatchQueue.main.async {
-                NSApplication.shared.activate(ignoringOtherApps: true)
-                NSApplication.shared.windows.first!.makeKeyAndOrderFront(self)
-              }
+                NSApp.setActivationPolicy(.accessory)
+                DispatchQueue.main.async {
+                    NSApplication.shared.activate(ignoringOtherApps: true)
+                    NSApplication.shared.windows.first!.makeKeyAndOrderFront(self)
+                }
             }
         }
         

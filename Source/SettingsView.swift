@@ -18,8 +18,7 @@ enum Translation {
 }
 
 struct SettingsView: View {
-    @ObservedObject private var thiefManager = ThiefManager { _ in
-    }
+    @ObservedObject private var thiefManager = ThiefManager { _ in }
     
     @ObservedObject private var settings = AppSettings()
     
@@ -38,16 +37,16 @@ struct SettingsView: View {
                     .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { [weak thiefManager] value in
                         thiefManager?.restartWatching()
                     })
-                /*UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.isUseSnapshotOnLogin)
+                UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.isUseSnapshotOnLogin)
                     .onChange(of: settings.isUseSnapshotOnLogin, perform: { [weak thiefManager] value in
                         thiefManager?.restartWatching()
-                    })*/
-                #if NON_MAS_CONFIG
-                UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
-                    .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { [weak thiefManager] value in
-                        thiefManager?.restartWatching()
                     })
-                #endif
+                if AppSettings.isMASBuild == false {
+                    UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
+                        .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { [weak thiefManager] value in
+                            thiefManager?.restartWatching()
+                        })
+                }
                 UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.isUseSnapshotOnSwitchToBatteryPower)
                     .onChange(of: settings.isUseSnapshotOnSwitchToBatteryPower, perform: { [weak thiefManager] value in
                         thiefManager?.restartWatching()
@@ -74,11 +73,10 @@ struct SettingsView: View {
             Divider()
             
             VStack(alignment: .leading, spacing: 8.0) {
-                #if NON_MAS_CONFIG
-                SendNotificationToMailView(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
-                    .onChange(of: settings.isSendNotificationToMail, perform: {_ in })
-                #endif
-                
+                if AppSettings.isMASBuild == false {
+                    SendNotificationToMailView(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
+                        .onChange(of: settings.isSendNotificationToMail, perform: {_ in })
+                }
                 ICloudSyncEnableView(isICloudSyncEnable: $settings.isICloudSyncEnable)
                 
                 DropboxEnableView(isDropboxEnable: $settings.isDropboxEnable, dropboxName: $settings.dropboxName)

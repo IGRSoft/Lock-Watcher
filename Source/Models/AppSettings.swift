@@ -11,6 +11,12 @@ import Combine
 final class AppSettings: ObservableObject {
     let objectWillChange = PassthroughSubject<Void, Never>()
     
+#if NON_MAS_CONFIG
+    static var isMASBuild = false
+#else
+    static var isMASBuild = true
+#endif
+    
     @UserDefault("FirstLaunch", defaultValue: false) var isFirstLaunch: Bool {
         willSet {
             objectWillChange.send()

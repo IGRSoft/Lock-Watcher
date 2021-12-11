@@ -46,9 +46,9 @@ class LoginListener: BaseListener, BaseListenerProtocol {
     @objc func activeSpaceDidChangeNotification(_ notif: Notification) {
         os_log(.debug, "LoginListener sessionDidBecomeActiveNotification")
         
-        /*let thief = ThiefDto()
+        let thief = ThiefDto()
         thief.trigerType = .logedIn
                     
-        listenerAction?(thief)*/
+        listenerAction?(thief)
     }
 }

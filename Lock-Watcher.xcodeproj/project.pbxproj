@@ -24,6 +24,10 @@
 		A533D83C25AA12110046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
 		A533D84325AA126B0046B7C8 /* Mail.app in Resources */ = {isa = PBXBuildFile; fileRef = A533D84225AA126B0046B7C8 /* Mail.app */; };
 		A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
+		A541188027649FB2007C6AB8 /* WrongPasswordListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */; };
+		A541188127649FC4007C6AB8 /* MailNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */; };
+		A54118822764A49B007C6AB8 /* XPCAuthentication.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = A54E4A1726108E9600E7B1D4 /* XPCAuthentication.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A54118852764A49B007C6AB8 /* XPCMail.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = A533D82625AA11F40046B7C8 /* XPCMail.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A5457A8C26C1FB1400386738 /* NSImage+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5457A8B26C1FB1400386738 /* NSImage+IGRExtension.swift */; };
 		A54A1F7A2703769800176069 /* LoginListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A1F792703769800176069 /* LoginListener.swift */; };
 		A54A1F7B2703769800176069 /* LoginListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A1F792703769800176069 /* LoginListener.swift */; };
@@ -31,8 +35,6 @@
 		A54E4A2F26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
 		A54E4A582610AA3D00E7B1D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A562610AA3C00E7B1D4 /* main.swift */; };
 		A54E4A592610AA3D00E7B1D4 /* XPCAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */; };
-		A54E4A8A2610D3E500E7B1D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A892610D3E500E7B1D4 /* Constants.swift */; };
-		A54E4A8B2610D3E500E7B1D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A892610D3E500E7B1D4 /* Constants.swift */; };
 		A56D11E126DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D11E026DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift */; };
 		A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */; };
 		A58FC72C26E2814E007674F6 /* DatabaseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519998526DA4BFB00F482BC /* DatabaseDto.swift */; };
@@ -58,7 +60,6 @@
 		A58FC74026E2814E007674F6 /* XPCPowerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */; };
 		A58FC74126E2814E007674F6 /* WakeUpListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */; };
 		A58FC74226E2814E007674F6 /* DropboxNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519997B26D92E6100F482BC /* DropboxNotifier.swift */; };
-		A58FC74326E2814E007674F6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A892610D3E500E7B1D4 /* Constants.swift */; };
 		A58FC74526E2814E007674F6 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = A58FC72526E2814E007674F6 /* LaunchAtLogin */; };
 		A58FC74626E2814E007674F6 /* PhotoSnap in Frameworks */ = {isa = PBXBuildFile; productRef = A58FC72326E2814E007674F6 /* PhotoSnap */; };
 		A58FC74726E2814E007674F6 /* EasyStash in Frameworks */ = {isa = PBXBuildFile; productRef = A58FC72926E2814E007674F6 /* EasyStash */; };
@@ -110,6 +111,20 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
+		A54118832764A49B007C6AB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A54E4A1626108E9600E7B1D4;
+			remoteInfo = XPCAuthentication;
+		};
+		A54118862764A49B007C6AB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A533D82525AA11F40046B7C8;
+			remoteInfo = XPCMail;
+		};
 		A58FC72026E2814E007674F6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A5C6DBE625796A90009DE750 /* Project object */;
@@ -175,6 +190,8 @@
 			dstSubfolderSpec = 16;
 			files = (
 				A5E6D75D25A5BB6C00EEA7DD /* XPCPower.xpc in Embed XPC Services */,
+				A54118852764A49B007C6AB8 /* XPCMail.xpc in Embed XPC Services */,
+				A54118822764A49B007C6AB8 /* XPCAuthentication.xpc in Embed XPC Services */,
 			);
 			name = "Embed XPC Services";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,7 +230,6 @@
 		A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCAuthenticationProtocol.swift; sourceTree = "<group>"; };
 		A54E4A562610AA3C00E7B1D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCAuthentication.swift; sourceTree = "<group>"; };
-		A54E4A892610D3E500E7B1D4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A56D11DE26DBB1ED00BEBEC2 /* XPCAuthentication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCAuthentication.entitlements; sourceTree = "<group>"; };
 		A56D11DF26DBB1ED00BEBEC2 /* XPCPower.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCPower.entitlements; sourceTree = "<group>"; };
 		A56D11E026DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+IGRExtension.swift"; sourceTree = "<group>"; };
@@ -390,14 +406,6 @@
 			path = XPCAuthentication;
 			sourceTree = "<group>";
 		};
-		A54E4A882610D3CA00E7B1D4 /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				A54E4A892610D3E500E7B1D4 /* Constants.swift */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
 		A5C6DBE525796A90009DE750 = {
 			isa = PBXGroup;
 			children = (
@@ -431,7 +439,6 @@
 			isa = PBXGroup;
 			children = (
 				A5457A8A26C1FAF200386738 /* Extensions */,
-				A54E4A882610D3CA00E7B1D4 /* Constants */,
 				A533D80125AA0EF00046B7C8 /* Notifiers */,
 				A533D7D225A9E23F0046B7C8 /* Utils */,
 				A5E6D7A425A5D1C200EEA7DD /* Models */,
@@ -599,6 +606,8 @@
 			);
 			dependencies = (
 				A5E6D75C25A5BB6C00EEA7DD /* PBXTargetDependency */,
+				A54118842764A49B007C6AB8 /* PBXTargetDependency */,
+				A54118872764A49B007C6AB8 /* PBXTargetDependency */,
 			);
 			name = "Lock-Watcher";
 			packageProductDependencies = (
@@ -842,7 +851,6 @@
 				A54E4A582610AA3D00E7B1D4 /* main.swift in Sources */,
 				A54E4A592610AA3D00E7B1D4 /* XPCAuthentication.swift in Sources */,
 				A54E4A2F26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
-				A54E4A8B2610D3E500E7B1D4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,7 +885,6 @@
 				A58FC74126E2814E007674F6 /* WakeUpListener.swift in Sources */,
 				A58FC76326E282C7007674F6 /* MailNotifier.swift in Sources */,
 				A58FC74226E2814E007674F6 /* DropboxNotifier.swift in Sources */,
-				A58FC74326E2814E007674F6 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,12 +904,14 @@
 				A5E6D78E25A5CD2E00EEA7DD /* TrigerManager.swift in Sources */,
 				A5EFE8B826E2B587001FC4EA /* Date+IGRExtension.swift in Sources */,
 				A58FC76726E2870E007674F6 /* Preview.swift in Sources */,
+				A541188127649FC4007C6AB8 /* MailNotifier.swift in Sources */,
 				A5457A8C26C1FB1400386738 /* NSImage+IGRExtension.swift in Sources */,
 				A5E6D7A625A5D1EB00EEA7DD /* AppSettings.swift in Sources */,
 				A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */,
 				A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */,
 				A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */,
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
+				A541188027649FB2007C6AB8 /* WrongPasswordListener.swift in Sources */,
 				A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */,
 				A54A1F7A2703769800176069 /* LoginListener.swift in Sources */,
 				A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */,
@@ -910,7 +919,6 @@
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 				A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */,
 				A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */,
-				A54E4A8A2610D3E500E7B1D4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -943,6 +951,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A54118842764A49B007C6AB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A54E4A1626108E9600E7B1D4 /* XPCAuthentication */;
+			targetProxy = A54118832764A49B007C6AB8 /* PBXContainerItemProxy */;
+		};
+		A54118872764A49B007C6AB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A533D82525AA11F40046B7C8 /* XPCMail */;
+			targetProxy = A54118862764A49B007C6AB8 /* PBXContainerItemProxy */;
+		};
 		A58FC71F26E2814E007674F6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A5E6D75125A5BB6B00EEA7DD /* XPCPower */;
@@ -1205,7 +1223,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ITSAppUsesNonExemptEncryption = NO;
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -1439,7 +1457,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ITSAppUsesNonExemptEncryption = NO;
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1497,7 +1515,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ITSAppUsesNonExemptEncryption = NO;
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -1801,7 +1819,7 @@
 			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.0;
+				minimumVersion = 4.2.0;
 			};
 		};
 		A58FC72426E2814E007674F6 /* XCRemoteSwiftPackageReference "PhotoSnap" */ = {
