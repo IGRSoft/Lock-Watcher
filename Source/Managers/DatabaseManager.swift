@@ -48,6 +48,18 @@ class DatabaseManager: Equatable {
         return true
     }
     
+    func remove(_ dto: DatabaseDto) {
+        let images = latestImages()
+        
+        images.dtos.removeAll {$0.date == dto.date}
+        
+        do {
+            try storage?.save(object: images, forKey: kImagesKey)
+        } catch {
+            print(error)
+        }
+    }
+    
     func latestImages() -> DatabaseDtoList {
         var images: DatabaseDtoList = DatabaseDtoList(dtos: [DatabaseDto]())
         do {

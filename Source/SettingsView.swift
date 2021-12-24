@@ -299,8 +299,10 @@ struct LastThiefDetectionView: View {
                         isPreviewActive = true
                     }
                     .popover(isPresented: $isPreviewActive, arrowEdge: .leading) {
-                        Preview()
-                            .frame(width: 168 * 4, height: 126.0 * ceil(Double(latestImages.dtos.count) / 4.0) + 36.0, alignment: .center)
+                        Preview(databaseManager: $databaseManager)
+                            .frame(width: 168 * 4,
+                                   height: 164.0 * ceil(Double(latestImages.dtos.count) / 4.0),
+                                   alignment: .top)
                             .environmentObject(latestImages)
                     }
                 }
