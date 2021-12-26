@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "menu-icon-a.png",
+      "filename" : "menu-icon-alert-a.png",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "menu-icon-l.png",
+      "filename" : "menu-icon-alert-l.png",
       "idiom" : "universal"
     },
     {
@@ -21,7 +21,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "menu-icon-d.png",
+      "filename" : "menu-icon-alert-d.png",
       "idiom" : "universal"
     }
   ],

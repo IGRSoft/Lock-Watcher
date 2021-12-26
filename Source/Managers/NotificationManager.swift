@@ -13,7 +13,7 @@ class NotificationManager {
     private lazy var mailNotifier = MailNotifier()
     private lazy var icloudNotifier = iCloudNotifier()
     private lazy var dropboxNotifier = DropboxNotifier()
-    
+    private lazy var notificationNotifier = NotificationNotifier()
     private var settings: AppSettings?
     
     func setupSettings(settings: AppSettings?) {
@@ -35,6 +35,10 @@ class NotificationManager {
         
         if settings?.isDropboxEnable == true {
             result = dropboxNotifier.send(thiefDto)
+        }
+        
+        if settings?.isUseSnapshotLocalNotification == true {
+            result = notificationNotifier.send(thiefDto)
         }
         
         return result

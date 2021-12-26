@@ -55,7 +55,6 @@ struct Preview: View {
                                 .buttonStyle(BorderlessButtonStyle())
                                 .padding(EdgeInsets(top: 8.0, leading: 8.0, bottom: 8.0, trailing: 8.0))
                             }
-                            
                         }
                     }
                 }

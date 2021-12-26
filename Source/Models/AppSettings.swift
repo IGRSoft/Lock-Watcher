@@ -100,4 +100,10 @@ final class AppSettings: ObservableObject {
             objectWillChange.send()
         }
     }
+    
+    @UserDefault("UseSnapshotLocalNotification", defaultValue: false) var isUseSnapshotLocalNotification: Bool {
+        willSet {
+            objectWillChange.send()
+        }
+    }
 }

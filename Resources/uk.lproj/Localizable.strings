@@ -25,7 +25,7 @@
 "SnapshotOnUSBMount" = "Зробити знімок при підключенні в USB";
 
 /* Description was not specified */
-"Keep last %d" = "Залишити останні %d";
+"KeepLastN" = "Залишити останні %d";
 
 /* Description was not specified */
 "LastSnapshots" = "Останні знімки";
@@ -46,7 +46,10 @@
 "SyncWithDropbox" = "Синхронізувати з Dropbox";
 
 /* Description was not specified */
-"Synced with Dropbox: %@" = "Синхронізовано з: %@";
+"PushLocalNotification" = "Створити локальне повідомлення";
+
+/* Description was not specified */
+"SyncedWithDropbox" = "Синхронізовано з: %@";
 
 /* Description was not specified */
 "Logout" = "Вийти";
@@ -62,3 +65,21 @@
 
 /* Description was not specified */
 "LastSnapshot" = "Останній знімок:";
+
+/* Description was not specified */
+"SnapshotAt" = "Знімок о: %@";
+
+/* Description was not specified */
+"TrigerType_onWakeUp" = "на пробудження";
+
+/* Description was not specified */
+"TrigerType_onWrongPassword" = "на введення невірного пароля";
+
+/* Description was not specified */
+"TrigerType_onBatteryPower" = "на отключение источника питания";
+
+/* Description was not specified */
+"TrigerType_usbConnected" = "на відключення джерела живлення";
+
+/* Description was not specified */
+"TrigerType_logedIn" = "на вхід";

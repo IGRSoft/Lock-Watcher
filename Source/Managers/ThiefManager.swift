@@ -11,6 +11,7 @@ import os
 import PhotoSnap
 import Combine
 import CoreLocation
+import UserNotifications
 
 class ThiefManager: NSObject, ObservableObject {
     typealias WatchBlock = ((ThiefDto) -> Void)
@@ -23,7 +24,7 @@ class ThiefManager: NSObject, ObservableObject {
     private var lastThiefDetection = ThiefDto()
     @Published var databaseManager = DatabaseManager()
     
-    private var watchBlock: WatchBlock = {trigered in}
+    private var watchBlock: WatchBlock = {_ in}
     
     lazy var trigerManager = TrigerManager()
     
@@ -37,12 +38,15 @@ class ThiefManager: NSObject, ObservableObject {
         settings = AppSettings()
         
         databaseManager.setupSettings(settings)
+        
         if (settings?.addLocationToSnapshot == true) {
             setupLocationManager(enable: true)
         }
         
         startWatching(watchBlock)
         notificationManager.setupSettings(settings: settings)
+        
+        UNUserNotificationCenter.current().delegate = self
     }
     
     func setupLocationManager(enable: Bool) {
@@ -116,6 +120,16 @@ class ThiefManager: NSObject, ObservableObject {
         let _ = databaseManager.send(lastThiefDetection)
         
         objectWillChange.send()
+        
+        watchBlock(lastThiefDetection)
+    }
+    
+    func showSnapshot(identifier: String) {
+        if let dto = databaseManager.latestImages().dtos.first(where: { Date.dateFormat.string(from: $0.date) == identifier }) {
+            if let filepath = dto.path {
+                NSWorkspace.shared.open(filepath)
+            }
+        }
     }
 }
 
@@ -142,5 +156,12 @@ extension ThiefManager: CLLocationManagerDelegate {
         default:
             os_log(.debug, "Unknown")
         }
+    }
+}
+
+extension ThiefManager: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        let identifier = response.notification.request.identifier;
+        showSnapshot(identifier: identifier)
     }
 }

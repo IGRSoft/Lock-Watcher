@@ -25,7 +25,7 @@
 "SnapshotOnUSBMount" = "Take Snapshot On USB Mount";
 
 /* Description was not specified */
-"Keep last %d" = "Keep last %d";
+"KeepLastN" = "Keep last %d";
 
 /* Description was not specified */
 "LastSnapshots" = "Last Snapshots";
@@ -46,7 +46,10 @@
 "SyncWithDropbox" = "Sync with Dropbox";
 
 /* Description was not specified */
-"Synced with Dropbox: %@" = "Sync with Dropbox: %@";
+"SyncedWithDropbox" = "Sync with Dropbox: %@";
+
+/* Description was not specified */
+"PushLocalNotification" = "Push Local Notification";
 
 /* Description was not specified */
 "Logout" = "Logout";
@@ -62,3 +65,21 @@
 
 /* Description was not specified */
 "LastSnapshot" = "Last Snapshot:";
+
+/* Description was not specified */
+"SnapshotAt" = "Snapshot at: %@";
+
+/* Description was not specified */
+"TrigerType_onWakeUp" = "On wake up";
+
+/* Description was not specified */
+"TrigerType_onWrongPassword" = "On entered wrong password:";
+
+/* Description was not specified */
+"TrigerType_onBatteryPower" = "On removed power supply";
+
+/* Description was not specified */
+"TrigerType_usbConnected" = "On connected usb device";
+
+/* Description was not specified */
+"TrigerType_logedIn" = "On login";

@@ -41,8 +41,8 @@ class DatabaseDto: Codable, Identifiable {
         case date, data, path
     }
     
-    var date: Date?
-    var data: Data?
+    var date: Date
+    var data: Data
     var path: URL?
     
     func encode(to encoder: Encoder) throws {
@@ -50,7 +50,7 @@ class DatabaseDto: Codable, Identifiable {
         
         try container.encode(date, forKey: .date)
         try container.encode(data, forKey: .data)
-        try container.encode(path, forKey: .path)
+        try container.encodeIfPresent(path, forKey: .path)
     }
     
     required init(from decoder: Decoder) throws {
@@ -58,12 +58,12 @@ class DatabaseDto: Codable, Identifiable {
         
         date = try container.decode(Date.self, forKey: .date)
         data = try container.decode(Data.self, forKey: .data)
-        path = try container.decode(URL.self, forKey: .path)
+        path = try container.decodeIfPresent(URL.self, forKey: .path)
     }
     
     init(with thiefDto: ThiefDto) {
         date = thiefDto.date
-        data = thiefDto.snapshot?.tiffRepresentation
+        data = thiefDto.snapshot!.tiffRepresentation!
         path = thiefDto.filepath
     }
 }

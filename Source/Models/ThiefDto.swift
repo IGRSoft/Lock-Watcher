@@ -9,17 +9,23 @@ import Foundation
 import CoreLocation
 import AppKit
 
+enum TrigerType: String {
+    case empty, onWakeUp, onWrongPassword, onBatteryPower, usbConnected, logedIn
+}
+
+extension TrigerType {
+    var info: String {
+        return NSLocalizedString("TrigerType_\(self.rawValue)", comment: "")
+    }
+}
+
 public class ThiefDto: Equatable {
     public static func == (lhs: ThiefDto, rhs: ThiefDto) -> Bool {
         return lhs.date == rhs.date
     }
     
-    enum TrigerType {
-        case empty, onWakeUp, onWrongPassword, onBatteryPower, usbConnected, logedIn
-    }
-    
     var coordinate: CLLocationCoordinate2D?
-    var trigerType: TrigerType? = .empty
+    var trigerType: TrigerType = .empty
     var snapshot: NSImage?
     var filepath: URL?
     var date: Date = Date()
