@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -81,6 +81,8 @@
 		A5AA31E62778D6B300A064B6 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31E42778D6B300A064B6 /* Translation.swift */; };
 		A5AA31E82778D6E600A064B6 /* InfoViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31E72778D6E600A064B6 /* InfoViews.swift */; };
 		A5AA31E92778D6E600A064B6 /* InfoViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31E72778D6E600A064B6 /* InfoViews.swift */; };
+		A5ACC7C727835BF800999CF0 /* NetworkUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */; };
+		A5ACC7C827835BF800999CF0 /* NetworkUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */; };
 		A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */; };
 		A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */; };
 		A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
@@ -191,11 +193,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A5117E46278349C7001EC35F /* XPCAuthentication.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = XPCAuthentication.entitlements; sourceTree = "<group>"; };
+		A5117E47278349C7001EC35F /* XPCPower-non-mas.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "XPCPower-non-mas.entitlements"; sourceTree = "<group>"; };
+		A5117E48278349C7001EC35F /* Lock_Watcher.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lock_Watcher.entitlements; sourceTree = "<group>"; };
+		A5117E49278349C7001EC35F /* Lock_Watcher-non-mas.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "Lock_Watcher-non-mas.entitlements"; sourceTree = "<group>"; };
+		A5117E4A278349C7001EC35F /* XPCMail-non-mas.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "XPCMail-non-mas.entitlements"; sourceTree = "<group>"; };
+		A5117E4B278349C7001EC35F /* XPCMail.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = XPCMail.entitlements; sourceTree = "<group>"; };
+		A5117E4C278349C7001EC35F /* XPCPower.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = XPCPower.entitlements; sourceTree = "<group>"; };
+		A5117E4D278349C7001EC35F /* XPCAuthentication-non-mas.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "XPCAuthentication-non-mas.entitlements"; sourceTree = "<group>"; };
 		A519997B26D92E6100F482BC /* DropboxNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropboxNotifier.swift; sourceTree = "<group>"; };
 		A519998026DA41C700F482BC /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		A519998526DA4BFB00F482BC /* DatabaseDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDto.swift; sourceTree = "<group>"; };
 		A519999B26DA764A00F482BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A519999C26DA764A00F482BC /* Lock_Watcher.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lock_Watcher.entitlements; sourceTree = "<group>"; };
 		A519999D26DA764A00F482BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A519999E26DA764A00F482BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A519999F26DA764A00F482BC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -222,19 +231,12 @@
 		A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCAuthenticationProtocol.swift; sourceTree = "<group>"; };
 		A54E4A562610AA3C00E7B1D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCAuthentication.swift; sourceTree = "<group>"; };
-		A56D11DE26DBB1ED00BEBEC2 /* XPCAuthentication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCAuthentication.entitlements; sourceTree = "<group>"; };
-		A56D11DF26DBB1ED00BEBEC2 /* XPCPower.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCPower.entitlements; sourceTree = "<group>"; };
 		A56D11E026DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+IGRExtension.swift"; sourceTree = "<group>"; };
 		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A57FDCB026DB99B700954ED7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A57FDCB126DB99B800954ED7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
 		A58FC75326E2814E007674F6 /* Lock-Watcher-non-mas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher-non-mas.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A58FC75826E2820E007674F6 /* XPCPower-non-mas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "XPCPower-non-mas.entitlements"; sourceTree = "<group>"; };
-		A58FC75926E2820E007674F6 /* Lock_Watcher-non-mas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lock_Watcher-non-mas.entitlements"; sourceTree = "<group>"; };
-		A58FC75A26E2820E007674F6 /* XPCAuthentication-non-mas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "XPCAuthentication-non-mas.entitlements"; sourceTree = "<group>"; };
-		A58FC76426E2832F007674F6 /* XPCMail.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XPCMail.entitlements; sourceTree = "<group>"; };
-		A58FC76526E2832F007674F6 /* XPCMail-non-mas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "XPCMail-non-mas.entitlements"; sourceTree = "<group>"; };
 		A58FC76626E2870E007674F6 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		A5A0788C26B9A78400A7D578 /* USBListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBListener.swift; sourceTree = "<group>"; };
 		A5AA31D62778961400A064B6 /* NotificationNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNotifier.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 		A5AA31E12778D64400A064B6 /* SaveSnapshotViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSnapshotViews.swift; sourceTree = "<group>"; };
 		A5AA31E42778D6B300A064B6 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		A5AA31E72778D6E600A064B6 /* InfoViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViews.swift; sourceTree = "<group>"; };
+		A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtil.swift; sourceTree = "<group>"; };
 		A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudNotifier.swift; sourceTree = "<group>"; };
 		A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherApp.swift; sourceTree = "<group>"; };
@@ -331,17 +334,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5117E45278349C7001EC35F /* entitlements */ = {
+			isa = PBXGroup;
+			children = (
+				A5117E46278349C7001EC35F /* XPCAuthentication.entitlements */,
+				A5117E47278349C7001EC35F /* XPCPower-non-mas.entitlements */,
+				A5117E48278349C7001EC35F /* Lock_Watcher.entitlements */,
+				A5117E49278349C7001EC35F /* Lock_Watcher-non-mas.entitlements */,
+				A5117E4A278349C7001EC35F /* XPCMail-non-mas.entitlements */,
+				A5117E4B278349C7001EC35F /* XPCMail.entitlements */,
+				A5117E4C278349C7001EC35F /* XPCPower.entitlements */,
+				A5117E4D278349C7001EC35F /* XPCAuthentication-non-mas.entitlements */,
+			);
+			path = entitlements;
+			sourceTree = "<group>";
+		};
 		A519999926DA764A00F482BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A58FC75926E2820E007674F6 /* Lock_Watcher-non-mas.entitlements */,
-				A58FC75A26E2820E007674F6 /* XPCAuthentication-non-mas.entitlements */,
-				A58FC76526E2832F007674F6 /* XPCMail-non-mas.entitlements */,
-				A58FC75826E2820E007674F6 /* XPCPower-non-mas.entitlements */,
-				A519999C26DA764A00F482BC /* Lock_Watcher.entitlements */,
-				A56D11DE26DBB1ED00BEBEC2 /* XPCAuthentication.entitlements */,
-				A58FC76426E2832F007674F6 /* XPCMail.entitlements */,
-				A56D11DF26DBB1ED00BEBEC2 /* XPCPower.entitlements */,
+				A5117E45278349C7001EC35F /* entitlements */,
 				A519999A26DA764A00F482BC /* Localizable.strings */,
 				A57FDCAF26DB99B600954ED7 /* InfoPlist.strings */,
 				A519999D26DA764A00F482BC /* Assets.xcassets */,
@@ -355,6 +366,7 @@
 			children = (
 				A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */,
 				A5AA31E42778D6B300A064B6 /* Translation.swift */,
+				A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -689,6 +701,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1300;
+				ORGANIZATIONNAME = "IGR Soft";
 				TargetAttributes = {
 					A533D82525AA11F40046B7C8 = {
 						CreatedOnToolsVersion = 12.3;
@@ -716,7 +729,7 @@
 				};
 			};
 			buildConfigurationList = A5C6DBE925796A90009DE750 /* Build configuration list for PBXProject "Lock-Watcher" */;
-			compatibilityVersion = "Xcode 12.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -737,12 +750,12 @@
 			projectRoot = "";
 			targets = (
 				A5C6DBED25796A90009DE750 /* Lock-Watcher */,
-				A5C6DBFF25796A93009DE750 /* Lock-WatcherTests */,
-				A5C6DC0A25796A93009DE750 /* Lock-WatcherUITests */,
+				A58FC71E26E2814E007674F6 /* Lock-Watcher-non-mas */,
+				A54E4A1626108E9600E7B1D4 /* XPCAuthentication */,
 				A5E6D75125A5BB6B00EEA7DD /* XPCPower */,
 				A533D82525AA11F40046B7C8 /* XPCMail */,
-				A54E4A1626108E9600E7B1D4 /* XPCAuthentication */,
-				A58FC71E26E2814E007674F6 /* Lock-Watcher-non-mas */,
+				A5C6DBFF25796A93009DE750 /* Lock-WatcherTests */,
+				A5C6DC0A25796A93009DE750 /* Lock-WatcherUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -886,6 +899,7 @@
 				A58FC73826E2814E007674F6 /* AppSettings.swift in Sources */,
 				A58FC73926E2814E007674F6 /* Lock_WatcherApp.swift in Sources */,
 				A58FC73A26E2814E007674F6 /* iCloudNotifier.swift in Sources */,
+				A5ACC7C827835BF800999CF0 /* NetworkUtil.swift in Sources */,
 				A58FC73B26E2814E007674F6 /* EmptyView.swift in Sources */,
 				A5EFE8B926E2B587001FC4EA /* Date+IGRExtension.swift in Sources */,
 				A58FC73C26E2814E007674F6 /* XPCAuthenticationProtocol.swift in Sources */,
@@ -925,6 +939,7 @@
 				A5457A8C26C1FB1400386738 /* NSImage+IGRExtension.swift in Sources */,
 				A5E6D7A625A5D1EB00EEA7DD /* AppSettings.swift in Sources */,
 				A5C6DBF225796A90009DE750 /* Lock_WatcherApp.swift in Sources */,
+				A5ACC7C727835BF800999CF0 /* NetworkUtil.swift in Sources */,
 				A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */,
 				A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */,
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
@@ -1030,11 +1045,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Resources/XPCMail.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCMail.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCMail/Info.plist;
@@ -1057,11 +1072,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Resources/XPCMail.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCMail.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCMail/Info.plist;
@@ -1083,11 +1098,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Resources/XPCAuthentication.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCAuthentication.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
@@ -1109,11 +1124,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Resources/XPCAuthentication.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCAuthentication.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
@@ -1136,11 +1151,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Resources/Lock_Watcher-non-mas.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/Lock_Watcher-non-mas.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1163,11 +1178,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Resources/Lock_Watcher-non-mas.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/Lock_Watcher-non-mas.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1247,11 +1262,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Resources/Lock_Watcher.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1312,11 +1327,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Resources/XPCPower-non-mas.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCPower-non-mas.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCPower/Info.plist;
@@ -1338,11 +1353,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Resources/XPCMail-non-mas.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCMail/Info.plist;
@@ -1364,11 +1379,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Resources/XPCAuthentication-non-mas.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
@@ -1391,11 +1406,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Resources/Lock_Watcher-non-mas.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/Lock_Watcher-non-mas.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1539,11 +1554,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Resources/Lock_Watcher.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1565,11 +1580,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Resources/Lock_Watcher.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1671,11 +1686,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Resources/XPCPower.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCPower.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCPower/Info.plist;
@@ -1698,11 +1713,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Resources/XPCPower.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCPower.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 102;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCPower/Info.plist;

@@ -71,6 +71,12 @@ final class AppSettings: ObservableObject {
         }
     }
     
+    @UserDefault("AddIPAddressToSnapshot", defaultValue: false) var addIPAddressToSnapshot: Bool {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
     @UserDefault("SendNotificationToMail", defaultValue: false) var isSendNotificationToMail: Bool {
         willSet {
             objectWillChange.send()

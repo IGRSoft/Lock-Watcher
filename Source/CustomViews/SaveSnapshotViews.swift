@@ -42,6 +42,16 @@ struct AddLocationToSnapshotView: View {
     }
 }
 
+struct AddIPAddressToSnapshotView: View {
+    @Binding var addIPAddressToSnapshot : Bool
+    
+    var body: some View {
+        Toggle(isOn: $addIPAddressToSnapshot) {
+            Text("AddIPAddressToSnapshot")
+        }
+    }
+}
+
 struct SaveSnapshotToDiskView: View {
     @Binding var isSaveSnapshotToDisk : Bool
     

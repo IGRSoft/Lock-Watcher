@@ -39,8 +39,9 @@ class DropboxNotifier {
         }
         
         var image = NSImage(contentsOf: filepath)
-        if let coordinate = thiefDto.coordinate {
-            image = image?.imageWithText(text: String(describing: coordinate))
+        let info = thiefDto.info()
+        if info.isEmpty == false {
+            image = image?.imageWithText(text: info)
         }
         
         do {

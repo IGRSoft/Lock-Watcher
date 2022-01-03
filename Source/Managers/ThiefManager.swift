@@ -29,6 +29,7 @@ class ThiefManager: NSObject, ObservableObject {
     lazy var trigerManager = TrigerManager()
     
     private(set) var locationManager = CLLocationManager()
+    private var coordinate: CLLocationCoordinate2D?
     
     init(_ watchBlock: @escaping WatchBlock = {trigered in}) {
         super.init()
@@ -108,11 +109,17 @@ class ThiefManager: NSObject, ObservableObject {
     }
     
     func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {
-        lastThiefDetection.snapshot = snapshot
-        lastThiefDetection.date = date
         guard let filepath = FileSystemUtil.store(image: snapshot, forKey: filename) else {
             assert(false, "wrong file path")
             return
+        }
+        
+        lastThiefDetection.snapshot = snapshot
+        lastThiefDetection.date = date
+        lastThiefDetection.coordinate = coordinate
+        
+        if settings?.addIPAddressToSnapshot == true {
+            lastThiefDetection.ipAddress = NetworkUtil.getIFAddresses()
         }
         
         lastThiefDetection.filepath = filepath
@@ -135,7 +142,7 @@ class ThiefManager: NSObject, ObservableObject {
 
 extension ThiefManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.lastThiefDetection.coordinate = locations.last?.coordinate
+        self.coordinate = locations.last?.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

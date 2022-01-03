@@ -25,8 +25,23 @@ public class ThiefDto: Equatable {
     }
     
     var coordinate: CLLocationCoordinate2D?
+    var ipAddress: String?
     var trigerType: TrigerType = .empty
     var snapshot: NSImage?
     var filepath: URL?
     var date: Date = Date()
+    
+    func info() -> String {
+        var info = ""
+        
+        if let coordinate = coordinate {
+            info = String(describing: coordinate)
+        }
+        
+        if let ipAddress = ipAddress {
+            info += " \(ipAddress)"
+        }
+        
+        return info
+    }
 }

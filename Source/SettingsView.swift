@@ -70,6 +70,8 @@ struct SettingsView: View {
                         thiefManager?.setupLocationManager(enable: value)
                     })
                 
+                AddIPAddressToSnapshotView(addIPAddressToSnapshot: $settings.addIPAddressToSnapshot)
+                
                 SaveSnapshotToDiskView(isSaveSnapshotToDisk: $settings.isSaveSnapshotToDisk)
             }
             

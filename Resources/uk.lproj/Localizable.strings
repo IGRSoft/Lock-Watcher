@@ -37,6 +37,9 @@
 "AddLocationToSnapshot" = "Додати геопозицію на знімок";
 
 /* Description was not specified */
+"AddIPAddressToSnapshot" = "Додати IP адресу на знімок";
+
+/* Description was not specified */
 "SaveSnapshotToDisk" = "Зберегти знімок на напичувач";
 
 /* Description was not specified */

@@ -37,6 +37,9 @@
 "AddLocationToSnapshot" = "Add location info to snapshot";
 
 /* Description was not specified */
+"AddIPAddressToSnapshot" = "Add IP Address info to snapshot";
+
+/* Description was not specified */
 "SaveSnapshotToDisk" = "Save snapshot to disk";
 
 /* Description was not specified */
