@@ -90,7 +90,7 @@ class ThiefManager: NSObject, ObservableObject {
     }
     
     public func detectedTriger() {
-        os_log(.debug, "Detected trigered action")
+        os_log(.debug, "Detected trigered action: \(self.lastThiefDetection.trigerType.rawValue)")
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings?.isSaveSnapshotToDisk == true
         #if DEBUG

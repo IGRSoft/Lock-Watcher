@@ -24,7 +24,6 @@ class TrigerManager {
                                                                 .onUSBConnectionListenet : USBListener(),
                                                                 .onLoginListenet : LoginListener()]
         
-        
         if AppSettings.isMASBuild == false {
             listeners[.onWrongPassword] = WrongPasswordListener()
         }
