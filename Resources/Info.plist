@@ -35,6 +35,8 @@
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Detect persone who is trying get access to your user</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Add location information to snapshot</string>
 	<key>NSLocationUsageDescription</key>
