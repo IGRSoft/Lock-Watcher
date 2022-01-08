@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct InfoView: View {
     var thiefManager: ThiefManager
@@ -50,6 +51,7 @@ struct InfoView: View {
 struct LastThiefDetectionView: View {
     @Binding var databaseManager: DatabaseManager
     @State var isPreviewActive: Bool = false
+    @State private var isUnlocked = false
     
     var body: some View {
         let latestImages = databaseManager.latestImages()
@@ -72,7 +74,9 @@ struct LastThiefDetectionView: View {
                 Text("\(date, formatter: Date.dateFormat)")
                 if latestImages.dtos.count > 1 {
                     Button("LastSnapshots") {
-                        isPreviewActive = true
+                        authenticate {
+                            isPreviewActive = true
+                        }
                     }
                     .popover(isPresented: $isPreviewActive, arrowEdge: .leading) {
                         Preview(databaseManager: $databaseManager)
@@ -85,6 +89,33 @@ struct LastThiefDetectionView: View {
                 
                 Divider()
             }
+        }
+    }
+    
+    func authenticate(action: @escaping () -> Void) {
+        
+        Timer.scheduledTimer(withTimeInterval: 900.0, repeats: false) { (Timer) in
+            isUnlocked = false
+        }
+        
+        if isUnlocked == false {
+            let context = LAContext()
+            var error: NSError?
+
+            // check whether biometric authentication is possible
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, error: &error) {
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, localizedReason: NSLocalizedString("AuthInfo", comment: "")) { success, authenticationError in
+                    isUnlocked = success
+                    if success {
+                        action()
+                    }
+                }
+            } else {
+                isUnlocked = true
+                action()
+            }
+        } else {
+            action()
         }
     }
 }

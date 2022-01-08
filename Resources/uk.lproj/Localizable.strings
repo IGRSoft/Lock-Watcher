@@ -86,3 +86,6 @@
 
 /* Description was not specified */
 "TrigerType_logedIn" = "на вхід";
+
+/* Description was not specified */
+"AuthInfo" = "розблокувати доступ до даних бази даних";
