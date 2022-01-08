@@ -34,10 +34,6 @@ struct InfoView: View {
                         thiefManager.detectedTriger()
                     }
 #endif
-                    
-                    Button("Notices") {
-                        exit(0)
-                    }
                     Button("Quit") {
                         exit(0)
                     }
