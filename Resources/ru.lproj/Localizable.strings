@@ -89,3 +89,9 @@
 
 /* Description was not specified */
 "AuthInfo" = "разблокировать доступ к данным базы данных";
+
+/* Description was not specified */
+"TakeSnapshot" = "Сделать снимок";
+
+/* Description was not specified */
+"FirstLaunchSetup" = "Первая настройка";

@@ -20,8 +20,8 @@ struct Lock_WatcherApp: App {
     }
     
     class AppDelegate: NSObject, NSApplicationDelegate {
-        var popover = NSPopover.init()
-        var statusBarItem: NSStatusItem?
+        private var popover = NSPopover.init()
+        private var statusBarItem: NSStatusItem?
      
         private lazy var settingsView = SettingsView(watchBlock: { triger in
             self.updateStatusBarIcon(triger: triger != .empty)

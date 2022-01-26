@@ -93,7 +93,7 @@ class ThiefManager: NSObject, ObservableObject {
         os_log(.debug, "Detected trigered action: \(self.lastThiefDetection.trigerType.rawValue)")
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings?.isSaveSnapshotToDisk == true
-        #if DEBUG
+        #if NOSNAPSHOT_DEBUG
         let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
         let date = Date()
         self.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)

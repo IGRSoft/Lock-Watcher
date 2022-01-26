@@ -25,6 +25,11 @@ struct SettingsView: View {
         self.thiefManager = ThiefManager { dto in
             watchBlock(dto.trigerType)
         }
+        
+        if settings.isFirstLaunch {
+            settings.isFirstLaunch = false
+            FirstLaunchView(settings: settings, thiefManager: thiefManager).openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
+        }
     }
     
     var body: some View {
@@ -106,7 +111,7 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         //ForEach(["en", "ru", "uk"], id: \.self) { id in
         SettingsView(watchBlock: { _ in } )
-                //.environment(\.locale, .init(identifier: id))
-        //}
+            //.environment(\.locale, .init(identifier: id))
+        }
     }
 }

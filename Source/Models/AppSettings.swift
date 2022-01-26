@@ -17,7 +17,7 @@ final class AppSettings: ObservableObject {
     static var isMASBuild = true
 #endif
     
-    @UserDefault("FirstLaunch", defaultValue: false) var isFirstLaunch: Bool {
+    @UserDefault("FirstLaunch", defaultValue: true) var isFirstLaunch: Bool {
         willSet {
             objectWillChange.send()
         }

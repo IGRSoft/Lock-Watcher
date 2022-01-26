@@ -91,6 +91,10 @@
 		A5C6DC0525796A93009DE750 /* Lock_WatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0425796A93009DE750 /* Lock_WatcherTests.swift */; };
 		A5C6DC1025796A93009DE750 /* Lock_WatcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0F25796A93009DE750 /* Lock_WatcherUITests.swift */; };
 		A5C6DC4625796CCB009DE750 /* PhotoSnap in Frameworks */ = {isa = PBXBuildFile; productRef = A5C6DC4525796CCB009DE750 /* PhotoSnap */; };
+		A5D23E3027A1DFAE001C0370 /* FirstLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D23E2F27A1DFAE001C0370 /* FirstLaunchView.swift */; };
+		A5D23E3127A1DFAE001C0370 /* FirstLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D23E2F27A1DFAE001C0370 /* FirstLaunchView.swift */; };
+		A5D23E3327A1E4BA001C0370 /* View+OpenWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */; };
+		A5D23E3427A1E4BA001C0370 /* View+OpenWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */; };
 		A5E6D75725A5BB6C00EEA7DD /* XPCPower.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D75625A5BB6C00EEA7DD /* XPCPower.m */; };
 		A5E6D75925A5BB6C00EEA7DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D75825A5BB6C00EEA7DD /* main.m */; };
 		A5E6D75D25A5BB6C00EEA7DD /* XPCPower.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -258,6 +262,8 @@
 		A5C6DC0B25796A93009DE750 /* Lock-WatcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lock-WatcherUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DC0F25796A93009DE750 /* Lock_WatcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherUITests.swift; sourceTree = "<group>"; };
 		A5C6DC1125796A93009DE750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5D23E2F27A1DFAE001C0370 /* FirstLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchView.swift; sourceTree = "<group>"; };
+		A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+OpenWindow.swift"; sourceTree = "<group>"; };
 		A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCPower.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E6D75525A5BB6C00EEA7DD /* XPCPower.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XPCPower.h; sourceTree = "<group>"; };
 		A5E6D75625A5BB6C00EEA7DD /* XPCPower.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XPCPower.m; sourceTree = "<group>"; };
@@ -406,6 +412,7 @@
 				A56D11E026DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift */,
 				A5EFE8B726E2B587001FC4EA /* Date+IGRExtension.swift */,
 				A56F1A7C278A29630066CA78 /* DispatchQueue+IGRExtension.swift */,
+				A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -472,6 +479,7 @@
 				A5E6D77C25A5CB8900EEA7DD /* Managers */,
 				A5AA31DD2778D59300A064B6 /* CustomViews */,
 				A5C6DBF325796A90009DE750 /* SettingsView.swift */,
+				A5D23E2F27A1DFAE001C0370 /* FirstLaunchView.swift */,
 				A58FC76626E2870E007674F6 /* Preview.swift */,
 				A533D7B425A8F9A60046B7C8 /* EmptyView.swift */,
 			);
@@ -884,12 +892,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A58FC72C26E2814E007674F6 /* DatabaseDto.swift in Sources */,
+				A5D23E3127A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
 				A58FC72D26E2814E007674F6 /* XPCMailProtocol.swift in Sources */,
 				A58FC72E26E2814E007674F6 /* WrongPasswordListener.swift in Sources */,
 				A58FC72F26E2814E007674F6 /* BaseListener.swift in Sources */,
 				A5AA31E92778D6E600A064B6 /* InfoViews.swift in Sources */,
 				A58FC73026E2814E007674F6 /* USBListener.swift in Sources */,
 				A54A1F7B2703769800176069 /* LoginListener.swift in Sources */,
+				A5D23E3427A1E4BA001C0370 /* View+OpenWindow.swift in Sources */,
 				A5AA31E62778D6B300A064B6 /* Translation.swift in Sources */,
 				A58FC73126E2814E007674F6 /* FileSystemUtil.swift in Sources */,
 				A58FC73226E2814E007674F6 /* SettingsView.swift in Sources */,
@@ -925,12 +935,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A519998626DA4BFB00F482BC /* DatabaseDto.swift in Sources */,
+				A5D23E3027A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
 				A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */,
 				A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */,
 				A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */,
 				A5AA31E82778D6E600A064B6 /* InfoViews.swift in Sources */,
 				A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */,
 				A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */,
+				A5D23E3327A1E4BA001C0370 /* View+OpenWindow.swift in Sources */,
 				A5AA31E52778D6B300A064B6 /* Translation.swift in Sources */,
 				A56D11E126DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift in Sources */,
 				A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */,
@@ -1228,7 +1240,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 106;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1448,7 +1460,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 106;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1514,7 +1526,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 106;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
