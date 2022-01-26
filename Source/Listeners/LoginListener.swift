@@ -33,7 +33,7 @@ class LoginListener: BaseListener, BaseListenerProtocol {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             NotificationCenter.default.addObserver(self,
                                                    selector: #selector(self.sessionDidBecomeActiveNotification(_:)),
-                                                   name: NSWindow.didChangeOcclusionStateNotification,
+                                                   name: NSApplication.didChangeOcclusionStateNotification,
                                                    object: nil)
         }
     }
@@ -43,18 +43,12 @@ class LoginListener: BaseListener, BaseListenerProtocol {
         isRunning = false
         listenerAction = nil
         
-        NotificationCenter.default.removeObserver(self, name: NSWindow.didChangeOcclusionStateNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSApplication.didChangeOcclusionStateNotification, object: nil)
     }
     
     @objc func sessionDidBecomeActiveNotification(_ notification: Notification) {
         os_log(.debug, "LoginListener didChangeOcclusionStateNotification")
         
-        guard let window = (notification.object as? NSWindow) else {
-            return
-        }
-        
-        if window.occlusionState.contains(.visible) {
-            debouncedThief()
-        }
+        debouncedThief()
     }
 }

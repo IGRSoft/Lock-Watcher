@@ -24,7 +24,7 @@ struct Lock_WatcherApp: App {
         var statusBarItem: NSStatusItem?
      
         private lazy var settingsView = SettingsView(watchBlock: { triger in
-            self.updateStatusBarIcon(triger: triger == .empty)
+            self.updateStatusBarIcon(triger: triger != .empty)
         })
         
         func applicationDidFinishLaunching(_ notification: Notification) {

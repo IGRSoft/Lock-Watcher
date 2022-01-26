@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/dropbox/SwiftyDropbox.git",
         "state": {
           "branch": null,
-          "revision": "ae30b1419d2de226bc816b84594ebf7bbe2465ca",
-          "version": "8.2.0"
+          "revision": "7af87d903be1cf0af0e76e0394d992943055894e",
+          "version": "8.2.1"
         }
       }
     ]

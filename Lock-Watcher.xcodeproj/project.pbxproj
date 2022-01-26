@@ -463,15 +463,15 @@
 		A5C6DBF025796A90009DE750 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */,
 				A5457A8A26C1FAF200386738 /* Extensions */,
 				A533D80125AA0EF00046B7C8 /* Notifiers */,
 				A533D7D225A9E23F0046B7C8 /* Utils */,
 				A5E6D7A425A5D1C200EEA7DD /* Models */,
 				A5E6D79325A5D11200EEA7DD /* Listeners */,
 				A5E6D77C25A5CB8900EEA7DD /* Managers */,
-				A5C6DBF125796A90009DE750 /* Lock_WatcherApp.swift */,
-				A5C6DBF325796A90009DE750 /* SettingsView.swift */,
 				A5AA31DD2778D59300A064B6 /* CustomViews */,
+				A5C6DBF325796A90009DE750 /* SettingsView.swift */,
 				A58FC76626E2870E007674F6 /* Preview.swift */,
 				A533D7B425A8F9A60046B7C8 /* EmptyView.swift */,
 			);
@@ -1832,7 +1832,7 @@
 			repositoryURL = "https://github.com/dropbox/SwiftyDropbox.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.2.0;
+				minimumVersion = 8.2.1;
 			};
 		};
 		A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */ = {
