@@ -112,6 +112,6 @@ struct SettingsView_Previews: PreviewProvider {
         //ForEach(["en", "ru", "uk"], id: \.self) { id in
         SettingsView(watchBlock: { _ in } )
             //.environment(\.locale, .init(identifier: id))
-        }
+        //}
     }
 }

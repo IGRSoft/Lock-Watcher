@@ -37,7 +37,7 @@ struct InfoView: View {
                     Button("Quit") {
                         exit(0)
                     }
-                    Text("© IGR Software 2008 - 2021")
+                    Link("© IGR Software 2008 - 2022", destination: URL(string: "http://igrsoft.com")!)
                 }
             }
         }
