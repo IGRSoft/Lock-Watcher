@@ -11,35 +11,41 @@ import CoreGraphics
 extension NSImage {
     func imageWithText(text: String) -> NSImage? {
         let imageSize = self.size
-        let font = NSFont.boldSystemFont(ofSize: 18)
+        
         let imageRect = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
-        let textRect = CGRect(x: 5, y: 5, width: imageSize.width - 5, height: imageSize.height - 5)
+        
+        let scaleFactor = NSScreen.main?.backingScaleFactor ?? 1
+        let font = NSFont.boldSystemFont(ofSize: 18 * scaleFactor)
+        let textRect = CGRect(x: 5, y: 5, width: imageRect.size.width - 5, height: imageRect.size.height - 5)
         let textStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-        let textFontAttributes = [
-            NSAttributedString.Key.font: font,
-            NSAttributedString.Key.foregroundColor: NSColor.red,
-            NSAttributedString.Key.paragraphStyle: textStyle
-        ]
-        let image: NSImage = NSImage(size: imageSize)
-        guard let rep: NSBitmapImageRep = NSBitmapImageRep(bitmapDataPlanes: nil,
-                                                     pixelsWide: Int(imageSize.width),
-                                                     pixelsHigh: Int(imageSize.height),
-                                                     bitsPerSample: 8,
-                                                     samplesPerPixel: 4,
-                                                     hasAlpha: true,
-                                                     isPlanar: false,
-                                                     colorSpaceName: .calibratedRGB,
-                                                     bytesPerRow: 0,
-                                                     bitsPerPixel: 0) else {
-            assert(false, "can't get BitmapImage")
+        let textFontAttributes: [NSAttributedString.Key : Any] = [.font: font, .foregroundColor: NSColor.red, .paragraphStyle: textStyle]
+        
+        guard let cgImage = self.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
             return self
         }
         
-        image.addRepresentation(rep)
+        let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
+        bitmapRep.size = imageRect.size
+
+        let image: NSImage = NSImage(size: imageRect.size)
+        image.addRepresentation(bitmapRep)
+        
         image.lockFocus()
         self.draw(in: imageRect)
         text.draw(in: textRect, withAttributes: textFontAttributes)
         image.unlockFocus()
         return image
+    }
+    
+    func jpegData() -> Data {
+        guard let tiffData = self.tiffRepresentation, let bitmap: NSBitmapImageRep = NSBitmapImageRep(data: tiffData) else {
+            return Data()
+        }
+        
+        guard let data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: 0.9]) else {
+            return Data()
+        }
+        
+        return data
     }
 }

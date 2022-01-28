@@ -45,11 +45,11 @@ class DropboxNotifier {
         }
         
         do {
-            guard let data = image?.tiffRepresentation else {
+            guard let data = image?.jpegData(), data.isEmpty == false else {
                 throw DropboxNotifierError.emptyData
             }
             
-            let _ = client?.files.upload(path: "/\(filepath.path.split(separator: "/").last ?? "image.png")", input: data)
+            let _ = client?.files.upload(path: "/\(filepath.path.split(separator: "/").last ?? "image.jpeg")", input: data)
                 .response { response, error in
                     if let response = response {
                         print(response)

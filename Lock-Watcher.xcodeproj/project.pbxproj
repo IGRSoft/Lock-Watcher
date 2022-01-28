@@ -33,6 +33,8 @@
 		A54E4A2F26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
 		A54E4A582610AA3D00E7B1D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A562610AA3C00E7B1D4 /* main.swift */; };
 		A54E4A592610AA3D00E7B1D4 /* XPCAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */; };
+		A56CFFBB27A48D6A00CB137B /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CFFBA27A48D6A00CB137B /* String+Regex.swift */; };
+		A56CFFBC27A48D6A00CB137B /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CFFBA27A48D6A00CB137B /* String+Regex.swift */; };
 		A56D11E126DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D11E026DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift */; };
 		A56F1A7D278A29630066CA78 /* DispatchQueue+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56F1A7C278A29630066CA78 /* DispatchQueue+IGRExtension.swift */; };
 		A56F1A7E278A29630066CA78 /* DispatchQueue+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56F1A7C278A29630066CA78 /* DispatchQueue+IGRExtension.swift */; };
@@ -237,6 +239,7 @@
 		A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCAuthenticationProtocol.swift; sourceTree = "<group>"; };
 		A54E4A562610AA3C00E7B1D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCAuthentication.swift; sourceTree = "<group>"; };
+		A56CFFBA27A48D6A00CB137B /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		A56D11E026DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+IGRExtension.swift"; sourceTree = "<group>"; };
 		A56F1A7C278A29630066CA78 /* DispatchQueue+IGRExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+IGRExtension.swift"; sourceTree = "<group>"; };
 		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -413,6 +416,7 @@
 				A5EFE8B726E2B587001FC4EA /* Date+IGRExtension.swift */,
 				A56F1A7C278A29630066CA78 /* DispatchQueue+IGRExtension.swift */,
 				A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */,
+				A56CFFBA27A48D6A00CB137B /* String+Regex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -919,6 +923,7 @@
 				A5EFE8B926E2B587001FC4EA /* Date+IGRExtension.swift in Sources */,
 				A58FC73C26E2814E007674F6 /* XPCAuthenticationProtocol.swift in Sources */,
 				A58FC73D26E2814E007674F6 /* NotificationManager.swift in Sources */,
+				A56CFFBC27A48D6A00CB137B /* String+Regex.swift in Sources */,
 				A58FC73E26E2814E007674F6 /* ThiefManager.swift in Sources */,
 				A58FC73F26E2814E007674F6 /* DatabaseManager.swift in Sources */,
 				A58FC76826E2870E007674F6 /* Preview.swift in Sources */,
@@ -962,6 +967,7 @@
 				A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */,
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 				A541188027649FB2007C6AB8 /* WrongPasswordListener.swift in Sources */,
+				A56CFFBB27A48D6A00CB137B /* String+Regex.swift in Sources */,
 				A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */,
 				A54A1F7A2703769800176069 /* LoginListener.swift in Sources */,
 				A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */,
@@ -1240,7 +1246,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1460,7 +1466,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1526,7 +1532,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

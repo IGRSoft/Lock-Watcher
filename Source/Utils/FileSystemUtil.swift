@@ -28,17 +28,14 @@ class FileSystemUtil {
             }
         }
         
-        return documentURL.appendingPathComponent(key + ".png")
+        return documentURL.appendingPathComponent(key + ".jpeg")
     }
     
     class func store(image: NSImage, forKey key: String) -> URL? {
         if let filePath = filePath(forKey: key) {
-            guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil} // TODO: handle error
-            let newRep = NSBitmapImageRep(cgImage: cgImage)
-            newRep.size = image.size // if you want the same size
-            guard let pngData = newRep.representation(using: .png, properties: [:]) else { return nil} // TODO: handle error
             do {
-                try pngData.write(to: filePath)
+                let data = image.jpegData()
+                try data.write(to: filePath)
             }
             catch {
                 os_log(.debug, "error saving: \(error.localizedDescription)")

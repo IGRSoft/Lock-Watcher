@@ -32,16 +32,21 @@ public class ThiefDto: Equatable {
     var date: Date = Date()
     
     func info() -> String {
-        var info = ""
+        var objects = [String]()
         
         if let coordinate = coordinate {
-            info = String(describing: coordinate)
+            var info = String(describing: coordinate)
+            
+            if let coordinatesItems = info.matches(for: "\\((.*?)\\)"), let coordinates = coordinatesItems.first  {
+                info = coordinates
+            }
+            objects.append(info)
         }
         
         if let ipAddress = ipAddress {
-            info += " \(ipAddress)"
+            objects.append(ipAddress)
         }
         
-        return info
+        return objects.joined(separator: "\n")
     }
 }

@@ -63,7 +63,7 @@ class DatabaseDto: Codable, Identifiable {
     
     init(with thiefDto: ThiefDto) {
         date = thiefDto.date
-        data = thiefDto.snapshot!.tiffRepresentation!
+        data = thiefDto.snapshot!.jpegData()
         path = thiefDto.filepath
     }
 }
