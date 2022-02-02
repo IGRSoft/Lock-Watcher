@@ -82,6 +82,8 @@
 		A599EB2F27AB0C09003A69B5 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A599EB2E27AB0C09003A69B5 /* KeychainAccess */; };
 		A599EB3127AB1259003A69B5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB3027AB1259003A69B5 /* BaseView.swift */; };
 		A599EB3227AB1259003A69B5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB3027AB1259003A69B5 /* BaseView.swift */; };
+		A599EB3427AB1BF0003A69B5 /* policy.html.webloc in Resources */ = {isa = PBXBuildFile; fileRef = A599EB3327AB1BF0003A69B5 /* policy.html.webloc */; };
+		A599EB3527AB1BF0003A69B5 /* policy.html.webloc in Resources */ = {isa = PBXBuildFile; fileRef = A599EB3327AB1BF0003A69B5 /* policy.html.webloc */; };
 		A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0788C26B9A78400A7D578 /* USBListener.swift */; };
 		A5AA31D72778961400A064B6 /* NotificationNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31D62778961400A064B6 /* NotificationNotifier.swift */; };
 		A5AA31D82778961400A064B6 /* NotificationNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31D62778961400A064B6 /* NotificationNotifier.swift */; };
@@ -259,6 +261,7 @@
 		A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityAlertView.swift; sourceTree = "<group>"; };
 		A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityUtil.swift; sourceTree = "<group>"; };
 		A599EB3027AB1259003A69B5 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		A599EB3327AB1BF0003A69B5 /* policy.html.webloc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = policy.html.webloc; sourceTree = "<group>"; };
 		A5A0788C26B9A78400A7D578 /* USBListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBListener.swift; sourceTree = "<group>"; };
 		A5AA31D62778961400A064B6 /* NotificationNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNotifier.swift; sourceTree = "<group>"; };
 		A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectSnapshotViews.swift; sourceTree = "<group>"; };
@@ -377,6 +380,7 @@
 		A519999926DA764A00F482BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A599EB3327AB1BF0003A69B5 /* policy.html.webloc */,
 				A5117E45278349C7001EC35F /* entitlements */,
 				A519999A26DA764A00F482BC /* Localizable.strings */,
 				A57FDCAF26DB99B600954ED7 /* InfoPlist.strings */,
@@ -817,6 +821,7 @@
 			files = (
 				A58FC74A26E2814E007674F6 /* Assets.xcassets in Resources */,
 				A58FC74B26E2814E007674F6 /* Localizable.strings in Resources */,
+				A599EB3527AB1BF0003A69B5 /* policy.html.webloc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +831,7 @@
 			files = (
 				A51999A326DA764A00F482BC /* Assets.xcassets in Resources */,
 				A51999A226DA764A00F482BC /* Localizable.strings in Resources */,
+				A599EB3427AB1BF0003A69B5 /* policy.html.webloc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
