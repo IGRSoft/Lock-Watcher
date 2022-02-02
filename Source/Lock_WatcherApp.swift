@@ -22,7 +22,7 @@ struct Lock_WatcherApp: App {
     class AppDelegate: NSObject, NSApplicationDelegate {
         private var popover = NSPopover.init()
         private var statusBarItem: NSStatusItem?
-     
+        
         private lazy var settingsView = SettingsView(watchBlock: { triger in
             self.updateStatusBarIcon(triger: triger != .empty)
         })
@@ -47,7 +47,6 @@ struct Lock_WatcherApp: App {
             statusBarItem?.button?.imageScaling = .scaleProportionallyDown
             statusBarItem?.button?.action = #selector(AppDelegate.togglePopover(_:))
             statusBarItem?.length = NSStatusItem.squareLength
-            
             updateStatusBarIcon(triger: false)
         }
         
@@ -75,8 +74,12 @@ struct Lock_WatcherApp: App {
         
         @objc func showPopover(_ sender: AnyObject?) {
             if let button = statusBarItem?.button {
-                popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
-                updateStatusBarIcon(triger: false)
+                showSecurityAlert { [weak self] granted in
+                    if granted {
+                        self?.popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+                        self?.updateStatusBarIcon(triger: false)
+                    }
+                }
             }
         }
         
@@ -89,6 +92,25 @@ struct Lock_WatcherApp: App {
                 closePopover(sender)
             } else {
                 showPopover(sender)
+            }
+        }
+        
+        private func showSecurityAlert(completion: (Bool) -> Void) {
+            if AppSettings().isProtected && SecurityUtil.hasPassword() {
+                let alert = NSAlert()
+                alert.messageText = NSLocalizedString("EnterPassword", comment: "")
+                alert.addButton(withTitle: NSLocalizedString("ButtonOk", comment: ""))
+                alert.addButton(withTitle: NSLocalizedString("ButtonCancel", comment: ""))
+                alert.alertStyle = .warning
+                
+                let inputTextField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+                alert.accessoryView = inputTextField
+                alert.runModal()
+                
+                let enteredString = inputTextField.stringValue
+                completion(SecurityUtil.isValid(password: enteredString))
+            } else {
+                completion(true)
             }
         }
     }

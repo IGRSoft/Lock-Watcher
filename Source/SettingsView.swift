@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import LaunchAtLogin
 
 struct SettingsView: View {
     typealias SettingsTrigerWatchBlock = ((TrigerType) -> Void)
@@ -34,8 +33,10 @@ struct SettingsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12.0) {
-            VStack(spacing: 16.0) {
-                LaunchAtLogin.Toggle(LocalizedStringKey("LaunchAtLogin"))
+            VStack(alignment: .leading, spacing: 8.0) {
+                LaunchAtLoginView()
+                
+                ProtectionView(isProtectioEnable: $settings.isProtected)
             }
             
             Divider()

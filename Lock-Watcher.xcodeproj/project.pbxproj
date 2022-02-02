@@ -74,6 +74,14 @@
 		A58FC76326E282C7007674F6 /* MailNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */; };
 		A58FC76726E2870E007674F6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58FC76626E2870E007674F6 /* Preview.swift */; };
 		A58FC76826E2870E007674F6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58FC76626E2870E007674F6 /* Preview.swift */; };
+		A599EB2327AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */; };
+		A599EB2427AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */; };
+		A599EB2927AB0B07003A69B5 /* SecurityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */; };
+		A599EB2A27AB0B07003A69B5 /* SecurityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */; };
+		A599EB2D27AB0BE1003A69B5 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A599EB2C27AB0BE1003A69B5 /* KeychainAccess */; };
+		A599EB2F27AB0C09003A69B5 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A599EB2E27AB0C09003A69B5 /* KeychainAccess */; };
+		A599EB3127AB1259003A69B5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB3027AB1259003A69B5 /* BaseView.swift */; };
+		A599EB3227AB1259003A69B5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB3027AB1259003A69B5 /* BaseView.swift */; };
 		A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0788C26B9A78400A7D578 /* USBListener.swift */; };
 		A5AA31D72778961400A064B6 /* NotificationNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31D62778961400A064B6 /* NotificationNotifier.swift */; };
 		A5AA31D82778961400A064B6 /* NotificationNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31D62778961400A064B6 /* NotificationNotifier.swift */; };
@@ -248,6 +256,9 @@
 		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
 		A58FC75326E2814E007674F6 /* Lock-Watcher-non-mas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher-non-mas.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58FC76626E2870E007674F6 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityAlertView.swift; sourceTree = "<group>"; };
+		A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityUtil.swift; sourceTree = "<group>"; };
+		A599EB3027AB1259003A69B5 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		A5A0788C26B9A78400A7D578 /* USBListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBListener.swift; sourceTree = "<group>"; };
 		A5AA31D62778961400A064B6 /* NotificationNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNotifier.swift; sourceTree = "<group>"; };
 		A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectSnapshotViews.swift; sourceTree = "<group>"; };
@@ -307,6 +318,7 @@
 				A58FC74626E2814E007674F6 /* PhotoSnap in Frameworks */,
 				A58FC74726E2814E007674F6 /* EasyStash in Frameworks */,
 				A58FC74826E2814E007674F6 /* SwiftyDropbox in Frameworks */,
+				A599EB2F27AB0C09003A69B5 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +330,7 @@
 				A5C6DC4625796CCB009DE750 /* PhotoSnap in Frameworks */,
 				A519998426DA4AD400F482BC /* EasyStash in Frameworks */,
 				A519997A26D92D4400F482BC /* SwiftyDropbox in Frameworks */,
+				A599EB2D27AB0BE1003A69B5 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +392,7 @@
 				A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */,
 				A5AA31E42778D6B300A064B6 /* Translation.swift */,
 				A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */,
+				A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -438,6 +452,8 @@
 				A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */,
 				A5AA31E12778D64400A064B6 /* SaveSnapshotViews.swift */,
 				A5AA31E72778D6E600A064B6 /* InfoViews.swift */,
+				A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */,
+				A599EB3027AB1259003A69B5 /* BaseView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -625,6 +641,7 @@
 				A58FC72526E2814E007674F6 /* LaunchAtLogin */,
 				A58FC72726E2814E007674F6 /* SwiftyDropbox */,
 				A58FC72926E2814E007674F6 /* EasyStash */,
+				A599EB2E27AB0C09003A69B5 /* KeychainAccess */,
 			);
 			productName = "Lock-Watcher";
 			productReference = A58FC75326E2814E007674F6 /* Lock-Watcher-non-mas.app */;
@@ -651,6 +668,7 @@
 				A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */,
 				A519997926D92D4400F482BC /* SwiftyDropbox */,
 				A519998326DA4AD400F482BC /* EasyStash */,
+				A599EB2C27AB0BE1003A69B5 /* KeychainAccess */,
 			);
 			productName = "Lock-Watcher";
 			productReference = A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */;
@@ -760,6 +778,7 @@
 				A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 				A519997826D92D4400F482BC /* XCRemoteSwiftPackageReference "SwiftyDropbox" */,
 				A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */,
+				A599EB2B27AB0BE1003A69B5 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = A5C6DBEF25796A90009DE750 /* Products */;
 			projectDirPath = "";
@@ -896,17 +915,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				A58FC72C26E2814E007674F6 /* DatabaseDto.swift in Sources */,
+				A599EB2427AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */,
 				A5D23E3127A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
 				A58FC72D26E2814E007674F6 /* XPCMailProtocol.swift in Sources */,
 				A58FC72E26E2814E007674F6 /* WrongPasswordListener.swift in Sources */,
 				A58FC72F26E2814E007674F6 /* BaseListener.swift in Sources */,
 				A5AA31E92778D6E600A064B6 /* InfoViews.swift in Sources */,
+				A599EB3227AB1259003A69B5 /* BaseView.swift in Sources */,
 				A58FC73026E2814E007674F6 /* USBListener.swift in Sources */,
 				A54A1F7B2703769800176069 /* LoginListener.swift in Sources */,
 				A5D23E3427A1E4BA001C0370 /* View+OpenWindow.swift in Sources */,
 				A5AA31E62778D6B300A064B6 /* Translation.swift in Sources */,
 				A58FC73126E2814E007674F6 /* FileSystemUtil.swift in Sources */,
 				A58FC73226E2814E007674F6 /* SettingsView.swift in Sources */,
+				A599EB2A27AB0B07003A69B5 /* SecurityUtil.swift in Sources */,
 				A5AA31D82778961400A064B6 /* NotificationNotifier.swift in Sources */,
 				A58FC73326E2814E007674F6 /* UserDefault+IGRExtension.swift in Sources */,
 				A56F1A7E278A29630066CA78 /* DispatchQueue+IGRExtension.swift in Sources */,
@@ -940,17 +962,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				A519998626DA4BFB00F482BC /* DatabaseDto.swift in Sources */,
+				A599EB2327AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */,
 				A5D23E3027A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
 				A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */,
 				A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */,
 				A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */,
 				A5AA31E82778D6E600A064B6 /* InfoViews.swift in Sources */,
+				A599EB3127AB1259003A69B5 /* BaseView.swift in Sources */,
 				A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */,
 				A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */,
 				A5D23E3327A1E4BA001C0370 /* View+OpenWindow.swift in Sources */,
 				A5AA31E52778D6B300A064B6 /* Translation.swift in Sources */,
 				A56D11E126DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift in Sources */,
 				A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */,
+				A599EB2927AB0B07003A69B5 /* SecurityUtil.swift in Sources */,
 				A5AA31D72778961400A064B6 /* NotificationNotifier.swift in Sources */,
 				A5E6D79F25A5D1AE00EEA7DD /* PowerListener.swift in Sources */,
 				A56F1A7D278A29630066CA78 /* DispatchQueue+IGRExtension.swift in Sources */,
@@ -1877,6 +1902,14 @@
 				minimumVersion = 1.1.8;
 			};
 		};
+		A599EB2B27AB0BE1003A69B5 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
+			};
+		};
 		A5C6DC4425796CCB009DE750 /* XCRemoteSwiftPackageReference "PhotoSnap" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/IGRSoft/PhotoSnap.git";
@@ -1922,6 +1955,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A58FC72A26E2814E007674F6 /* XCRemoteSwiftPackageReference "EasyStash" */;
 			productName = EasyStash;
+		};
+		A599EB2C27AB0BE1003A69B5 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A599EB2B27AB0BE1003A69B5 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		A599EB2E27AB0C09003A69B5 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A599EB2B27AB0BE1003A69B5 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 		A5C6DC4525796CCB009DE750 /* PhotoSnap */ = {
 			isa = XCSwiftPackageProductDependency;

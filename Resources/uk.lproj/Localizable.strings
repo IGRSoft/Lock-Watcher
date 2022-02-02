@@ -95,3 +95,21 @@
 
 /* Description was not specified */
 "FirstLaunchSetup" = "Перше налаштування";
+
+/* Description was not specified */
+"ProtectAccess" = "Захистити доступ";
+
+/* Description was not specified */
+"ProtectPassword" = "пароль";
+
+/* Description was not specified */
+"ButtonSet" = "Встановити";
+
+/* Description was not specified */
+"EnterPassword" = "Введіть пароль";
+
+/* Description was not specified */
+"ButtonOk" = "Добре";
+
+/* Description was not specified */
+"ButtonCancel" = "Відхилили";

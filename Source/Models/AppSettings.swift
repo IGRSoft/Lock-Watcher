@@ -112,4 +112,10 @@ final class AppSettings: ObservableObject {
             objectWillChange.send()
         }
     }
+    
+    @UserDefault("IsProtected", defaultValue: false) var isProtected: Bool {
+        willSet {
+            objectWillChange.send()
+        }
+    }
 }

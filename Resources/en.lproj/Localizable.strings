@@ -98,3 +98,21 @@
 
 /* Description was not specified */
 "FirstLaunchSetup" = "First launch setup";
+
+/* Description was not specified */
+"ProtectAccess" = "Protect acces";
+
+/* Description was not specified */
+"ProtectPassword" = "Password";
+
+/* Description was not specified */
+"ButtonSet" = "Set";
+
+/* Description was not specified */
+"EnterPassword" = "Enter password";
+
+/* Description was not specified */
+"ButtonOk" = "OK";
+
+/* Description was not specified */
+"ButtonCancel" = "Cancel";
