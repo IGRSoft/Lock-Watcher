@@ -33,7 +33,7 @@ public final class XPCAuthentication: NSObject, XPCAuthenticationProtocol {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable,
                                                object: outputPipe.fileHandleForReading ,
                                                queue: nil) { [weak self] notification in
-          
+            
             if let output = self?.outputPipe.fileHandleForReading.availableData {
                 let outputString = String(data: output, encoding: String.Encoding.utf8) ?? ""
                 let lines = outputString.split(separator: "\n")
@@ -42,7 +42,7 @@ public final class XPCAuthentication: NSObject, XPCAuthenticationProtocol {
                 os_log(.debug, "XPCAuthentication lines \(lines)")
                 
                 replyBlock(detectedAuthenticationFailed)
-                }
+            }
         }
         
         self.buildTask.launch()

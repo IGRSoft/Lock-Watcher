@@ -91,7 +91,7 @@
 "AuthInfo" = "розблокувати доступ до даних бази даних";
 
 /* Description was not specified */
-"TakeSnapshot" = "Зробити знімок";
+"TakeSnapshotAndStart" = "Зробити знімок та почати користуватися";
 
 /* Description was not specified */
 "FirstLaunchSetup" = "Перше налаштування";

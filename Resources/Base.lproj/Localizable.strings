@@ -91,7 +91,7 @@
 "AuthInfo" = "unlock access to database data";
 
 /* Description was not specified */
-"TakeSnapshot" = "Take Snapshot";
+"TakeSnapshotAndStart" = "Take snapshot and start use";
 
 /* Description was not specified */
 "FirstLaunchSetup" = "First launch setup";
