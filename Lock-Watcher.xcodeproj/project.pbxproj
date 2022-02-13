@@ -24,6 +24,8 @@
 		A533D83C25AA12110046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
 		A533D84325AA126B0046B7C8 /* Mail.app in Resources */ = {isa = PBXBuildFile; fileRef = A533D84225AA126B0046B7C8 /* Mail.app */; };
 		A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
+		A535F5D227B9165F0096D0C3 /* SimpleTracer in Frameworks */ = {isa = PBXBuildFile; productRef = A535F5D127B9165F0096D0C3 /* SimpleTracer */; };
+		A535F5D427B9166E0096D0C3 /* SimpleTracer in Frameworks */ = {isa = PBXBuildFile; productRef = A535F5D327B9166E0096D0C3 /* SimpleTracer */; };
 		A541188027649FB2007C6AB8 /* WrongPasswordListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */; };
 		A541188127649FC4007C6AB8 /* MailNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */; };
 		A5457A8C26C1FB1400386738 /* NSImage+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5457A8B26C1FB1400386738 /* NSImage+IGRExtension.swift */; };
@@ -322,6 +324,7 @@
 				A58FC74726E2814E007674F6 /* EasyStash in Frameworks */,
 				A58FC74826E2814E007674F6 /* SwiftyDropbox in Frameworks */,
 				A599EB2F27AB0C09003A69B5 /* KeychainAccess in Frameworks */,
+				A535F5D427B9166E0096D0C3 /* SimpleTracer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +337,7 @@
 				A519998426DA4AD400F482BC /* EasyStash in Frameworks */,
 				A519997A26D92D4400F482BC /* SwiftyDropbox in Frameworks */,
 				A599EB2D27AB0BE1003A69B5 /* KeychainAccess in Frameworks */,
+				A535F5D227B9165F0096D0C3 /* SimpleTracer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,6 +650,7 @@
 				A58FC72726E2814E007674F6 /* SwiftyDropbox */,
 				A58FC72926E2814E007674F6 /* EasyStash */,
 				A599EB2E27AB0C09003A69B5 /* KeychainAccess */,
+				A535F5D327B9166E0096D0C3 /* SimpleTracer */,
 			);
 			productName = "Lock-Watcher";
 			productReference = A58FC75326E2814E007674F6 /* Lock-Watcher-non-mas.app */;
@@ -673,6 +678,7 @@
 				A519997926D92D4400F482BC /* SwiftyDropbox */,
 				A519998326DA4AD400F482BC /* EasyStash */,
 				A599EB2C27AB0BE1003A69B5 /* KeychainAccess */,
+				A535F5D127B9165F0096D0C3 /* SimpleTracer */,
 			);
 			productName = "Lock-Watcher";
 			productReference = A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */;
@@ -783,6 +789,7 @@
 				A519997826D92D4400F482BC /* XCRemoteSwiftPackageReference "SwiftyDropbox" */,
 				A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */,
 				A599EB2B27AB0BE1003A69B5 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */,
 			);
 			productRefGroup = A5C6DBEF25796A90009DE750 /* Products */;
 			projectDirPath = "";
@@ -1876,6 +1883,14 @@
 				minimumVersion = 4.2.0;
 			};
 		};
+		A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/IGRSoft/SimpleTracer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		A58FC72426E2814E007674F6 /* XCRemoteSwiftPackageReference "PhotoSnap" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/IGRSoft/PhotoSnap.git";
@@ -1941,6 +1956,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
 			productName = LaunchAtLogin;
+		};
+		A535F5D127B9165F0096D0C3 /* SimpleTracer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */;
+			productName = SimpleTracer;
+		};
+		A535F5D327B9166E0096D0C3 /* SimpleTracer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */;
+			productName = SimpleTracer;
 		};
 		A58FC72326E2814E007674F6 /* PhotoSnap */ = {
 			isa = XCSwiftPackageProductDependency;

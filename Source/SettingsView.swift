@@ -78,6 +78,8 @@ struct SettingsView: View {
                 
                 AddIPAddressToSnapshotView(addIPAddressToSnapshot: $settings.addIPAddressToSnapshot)
                 
+                TraceRouteToSnapshotView(isAddTraceRouteToSnapshot: $settings.addTraceRouteToSnapshot, traceRouteServer: $settings.traceRouteServer)
+                
                 SaveSnapshotToDiskView(isSaveSnapshotToDisk: $settings.isSaveSnapshotToDisk)
             }
             

@@ -52,6 +52,21 @@ struct AddIPAddressToSnapshotView: View {
     }
 }
 
+struct TraceRouteToSnapshotView: View {
+    @Binding var isAddTraceRouteToSnapshot : Bool
+    @Binding var traceRouteServer : String
+    
+    var body: some View {
+        HStack(spacing: 8.0, content: {
+            Toggle(isOn: $isAddTraceRouteToSnapshot) {
+                Text("AddTraceRoute")
+            }
+            TextField("example.com", text: $traceRouteServer)
+                .disabled(isAddTraceRouteToSnapshot == false)
+        })
+    }
+}
+
 struct SaveSnapshotToDiskView: View {
     @Binding var isSaveSnapshotToDisk : Bool
     

@@ -26,6 +26,7 @@ public class ThiefDto: Equatable {
     
     var coordinate: CLLocationCoordinate2D?
     var ipAddress: String?
+    var traceRoute: String?
     var trigerType: TrigerType = .empty
     var snapshot: NSImage?
     var filepath: URL?
@@ -44,7 +45,11 @@ public class ThiefDto: Equatable {
         }
         
         if let ipAddress = ipAddress {
-            objects.append(ipAddress)
+            objects.append("ip: \(ipAddress)")
+        }
+        
+        if let traceRoute = traceRoute {
+            objects.append(traceRoute)
         }
         
         return objects.joined(separator: "\n")

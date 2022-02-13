@@ -113,3 +113,6 @@
 
 /* Description was not specified */
 "ButtonCancel" = "Відхилили";
+
+/* Description was not specified */
+"AddTraceRoute" = "Додати Trace Route інфо";

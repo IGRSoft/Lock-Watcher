@@ -47,6 +47,24 @@
         }
       },
       {
+        "package": "SimplePing",
+        "repositoryURL": "https://github.com/IGRSoft/SimplePing.git",
+        "state": {
+          "branch": null,
+          "revision": "988315fe6827fc9e772a3564e87e2f99d7b461d1",
+          "version": "0.1.1"
+        }
+      },
+      {
+        "package": "SimpleTracer",
+        "repositoryURL": "https://github.com/IGRSoft/SimpleTracer",
+        "state": {
+          "branch": null,
+          "revision": "bd22b504ca4f72510105af519f55d73c64093f98",
+          "version": "0.1.1"
+        }
+      },
+      {
         "package": "SwiftyDropbox",
         "repositoryURL": "https://github.com/dropbox/SwiftyDropbox.git",
         "state": {

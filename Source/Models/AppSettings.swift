@@ -77,6 +77,18 @@ final class AppSettings: ObservableObject {
         }
     }
     
+    @UserDefault("AddTraceRouteToSnapshot", defaultValue: false) var addTraceRouteToSnapshot: Bool {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
+    @UserDefault("TraceRouteServer", defaultValue: "") var traceRouteServer: String {
+        willSet {
+            objectWillChange.send()
+        }
+    }
+    
     @UserDefault("SendNotificationToMail", defaultValue: false) var isSendNotificationToMail: Bool {
         willSet {
             objectWillChange.send()

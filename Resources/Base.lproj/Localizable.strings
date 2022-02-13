@@ -113,3 +113,6 @@
 
 /* Description was not specified */
 "ButtonCancel" = "Cancel";
+
+/* Description was not specified */
+"AddTraceRoute" = "Add Trace Route info";

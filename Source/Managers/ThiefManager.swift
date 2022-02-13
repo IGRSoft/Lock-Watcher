@@ -23,6 +23,7 @@ class ThiefManager: NSObject, ObservableObject {
     
     private var lastThiefDetection = ThiefDto()
     @Published var databaseManager = DatabaseManager()
+    private let networkUtil = NetworkUtil()
     
     private var watchBlock: WatchBlock = {_ in}
     
@@ -117,18 +118,35 @@ class ThiefManager: NSObject, ObservableObject {
         lastThiefDetection.snapshot = snapshot
         lastThiefDetection.date = date
         lastThiefDetection.coordinate = coordinate
+        lastThiefDetection.filepath = filepath
         
-        if settings?.addIPAddressToSnapshot == true {
-            lastThiefDetection.ipAddress = NetworkUtil.getIFAddresses()
+        let compleate:(ThiefDto) -> () = { [weak self] dto in
+            
+            let _ = self?.notificationManager.send(dto)
+            let _ = self?.databaseManager.send(dto)
+            
+            self?.objectWillChange.send()
+            
+            self?.watchBlock(dto)
         }
         
-        lastThiefDetection.filepath = filepath
-        let _ = notificationManager.send(lastThiefDetection)
-        let _ = databaseManager.send(lastThiefDetection)
+        if settings?.addIPAddressToSnapshot == true {
+            lastThiefDetection.ipAddress = networkUtil.getIFAddresses()
+        }
         
-        objectWillChange.send()
-        
-        watchBlock(lastThiefDetection)
+        if settings?.addTraceRouteToSnapshot == true {
+            networkUtil.getTraceRoute(host: settings?.traceRouteServer ?? "") { [weak self] traceRouteLog in
+                guard let lastThiefDetection = self?.lastThiefDetection else {
+                    assert(false, "wrong dto")
+                    return
+                }
+                
+                lastThiefDetection.traceRoute = traceRouteLog
+                compleate(lastThiefDetection)
+            }
+        } else {
+            compleate(lastThiefDetection)
+        }
     }
     
     func showSnapshot(identifier: String) {

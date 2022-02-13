@@ -88,9 +88,6 @@
 "TrigerType_logedIn" = "On login";
 
 /* Description was not specified */
-"TrigerType_logedIn" = "On login";
-
-/* Description was not specified */
 "AuthInfo" = "unlock access to database data";
 
 /* Description was not specified */
@@ -116,3 +113,6 @@
 
 /* Description was not specified */
 "ButtonCancel" = "Cancel";
+
+/* Description was not specified */
+"AddTraceRoute" = "Add Trace Route info";
