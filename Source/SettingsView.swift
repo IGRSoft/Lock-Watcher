@@ -25,10 +25,10 @@ struct SettingsView: View {
             watchBlock(dto.trigerType)
         }
         
-        if settings.isFirstLaunch {
+        //if settings.isFirstLaunch {
             settings.isFirstLaunch = false
             FirstLaunchView(settings: settings, thiefManager: thiefManager).openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
-        }
+        //}
     }
     
     var body: some View {

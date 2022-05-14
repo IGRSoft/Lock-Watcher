@@ -52,7 +52,7 @@
 "PushLocalNotification" = "Создать локальное уведомление";
 
 /* Description was not specified */
-"SyncedWithDropbox" = "Синхронизировано с: %@";
+"SyncedWithDropbox %@" = "Синхронизировано с: %@";
 
 /* Description was not specified */
 "Logout" = "Выйти";
@@ -70,7 +70,7 @@
 "LastSnapshot" = "Последний снимок:";
 
 /* Description was not specified */
-"SnapshotAt" = "Снимок в: %@";
+"SnapshotAt %d" = "Снимок в: %@";
 
 /* Description was not specified */
 "TrigerType_onWakeUp" = "на пробуждении";
@@ -116,3 +116,12 @@
 
 /* Description was not specified */
 "AddTraceRoute" = "Добавить Trace Route инфо";
+
+/* Description was not specified */
+"Tips0" = "Используйте приложение из Меню Бара";
+
+/* Description was not specified */
+"Success" = "Удачно!";
+
+/* Description was not specified */
+"SuccessTimer %d" = "окно будет закрыто через %dс";

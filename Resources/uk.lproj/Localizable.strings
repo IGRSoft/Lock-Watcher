@@ -25,7 +25,7 @@
 "SnapshotOnUSBMount" = "Зробити знімок при підключенні в USB";
 
 /* Description was not specified */
-"KeepLastN" = "Залишити останні %d";
+"KeepLastN %d" = "Залишити останні %d";
 
 /* Description was not specified */
 "LastSnapshots" = "Останні знімки";
@@ -52,7 +52,7 @@
 "PushLocalNotification" = "Створити локальне повідомлення";
 
 /* Description was not specified */
-"SyncedWithDropbox" = "Синхронізовано з: %@";
+"SyncedWithDropbox %@" = "Синхронізовано з: %@";
 
 /* Description was not specified */
 "Logout" = "Вийти";
@@ -116,3 +116,12 @@
 
 /* Description was not specified */
 "AddTraceRoute" = "Додати Trace Route інфо";
+
+/* Description was not specified */
+"Tips0" = "Користуйтесь додатком з Меню Бара";
+
+/* Description was not specified */
+"Success" = "Вдало!";
+
+/* Description was not specified */
+"SuccessTimer %d" = "вікно буде зачинено за %dс";

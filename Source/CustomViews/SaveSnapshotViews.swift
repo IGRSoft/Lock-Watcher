@@ -12,7 +12,7 @@ struct KeepLastCountView: View {
     
     var body: some View {
         Stepper(value: $keepLastActionsCount, in: 1...30) {
-            Text(Translation.keep(last: keepLastActionsCount))
+            Text(String(format: NSLocalizedString("KeepLastN %d", comment: ""), keepLastActionsCount))
         }
     }
 }
@@ -96,8 +96,7 @@ struct DropboxView: View {
             
             if let name = dropboxName, name.isEmpty == false {
                 Toggle(isOn: $isDropboxEnable) {
-                    let text = Translation.synkedDropbox(name: name)
-                    Text(text)
+                    Text(String(format: NSLocalizedString("SyncedWithDropbox %@", comment: ""), name))
                 }
                 Button("Logout") {
                     DropboxNotifier.logout()

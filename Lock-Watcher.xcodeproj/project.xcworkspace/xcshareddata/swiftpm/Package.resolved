@@ -1,79 +1,77 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
-        "state": {
-          "branch": null,
-          "revision": "f96b619bcb2383b43d898402283924b80e2c4bae",
-          "version": "5.4.3"
-        }
-      },
-      {
-        "package": "EasyStash",
-        "repositoryURL": "https://github.com/onmyway133/EasyStash",
-        "state": {
-          "branch": null,
-          "revision": "c7230d65d4c2c143ac395e870a7b2bd8cf0c139e",
-          "version": "1.1.8"
-        }
-      },
-      {
-        "package": "KeychainAccess",
-        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess",
-        "state": {
-          "branch": null,
-          "revision": "84e546727d66f1adc5439debad16270d0fdd04e7",
-          "version": "4.2.2"
-        }
-      },
-      {
-        "package": "LaunchAtLogin",
-        "repositoryURL": "https://github.com/sindresorhus/LaunchAtLogin",
-        "state": {
-          "branch": null,
-          "revision": "e8171b3e38a2816f579f58f3dac1522aa39efe41",
-          "version": "4.2.0"
-        }
-      },
-      {
-        "package": "PhotoSnap",
-        "repositoryURL": "https://github.com/IGRSoft/PhotoSnap.git",
-        "state": {
-          "branch": null,
-          "revision": "8ad96ef777d2f9517d78d1e1cedc940cc9fe4686",
-          "version": "0.2.1"
-        }
-      },
-      {
-        "package": "SimplePing",
-        "repositoryURL": "https://github.com/IGRSoft/SimplePing.git",
-        "state": {
-          "branch": null,
-          "revision": "988315fe6827fc9e772a3564e87e2f99d7b461d1",
-          "version": "0.1.1"
-        }
-      },
-      {
-        "package": "SimpleTracer",
-        "repositoryURL": "https://github.com/IGRSoft/SimpleTracer",
-        "state": {
-          "branch": null,
-          "revision": "bd22b504ca4f72510105af519f55d73c64093f98",
-          "version": "0.1.1"
-        }
-      },
-      {
-        "package": "SwiftyDropbox",
-        "repositoryURL": "https://github.com/dropbox/SwiftyDropbox.git",
-        "state": {
-          "branch": null,
-          "revision": "7af87d903be1cf0af0e76e0394d992943055894e",
-          "version": "8.2.1"
-        }
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "354dda32d89fc8cd4f5c46487f64957d355f53d8",
+        "version" : "5.6.1"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "easystash",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onmyway133/EasyStash",
+      "state" : {
+        "revision" : "c7230d65d4c2c143ac395e870a7b2bd8cf0c139e",
+        "version" : "1.1.8"
+      }
+    },
+    {
+      "identity" : "keychainaccess",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/KeychainAccess",
+      "state" : {
+        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
+        "version" : "4.2.2"
+      }
+    },
+    {
+      "identity" : "launchatlogin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/LaunchAtLogin",
+      "state" : {
+        "revision" : "e8171b3e38a2816f579f58f3dac1522aa39efe41",
+        "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "photosnap",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/IGRSoft/PhotoSnap.git",
+      "state" : {
+        "revision" : "8ad96ef777d2f9517d78d1e1cedc940cc9fe4686",
+        "version" : "0.2.1"
+      }
+    },
+    {
+      "identity" : "simpleping",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/IGRSoft/SimplePing.git",
+      "state" : {
+        "revision" : "988315fe6827fc9e772a3564e87e2f99d7b461d1",
+        "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "simpletracer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/IGRSoft/SimpleTracer",
+      "state" : {
+        "revision" : "bd22b504ca4f72510105af519f55d73c64093f98",
+        "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "swiftydropbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dropbox/SwiftyDropbox.git",
+      "state" : {
+        "revision" : "9df3d4997127f1f17ed295e5f373ab676419df08",
+        "version" : "8.3.0"
+      }
+    }
+  ],
+  "version" : 2
 }

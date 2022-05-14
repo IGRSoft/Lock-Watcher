@@ -29,6 +29,8 @@ class ThiefManager: NSObject, ObservableObject {
     
     lazy var trigerManager = TrigerManager()
     
+    private var isDebug = true
+    
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
     
@@ -90,23 +92,29 @@ class ThiefManager: NSObject, ObservableObject {
         }
     }
     
-    public func detectedTriger() {
+    public func detectedTriger(_ closure: @escaping (Bool) -> Void = {_ in }) {
         os_log(.debug, "Detected trigered action: \(self.lastThiefDetection.trigerType.rawValue)")
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings?.isSaveSnapshotToDisk == true
-        #if NOSNAPSHOT_DEBUG
-        let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
-        let date = Date()
-        self.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
-        #else
+        guard !isDebug else {
+            let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
+            let date = Date()
+            self.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
+            closure(true)
+            return
+        }
+        
         ps.fetchSnapshot() { [weak self] photoModel in
             if let img = photoModel.images.last {
                 os_log(.debug, "\(img)")
                 let date = Date()
                 self?.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
+                
+                closure(true)
             }
+            
+            closure(false)
         }
-        #endif
     }
     
     func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {

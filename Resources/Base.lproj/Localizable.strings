@@ -25,7 +25,7 @@
 "SnapshotOnUSBMount" = "Take Snapshot On USB Mount";
 
 /* Description was not specified */
-"KeepLastN" = "Keep last %d";
+"KeepLastN %d" = "Keep last %d";
 
 /* Description was not specified */
 "LastSnapshots" = "Last Snapshots";
@@ -52,7 +52,7 @@
 "PushLocalNotification" = "Push Local Notification";
 
 /* Description was not specified */
-"SyncedWithDropbox" = "Sync with Dropbox: %@";
+"SyncedWithDropbox %@" = "Sync with Dropbox: %@";
 
 /* Description was not specified */
 "Logout" = "Logout";
@@ -116,3 +116,12 @@
 
 /* Description was not specified */
 "AddTraceRoute" = "Add Trace Route info";
+
+/* Description was not specified */
+"Tips0" = "Use app from the Menu Bar";
+
+/* Description was not specified */
+"Success" = "Success!";
+
+/* Description was not specified */
+"SuccessTimer %d" = "window will be close in %ds";
