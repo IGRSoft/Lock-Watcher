@@ -10,7 +10,7 @@ import CoreLocation
 import AppKit
 
 enum TrigerType: String {
-    case empty, onWakeUp, onWrongPassword, onBatteryPower, usbConnected, logedIn
+    case setup, onWakeUp, onWrongPassword, onBatteryPower, usbConnected, logedIn
 }
 
 extension TrigerType {
@@ -27,7 +27,7 @@ public class ThiefDto: Equatable {
     var coordinate: CLLocationCoordinate2D?
     var ipAddress: String?
     var traceRoute: String?
-    var trigerType: TrigerType = .empty
+    var trigerType: TrigerType = .setup
     var snapshot: NSImage?
     var filepath: URL?
     var date: Date = Date()

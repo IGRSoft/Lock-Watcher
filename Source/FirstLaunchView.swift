@@ -9,61 +9,76 @@
 import SwiftUI
 
 struct FirstLaunchView: View {
-    private struct K {
-        static let windowHeightDefault: CGFloat = 200
-        static let windowHeightExpand: CGFloat = 310
+    
+    enum StateMode: Int {
+        case idle
+        case inProgress
+        case success
+        case fault
+        
+        static let allValues = [idle, inProgress, success, fault]
+    }
+    
+    private struct Size {
+        static let width: CGFloat = 300
+        static let height: CGFloat = 200
+        
+        static let minPadding: CGFloat = 8
+        static let maxPadding: CGFloat = 16 //double of min
     }
     
     @ObservedObject var settings: AppSettings
     @ObservedObject var thiefManager: ThiefManager
-    @State var successInProgress = false
-    @State var successConuntDown = 5
     
-    @State var windowHeight: CGFloat = FirstLaunchView.K.windowHeightDefault
+    @Binding var isHidden: Bool
+    @Binding var isAccessGranted: Bool
+    
+    @State private var state: StateMode = .idle
+    @State private var successConuntDown = 1
+    
+    @State private var windowSize = CGSize(width: Size.width, height: Size.height)
+    @State private var safeArea = CGSize(width: Size.width - Size.minPadding, height: Size.height - Size.minPadding)
+    
+    @State var isNeedRestart: Bool = false
     
     var body: some View {
-        VStack(alignment: .center, spacing: 16) {
-            VStack(alignment: .leading, spacing: 16) {
-                UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.isUseSnapshotOnWakeUp)
-                    .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { _ in })
-                UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.isUseSnapshotOnLogin)
-                    .onChange(of: settings.isUseSnapshotOnLogin, perform: { _ in })
-                AddLocationToSnapshotView(addLocationToSnapshot: $settings.addLocationToSnapshot)
-                    .onChange(of: settings.addLocationToSnapshot, perform: { _ in })
-                ICloudSyncView(isICloudSyncEnable: $settings.isICloudSyncEnable)
-                
-                Divider()
-            }
-            if !successInProgress {
+        VStack(alignment: .center, spacing: Size.maxPadding) {
+            switch state {
+            case .idle:
+                FirstLaunchOptionsViews(settings: settings)
                 Button("TakeSnapshotAndStart") {
+                    state = .inProgress
+                    
                     thiefManager.detectedTriger() { success in
-                        withAnimation(.easeInOut(duration: 0.1)) { windowHeight = success ? K.windowHeightExpand : K.windowHeightDefault }
-                        successInProgress = success
+                        state = success ? .success : .fault
                         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
                             if successConuntDown == 0 {
                                 timer.invalidate()
+                                isHidden = true
+                                isAccessGranted = true
                                 NSApplication.shared.keyWindow?.close()
                             }
                             successConuntDown -= 1
                         }
                     }
                 }
-            } else {
-                Label("Success", systemImage: "bolt.circle")
-                    .font(.title3)
-                    .padding(.horizontal)
-                    .foregroundColor(.green)
-                Text("Tips0")
-                    .font(.headline)
-                    .foregroundColor(.green)
-                Image("tips0").aspectRatio(contentMode: .fit)
-                    .frame(width: 200, height: 40, alignment: .center)
-                Text(String(format: NSLocalizedString("SuccessTimer %d", comment: ""), successConuntDown))
-                    .font(.body)
-                    .foregroundColor(.white)
+            case .inProgress:
+                FirstLaunchProgressViews(frameSize: $safeArea)
+            case .success:
+                FirstLaunchSuccessViews(successConuntDown: $successConuntDown, frameSize: $safeArea)
+            case .fault:
+                if !isNeedRestart {
+                    FirstLaunchFaultViews(isHidden: $isNeedRestart, frameSize: $safeArea)
+                } else {
+                    Text("")
+                        .onAppear() {
+                            state = .idle
+                            isNeedRestart = false
+                        }
+                }
             }
         }
-        .padding(EdgeInsets(top: 16.0, leading: 8.0, bottom: 16.0, trailing: 8.0))
-        .frame(width: 300, height: windowHeight, alignment: .topLeading)
+        .padding(EdgeInsets(top: Size.maxPadding, leading: Size.maxPadding, bottom: Size.maxPadding, trailing: Size.maxPadding))
+        .frame(width: windowSize.width, height: windowSize.height, alignment: .center)
     }
 }

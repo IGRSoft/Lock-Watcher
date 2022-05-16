@@ -70,7 +70,7 @@ class ThiefManager: NSObject, ObservableObject {
         trigerManager.start(settings: settings) {[weak self] trigered in
             watchBlock(trigered)
             
-            if trigered.trigerType != .empty {
+            if trigered.trigerType != .setup {
                 DispatchQueue.main.async {
                     self?.lastThiefDetection.trigerType = trigered.trigerType
                     self?.detectedTriger()
@@ -100,7 +100,11 @@ class ThiefManager: NSObject, ObservableObject {
             let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
             let date = Date()
             self.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
-            closure(true)
+            let debouncedFunction = DispatchQueue.main.debounce(interval: 1_00) {
+                closure(true)
+            }
+            debouncedFunction()
+            
             return
         }
         

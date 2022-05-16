@@ -14,6 +14,8 @@
 		A519998626DA4BFB00F482BC /* DatabaseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519998526DA4BFB00F482BC /* DatabaseDto.swift */; };
 		A51999A226DA764A00F482BC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A519999A26DA764A00F482BC /* Localizable.strings */; };
 		A51999A326DA764A00F482BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A519999D26DA764A00F482BC /* Assets.xcassets */; };
+		A5258AC72831652B0034E32F /* FirstLaunchViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5258AC62831652B0034E32F /* FirstLaunchViews.swift */; };
+		A5258AC82831652B0034E32F /* FirstLaunchViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5258AC62831652B0034E32F /* FirstLaunchViews.swift */; };
 		A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7B425A8F9A60046B7C8 /* EmptyView.swift */; };
 		A533D7BC25A8FCC20046B7C8 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */; };
 		A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */; };
@@ -228,6 +230,7 @@
 		A519999F26DA764A00F482BC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A51999A126DA764A00F482BC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A51999A626DA771600F482BC /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A5258AC62831652B0034E32F /* FirstLaunchViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchViews.swift; sourceTree = "<group>"; };
 		A533D7B425A8F9A60046B7C8 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpListener.swift; sourceTree = "<group>"; };
 		A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongPasswordListener.swift; sourceTree = "<group>"; };
@@ -458,6 +461,7 @@
 				A5AA31E72778D6E600A064B6 /* InfoViews.swift */,
 				A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */,
 				A599EB3027AB1259003A69B5 /* BaseView.swift */,
+				A5258AC62831652B0034E32F /* FirstLaunchViews.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -933,6 +937,7 @@
 				A599EB3227AB1259003A69B5 /* BaseView.swift in Sources */,
 				A58FC73026E2814E007674F6 /* USBListener.swift in Sources */,
 				A54A1F7B2703769800176069 /* LoginListener.swift in Sources */,
+				A5258AC82831652B0034E32F /* FirstLaunchViews.swift in Sources */,
 				A5D23E3427A1E4BA001C0370 /* View+OpenWindow.swift in Sources */,
 				A58FC73126E2814E007674F6 /* FileSystemUtil.swift in Sources */,
 				A58FC73226E2814E007674F6 /* SettingsView.swift in Sources */,
@@ -979,6 +984,7 @@
 				A599EB3127AB1259003A69B5 /* BaseView.swift in Sources */,
 				A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */,
 				A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */,
+				A5258AC72831652B0034E32F /* FirstLaunchViews.swift in Sources */,
 				A5D23E3327A1E4BA001C0370 /* View+OpenWindow.swift in Sources */,
 				A56D11E126DBEC7D00BEBEC2 /* UserDefault+IGRExtension.swift in Sources */,
 				A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */,

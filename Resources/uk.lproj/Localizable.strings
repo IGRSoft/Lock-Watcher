@@ -121,7 +121,16 @@
 "Tips0" = "Користуйтесь додатком з Меню Бара";
 
 /* Description was not specified */
-"Success" = "Вдало!";
+"SetupSuccess" = "Вдало!";
 
 /* Description was not specified */
 "SuccessTimer %d" = "вікно буде зачинено за %dс";
+
+/* Description was not specified */
+"SetupFault" = "Помилка";
+
+/* Description was not specified */
+"SetupFaultMessage" = "будь ласка, дайте доступ додатку";
+
+/* Description was not specified */
+"SetupOpenSettings" = "Вікрити налаштування";

@@ -121,7 +121,16 @@
 "Tips0" = "Use app from the Menu Bar";
 
 /* Description was not specified */
-"Success" = "Success!";
+"SetupSuccess" = "Success!";
 
 /* Description was not specified */
 "SuccessTimer %d" = "window will be close in %ds";
+
+/* Description was not specified */
+"SetupFault" = "Fault!";
+
+/* Description was not specified */
+"SetupFaultMessage" = "please, enable all permissions to app";
+
+/* Description was not specified */
+"SetupOpenSettings" = "Open Settings";

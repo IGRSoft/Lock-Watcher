@@ -24,7 +24,11 @@ struct Lock_WatcherApp: App {
         private var statusBarItem: NSStatusItem?
         
         private lazy var settingsView = SettingsView(watchBlock: { triger in
-            self.updateStatusBarIcon(triger: triger != .empty)
+            self.updateStatusBarIcon(triger: triger != .setup)
+        }, accessGrantedBlock: { [weak self] in
+            if let button = self?.statusBarItem?.button {
+                self?.popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+            }
         })
         
         func applicationDidFinishLaunching(_ notification: Notification) {
