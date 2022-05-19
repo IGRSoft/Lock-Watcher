@@ -122,6 +122,8 @@
 		A5E6D7A625A5D1EB00EEA7DD /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */; };
 		A5EFE8B826E2B587001FC4EA /* Date+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EFE8B726E2B587001FC4EA /* Date+IGRExtension.swift */; };
 		A5EFE8B926E2B587001FC4EA /* Date+IGRExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EFE8B726E2B587001FC4EA /* Date+IGRExtension.swift */; };
+		A5F4B5422836C0D1001A2413 /* ExtendedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */; };
+		A5F4B5432836C0D1001A2413 /* ExtendedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -298,6 +300,7 @@
 		A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerListener.swift; sourceTree = "<group>"; };
 		A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		A5EFE8B726E2B587001FC4EA /* Date+IGRExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+IGRExtension.swift"; sourceTree = "<group>"; };
+		A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedDivider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -462,6 +465,7 @@
 				A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */,
 				A599EB3027AB1259003A69B5 /* BaseView.swift */,
 				A5258AC62831652B0034E32F /* FirstLaunchViews.swift */,
+				A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -947,6 +951,7 @@
 				A56F1A7E278A29630066CA78 /* DispatchQueue+IGRExtension.swift in Sources */,
 				A58FC73426E2814E007674F6 /* ThiefDto.swift in Sources */,
 				A5AA31E32778D64400A064B6 /* SaveSnapshotViews.swift in Sources */,
+				A5F4B5432836C0D1001A2413 /* ExtendedDivider.swift in Sources */,
 				A58FC73526E2814E007674F6 /* PowerListener.swift in Sources */,
 				A58FC73626E2814E007674F6 /* TrigerManager.swift in Sources */,
 				A58FC73726E2814E007674F6 /* NSImage+IGRExtension.swift in Sources */,
@@ -994,6 +999,7 @@
 				A56F1A7D278A29630066CA78 /* DispatchQueue+IGRExtension.swift in Sources */,
 				A5E6D78E25A5CD2E00EEA7DD /* TrigerManager.swift in Sources */,
 				A5AA31E22778D64400A064B6 /* SaveSnapshotViews.swift in Sources */,
+				A5F4B5422836C0D1001A2413 /* ExtendedDivider.swift in Sources */,
 				A5EFE8B826E2B587001FC4EA /* Date+IGRExtension.swift in Sources */,
 				A58FC76726E2870E007674F6 /* Preview.swift in Sources */,
 				A541188127649FC4007C6AB8 /* MailNotifier.swift in Sources */,

@@ -9,8 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     typealias SettingsTrigerWatchBlock = ((TrigerType) -> Void)
-    typealias SettingsAcceptedBlock = (() -> Void)
-            
+    
     @ObservedObject private var thiefManager: ThiefManager
     
     @ObservedObject private var settings = AppSettings()
@@ -18,23 +17,27 @@ struct SettingsView: View {
     @State var isInfoHidden = true
     @State var isFirstLaunchHidden = false
     @State var isAccessGranted = false
-    private var accessGrantedBlock: SettingsAcceptedBlock?
+    
+    @State var isInfo1Hidden = false
+    
+    
+    private var accessGrantedBlock: AppEmptyClosure?
         
     func showSnapshot(identifier: String) {
         thiefManager.showSnapshot(identifier: identifier)
     }
     
-    init(watchBlock: @escaping SettingsTrigerWatchBlock, accessGrantedBlock: SettingsAcceptedBlock?) {
+    init(watchBlock: @escaping SettingsTrigerWatchBlock, accessGrantedBlock: AppEmptyClosure?) {
         self.thiefManager = ThiefManager { dto in
             watchBlock(dto.trigerType)
         }
-        
-        self.accessGrantedBlock = accessGrantedBlock
-        
-        //if settings.isFirstLaunch {
+                
+        if settings.isFirstLaunch {
             settings.isFirstLaunch = false
-            FirstLaunchView(settings: settings, thiefManager: thiefManager, isHidden: $isFirstLaunchHidden, isAccessGranted: $isAccessGranted).openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
-        //}
+        FirstLaunchView(settings: settings, thiefManager: thiefManager, isHidden: $isFirstLaunchHidden, closeClosure: {
+            accessGrantedBlock!()
+        }).openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
+        }
     }
     
     var body: some View {
@@ -46,32 +49,34 @@ struct SettingsView: View {
                     ProtectionView(isProtectioEnable: $settings.isProtected)
                 }
                 
-                Divider()
-                
-                VStack(alignment: .leading, spacing: 8.0) {
-                    UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.isUseSnapshotOnWakeUp)
-                        .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { [weak thiefManager] value in
-                            thiefManager?.restartWatching()
-                        })
-                    UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.isUseSnapshotOnLogin)
-                        .onChange(of: settings.isUseSnapshotOnLogin, perform: { [weak thiefManager] value in
-                            thiefManager?.restartWatching()
-                        })
-                    if AppSettings.isMASBuild == false {
-                        UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
-                            .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { [weak thiefManager] value in
+                ExtendedDivider(isExtended: $isInfo1Hidden, title: "ddd")
+                if !isInfo1Hidden {
+                    VStack(alignment: .leading, spacing: 8.0) {
+                        UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.isUseSnapshotOnWakeUp)
+                            .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { [weak thiefManager] value in
+                                thiefManager?.restartWatching()
+                            })
+                        UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.isUseSnapshotOnLogin)
+                            .onChange(of: settings.isUseSnapshotOnLogin, perform: { [weak thiefManager] value in
+                                thiefManager?.restartWatching()
+                            })
+                        if AppSettings.isMASBuild == false {
+                            UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
+                                .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { [weak thiefManager] value in
+                                    thiefManager?.restartWatching()
+                                })
+                        }
+                        UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.isUseSnapshotOnSwitchToBatteryPower)
+                            .onChange(of: settings.isUseSnapshotOnSwitchToBatteryPower, perform: { [weak thiefManager] value in
+                                thiefManager?.restartWatching()
+                            })
+                        UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: $settings.isUseSnapshotOnUSBMount)
+                            .onChange(of: settings.isUseSnapshotOnUSBMount, perform: { [weak thiefManager] value in
                                 thiefManager?.restartWatching()
                             })
                     }
-                    UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.isUseSnapshotOnSwitchToBatteryPower)
-                        .onChange(of: settings.isUseSnapshotOnSwitchToBatteryPower, perform: { [weak thiefManager] value in
-                            thiefManager?.restartWatching()
-                        })
-                    UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: $settings.isUseSnapshotOnUSBMount)
-                        .onChange(of: settings.isUseSnapshotOnUSBMount, perform: { [weak thiefManager] value in
-                            thiefManager?.restartWatching()
-                        })
                 }
+                
                 
                 Divider()
                 

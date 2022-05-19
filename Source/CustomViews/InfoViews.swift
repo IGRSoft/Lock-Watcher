@@ -98,11 +98,10 @@ struct LastThiefDetectionView: View {
             let context = LAContext()
             var error: NSError?
 
-            // check whether biometric authentication is possible
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, error: &error) {
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, localizedReason: NSLocalizedString("AuthInfo", comment: "")) { success, authenticationError in
                     isUnlocked = success
-                    if success {
+                    if isUnlocked {
                         action()
                     }
                 }

@@ -13,6 +13,7 @@ struct FirstLaunchOptionsViews: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
+            LaunchAtLoginView()
             UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.isUseSnapshotOnWakeUp)
                 .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { _ in })
             UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.isUseSnapshotOnLogin)

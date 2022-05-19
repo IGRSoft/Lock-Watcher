@@ -25,7 +25,6 @@ struct SecurityAlertView: View {
                 Button(action: {
                     isPresented = false
                 }) {
-                    
                     Text("ButtonOk")
                 }
                 Spacer()

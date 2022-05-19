@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmptyView: View {
     var body: some View {
-        Text("Lock Watcher")
+        Text("AppName")
     }
 }
 

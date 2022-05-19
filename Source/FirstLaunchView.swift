@@ -20,8 +20,8 @@ struct FirstLaunchView: View {
     }
     
     private struct Size {
-        static let width: CGFloat = 300
-        static let height: CGFloat = 200
+        static let width: CGFloat = 320
+        static let height: CGFloat = 220
         
         static let minPadding: CGFloat = 8
         static let maxPadding: CGFloat = 16 //double of min
@@ -31,10 +31,10 @@ struct FirstLaunchView: View {
     @ObservedObject var thiefManager: ThiefManager
     
     @Binding var isHidden: Bool
-    @Binding var isAccessGranted: Bool
+    @State var closeClosure: AppEmptyClosure
     
     @State private var state: StateMode = .idle
-    @State private var successConuntDown = 1
+    @State private var successConuntDown = AppSettings.firstLaunchSuccessConunt
     
     @State private var windowSize = CGSize(width: Size.width, height: Size.height)
     @State private var safeArea = CGSize(width: Size.width - Size.minPadding, height: Size.height - Size.minPadding)
@@ -51,14 +51,17 @@ struct FirstLaunchView: View {
                     
                     thiefManager.detectedTriger() { success in
                         state = success ? .success : .fault
-                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                            if successConuntDown == 0 {
-                                timer.invalidate()
-                                isHidden = true
-                                isAccessGranted = true
-                                NSApplication.shared.keyWindow?.close()
+                        if success {
+                            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                                if successConuntDown == 0 {
+                                    timer.invalidate()
+                                    isHidden = true
+                                    NSApplication.shared.keyWindow?.close()
+                                    closeClosure()
+                                } else {
+                                    successConuntDown -= 1
+                                }
                             }
-                            successConuntDown -= 1
                         }
                     }
                 }
@@ -73,7 +76,7 @@ struct FirstLaunchView: View {
                     Text("")
                         .onAppear() {
                             state = .idle
-                            isNeedRestart = false
+                            isNeedRestart.toggle()
                         }
                 }
             }

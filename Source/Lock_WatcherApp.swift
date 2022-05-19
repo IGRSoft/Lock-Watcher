@@ -8,6 +8,8 @@
 import SwiftUI
 import UserNotifications
 
+typealias AppEmptyClosure = () -> Void
+
 @main
 struct Lock_WatcherApp: App {
     
