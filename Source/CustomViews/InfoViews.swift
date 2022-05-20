@@ -15,30 +15,17 @@ struct InfoView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            if isInfoHidden {
-                Button(action: {
-                    isInfoHidden = false
-                }) {
-                    Image(systemName: "chevron.compact.down").font(.system(size: 28))
-                }.buttonStyle(BorderlessButtonStyle())
-            } else {
-                Button(action: {
-                    isInfoHidden = true
-                }) {
-                    Image(systemName: "chevron.compact.up").font(.system(size: 28))
-                }.buttonStyle(BorderlessButtonStyle())
-                
-                VStack(alignment: .center) {
+            ExtendedDivider(isExtended: $isInfoHidden, font: .title)
+            if !isInfoHidden {
 #if DEBUG
-                    Button("Debug") {
-                        thiefManager.detectedTriger()
-                    }
-#endif
-                    Button("Quit") {
-                        exit(0)
-                    }
-                    Link("© IGR Software 2008 - 2022", destination: URL(string: "http://igrsoft.com")!)
+                Button("Debug") {
+                    thiefManager.detectedTriger()
                 }
+#endif
+                Button("Quit") {
+                    exit(0)
+                }
+                Link("© IGR Software 2008 - 2022", destination: URL(string: "http://igrsoft.com")!)
             }
         }
     }
@@ -53,6 +40,9 @@ struct LastThiefDetectionView: View {
         let latestImages = databaseManager.latestImages()
         
         VStack(alignment: .center, spacing: 8.0) {
+            Divider()
+                .background(Color("divider"))
+            
             if let lastImage = latestImages.dtos.last,
                let imageData = lastImage.data,
                let image = NSImage(data: imageData),
@@ -82,8 +72,6 @@ struct LastThiefDetectionView: View {
                             .environmentObject(latestImages)
                     }
                 }
-                
-                Divider()
             }
         }
     }
@@ -97,7 +85,7 @@ struct LastThiefDetectionView: View {
         if isUnlocked == false {
             let context = LAContext()
             var error: NSError?
-
+            
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, error: &error) {
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, localizedReason: NSLocalizedString("AuthInfo", comment: "")) { success, authenticationError in
                     isUnlocked = success

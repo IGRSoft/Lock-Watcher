@@ -8,6 +8,42 @@
 import Foundation
 import Combine
 
+struct UISettings: Codable {
+    var isSecurityInfoHidden = true
+    var isSnapshotInfoHidden = false
+    var isOptionsInfoHidden = false
+    var isSyncInfoHidden = true
+}
+
+struct OptionsSettings: Codable {
+    var isFirstLaunch = true
+    var keepLastActionsCount = 10
+    var isSaveSnapshotToDisk = false
+    var addLocationToSnapshot = false
+    var addIPAddressToSnapshot = false
+    var addTraceRouteToSnapshot = false
+    var traceRouteServer = ""
+    var isProtected = false
+}
+
+struct TriggerSettings: Codable {
+    var isUseSnapshotOnWakeUp = true
+    var isUseSnapshotOnLogin = true
+    var isUseSnapshotOnWrongPassword = true
+    var isUseSnapshotOnSwitchToBatteryPower = false
+    var isUseSnapshotOnUSBMount = false
+}
+
+struct SyncSettings: Codable {
+    var isSaveSnapshotToDisk = false
+    var isSendNotificationToMail = false
+    var mailRecipient = ""
+    var isICloudSyncEnable = true
+    var isDropboxEnable = false
+    var dropboxName = ""
+    var isUseSnapshotLocalNotification = false
+}
+
 final class AppSettings: ObservableObject {
     let objectWillChange = PassthroughSubject<Void, Never>()
     
@@ -23,115 +59,25 @@ final class AppSettings: ObservableObject {
     static var firstLaunchSuccessConunt = 1
 #endif
     
-    @UserDefault("FirstLaunch", defaultValue: true) var isFirstLaunch: Bool {
+    @UserDefault("OptionsSettings", defaultValue: OptionsSettings()) var options: OptionsSettings {
         willSet {
             objectWillChange.send()
         }
     }
     
-    @UserDefault("KeepLastActionsCount", defaultValue: 10) var keepLastActionsCount: Int {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-
-    @UserDefault("UseSnapshotOnWakeUp", defaultValue: false) var isUseSnapshotOnWakeUp: Bool {
+    @UserDefault("TriggerSettings", defaultValue: TriggerSettings()) var triggers: TriggerSettings {
         willSet {
             objectWillChange.send()
         }
     }
     
-    @UserDefault("UseSnapshotOnLogin", defaultValue: false) var isUseSnapshotOnLogin: Bool {
+    @UserDefault("SyncSettings", defaultValue: SyncSettings()) var sync: SyncSettings {
         willSet {
             objectWillChange.send()
         }
     }
     
-    @UserDefault("UseSnapshotOnWrongPassword", defaultValue: false) var isUseSnapshotOnWrongPassword: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("UseSnapshotOnSwitchToBatteryPower", defaultValue: false) var isUseSnapshotOnSwitchToBatteryPower: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("UseSnapshotOnUSBMount", defaultValue: false) var isUseSnapshotOnUSBMount: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("SaveSnapshotToDisk", defaultValue: false) var isSaveSnapshotToDisk: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("AddLocationToSnapshot", defaultValue: false) var addLocationToSnapshot: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("AddIPAddressToSnapshot", defaultValue: false) var addIPAddressToSnapshot: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("AddTraceRouteToSnapshot", defaultValue: false) var addTraceRouteToSnapshot: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("TraceRouteServer", defaultValue: "") var traceRouteServer: String {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("SendNotificationToMail", defaultValue: false) var isSendNotificationToMail: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("MailRecipient", defaultValue: "") var mailRecipient: String {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("iCloudSyncEnable", defaultValue: false) var isICloudSyncEnable: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("DropboxEnable", defaultValue: false) var isDropboxEnable: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("DropboxName", defaultValue: "") var dropboxName: String {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("UseSnapshotLocalNotification", defaultValue: false) var isUseSnapshotLocalNotification: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    
-    @UserDefault("IsProtected", defaultValue: false) var isProtected: Bool {
+    @UserDefault("UISettings", defaultValue: UISettings()) var ui: UISettings {
         willSet {
             objectWillChange.send()
         }

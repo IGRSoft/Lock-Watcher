@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 @propertyWrapper
-struct UserDefault<T> {
+struct UserDefault<T: Codable> {
     let key: String
     let defaultValue: T
     
@@ -22,10 +22,27 @@ struct UserDefault<T> {
     
     var wrappedValue: T {
         get {
-            return UserDefaults(suiteName: userDefaultsId)?.object(forKey: key) as? T ?? defaultValue
+            if let data = UserDefaults.standard.object(forKey: key) as? Data {
+                do {
+                    let object = try JSONDecoder().decode(T.self, from: data)
+                    return object
+                } catch {
+                    print(error)
+                    return defaultValue
+                }
+            } else if let object = UserDefaults.standard.object(forKey: key) as? T {
+                return object
+            } else {
+                return defaultValue
+            }
         }
         set {
-            UserDefaults(suiteName: userDefaultsId)?.set(newValue, forKey: key)
+            do {
+                let encoded = try JSONEncoder().encode(newValue)
+                UserDefaults.standard.set(encoded, forKey: key)
+            } catch {
+                print(error)
+            }
         }
     }
 }

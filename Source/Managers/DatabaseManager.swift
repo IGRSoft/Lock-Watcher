@@ -15,7 +15,7 @@ class DatabaseManager: Equatable {
     
     private let kImagesKey = "images"
     
-    private var settings: AppSettings?
+    private var settings: AppSettings!
     
     private var storage: Storage? = nil
     
@@ -26,7 +26,7 @@ class DatabaseManager: Equatable {
         storage = try? Storage(options: options)
     }
     
-    func setupSettings(_ settings: AppSettings?) {
+    func setupSettings(_ settings: AppSettings) {
         self.settings = settings
     }
     
@@ -36,7 +36,7 @@ class DatabaseManager: Equatable {
         let images = latestImages()
         
         images.append(dto)
-        images.dtos = images.dtos.suffix(settings?.keepLastActionsCount ?? 10)
+        images.dtos = images.dtos.suffix(settings.options.keepLastActionsCount)
         
         do {
             try storage?.save(object: images, forKey: kImagesKey)

@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct SettingsView: View {
+    private struct K {
+        static let windowWidth: CGFloat = 340
+        static let windowBorder = EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
+        static let blockWidth = windowWidth - (windowBorder.leading + windowBorder.trailing)
+    }
+    
     typealias SettingsTrigerWatchBlock = ((TrigerType) -> Void)
     
     @ObservedObject private var thiefManager: ThiefManager
@@ -18,11 +24,8 @@ struct SettingsView: View {
     @State var isFirstLaunchHidden = false
     @State var isAccessGranted = false
     
-    @State var isInfo1Hidden = false
-    
-    
     private var accessGrantedBlock: AppEmptyClosure?
-        
+    
     func showSnapshot(identifier: String) {
         thiefManager.showSnapshot(identifier: identifier)
     }
@@ -31,94 +34,113 @@ struct SettingsView: View {
         self.thiefManager = ThiefManager { dto in
             watchBlock(dto.trigerType)
         }
-                
-        if settings.isFirstLaunch {
-            settings.isFirstLaunch = false
-        FirstLaunchView(settings: settings, thiefManager: thiefManager, isHidden: $isFirstLaunchHidden, closeClosure: {
-            accessGrantedBlock!()
-        }).openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
+        
+        if settings.options.isFirstLaunch {
+            settings.options.isFirstLaunch = false
+            FirstLaunchView(settings: settings, thiefManager: thiefManager, isHidden: $isFirstLaunchHidden, closeClosure: {
+                accessGrantedBlock!()
+            }).openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
         }
     }
     
     var body: some View {
         if !isAccessGranted {
-            VStack(alignment: .leading, spacing: 12.0) {
-                VStack(alignment: .leading, spacing: 8.0) {
-                    LaunchAtLoginView()
-                    
-                    ProtectionView(isProtectioEnable: $settings.isProtected)
+            VStack(alignment: .leading) {
+                VStack(alignment: .leading) {
+                    ExtendedDivider(isExtended: $settings.ui.isSecurityInfoHidden, title: "SettingsMenuSecurity")
+                    if !settings.ui.isSecurityInfoHidden {
+                        VStack(alignment: .leading, spacing: 8.0) {
+                            LaunchAtLoginView()
+                            
+                            ProtectionView(isProtectioEnable: $settings.options.isProtected)
+                        }
+                    }
                 }
+                .frame(width: K.blockWidth)
                 
-                ExtendedDivider(isExtended: $isInfo1Hidden, title: "ddd")
-                if !isInfo1Hidden {
-                    VStack(alignment: .leading, spacing: 8.0) {
-                        UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.isUseSnapshotOnWakeUp)
-                            .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { [weak thiefManager] value in
-                                thiefManager?.restartWatching()
-                            })
-                        UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.isUseSnapshotOnLogin)
-                            .onChange(of: settings.isUseSnapshotOnLogin, perform: { [weak thiefManager] value in
-                                thiefManager?.restartWatching()
-                            })
-                        if AppSettings.isMASBuild == false {
-                            UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.isUseSnapshotOnWrongPassword)
-                                .onChange(of: settings.isUseSnapshotOnWrongPassword, perform: { [weak thiefManager] value in
+                VStack(alignment: .leading) {
+                    ExtendedDivider(isExtended: $settings.ui.isSnapshotInfoHidden, title: "SettingsMenuSnapshot")
+                    if !settings.ui.isSnapshotInfoHidden {
+                        VStack(alignment: .leading, spacing: 8.0) {
+                            UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.triggers.isUseSnapshotOnWakeUp)
+                                .onChange(of: settings.triggers.isUseSnapshotOnWakeUp, perform: { [weak thiefManager] value in
+                                    thiefManager?.restartWatching()
+                                })
+                            UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.triggers.isUseSnapshotOnLogin)
+                                .onChange(of: settings.triggers.isUseSnapshotOnLogin, perform: { [weak thiefManager] value in
+                                    thiefManager?.restartWatching()
+                                })
+                            if AppSettings.isMASBuild == false {
+                                UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $settings.triggers.isUseSnapshotOnWrongPassword)
+                                    .onChange(of: settings.triggers.isUseSnapshotOnWrongPassword, perform: { [weak thiefManager] value in
+                                        thiefManager?.restartWatching()
+                                    })
+                            }
+                            UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.triggers.isUseSnapshotOnSwitchToBatteryPower)
+                                .onChange(of: settings.triggers.isUseSnapshotOnSwitchToBatteryPower, perform: { [weak thiefManager] value in
+                                    thiefManager?.restartWatching()
+                                })
+                            UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: $settings.triggers.isUseSnapshotOnUSBMount)
+                                .onChange(of: settings.triggers.isUseSnapshotOnUSBMount, perform: { [weak thiefManager] value in
                                     thiefManager?.restartWatching()
                                 })
                         }
-                        UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.isUseSnapshotOnSwitchToBatteryPower)
-                            .onChange(of: settings.isUseSnapshotOnSwitchToBatteryPower, perform: { [weak thiefManager] value in
-                                thiefManager?.restartWatching()
-                            })
-                        UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: $settings.isUseSnapshotOnUSBMount)
-                            .onChange(of: settings.isUseSnapshotOnUSBMount, perform: { [weak thiefManager] value in
-                                thiefManager?.restartWatching()
-                            })
                     }
                 }
+                .frame(width: K.blockWidth)
                 
-                
-                Divider()
-                
-                VStack(alignment: .leading, spacing: 8.0) {
-                    KeepLastCountView(keepLastActionsCount: $settings.keepLastActionsCount)
-                    
-                    AddLocationToSnapshotView(addLocationToSnapshot: $settings.addLocationToSnapshot)
-                        .onChange(of: settings.addLocationToSnapshot, perform: { [weak thiefManager] value in
-                            thiefManager?.setupLocationManager(enable: value)
-                        })
-                    
-                    AddIPAddressToSnapshotView(addIPAddressToSnapshot: $settings.addIPAddressToSnapshot)
-                    
-                    TraceRouteToSnapshotView(isAddTraceRouteToSnapshot: $settings.addTraceRouteToSnapshot, traceRouteServer: $settings.traceRouteServer)
-                    
-                    SaveSnapshotToDiskView(isSaveSnapshotToDisk: $settings.isSaveSnapshotToDisk)
-                }
-                
-                Divider()
-                
-                VStack(alignment: .leading, spacing: 8.0) {
-                    if AppSettings.isMASBuild == false {
-                        SendNotificationToMailView(isSendNotificationToMail: $settings.isSendNotificationToMail, mailRecipient: $settings.mailRecipient)
-                            .onChange(of: settings.isSendNotificationToMail, perform: {_ in })
+                VStack(alignment: .leading) {
+                    ExtendedDivider(isExtended: $settings.ui.isOptionsInfoHidden, title: "SettingsMenuOptions")
+                    if !settings.ui.isOptionsInfoHidden {
+                        VStack(alignment: .leading, spacing: 8.0) {
+                            KeepLastCountView(keepLastActionsCount: $settings.options.keepLastActionsCount)
+                            
+                            AddLocationToSnapshotView(addLocationToSnapshot: $settings.options.addLocationToSnapshot)
+                                .onChange(of: settings.options.addLocationToSnapshot, perform: { [weak thiefManager] value in
+                                    thiefManager?.setupLocationManager(enable: value)
+                                })
+                            
+                            AddIPAddressToSnapshotView(addIPAddressToSnapshot: $settings.options.addIPAddressToSnapshot)
+                            
+                            TraceRouteToSnapshotView(isAddTraceRouteToSnapshot: $settings.options.addTraceRouteToSnapshot, traceRouteServer: $settings.options.traceRouteServer)
+                            
+                            SaveSnapshotToDiskView(isSaveSnapshotToDisk: $settings.sync.isSaveSnapshotToDisk)
+                        }
                     }
-                    ICloudSyncView(isICloudSyncEnable: $settings.isICloudSyncEnable)
-                    
-                    DropboxView(isDropboxEnable: $settings.isDropboxEnable, dropboxName: $settings.dropboxName)
-                    
-                    LocalNotificationView(isLocalNotificationEnable: $settings.isUseSnapshotLocalNotification)
                 }
-                Divider()
+                .frame(width: K.blockWidth)
                 
-                LastThiefDetectionView(databaseManager: $thiefManager.databaseManager)
+                VStack(alignment: .leading) {
+                    ExtendedDivider(isExtended: $settings.ui.isSyncInfoHidden, title: "SettingsMenuSync")
+                    if !settings.ui.isSyncInfoHidden {
+                        
+                        VStack(alignment: .leading, spacing: 8.0) {
+                            if AppSettings.isMASBuild == false {
+                                SendNotificationToMailView(isSendNotificationToMail: $settings.sync.isSendNotificationToMail, mailRecipient: $settings.sync.mailRecipient)
+                                    .onChange(of: settings.sync.isSendNotificationToMail, perform: {_ in })
+                            }
+                            ICloudSyncView(isICloudSyncEnable: $settings.sync.isICloudSyncEnable)
+                            
+                            DropboxView(isDropboxEnable: $settings.sync.isDropboxEnable, dropboxName: $settings.sync.dropboxName)
+                            
+                            LocalNotificationView(isLocalNotificationEnable: $settings.sync.isUseSnapshotLocalNotification)
+                        }
+                    }
+                }
+                .frame(width: K.blockWidth)
                 
-                VStack() {
+                VStack(alignment: .leading) {
+                    LastThiefDetectionView(databaseManager: $thiefManager.databaseManager)
+                }
+                .frame(width: K.blockWidth)
+                
+                VStack(alignment: .leading) {
                     InfoView(thiefManager: thiefManager, isInfoHidden: $isInfoHidden)
                 }
-                .frame(width: 324.0)
+                .frame(width: K.blockWidth)
             }
-            .padding(16.0)
-            .frame(width: 340.0)
+            .padding(K.windowBorder)
+            .frame(width: K.windowWidth)
         } else {
             Text("")
                 .onAppear() {
@@ -132,7 +154,7 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         //ForEach(["en", "ru", "uk"], id: \.self) { id in
         SettingsView(watchBlock: { _ in }, accessGrantedBlock: {} )
-            //.environment(\.locale, .init(identifier: id))
+        //.environment(\.locale, .init(identifier: id))
         //}
     }
 }

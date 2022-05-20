@@ -14,13 +14,13 @@ struct FirstLaunchOptionsViews: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             LaunchAtLoginView()
-            UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.isUseSnapshotOnWakeUp)
-                .onChange(of: settings.isUseSnapshotOnWakeUp, perform: { _ in })
-            UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.isUseSnapshotOnLogin)
-                .onChange(of: settings.isUseSnapshotOnLogin, perform: { _ in })
-            AddLocationToSnapshotView(addLocationToSnapshot: $settings.addLocationToSnapshot)
-                .onChange(of: settings.addLocationToSnapshot, perform: { _ in })
-            ICloudSyncView(isICloudSyncEnable: $settings.isICloudSyncEnable)
+            UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $settings.triggers.isUseSnapshotOnWakeUp)
+                .onChange(of: settings.triggers.isUseSnapshotOnWakeUp, perform: { _ in })
+            UseSnapshotOnLoginView(isUseSnapshotOnLogin: $settings.triggers.isUseSnapshotOnLogin)
+                .onChange(of: settings.triggers.isUseSnapshotOnLogin, perform: { _ in })
+            AddLocationToSnapshotView(addLocationToSnapshot: $settings.options.addLocationToSnapshot)
+                .onChange(of: settings.options.addLocationToSnapshot, perform: { _ in })
+            ICloudSyncView(isICloudSyncEnable: $settings.sync.isICloudSyncEnable)
             
             Divider()
         }

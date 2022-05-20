@@ -20,34 +20,46 @@ extension View {
 
 struct ExtendedDivider: View {
     @Binding var isExtended: Bool
-    @State var title: String = ""
+    
+    @State var title = ""
+    @State var font: Font = .headline
+    @State var lineWidth: CGFloat = 1
+    @State var lineColor = Color("divider")
     
     var body: some View {
-        ZStack {
-            HStack {
-                ExtendedDividerLine()
-                Button(action: {
-                    isExtended.toggle()
-                }) {
-                    HStack {
-                        Text(title)
-                        Image(systemName: isExtended ? "chevron.compact.down" : "chevron.compact.up")
-                            .font(.system(size: 22))
+        HStack {
+            ExtendedDividerLine(width: lineWidth, color: lineColor)
+            Button(action: {
+                isExtended.toggle()
+            }) {
+                HStack {
+                    if title.count > 0 {
+                        Text(NSLocalizedString(title, comment: ""))
+                            .font(font)
                     }
-                }.buttonStyle(BorderlessButtonStyle())
-                ExtendedDividerLine()
-            }
+                    Image(systemName: isExtended ? "chevron.compact.down" : "chevron.compact.up")
+                        .font(font)
+                        .foregroundColor(isExtended ? Color("extendedMenu") : Color("defaultMenu"))
+                }
+            }.buttonStyle(BorderlessButtonStyle())
+            ExtendedDividerLine(width: lineWidth, color: lineColor)
         }
+        .onTapGesture {
+            isExtended.toggle()
+        }
+        .padding(4)
     }
 }
 
 struct ExtendedDividerLine: View {
-    var width: CGFloat = 2
+    @State var width: CGFloat = 1
+    @State var color: Color = .gray
+    
     var direction: Axis.Set = .horizontal
     
     var body: some View {
         Rectangle()
-            .fill(.gray)
+            .fill(color)
             .applyIf(direction == .vertical) {
                 $0.frame(width: width)
                     .edgesIgnoringSafeArea(.vertical)

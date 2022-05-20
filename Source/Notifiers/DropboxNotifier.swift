@@ -93,11 +93,11 @@ class DropboxNotifier {
                             let currentAccount = self?.client?.users.getCurrentAccount()
                             currentAccount?.response(completionHandler: { user, error in
                                 if let displayName = user?.name.displayName {
-                                    self?.settings?.dropboxName = displayName
+                                    self?.settings?.sync.dropboxName = displayName
                                 }
                             })
                         case .cancel, .error:
-                            self?.settings?.dropboxName = ""
+                            self?.settings?.sync.dropboxName = ""
                         }
                     }
                 }

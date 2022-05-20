@@ -19,7 +19,7 @@ class ThiefManager: NSObject, ObservableObject {
     private let notificationManager = NotificationManager()
     public let objectWillChange = ObservableObjectPublisher()
     
-    var settings: AppSettings?
+    private(set) lazy var settings = AppSettings()
     
     private var lastThiefDetection = ThiefDto()
     @Published var databaseManager = DatabaseManager()
@@ -39,11 +39,9 @@ class ThiefManager: NSObject, ObservableObject {
         
         self.watchBlock = watchBlock
         
-        settings = AppSettings()
-        
         databaseManager.setupSettings(settings)
         
-        if (settings?.addLocationToSnapshot == true) {
+        if (settings.options.addLocationToSnapshot) {
             setupLocationManager(enable: true)
         }
         
@@ -95,7 +93,7 @@ class ThiefManager: NSObject, ObservableObject {
     public func detectedTriger(_ closure: @escaping (Bool) -> Void = {_ in }) {
         os_log(.debug, "Detected trigered action: \(self.lastThiefDetection.trigerType.rawValue)")
         let ps = PhotoSnap()
-        ps.photoSnapConfiguration.isSaveToFile = settings?.isSaveSnapshotToDisk == true
+        ps.photoSnapConfiguration.isSaveToFile = settings.sync.isSaveSnapshotToDisk
         guard !isDebug else {
             let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
             let date = Date()
@@ -142,12 +140,12 @@ class ThiefManager: NSObject, ObservableObject {
             self?.watchBlock(dto)
         }
         
-        if settings?.addIPAddressToSnapshot == true {
+        if settings.options.addIPAddressToSnapshot {
             lastThiefDetection.ipAddress = networkUtil.getIFAddresses()
         }
         
-        if settings?.addTraceRouteToSnapshot == true {
-            networkUtil.getTraceRoute(host: settings?.traceRouteServer ?? "") { [weak self] traceRouteLog in
+        if settings.options.addTraceRouteToSnapshot {
+            networkUtil.getTraceRoute(host: settings.options.traceRouteServer) { [weak self] traceRouteLog in
                 guard let lastThiefDetection = self?.lastThiefDetection else {
                     assert(false, "wrong dto")
                     return

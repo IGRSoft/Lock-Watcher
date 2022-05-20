@@ -102,7 +102,7 @@ struct Lock_WatcherApp: App {
         }
         
         private func showSecurityAlert(completion: (Bool) -> Void) {
-            if AppSettings().isProtected && SecurityUtil.hasPassword() {
+            if AppSettings().options.isProtected && SecurityUtil.hasPassword() {
                 let alert = NSAlert()
                 alert.messageText = NSLocalizedString("EnterPassword", comment: "")
                 alert.addButton(withTitle: NSLocalizedString("ButtonOk", comment: ""))

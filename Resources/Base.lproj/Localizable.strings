@@ -137,3 +137,15 @@
 
 /* Description was not specified */
 "SetupOpenSettings" = "Open Settings";
+
+/* Description was not specified */
+"SettingsMenuSecurity" = "Security";
+
+/* Description was not specified */
+"SettingsMenuSnapshot" = "Snapshot";
+
+/* Description was not specified */
+"SettingsMenuOptions" = "Options";
+
+/* Description was not specified */
+"SettingsMenuSync" = "Sync";

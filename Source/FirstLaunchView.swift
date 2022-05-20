@@ -41,6 +41,8 @@ struct FirstLaunchView: View {
     
     @State var isNeedRestart: Bool = false
     
+    @State private var timer: Timer?
+    
     var body: some View {
         VStack(alignment: .center, spacing: Size.maxPadding) {
             switch state {
@@ -52,7 +54,7 @@ struct FirstLaunchView: View {
                     thiefManager.detectedTriger() { success in
                         state = success ? .success : .fault
                         if success {
-                            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
                                 if successConuntDown == 0 {
                                     timer.invalidate()
                                     isHidden = true
@@ -83,5 +85,8 @@ struct FirstLaunchView: View {
         }
         .padding(EdgeInsets(top: Size.maxPadding, leading: Size.maxPadding, bottom: Size.maxPadding, trailing: Size.maxPadding))
         .frame(width: windowSize.width, height: windowSize.height, alignment: .center)
+        .onDisappear() {
+            timer?.invalidate()
+        }
     }
 }

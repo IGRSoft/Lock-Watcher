@@ -47,27 +47,27 @@ class TrigerManager {
             }
         }
         
-        let isUseSnapshotOnWakeUp = settings?.isUseSnapshotOnWakeUp == true
+        let isUseSnapshotOnWakeUp = settings?.triggers.isUseSnapshotOnWakeUp == true
         if let wakeUpListener = listeners[.onWakeUpListener] {
             runListener(wakeUpListener, isUseSnapshotOnWakeUp)
         }
         
-        let isUseSnapshotOnWrongPassword = settings?.isUseSnapshotOnWrongPassword == true
+        let isUseSnapshotOnWrongPassword = settings?.triggers.isUseSnapshotOnWrongPassword == true
         if let wrongPasswordListener = listeners[.onWrongPassword] {
             runListener(wrongPasswordListener, isUseSnapshotOnWrongPassword)
         }
         
-        let isUseSnapshotOnSwitchToBatteryPower = settings?.isUseSnapshotOnSwitchToBatteryPower == true
+        let isUseSnapshotOnSwitchToBatteryPower = settings?.triggers.isUseSnapshotOnSwitchToBatteryPower == true
         if let powerListener = listeners[.onBatteryPowerListener] {
             runListener(powerListener, isUseSnapshotOnSwitchToBatteryPower)
         }
         
-        let isUseSnapshotOnUSBMount = settings?.isUseSnapshotOnUSBMount == true
+        let isUseSnapshotOnUSBMount = settings?.triggers.isUseSnapshotOnUSBMount == true
         if let usbListener = listeners[.onUSBConnectionListenet] {
             runListener(usbListener, isUseSnapshotOnUSBMount)
         }
         
-        let isUseSnapshotOnLogin = settings?.isUseSnapshotOnLogin == true
+        let isUseSnapshotOnLogin = settings?.triggers.isUseSnapshotOnLogin == true
         if let loginListener = listeners[.onLoginListenet] {
             runListener(loginListener, isUseSnapshotOnLogin)
         }
