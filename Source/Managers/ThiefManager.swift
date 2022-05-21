@@ -29,7 +29,7 @@ class ThiefManager: NSObject, ObservableObject {
     
     lazy var trigerManager = TrigerManager()
     
-    private var isDebug = true
+    private var isDebug = false
     
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
