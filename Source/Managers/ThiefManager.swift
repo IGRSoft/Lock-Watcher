@@ -113,9 +113,9 @@ class ThiefManager: NSObject, ObservableObject {
                 self?.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
                 
                 closure(true)
+            } else {
+                closure(false)
             }
-            
-            closure(false)
         }
     }
     
