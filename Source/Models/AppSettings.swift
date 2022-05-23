@@ -54,9 +54,9 @@ final class AppSettings: ObservableObject {
 #endif
     
 #if DEBUG
-    static var firstLaunchSuccessConunt = 15
-#else
     static var firstLaunchSuccessConunt = 1
+#else
+    static var firstLaunchSuccessConunt = 15
 #endif
     
     @UserDefault("OptionsSettings", defaultValue: OptionsSettings()) var options: OptionsSettings {

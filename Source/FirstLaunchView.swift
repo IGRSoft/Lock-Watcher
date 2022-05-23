@@ -58,7 +58,7 @@ struct FirstLaunchView: View {
                                 if successConuntDown == 0 {
                                     timer.invalidate()
                                     isHidden = true
-                                    NSApplication.shared.keyWindow?.close()
+                                    NSApp.windows.first?.close()
                                     closeClosure()
                                 } else {
                                     successConuntDown -= 1
