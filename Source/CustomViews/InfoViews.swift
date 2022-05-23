@@ -17,11 +17,12 @@ struct InfoView: View {
         VStack(alignment: .center) {
             ExtendedDivider(isExtended: $isInfoHidden, font: .title)
             if !isInfoHidden {
-#if DEBUG
-                Button("Debug") {
-                    thiefManager.detectedTriger()
+                if AppSettings.isDebug {
+                    Button("Debug") {
+                        thiefManager.detectedTriger()
+                    }
                 }
-#endif
+                
                 Button("Quit") {
                     exit(0)
                 }

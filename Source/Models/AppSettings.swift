@@ -53,6 +53,8 @@ final class AppSettings: ObservableObject {
     static var isMASBuild = true
 #endif
     
+    static var isDebug = false
+    
     static var firstLaunchSuccessConunt = 15
     
     @UserDefault("OptionsSettings", defaultValue: OptionsSettings()) var options: OptionsSettings {

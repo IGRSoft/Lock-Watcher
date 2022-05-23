@@ -29,8 +29,6 @@ class ThiefManager: NSObject, ObservableObject {
     
     lazy var trigerManager = TrigerManager()
     
-    private var isDebug = false
-    
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
     
@@ -94,7 +92,7 @@ class ThiefManager: NSObject, ObservableObject {
         os_log(.debug, "Detected trigered action: \(self.lastThiefDetection.trigerType.rawValue)")
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings.sync.isSaveSnapshotToDisk
-        guard !isDebug else {
+        guard !AppSettings.isDebug else {
             let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
             let date = Date()
             self.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)

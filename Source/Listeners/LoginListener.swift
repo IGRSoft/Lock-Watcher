@@ -18,7 +18,7 @@ class LoginListener: BaseListener, BaseListenerProtocol {
         let debouncedFunction = DispatchQueue.main.debounce(interval: 500) { [weak self] in
             let thief = ThiefDto()
             thief.trigerType = .logedIn
-                        
+            
             self?.listenerAction?(thief)
         }
         
@@ -32,7 +32,7 @@ class LoginListener: BaseListener, BaseListenerProtocol {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(self.sessionDidBecomeActiveNotification(_:)),
+                                                   selector: #selector(self.sessionDidBecomeActiveNotification),
                                                    name: NSApplication.didChangeOcclusionStateNotification,
                                                    object: nil)
         }
@@ -46,7 +46,7 @@ class LoginListener: BaseListener, BaseListenerProtocol {
         NotificationCenter.default.removeObserver(self, name: NSApplication.didChangeOcclusionStateNotification, object: nil)
     }
     
-    @objc func sessionDidBecomeActiveNotification(_ notification: Notification) {
+    @objc func sessionDidBecomeActiveNotification() {
         os_log(.debug, "LoginListener didChangeOcclusionStateNotification")
         
         debouncedThief()

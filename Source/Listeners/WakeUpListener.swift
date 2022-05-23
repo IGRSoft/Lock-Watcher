@@ -20,7 +20,7 @@ class WakeUpListener: BaseListener, BaseListenerProtocol {
         listenerAction = action
         
         NSWorkspace.shared.notificationCenter.addObserver(self,
-                                                          selector: #selector(receiveWakeNotification(_:)),
+                                                          selector: #selector(receiveWakeNotification),
                                                           name: NSWorkspace.screensDidWakeNotification,
                                                           object: nil)
     }
@@ -33,10 +33,10 @@ class WakeUpListener: BaseListener, BaseListenerProtocol {
         NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.screensDidWakeNotification, object: nil)
     }
     
-    @objc func receiveWakeNotification (_ notif: Notification) {
+    @objc func receiveWakeNotification() {
         let thief = ThiefDto()
         thief.trigerType = .onWakeUp
-                    
+        
         listenerAction?(thief)
     }
 }

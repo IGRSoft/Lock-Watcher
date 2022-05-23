@@ -44,7 +44,7 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
         return service
     }
     
-    @objc private func occlusionStateChanged(_ notification: Notification) {
+    @objc private func occlusionStateChanged() {
         if NSApp.occlusionState.contains(.visible) {
             os_log(.debug, "WrongPasswordListener screen unlocked")
             isScreenLocked = false
@@ -64,7 +64,7 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
         self.listenerAction = action
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(occlusionStateChanged(_:)),
+                                               selector: #selector(occlusionStateChanged),
                                                name: NSApplication.didChangeOcclusionStateNotification,
                                                object: nil)
         

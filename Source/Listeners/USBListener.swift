@@ -20,7 +20,7 @@ class USBListener: BaseListener, BaseListenerProtocol {
         listenerAction = action
         
         NSWorkspace.shared.notificationCenter.addObserver(self,
-                                                          selector: #selector(receiveUSBNotification(_:)),
+                                                          selector: #selector(receiveUSBNotification),
                                                           name: NSWorkspace.didMountNotification,
                                                           object: nil)
     }
@@ -33,10 +33,10 @@ class USBListener: BaseListener, BaseListenerProtocol {
         NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.didMountNotification, object: nil)
     }
     
-    @objc func receiveUSBNotification(_ notif: Notification) {
+    @objc func receiveUSBNotification() {
         let thief = ThiefDto()
         thief.trigerType = .usbConnected
-                    
+        
         listenerAction?(thief)
     }
 }

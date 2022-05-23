@@ -27,7 +27,7 @@ class TrigerManager {
         if AppSettings.isMASBuild == false {
             listeners[.onWrongPassword] = WrongPasswordListener()
         }
-    
+        
         return listeners
     }()
     

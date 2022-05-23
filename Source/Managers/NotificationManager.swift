@@ -21,7 +21,7 @@ class NotificationManager {
         
         dropboxNotifier.register(with: settings)
     }
-        
+    
     func send(_ thiefDto: ThiefDto) -> Bool {
         var result = false
         

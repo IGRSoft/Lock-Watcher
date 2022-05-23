@@ -26,7 +26,7 @@ extension NSImage {
         
         let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
         bitmapRep.size = imageRect.size
-
+        
         let image: NSImage = NSImage(size: imageRect.size)
         image.addRepresentation(bitmapRep)
         

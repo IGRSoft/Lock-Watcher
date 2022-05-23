@@ -14,9 +14,11 @@ extension String {
             let regex = try NSRegularExpression(pattern: regex)
             let nsString = self as NSString
             let results = regex.matches(in: self, range: NSRange(location: 0, length: nsString.length))
+            
             return results.map { nsString.substring(with: $0.range(at: 1))}
         } catch let error {
             print("invalid regex: \(error.localizedDescription)")
+            
             return nil
         }
     }
