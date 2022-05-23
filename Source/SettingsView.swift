@@ -76,10 +76,12 @@ struct SettingsView: View {
                                         thiefManager?.restartWatching()
                                     })
                             }
-                            UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.triggers.isUseSnapshotOnSwitchToBatteryPower)
-                                .onChange(of: settings.triggers.isUseSnapshotOnSwitchToBatteryPower, perform: { [weak thiefManager] value in
-                                    thiefManager?.restartWatching()
-                                })
+                            if DeviceUtil.device() == .laptop {
+                                UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $settings.triggers.isUseSnapshotOnSwitchToBatteryPower)
+                                    .onChange(of: settings.triggers.isUseSnapshotOnSwitchToBatteryPower, perform: { [weak thiefManager] value in
+                                        thiefManager?.restartWatching()
+                                    })
+                            }
                             UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: $settings.triggers.isUseSnapshotOnUSBMount)
                                 .onChange(of: settings.triggers.isUseSnapshotOnUSBMount, perform: { [weak thiefManager] value in
                                     thiefManager?.restartWatching()

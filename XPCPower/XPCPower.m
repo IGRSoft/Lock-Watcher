@@ -47,8 +47,8 @@ void IGRPowerMonitorCallback(void *context) {
     if (source) {
         NSString *sSource = (__bridge NSString *)(source);
         
-        BOOL isBatteryPower = [@"Battery Power" isEqualToString:sSource];
-        BOOL isACPower = [@"AC Power" isEqualToString:sSource];
+        BOOL isBatteryPower = [@kIOPMBatteryPowerKey isEqualToString:sSource];
+        BOOL isACPower = [@kIOPMACPowerKey isEqualToString:sSource];
         
         if (xpcPower.powerMode == IGRPowerModeUnknown){
             xpcPower.powerMode = isBatteryPower ? IGRPowerModeBattery : IGRPowerModeACPower;

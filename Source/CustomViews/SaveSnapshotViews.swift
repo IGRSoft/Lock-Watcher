@@ -126,19 +126,3 @@ struct LocalNotificationView: View {
         }
     }
 }
-
-/*struct SnapshotSettings {
-    var isUseSnapshotOnWakeUp: Bool
-    var isUseSnapshotOnLogin: Bool
-    var isUseSnapshotOnWrongPassword: Bool
-    var isUseSnapshotOnSwitchToBatteryPower: Bool
-    var isUseSnapshotOnUSBMount: Bool
-}
-
-class SnapshotSettingsModel: ObservableObject {
-    @Published var snapshotSettings: SnapshotSettings
-    
-    init(isUseSnapshotOnWakeUp: Bool, isUseSnapshotOnLogin: Bool, isUseSnapshotOnWrongPassword: Bool, isUseSnapshotOnSwitchToBatteryPower: Bool, isUseSnapshotOnUSBMount: Bool) {
-        snapshotSettings = SnapshotSettings(isUseSnapshotOnWakeUp: isUseSnapshotOnWakeUp, isUseSnapshotOnLogin: isUseSnapshotOnLogin, isUseSnapshotOnWrongPassword: isUseSnapshotOnWrongPassword, isUseSnapshotOnSwitchToBatteryPower: isUseSnapshotOnSwitchToBatteryPower, isUseSnapshotOnUSBMount: isUseSnapshotOnUSBMount)
-    }
-}*/
