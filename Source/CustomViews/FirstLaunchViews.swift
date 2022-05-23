@@ -55,7 +55,6 @@ struct FirstLaunchProgressViews: View {
                 }
             }
             .font(.system(size: frameSize.height * 0.75))
-            .foregroundColor(.white)
             .frame(width: frameSize.width, height: frameSize.height, alignment: .center)
     }
 }
@@ -69,15 +68,14 @@ struct FirstLaunchSuccessViews: View {
         Label("SetupSuccess", systemImage: "bolt.circle")
             .font(.system(size: frameSize.height * 0.2))
             .padding(.horizontal)
-            .foregroundColor(.green)
+            .foregroundColor(Color("success"))
         Text("Tips0")
             .font(.headline)
-            .foregroundColor(.green)
+            .foregroundColor(Color("success"))
         Image("tips0").aspectRatio(contentMode: .fit)
             .frame(width: frameSize.width, height: .infinity, alignment: .center)
         Text(String(format: NSLocalizedString("SuccessTimer %d", comment: ""), successConuntDown))
             .font(.body)
-            .foregroundColor(.white)
     }
 }
 
@@ -90,10 +88,9 @@ struct FirstLaunchFaultViews: View {
         Label("SetupFault", systemImage: "exclamationmark.circle")
             .font(.system(size: frameSize.height * 0.25))
             .padding(.horizontal)
-            .foregroundColor(.red)
+            .foregroundColor(Color("error"))
         Text("SetupFaultMessage")
             .font(.headline)
-            .foregroundColor(.white)
         Button("SetupOpenSettings") {
             NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Camera")!)
             isHidden = true

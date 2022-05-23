@@ -98,7 +98,7 @@ class ThiefManager: NSObject, ObservableObject {
             let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
             let date = Date()
             self.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
-            let debouncedFunction = DispatchQueue.main.debounce(interval: 1_00) {
+            let debouncedFunction = DispatchQueue.main.debounce(interval: 1_000) {
                 closure(true)
             }
             debouncedFunction()
