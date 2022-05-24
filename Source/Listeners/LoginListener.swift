@@ -19,7 +19,9 @@ class LoginListener: BaseListener, BaseListenerProtocol {
             let thief = ThiefDto()
             thief.trigerType = .logedIn
             
-            self?.listenerAction?(thief)
+            DispatchQueue.main.async {
+                self?.listenerAction?(.onLoginListenet, thief)
+            }
         }
         
         return debouncedFunction

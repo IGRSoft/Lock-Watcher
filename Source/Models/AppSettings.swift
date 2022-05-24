@@ -29,7 +29,7 @@ struct OptionsSettings: Codable {
 struct TriggerSettings: Codable {
     var isUseSnapshotOnWakeUp = true
     var isUseSnapshotOnLogin = true
-    var isUseSnapshotOnWrongPassword = true
+    var isUseSnapshotOnWrongPassword = false
     var isUseSnapshotOnSwitchToBatteryPower = false
     var isUseSnapshotOnUSBMount = false
 }

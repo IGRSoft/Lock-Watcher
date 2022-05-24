@@ -9,11 +9,10 @@ import Foundation
 import os
 
 public final class XPCAuthentication: NSObject, XPCAuthenticationProtocol {
-    var outputPipe:Pipe!
-    var buildTask:Process!
+    var outputPipe = Pipe()
+    var buildTask = Process()
     
     public func detectedAuthenticationFailedFromDate(_ date: Date, _ replyBlock: @escaping (Bool) -> Void) {
-        self.buildTask = Process()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
         
@@ -25,13 +24,12 @@ public final class XPCAuthentication: NSObject, XPCAuthenticationProtocol {
         
         os_log(.debug, "XPCAuthentication start listen from \(dateFormatter.string(from: date))")
         
-        outputPipe = Pipe()
         self.buildTask.standardOutput = outputPipe
         
         outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable,
-                                               object: outputPipe.fileHandleForReading ,
+                                               object: outputPipe.fileHandleForReading,
                                                queue: nil) { [weak self] notification in
             
             if let output = self?.outputPipe.fileHandleForReading.availableData {

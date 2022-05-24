@@ -20,20 +20,21 @@ typedef void (^FoudChangesInPowerBlock)(NSInteger);
     CFRunLoopSourceRef _runLoopSource;
 }
 
-@property (nonatomic, copy  ) FoudChangesInPowerBlock foudChangesInPowerBlock;
+@property (nonatomic, strong) FoudChangesInPowerBlock foudChangesInPowerBlock;
 @property (nonatomic, assign) IGRPowerMode powerMode;
+
 @end
 
 @implementation XPCPower
 
 - (void)startCheckPower:(void (^)(NSInteger))replyBlock {
-    self.foudChangesInPowerBlock = [replyBlock copy];
+    self.foudChangesInPowerBlock = replyBlock;
     _powerMode = IGRPowerModeUnknown;
     
     [self startCustomLoop];
 }
 
-- (void)stopCheckPower{
+- (void)stopCheckPower {
     self.foudChangesInPowerBlock = nil;
     
     [self stopCustomLoop];

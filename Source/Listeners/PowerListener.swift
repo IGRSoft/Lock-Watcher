@@ -9,7 +9,7 @@ import Foundation
 import os
 
 class PowerListener: BaseListener, BaseListenerProtocol {
-    enum PowerMode : Int {
+    enum PowerMode: Int {
         case battery = 0
         case ac = 1
     }
@@ -20,9 +20,11 @@ class PowerListener: BaseListener, BaseListenerProtocol {
     
     var isRunning = false
     
-    private var connection: NSXPCConnection?
+    deinit {
+        connection.invalidate()
+    }
     
-    private var service: XPCPowerProtocol {
+    private lazy var connection: NSXPCConnection = {
         let connection = NSXPCConnection(serviceName: kServiceName)
         connection.remoteObjectInterface = NSXPCInterface(with: XPCPowerProtocol.self)
         connection.resume()
@@ -35,14 +37,16 @@ class PowerListener: BaseListener, BaseListenerProtocol {
             os_log(.error, "Service XPCPower invalidated")
         }
         
+        return connection
+    }()
+    
+    private lazy var service: XPCPowerProtocol  = {
         let service = connection.remoteObjectProxyWithErrorHandler { error in
             os_log(.error, "Received error: \(error.localizedDescription)")
         } as! XPCPowerProtocol
-        
-        self.connection = connection
-        
+                
         return service
-    }
+    }()
     
     func start(_ action: @escaping ListenerAction) {
         os_log(.debug, "PowerListener started")
@@ -50,8 +54,6 @@ class PowerListener: BaseListener, BaseListenerProtocol {
         self.listenerAction = action
         
         service.startCheckPower { [weak self] mode in
-            self?.isRunning = false
-            
             let powerMode = PowerMode.init(rawValue: mode)
             os_log(.debug, "Power switched to \(powerMode == .battery ? "Battery" : "AC Power")")
             
@@ -60,7 +62,9 @@ class PowerListener: BaseListener, BaseListenerProtocol {
                 thief.trigerType = .onBatteryPower
             }
             
-            self?.listenerAction?(thief)
+            DispatchQueue.main.async {
+                self?.listenerAction?(.onBatteryPowerListener, thief)
+            }
         }
         
         isRunning = true
@@ -68,8 +72,7 @@ class PowerListener: BaseListener, BaseListenerProtocol {
     
     func stop() {
         self.listenerAction = nil
-        (connection?.remoteObjectProxy as? XPCPowerProtocol)?.stopCheckPower()
-        connection?.invalidate()
+        (connection.remoteObjectProxy as? XPCPowerProtocol)?.stopCheckPower()
         
         os_log(.debug, "PowerListener stoped")
         

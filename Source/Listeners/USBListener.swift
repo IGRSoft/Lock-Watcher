@@ -37,6 +37,8 @@ class USBListener: BaseListener, BaseListenerProtocol {
         let thief = ThiefDto()
         thief.trigerType = .usbConnected
         
-        listenerAction?(thief)
+        DispatchQueue.main.async { [weak self] in
+            self?.listenerAction?(.onUSBConnectionListenet, thief)
+        }
     }
 }

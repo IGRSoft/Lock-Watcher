@@ -20,9 +20,11 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
     
     var lastScreenLockDate = Date()
     
-    private var connection: NSXPCConnection?
+    deinit {
+        connection.invalidate()
+    }
     
-    private var service: XPCAuthenticationProtocol {
+    private lazy var connection: NSXPCConnection = {
         let connection = NSXPCConnection(serviceName: kServiceName)
         connection.remoteObjectInterface = NSXPCInterface(with: XPCAuthenticationProtocol.self)
         connection.resume()
@@ -35,14 +37,16 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
             os_log(.error, "Service XPCAuthentication invalidated")
         }
         
+        return connection
+    }()
+    
+    private lazy var service: XPCAuthenticationProtocol = {
         let service = connection.remoteObjectProxyWithErrorHandler { error in
             os_log(.error, "Received error: \(error.localizedDescription)")
         } as! XPCAuthenticationProtocol
         
-        self.connection = connection
-        
         return service
-    }
+    }()
     
     @objc private func occlusionStateChanged() {
         if NSApp.occlusionState.contains(.visible) {
@@ -75,29 +79,22 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
         os_log(.debug, "WrongPasswordListener detecting AuthenticationFailed from \(self.lastScreenLockDate)")
         
         service.detectedAuthenticationFailedFromDate(lastScreenLockDate) { [weak self] (detectedFailed) in
-            self?.isRunning = false
+            let thief = ThiefDto()
             
             if detectedFailed {
                 self?.lastScreenLockDate = Date()
                 os_log(.debug, "Detected Authentication Failed")
-                let thief = ThiefDto()
                 thief.trigerType = .onWrongPassword
-                
-                self?.listenerAction?(thief)
             }
             
-            if self?.isScreenLocked == true {
-                DispatchQueue.main.async {
-                    self?.readDate()
-                }
+            DispatchQueue.main.async {
+                self?.listenerAction?(.onWrongPassword, thief)
             }
         }
     }
     
     func stop() {
         self.listenerAction = nil
-        (connection?.remoteObjectProxy as? XPCPowerProtocol)?.stopCheckPower()
-        connection?.invalidate()
         
         NotificationCenter.default.removeObserver(self, name: NSApplication.didChangeOcclusionStateNotification, object: nil)
         

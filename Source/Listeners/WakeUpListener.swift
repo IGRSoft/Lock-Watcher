@@ -37,6 +37,8 @@ class WakeUpListener: BaseListener, BaseListenerProtocol {
         let thief = ThiefDto()
         thief.trigerType = .onWakeUp
         
-        listenerAction?(thief)
+        DispatchQueue.main.async { [weak self] in
+            self?.listenerAction?(.onWakeUpListener, thief)
+        }
     }
 }

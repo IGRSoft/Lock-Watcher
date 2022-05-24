@@ -10,13 +10,11 @@ import os
 
 class TrigerManager {
     
-    enum ListenerName: String {
-        case onWakeUpListener, onWrongPassword, onBatteryPowerListener, onUSBConnectionListenet, onLoginListenet
-    }
-    
     typealias TrigerBlock = ((ThiefDto) -> Void)
     
     private var settings: AppSettings?
+    
+    var runListener: ((BaseListenerProtocol, Bool) -> ())?
     
     private lazy var listeners: [ListenerName : BaseListenerProtocol] = {
         var listeners: [ListenerName : BaseListenerProtocol] = [.onWakeUpListener : WakeUpListener(),
@@ -34,11 +32,13 @@ class TrigerManager {
     public func start(settings: AppSettings?, _ trigerBlock: @escaping TrigerBlock = {trigered in}) {
         os_log(.debug, "Starting all trigers")
         
-        let runListener:(BaseListenerProtocol, Bool) -> Void = {listener, isEnabled in
+        let runListener:(BaseListenerProtocol, Bool) -> () = {listener, isEnabled in
             if isEnabled == true {
                 if listener.isRunning == false {
-                    listener.start() { trigered in
+                    listener.start() { [weak self] type, trigered in
                         trigerBlock(trigered)
+                        
+                        self?.restartListener(type: type)
                     }
                 }
             }
@@ -46,6 +46,8 @@ class TrigerManager {
                 listener.stop()
             }
         }
+        
+        self.runListener = runListener
         
         let isUseSnapshotOnWakeUp = settings?.triggers.isUseSnapshotOnWakeUp == true
         if let wakeUpListener = listeners[.onWakeUpListener] {
@@ -73,6 +75,29 @@ class TrigerManager {
         }
         
         self.settings = settings
+    }
+    
+    private func restartListener(type: ListenerName) {
+        if let l = self.listeners[type] {
+            l.stop()
+        }
+        
+        var listener: BaseListenerProtocol!
+        switch type {
+        case .onWakeUpListener:
+            listener = WakeUpListener()
+        case .onWrongPassword:
+            listener = WrongPasswordListener()
+        case .onBatteryPowerListener:
+            listener = PowerListener()
+        case .onUSBConnectionListenet:
+            listener = USBListener()
+        case .onLoginListenet:
+            listener = LoginListener()
+        }
+        
+        self.listeners[type] = listener
+        self.runListener?(listener, true)
     }
     
     public func stop() {
