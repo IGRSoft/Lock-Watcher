@@ -1,6 +1,6 @@
 /* Localized versions of Info.plist keys */
 
 CFBundleDisplayName = "Lock Watcher";
-NSCameraUsageDescription = "Detect persone who is trying get access to your user";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Add location information to snapshot";
-NSLocationUsageDescription = "Add location information to snapshot";
+NSCameraUsageDescription = "Зробити знімок людини, яка намагається отримати доступ до вашого користувача";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Додати геопозіцію вашого пристрою до фотографії";
+NSLocationUsageDescription = "Додати геопозіцію вашого пристрою до фотографії";
