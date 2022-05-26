@@ -80,6 +80,8 @@
 		A58FC76326E282C7007674F6 /* MailNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */; };
 		A58FC76726E2870E007674F6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58FC76626E2870E007674F6 /* Preview.swift */; };
 		A58FC76826E2870E007674F6 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58FC76626E2870E007674F6 /* Preview.swift */; };
+		A5942651283FE287008A38E6 /* PermissionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5942650283FE287008A38E6 /* PermissionsUtils.swift */; };
+		A5942652283FE287008A38E6 /* PermissionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5942650283FE287008A38E6 /* PermissionsUtils.swift */; };
 		A599EB2327AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */; };
 		A599EB2427AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */; };
 		A599EB2927AB0B07003A69B5 /* SecurityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */; };
@@ -266,6 +268,7 @@
 		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
 		A58FC75326E2814E007674F6 /* Lock-Watcher-non-mas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher-non-mas.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58FC76626E2870E007674F6 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		A5942650283FE287008A38E6 /* PermissionsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsUtils.swift; sourceTree = "<group>"; };
 		A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityAlertView.swift; sourceTree = "<group>"; };
 		A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityUtil.swift; sourceTree = "<group>"; };
 		A599EB3027AB1259003A69B5 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -407,6 +410,7 @@
 				A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */,
 				A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */,
 				A51ABA2C283BE98200007B15 /* DeviceUtil.swift */,
+				A5942650283FE287008A38E6 /* PermissionsUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -965,6 +969,7 @@
 				A5ACC7C827835BF800999CF0 /* NetworkUtil.swift in Sources */,
 				A58FC73B26E2814E007674F6 /* EmptyView.swift in Sources */,
 				A5EFE8B926E2B587001FC4EA /* Date+IGRExtension.swift in Sources */,
+				A5942652283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
 				A58FC73C26E2814E007674F6 /* XPCAuthenticationProtocol.swift in Sources */,
 				A58FC73D26E2814E007674F6 /* NotificationManager.swift in Sources */,
 				A56CFFBC27A48D6A00CB137B /* String+Regex.swift in Sources */,
@@ -1014,6 +1019,7 @@
 				A5ACC7C727835BF800999CF0 /* NetworkUtil.swift in Sources */,
 				A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */,
 				A533D7B525A8F9A60046B7C8 /* EmptyView.swift in Sources */,
+				A5942651283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 				A541188027649FB2007C6AB8 /* WrongPasswordListener.swift in Sources */,
 				A56CFFBB27A48D6A00CB137B /* String+Regex.swift in Sources */,

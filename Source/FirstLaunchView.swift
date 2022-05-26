@@ -41,6 +41,8 @@ struct FirstLaunchView: View {
     
     @State var isNeedRestart: Bool = false
     
+    @State private var showingAlert = false
+    
     @State private var timer: Timer?
     
     var body: some View {
@@ -51,21 +53,36 @@ struct FirstLaunchView: View {
                 Button("TakeSnapshotAndStart") {
                     state = .inProgress
                     
-                    thiefManager.detectedTriger() { success in
-                        state = success ? .success : .fault
-                        if success {
-                            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                                if successConuntDown == 0 {
-                                    timer.invalidate()
-                                    isHidden = true
-                                    NSApp.windows.first?.close()
-                                    closeClosure()
+                    PermissionsUtils.updateCameraPermissions { isGranted in
+                        if isGranted {
+                            thiefManager.detectedTriger() { success in
+                                state = success ? .success : .fault
+                                if success {
+                                    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                                        if successConuntDown == 0 {
+                                            timer.invalidate()
+                                            isHidden = true
+                                            NSApp.windows.first?.close()
+                                            closeClosure()
+                                        } else {
+                                            successConuntDown -= 1
+                                        }
+                                    }
                                 } else {
-                                    successConuntDown -= 1
+                                    showingAlert = true
                                 }
                             }
+                        } else {
+                            state = .fault
+                            showingAlert = true
                         }
                     }
+                }
+                .alert("OpenSettings", isPresented: $showingAlert) {
+                    Button("ButtonSettings") {
+                        NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Camera")!)
+                    }
+                    Button("ButtonCancel", role: .cancel) { }
                 }
             case .inProgress:
                 FirstLaunchProgressViews(frameSize: $safeArea)

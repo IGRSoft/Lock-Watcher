@@ -118,6 +118,12 @@
 "ButtonCancel" = "Відхилили";
 
 /* Description was not specified */
+"ButtonSettings" = "Налаштунки";
+
+/* Description was not specified */
+"OpenSettings" = "Будь-ласка, оновіть права доступу для застосунку для повного функціонування.\nВідкрити налаштування конфіденційністі?";
+
+/* Description was not specified */
 "AddTraceRoute" = "Додати Trace Route інфо";
 
 /* Description was not specified */
@@ -133,7 +139,7 @@
 "SetupFault" = "Помилка";
 
 /* Description was not specified */
-"SetupFaultMessage" = "будь ласка, дайте доступ додатку";
+"SetupFaultMessage" = "Будь-ласка, дайте доступ додатку";
 
 /* Description was not specified */
 "SetupOpenSettings" = "Вікрити налаштування";

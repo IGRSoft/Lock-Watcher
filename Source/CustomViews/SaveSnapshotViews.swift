@@ -35,9 +35,27 @@ struct SendNotificationToMailView: View {
 struct AddLocationToSnapshotView: View {
     @Binding var addLocationToSnapshot : Bool
     
+    @State private var showingAlert = false
+    
     var body: some View {
         Toggle(isOn: $addLocationToSnapshot) {
             Text("AddLocationToSnapshot")
+        }
+        .onChange(of: addLocationToSnapshot) { value in
+            if (value) {
+                PermissionsUtils.updateLocationPermissions { isGranted in
+                    showingAlert = !isGranted
+                }
+            }
+        }
+        .alert("OpenSettings", isPresented: $showingAlert) {
+            Button("ButtonSettings") {
+                NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices")!)
+                addLocationToSnapshot = false
+            }
+            Button("ButtonCancel", role: .cancel) {
+                addLocationToSnapshot = false
+            }
         }
     }
 }

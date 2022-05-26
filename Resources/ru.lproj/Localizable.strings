@@ -118,6 +118,12 @@
 "ButtonCancel" = "Отмена";
 
 /* Description was not specified */
+"ButtonSettings" = "Настройки";
+
+/* Description was not specified */
+"OpenSettings" = "Пожалуйста, обновите права доступа для приложения для полного функционирования.\nОткрыть настройки конфиденциальности?";
+
+/* Description was not specified */
 "AddTraceRoute" = "Добавить Trace Route инфо";
 
 /* Description was not specified */

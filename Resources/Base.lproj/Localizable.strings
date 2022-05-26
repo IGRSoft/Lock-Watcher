@@ -118,6 +118,12 @@
 "ButtonCancel" = "Cancel";
 
 /* Description was not specified */
+"ButtonSettings" = "Settings";
+
+/* Description was not specified */
+"OpenSettings" = "Please, update application permissions to full usage.\n Open Privacy Settings?";
+
+/* Description was not specified */
 "AddTraceRoute" = "Add Trace Route info";
 
 /* Description was not specified */
