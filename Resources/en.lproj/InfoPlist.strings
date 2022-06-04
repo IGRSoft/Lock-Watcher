@@ -2,5 +2,4 @@
 
 CFBundleDisplayName = "Lock Watcher";
 NSCameraUsageDescription = "Detect persone who is trying get access to your user";
-NSLocationAlwaysAndWhenInUseUsageDescription = "Add location information to snapshot";
-NSLocationUsageDescription = "Add location information to snapshot";
+NSLocationWhenInUseUsageDescription = "Add location information to snapshot";

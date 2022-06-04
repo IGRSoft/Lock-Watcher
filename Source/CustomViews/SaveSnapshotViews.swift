@@ -42,7 +42,7 @@ struct AddLocationToSnapshotView: View {
             Text("AddLocationToSnapshot")
         }
         .onChange(of: addLocationToSnapshot) { value in
-            if (value) {
+            if value {
                 PermissionsUtils.updateLocationPermissions { isGranted in
                     showingAlert = !isGranted
                 }
