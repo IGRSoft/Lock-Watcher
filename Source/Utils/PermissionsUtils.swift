@@ -22,7 +22,7 @@ class PermissionsUtils {
         case .authorizedAlways:
             handler(true)
         @unknown default:
-            handler(false)
+            handler(true)
         }
     }
     
@@ -38,7 +38,7 @@ class PermissionsUtils {
         case .authorized:
             handler(true)
         @unknown default:
-            handler(false)
+            handler(true)
         }
     }
 }
