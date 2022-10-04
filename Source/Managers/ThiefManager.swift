@@ -19,7 +19,7 @@ class ThiefManager: NSObject, ObservableObject {
     private let notificationManager = NotificationManager()
     public let objectWillChange = ObservableObjectPublisher()
     
-    private(set) lazy var settings = AppSettings()
+    private(set) var settings: AppSettings
     
     private var lastThiefDetection = ThiefDto()
     @Published var databaseManager = DatabaseManager()
@@ -32,7 +32,9 @@ class ThiefManager: NSObject, ObservableObject {
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
     
-    init(_ watchBlock: @escaping WatchBlock = {trigered in}) {
+    init(settings: AppSettings, watchBlock: @escaping WatchBlock = {trigered in}) {
+        self.settings = settings
+        
         super.init()
         
         self.watchBlock = watchBlock

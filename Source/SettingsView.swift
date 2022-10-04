@@ -16,12 +16,11 @@ struct SettingsView: View {
     
     typealias SettingsTrigerWatchBlock = ((TrigerType) -> Void)
     
-    @ObservedObject private var thiefManager: ThiefManager
+    @ObservedObject private(set) var thiefManager: ThiefManager
     
-    @ObservedObject private var settings = AppSettings()
+    @ObservedObject private var settings: AppSettings
     
     @State var isInfoHidden = true
-    @State var isFirstLaunchHidden = false
     @State var isAccessGranted = false
     
     private var accessGrantedBlock: AppEmptyClosure?
@@ -30,16 +29,11 @@ struct SettingsView: View {
         thiefManager.showSnapshot(identifier: identifier)
     }
     
-    init(watchBlock: @escaping SettingsTrigerWatchBlock, accessGrantedBlock: AppEmptyClosure?) {
-        self.thiefManager = ThiefManager { dto in
-            watchBlock(dto.trigerType)
-        }
+    init(settings: AppSettings, watchBlock: @escaping SettingsTrigerWatchBlock) {
+        self.settings = settings
         
-        if settings.options.isFirstLaunch {
-            settings.options.isFirstLaunch = false
-            FirstLaunchView(settings: settings, thiefManager: thiefManager, isHidden: $isFirstLaunchHidden, closeClosure: {
-                accessGrantedBlock!()
-            }).openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
+        thiefManager = ThiefManager(settings: settings) { dto in
+            watchBlock(dto.trigerType)
         }
     }
     
@@ -155,7 +149,7 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         //ForEach(["en", "ru", "uk"], id: \.self) { id in
-        SettingsView(watchBlock: { _ in }, accessGrantedBlock: {} )
+        SettingsView(settings: AppSettings(), watchBlock: { _ in } )
         //.environment(\.locale, .init(identifier: id))
         //}
     }

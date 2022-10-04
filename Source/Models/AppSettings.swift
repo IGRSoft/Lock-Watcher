@@ -58,25 +58,25 @@ final class AppSettings: ObservableObject {
     static var firstLaunchSuccessConunt = 15
     
     @UserDefault("OptionsSettings", defaultValue: OptionsSettings()) var options: OptionsSettings {
-        willSet {
+        didSet {
             objectWillChange.send()
         }
     }
     
     @UserDefault("TriggerSettings", defaultValue: TriggerSettings()) var triggers: TriggerSettings {
-        willSet {
+        didSet {
             objectWillChange.send()
         }
     }
     
     @UserDefault("SyncSettings", defaultValue: SyncSettings()) var sync: SyncSettings {
-        willSet {
+        didSet {
             objectWillChange.send()
         }
     }
     
     @UserDefault("UISettings", defaultValue: UISettings()) var ui: UISettings {
-        willSet {
+        didSet {
             objectWillChange.send()
         }
     }

@@ -25,12 +25,12 @@ struct Lock_WatcherApp: App {
         private var popover = NSPopover.init()
         private var statusBarItem: NSStatusItem?
         
-        private lazy var settingsView = SettingsView(watchBlock: { triger in
+        @State var isFirstLaunchHidden = false
+        
+        private lazy var settings = AppSettings()
+        
+        private lazy var settingsView = SettingsView(settings: settings, watchBlock: { triger in
             self.updateStatusBarIcon(triger: triger != .setup)
-        }, accessGrantedBlock: { [weak self] in
-            if let button = self?.statusBarItem?.button {
-                self?.popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
-            }
         })
         
         func applicationDidFinishLaunching(_ notification: Notification) {
@@ -39,6 +39,19 @@ struct Lock_WatcherApp: App {
             hideDockIcon()
             
             process(localNotification: notification)
+            
+            if settings.options.isFirstLaunch {
+                settings.options.isFirstLaunch = false
+                FirstLaunchView(settings: settings, thiefManager: settingsView.thiefManager, isHidden: $isFirstLaunchHidden, closeClosure: { [weak self] in
+                    if let button = self?.statusBarItem?.button {
+                        self?.popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+                    }
+                }).openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
+            }
+        }
+        
+        func applicationDidBecomeActive(_ notification: Notification) {
+            showPopover(nil)
         }
         
         func createPopover() {
@@ -102,7 +115,7 @@ struct Lock_WatcherApp: App {
         }
         
         private func showSecurityAlert(completion: (Bool) -> Void) {
-            if AppSettings().options.isProtected && SecurityUtil.hasPassword() {
+            if settings.options.isProtected && SecurityUtil.hasPassword() {
                 let alert = NSAlert()
                 alert.messageText = NSLocalizedString("EnterPassword", comment: "")
                 alert.addButton(withTitle: NSLocalizedString("ButtonOk", comment: ""))

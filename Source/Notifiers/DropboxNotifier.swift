@@ -15,7 +15,9 @@ class DropboxNotifier {
         case emptyData
     }
     
-    private var settings: AppSettings?
+    typealias DropboxNotifierAuthCallback = (() -> Void)
+    
+    private weak var settings: AppSettings?
     
     lazy var client = DropboxClientsManager.authorizedClient
     
@@ -25,7 +27,7 @@ class DropboxNotifier {
         DropboxClientsManager.setupWithAppKeyDesktop("wg60852o20nf6eh")
         
         NSAppleEventManager.shared().setEventHandler(self,
-                                                     andSelector: #selector(handleGetURLEvent(_:replyEvent:)),
+                                                     andSelector: #selector(handleGetURLEvent),
                                                      forEventClass: AEEventClass(kInternetEventClass),
                                                      andEventID: AEEventID(kAEGetURL))
     }
@@ -74,8 +76,7 @@ class DropboxNotifier {
                                                         controller: controller,
                                                         loadingStatusDelegate: nil,
                                                         openURL: {(url: URL) -> Void in NSWorkspace.shared.open(url)},
-                                                        scopeRequest: scopeRequest
-        )
+                                                        scopeRequest: scopeRequest)
     }
     
     static func logout() {
@@ -85,6 +86,8 @@ class DropboxNotifier {
     @objc func handleGetURLEvent(_ event: NSAppleEventDescriptor?, replyEvent: NSAppleEventDescriptor?) {
         if let aeEventDescriptor = event?.paramDescriptor(forKeyword: AEKeyword(keyDirectObject)) {
             if let urlStr = aeEventDescriptor.stringValue {
+                // this brings your application back the foreground on redirect
+                NSApp.activate(ignoringOtherApps: true)
                 let url = URL(string: urlStr)!
                 let oauthCompletion: DropboxOAuthCompletion = { [weak self] in
                     if let authResult = $0 {
@@ -102,8 +105,6 @@ class DropboxNotifier {
                     }
                 }
                 DropboxClientsManager.handleRedirectURL(url, completion: oauthCompletion)
-                // this brings your application back the foreground on redirect
-                NSApp.activate(ignoringOtherApps: true)
             }
         }
     }
