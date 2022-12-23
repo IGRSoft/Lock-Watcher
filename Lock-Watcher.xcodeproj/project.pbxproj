@@ -1117,7 +1117,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1127,7 +1127,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1145,7 +1145,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1155,7 +1155,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1172,7 +1172,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1182,7 +1182,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1199,7 +1199,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1209,7 +1209,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1227,7 +1227,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1238,7 +1238,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_SWIFT_FLAGS = "-D NON_MAS_CONFIG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1256,7 +1256,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1267,7 +1267,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_SWIFT_FLAGS = "-D NON_MAS_CONFIG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1345,7 +1345,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1356,7 +1356,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1414,7 +1414,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1424,7 +1424,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1441,7 +1441,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1451,7 +1451,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1468,7 +1468,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1478,7 +1478,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1496,7 +1496,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1507,7 +1507,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_SWIFT_FLAGS = "-D NON_MAS_CONFIG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1652,7 +1652,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1663,7 +1663,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1680,7 +1680,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1691,7 +1691,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1792,7 +1792,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1802,7 +1802,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1820,7 +1820,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 119;
+				CURRENT_PROJECT_VERSION = 121;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1830,7 +1830,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1930,7 +1930,7 @@
 			repositoryURL = "https://github.com/dropbox/SwiftyDropbox.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 9.1.0;
 			};
 		};
 		A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */ = {
@@ -1946,7 +1946,7 @@
 			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.0;
+				minimumVersion = 5.0.0;
 			};
 		};
 		A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */ = {

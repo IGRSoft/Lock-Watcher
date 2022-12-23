@@ -10,6 +10,10 @@ import SwiftUI
 import LaunchAtLogin
 
 struct LaunchAtLoginView: View {
+    init() {
+        LaunchAtLogin.migrateIfNeeded()
+    }
+    
     var body: some View {
         VStack(spacing: 16.0) {
             LaunchAtLogin.Toggle(LocalizedStringKey("LaunchAtLogin"))

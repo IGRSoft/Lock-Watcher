@@ -72,7 +72,7 @@ class DropboxNotifier {
     
     static func authorize(on controller: NSViewController) {
         let scopeRequest = ScopeRequest(scopeType: .user, scopes: ["account_info.read", "files.content.write"], includeGrantedScopes: false)
-        DropboxClientsManager.authorizeFromControllerV2(sharedWorkspace: NSWorkspace.shared,
+        DropboxClientsManager.authorizeFromControllerV2(sharedApplication: NSApplication.shared,
                                                         controller: controller,
                                                         loadingStatusDelegate: nil,
                                                         openURL: {(url: URL) -> Void in NSWorkspace.shared.open(url)},
