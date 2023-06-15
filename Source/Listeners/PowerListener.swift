@@ -59,7 +59,7 @@ class PowerListener: BaseListener, BaseListenerProtocol {
             
             let thief = ThiefDto()
             if powerMode == .battery {
-                thief.trigerType = .onBatteryPower
+                thief.triggerType = .onBatteryPower
             }
             
             DispatchQueue.main.async {

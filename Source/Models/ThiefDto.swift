@@ -9,11 +9,11 @@ import Foundation
 import CoreLocation
 import AppKit
 
-enum TrigerType: String {
+enum TriggerType: String {
     case setup, onWakeUp, onWrongPassword, onBatteryPower, usbConnected, logedIn
 }
 
-extension TrigerType {
+extension TriggerType {
     var info: String {
         return NSLocalizedString("TrigerType_\(self.rawValue)", comment: "")
     }
@@ -27,7 +27,7 @@ public class ThiefDto: Equatable {
     var coordinate: CLLocationCoordinate2D?
     var ipAddress: String?
     var traceRoute: String?
-    var trigerType: TrigerType = .setup
+    var triggerType: TriggerType = .setup
     var snapshot: NSImage?
     var filepath: URL?
     var date: Date = Date()

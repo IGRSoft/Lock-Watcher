@@ -1,5 +1,5 @@
 //
-//  TrigerManager.swift
+//  TriggerManager.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 06.01.2021.
@@ -8,9 +8,9 @@
 import Foundation
 import os
 
-class TrigerManager {
+class TriggerManager {
     
-    typealias TrigerBlock = ((ThiefDto) -> Void)
+    typealias TriggerBlock = ((ThiefDto) -> Void)
     
     private var settings: AppSettings?
     
@@ -19,8 +19,8 @@ class TrigerManager {
     private lazy var listeners: [ListenerName : BaseListenerProtocol] = {
         var listeners: [ListenerName : BaseListenerProtocol] = [.onWakeUpListener : WakeUpListener(),
                                                                 .onBatteryPowerListener : PowerListener(),
-                                                                .onUSBConnectionListenet : USBListener(),
-                                                                .onLoginListenet : LoginListener()]
+                                                                .onUSBConnectionListener : USBListener(),
+                                                                .onLoginListener : LoginListener()]
         
         if AppSettings.isMASBuild == false {
             listeners[.onWrongPassword] = WrongPasswordListener()
@@ -29,8 +29,8 @@ class TrigerManager {
         return listeners
     }()
     
-    public func start(settings: AppSettings?, _ trigerBlock: @escaping TrigerBlock = {trigered in}) {
-        os_log(.debug, "Starting all trigers")
+    public func start(settings: AppSettings?, _ trigerBlock: @escaping TriggerBlock = {trigered in}) {
+        os_log(.debug, "Starting all triggers")
         
         let runListener:(BaseListenerProtocol, Bool) -> () = {listener, isEnabled in
             if isEnabled == true {
@@ -65,12 +65,12 @@ class TrigerManager {
         }
         
         let isUseSnapshotOnUSBMount = settings?.triggers.isUseSnapshotOnUSBMount == true
-        if let usbListener = listeners[.onUSBConnectionListenet] {
+        if let usbListener = listeners[.onUSBConnectionListener] {
             runListener(usbListener, isUseSnapshotOnUSBMount)
         }
         
         let isUseSnapshotOnLogin = settings?.triggers.isUseSnapshotOnLogin == true
-        if let loginListener = listeners[.onLoginListenet] {
+        if let loginListener = listeners[.onLoginListener] {
             runListener(loginListener, isUseSnapshotOnLogin)
         }
         
@@ -90,9 +90,9 @@ class TrigerManager {
             listener = WrongPasswordListener()
         case .onBatteryPowerListener:
             listener = PowerListener()
-        case .onUSBConnectionListenet:
+        case .onUSBConnectionListener:
             listener = USBListener()
-        case .onLoginListenet:
+        case .onLoginListener:
             listener = LoginListener()
         }
         
@@ -101,7 +101,7 @@ class TrigerManager {
     }
     
     public func stop() {
-        os_log(.debug, "Stop all trigers")
+        os_log(.debug, "Stop all triggers")
         
         for listener in self.listeners.values {
             listener.stop()

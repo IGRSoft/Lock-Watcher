@@ -35,10 +35,10 @@ class USBListener: BaseListener, BaseListenerProtocol {
     
     @objc func receiveUSBNotification() {
         let thief = ThiefDto()
-        thief.trigerType = .usbConnected
+        thief.triggerType = .usbConnected
         
         DispatchQueue.main.async { [weak self] in
-            self?.listenerAction?(.onUSBConnectionListenet, thief)
+            self?.listenerAction?(.onUSBConnectionListener, thief)
         }
     }
 }

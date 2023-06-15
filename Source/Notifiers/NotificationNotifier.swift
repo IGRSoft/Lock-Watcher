@@ -26,7 +26,7 @@ class NotificationNotifier: NSObject {
                     let date = Date.dateFormat.string(from: thiefDto.date)
                     let content = UNMutableNotificationContent()
                     content.title = String(format: NSLocalizedString("SnapshotAt", comment: ""), arguments: [date])
-                    content.body = thiefDto.trigerType.info
+                    content.body = thiefDto.triggerType.info
                     content.sound =  UNNotificationSound.default
                     
                     let attachment = try? UNNotificationAttachment(identifier: UUID().uuidString, url: localURL, options: nil)

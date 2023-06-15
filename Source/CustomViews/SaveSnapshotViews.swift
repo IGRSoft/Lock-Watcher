@@ -112,9 +112,9 @@ struct DropboxView: View {
     var body: some View {
         HStack(spacing: 8.0, content: {
             
-            if let name = dropboxName, name.isEmpty == false {
+            if dropboxName.isEmpty == false {
                 Toggle(isOn: $isDropboxEnable) {
-                    Text(String(format: NSLocalizedString("SyncedWithDropbox %@", comment: ""), name))
+                    Text(String(format: NSLocalizedString("SyncedWithDropbox %@", comment: ""), dropboxName))
                 }
                 Button("Logout") {
                     DropboxNotifier.logout()

@@ -14,7 +14,7 @@ struct SettingsView: View {
         static let blockWidth = windowWidth - (windowBorder.leading + windowBorder.trailing)
     }
     
-    typealias SettingsTrigerWatchBlock = ((TrigerType) -> Void)
+    typealias SettingsTriggerWatchBlock = ((TriggerType) -> Void)
     
     @ObservedObject private(set) var thiefManager: ThiefManager
     
@@ -29,11 +29,11 @@ struct SettingsView: View {
         thiefManager.showSnapshot(identifier: identifier)
     }
     
-    init(settings: AppSettings, watchBlock: @escaping SettingsTrigerWatchBlock) {
+    init(settings: AppSettings, watchBlock: @escaping SettingsTriggerWatchBlock) {
         self.settings = settings
         
         thiefManager = ThiefManager(settings: settings) { dto in
-            watchBlock(dto.trigerType)
+            watchBlock(dto.triggerType)
         }
     }
     
@@ -46,7 +46,7 @@ struct SettingsView: View {
                         VStack(alignment: .leading, spacing: 8.0) {
                             LaunchAtLoginView()
                             
-                            ProtectionView(isProtectioEnable: $settings.options.isProtected)
+                            ProtectionView(isProtectionEnable: $settings.options.isProtected)
                         }
                     }
                 }

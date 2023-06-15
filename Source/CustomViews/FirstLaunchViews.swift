@@ -60,7 +60,7 @@ struct FirstLaunchProgressViews: View {
 }
 
 struct FirstLaunchSuccessViews: View {
-    @Binding var successConuntDown: Int
+    @Binding var successCountDown: Int
     
     @Binding var frameSize: CGSize
     
@@ -74,7 +74,7 @@ struct FirstLaunchSuccessViews: View {
             .foregroundColor(Color("success"))
         Image("tips0").aspectRatio(contentMode: .fit)
             .frame(width: frameSize.width, height: .infinity, alignment: .center)
-        Text(String(format: NSLocalizedString("SuccessTimer %d", comment: ""), successConuntDown))
+        Text(String(format: NSLocalizedString("SuccessTimer %d", comment: ""), successCountDown))
             .font(.body)
     }
 }

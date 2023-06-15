@@ -27,12 +27,12 @@ class ThiefManager: NSObject, ObservableObject {
     
     private var watchBlock: WatchBlock = {_ in}
     
-    lazy var trigerManager = TrigerManager()
+    lazy var triggerManager = TriggerManager()
     
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
     
-    init(settings: AppSettings, watchBlock: @escaping WatchBlock = {trigered in}) {
+    init(settings: AppSettings, watchBlock: @escaping WatchBlock = {_ in}) {
         self.settings = settings
         
         super.init()
@@ -65,13 +65,13 @@ class ThiefManager: NSObject, ObservableObject {
         os_log(.debug, "Start Watching")
         
         self.watchBlock = watchBlock
-        trigerManager.start(settings: settings) {[weak self] trigered in
+        triggerManager.start(settings: settings) {[weak self] trigered in
             watchBlock(trigered)
             
-            if trigered.trigerType != .setup {
+            if trigered.triggerType != .setup {
                 DispatchQueue.main.async {
-                    self?.lastThiefDetection.trigerType = trigered.trigerType
-                    self?.detectedTriger()
+                    self?.lastThiefDetection.triggerType = trigered.triggerType
+                    self?.detectedTrigger()
                 }
             }
             
@@ -81,17 +81,17 @@ class ThiefManager: NSObject, ObservableObject {
     
     public func stopWatching() {
         os_log(.debug, "Stop Watching")
-        trigerManager.stop()
+        triggerManager.stop()
     }
     
     public func restartWatching() {
-        trigerManager.start(settings: settings) {[weak self] trigered in
+        triggerManager.start(settings: settings) {[weak self] trigered in
             self?.watchBlock(trigered)
         }
     }
     
-    public func detectedTriger(_ closure: @escaping (Bool) -> Void = {_ in }) {
-        os_log(.debug, "Detected trigered action: \(self.lastThiefDetection.trigerType.rawValue)")
+    public func detectedTrigger(_ closure: @escaping (Bool) -> Void = {_ in }) {
+        os_log(.debug, "Detected trigered action: \(self.lastThiefDetection.triggerType.rawValue)")
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings.sync.isSaveSnapshotToDisk
         guard !AppSettings.isDebug else {

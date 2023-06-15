@@ -84,7 +84,7 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
             if detectedFailed {
                 self?.lastScreenLockDate = Date()
                 os_log(.debug, "Detected Authentication Failed")
-                thief.trigerType = .onWrongPassword
+                thief.triggerType = .onWrongPassword
             }
             
             DispatchQueue.main.async {

@@ -19,14 +19,14 @@ struct InfoView: View {
             if !isInfoHidden {
                 if AppSettings.isDebug {
                     Button("Debug") {
-                        thiefManager.detectedTriger()
+                        thiefManager.detectedTrigger()
                     }
                 }
                 
                 Button("Quit") {
                     exit(0)
                 }
-                Link("© IGR Software 2008 - 2022", destination: URL(string: "http://igrsoft.com")!)
+                Link("© IGR Software 2008 - 2023", destination: URL(string: "https://igrsoft.com")!)
             }
         }
     }
@@ -45,12 +45,9 @@ struct LastThiefDetectionView: View {
                 .background(Color("divider"))
             
             if let lastImage = latestImages.dtos.last,
-               let imageData = lastImage.data,
-               let image = NSImage(data: imageData),
-               let imageValue = Image(nsImage: image),
-               let date = lastImage.date {
+               let image = NSImage(data: lastImage.data) {
                 Text("LastSnapshot")
-                imageValue
+                Image(nsImage: image)
                     .resizable()
                     .scaledToFit().frame(width: 324, height: 180, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
@@ -58,7 +55,7 @@ struct LastThiefDetectionView: View {
                             NSWorkspace.shared.open(filepath)
                         }
                     }
-                Text("\(date, formatter: Date.dateFormat)")
+                Text("\(lastImage.date, formatter: Date.dateFormat)")
                 if latestImages.dtos.count > 1 {
                     Button("LastSnapshots") {
                         authenticate {

@@ -8,7 +8,7 @@
 import Foundation
 
 public enum ListenerName: Int {
-    case onWakeUpListener, onWrongPassword, onBatteryPowerListener, onUSBConnectionListenet, onLoginListenet
+    case onWakeUpListener, onWrongPassword, onBatteryPowerListener, onUSBConnectionListener, onLoginListener
 }
 
 public protocol BaseListenerProtocol {

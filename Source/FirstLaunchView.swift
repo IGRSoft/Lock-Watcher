@@ -34,7 +34,7 @@ struct FirstLaunchView: View {
     @State var closeClosure: AppEmptyClosure
     
     @State private var state: StateMode = .idle
-    @State private var successConuntDown = AppSettings.firstLaunchSuccessConunt
+    @State private var successCountDown = AppSettings.firstLaunchSuccessConunt
     
     @State private var windowSize = CGSize(width: Size.width, height: Size.height)
     @State private var safeArea = CGSize(width: Size.width - Size.minPadding, height: Size.height - Size.minPadding)
@@ -55,17 +55,17 @@ struct FirstLaunchView: View {
                     
                     PermissionsUtils.updateCameraPermissions { isGranted in
                         if isGranted {
-                            thiefManager.detectedTriger() { success in
+                            thiefManager.detectedTrigger() { success in
                                 state = success ? .success : .fault
                                 if success {
                                     timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                                        if successConuntDown == 0 {
+                                        if successCountDown == 0 {
                                             timer.invalidate()
                                             isHidden = true
                                             NSApp.windows.first?.close()
                                             closeClosure()
                                         } else {
-                                            successConuntDown -= 1
+                                            successCountDown -= 1
                                         }
                                     }
                                 } else {
@@ -87,7 +87,7 @@ struct FirstLaunchView: View {
             case .inProgress:
                 FirstLaunchProgressViews(frameSize: $safeArea)
             case .success:
-                FirstLaunchSuccessViews(successConuntDown: $successConuntDown, frameSize: $safeArea)
+                FirstLaunchSuccessViews(successCountDown: $successCountDown, frameSize: $safeArea)
             case .fault:
                 if !isNeedRestart {
                     FirstLaunchFaultViews(isHidden: $isNeedRestart, frameSize: $safeArea)

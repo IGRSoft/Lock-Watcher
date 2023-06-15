@@ -22,22 +22,22 @@ struct LaunchAtLoginView: View {
 }
 
 struct ProtectionView: View {
-    @Binding var isProtectioEnable : Bool
+    @Binding var isProtectionEnable : Bool
     @State var password : String = ""
     
     var body: some View {
         HStack(spacing: 8.0, content: {
-            Toggle(isOn: $isProtectioEnable) {
+            Toggle(isOn: $isProtectionEnable) {
                 Text("ProtectAccess")
             }
             SecureField("ProtectPassword", text: $password)
                 .textFieldStyle(.roundedBorder)
-                .disabled(isProtectioEnable == false)
+                .disabled(isProtectionEnable == false)
             Button("ButtonSet") {
                 SecurityUtil.save(password: password)
                 password = ""
             }
-            .disabled(isProtectioEnable == false || password.isEmpty)
+            .disabled(isProtectionEnable == false || password.isEmpty)
         })
     }
 }

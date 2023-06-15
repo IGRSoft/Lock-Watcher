@@ -25,13 +25,10 @@ struct Preview: View {
             ScrollView(.vertical, showsIndicators: true) {
                 LazyVGrid(columns: columns, spacing: 8.0) {
                     ForEach (imagesList.dtos) { imageDto in
-                        if let imageData = imageDto.data,
-                           let image = NSImage(data: imageData),
-                           let imageValue = Image(nsImage: image),
-                           let date = imageDto.date  {
+                        if let image = NSImage(data: imageDto.data) {
                             ZStack (alignment: .topTrailing) {
                                 VStack {
-                                    imageValue
+                                    Image(nsImage: image)
                                         .resizable()
                                         .scaledToFit().frame(width: 150, height: 90, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                         .onTapGesture {
@@ -40,7 +37,7 @@ struct Preview: View {
                                             }
                                         }
                                     
-                                    Text("\(date, formatter: Date.dateFormat)")
+                                    Text("\(imageDto.date, formatter: Date.dateFormat)")
                                         .padding(EdgeInsets(top: 8.0, leading: 8.0, bottom: 8.0, trailing: 8.0))
                                 }
                                 .overlay(
