@@ -15,7 +15,7 @@ class LoginListener: BaseListener, BaseListenerProtocol {
     var isRunning: Bool = false
     
     private lazy var debouncedThief: () -> Void = {
-        let debouncedFunction = DispatchQueue.main.debounce(interval: 500) { [weak self] in
+        let debouncedFunction = DispatchQueue.main.debounce(interval: .milliseconds(500)) { [weak self] in
             let thief = ThiefDto()
             thief.triggerType = .logedIn
             

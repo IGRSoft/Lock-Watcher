@@ -13,16 +13,20 @@ import Combine
 import CoreLocation
 import UserNotifications
 
-class ThiefManager: NSObject, ObservableObject {
+protocol ThiefManagerProtocol: ObservableObject {
+    
+}
+
+class ThiefManager: NSObject, ThiefManagerProtocol{
     typealias WatchBlock = ((ThiefDto) -> Void)
     
-    private let notificationManager = NotificationManager()
+    private let notificationManager: NotificationManager
     public let objectWillChange = ObservableObjectPublisher()
     
-    private(set) var settings: AppSettings
+    private(set) var settings: (any AppSettingsProtocol)
     
     private var lastThiefDetection = ThiefDto()
-    @Published var databaseManager = DatabaseManager()
+    @Published var databaseManager: DatabaseManager
     private let networkUtil = NetworkUtil()
     
     private var watchBlock: WatchBlock = {_ in}
@@ -32,21 +36,22 @@ class ThiefManager: NSObject, ObservableObject {
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
     
-    init(settings: AppSettings, watchBlock: @escaping WatchBlock = {_ in}) {
+    init(settings: (any AppSettingsProtocol), watchBlock: @escaping WatchBlock = {_ in}) {
         self.settings = settings
+        
+        notificationManager = NotificationManager(settings: settings)
+        
+        databaseManager = DatabaseManager(settings: settings)
         
         super.init()
         
         self.watchBlock = watchBlock
-        
-        databaseManager.setupSettings(settings)
-        
+                
         if (settings.options.addLocationToSnapshot) {
             setupLocationManager(enable: true)
         }
         
         startWatching(watchBlock)
-        notificationManager.setupSettings(settings: settings)
         
         UNUserNotificationCenter.current().delegate = self
     }
@@ -97,11 +102,11 @@ class ThiefManager: NSObject, ObservableObject {
         guard !AppSettings.isDebug else {
             let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
             let date = Date()
-            self.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
-            let debouncedFunction = DispatchQueue.main.debounce(interval: 1_000) {
+            lastThiefDetection.triggerType = .debug
+            processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
+            DispatchQueue.main.debounce(interval: .seconds(1)) {
                 closure(true)
-            }
-            debouncedFunction()
+            }()
             
             return
         }

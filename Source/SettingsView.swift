@@ -7,18 +7,19 @@
 
 import SwiftUI
 
-struct SettingsView: View {
-    private struct K {
-        static let windowWidth: CGFloat = 340
-        static let windowBorder = EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
-        static let blockWidth = windowWidth - (windowBorder.leading + windowBorder.trailing)
-    }
+fileprivate struct K {
+    static let windowWidth: CGFloat = 340
+    static let windowBorder = EdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
+    static let blockWidth = windowWidth - (windowBorder.leading + windowBorder.trailing)
+}
+
+struct SettingsView<AppSettingsModel>: View where AppSettingsModel: AppSettingsProtocol {
     
     typealias SettingsTriggerWatchBlock = ((TriggerType) -> Void)
     
     @ObservedObject private(set) var thiefManager: ThiefManager
     
-    @ObservedObject private var settings: AppSettings
+    @ObservedObject private var settings: AppSettingsModel
     
     @State var isInfoHidden = true
     @State var isAccessGranted = false
@@ -29,12 +30,9 @@ struct SettingsView: View {
         thiefManager.showSnapshot(identifier: identifier)
     }
     
-    init(settings: AppSettings, watchBlock: @escaping SettingsTriggerWatchBlock) {
+    init(settings: AppSettingsModel, thiefManager: ThiefManager) {
         self.settings = settings
-        
-        thiefManager = ThiefManager(settings: settings) { dto in
-            watchBlock(dto.triggerType)
-        }
+        self.thiefManager = thiefManager
     }
     
     var body: some View {
@@ -124,16 +122,6 @@ struct SettingsView: View {
                     }
                 }
                 .frame(width: K.blockWidth)
-                
-                VStack(alignment: .leading) {
-                    LastThiefDetectionView(databaseManager: $thiefManager.databaseManager)
-                }
-                .frame(width: K.blockWidth)
-                
-                VStack(alignment: .leading) {
-                    InfoView(thiefManager: thiefManager, isInfoHidden: $isInfoHidden)
-                }
-                .frame(width: K.blockWidth)
             }
             .padding(K.windowBorder)
             .frame(width: K.windowWidth)
@@ -149,7 +137,7 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         //ForEach(["en", "ru", "uk"], id: \.self) { id in
-        SettingsView(settings: AppSettings(), watchBlock: { _ in } )
+        SettingsView(settings: AppSettings(), thiefManager: ThiefManager(settings: AppSettings()) )
         //.environment(\.locale, .init(identifier: id))
         //}
     }

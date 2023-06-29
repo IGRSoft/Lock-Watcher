@@ -47,7 +47,7 @@ struct Preview: View {
                                 Button(action: {
                                     databaseManager.remove(imageDto)
                                 }) {
-                                    Image(systemName: "xmark.square.fill").font(.system(size: 11)).tint(.red)
+                                    Image(systemName: "xmark.square.fill").font(.system(size: 11))
                                 }
                                 .buttonStyle(BorderlessButtonStyle())
                                 .padding(EdgeInsets(top: 8.0, leading: 8.0, bottom: 8.0, trailing: 8.0))

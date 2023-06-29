@@ -22,7 +22,9 @@ struct InfoView: View {
                         thiefManager.detectedTrigger()
                     }
                 }
-                
+                Button("ButtonSettings") {
+                    NSApplication.displaySettingsWindow()
+                }
                 Button("Quit") {
                     exit(0)
                 }

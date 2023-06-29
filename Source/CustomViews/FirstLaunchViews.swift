@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-struct FirstLaunchOptionsViews: View {
-    @ObservedObject var settings: AppSettings
+struct FirstLaunchOptionsViews<AppSettingsModel>: View where AppSettingsModel: AppSettingsProtocol {
+    @ObservedObject var settings: AppSettingsModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {

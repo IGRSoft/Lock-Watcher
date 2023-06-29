@@ -14,9 +14,9 @@ class NotificationManager {
     private lazy var icloudNotifier = iCloudNotifier()
     private lazy var dropboxNotifier = DropboxNotifier()
     private lazy var notificationNotifier = NotificationNotifier()
-    private weak var settings: AppSettings!
+    private weak var settings: (any AppSettingsProtocol)!
     
-    func setupSettings(settings: AppSettings) {
+    init(settings: any AppSettingsProtocol) {
         self.settings = settings
         
         dropboxNotifier.register(with: settings)

@@ -15,19 +15,17 @@ class DatabaseManager: Equatable {
     
     private let kImagesKey = "images"
     
-    private var settings: AppSettings!
+    private var settings: (any AppSettingsProtocol)
     
     private var storage: Storage? = nil
     
-    init() {
+    init(settings: (any AppSettingsProtocol)) {
+        self.settings = settings
+        
         var options: Options = Options()
         options.folder = "Thiefs"
         
         storage = try? Storage(options: options)
-    }
-    
-    func setupSettings(_ settings: AppSettings) {
-        self.settings = settings
     }
     
     func send(_ thiefDto: ThiefDto) -> Bool {

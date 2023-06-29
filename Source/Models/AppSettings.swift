@@ -44,8 +44,24 @@ struct SyncSettings: Codable {
     var isUseSnapshotLocalNotification = false
 }
 
-final class AppSettings: ObservableObject {
-    let objectWillChange = PassthroughSubject<Void, Never>()
+protocol AppSettingsProtocol: ObservableObject {
+    static var isMASBuild: Bool { get }
+    
+    static var isDebug: Bool { get }
+    
+    static var firstLaunchSuccessConunt: Int { get }
+    
+    var options: OptionsSettings { get set }
+    
+    var triggers: TriggerSettings { get set }
+    
+    var sync: SyncSettings { get set }
+    
+    var ui: UISettings { get set }
+}
+
+final class AppSettings: AppSettingsProtocol {
+    internal let objectWillChange = PassthroughSubject<Void, Never>()
     
 #if NON_MAS_CONFIG
     static var isMASBuild = false
@@ -53,7 +69,7 @@ final class AppSettings: ObservableObject {
     static var isMASBuild = true
 #endif
     
-    static var isDebug = false
+    static var isDebug = true
     
     static var firstLaunchSuccessConunt = 15
     

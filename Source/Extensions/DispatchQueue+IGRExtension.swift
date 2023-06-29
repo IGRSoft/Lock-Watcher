@@ -11,18 +11,12 @@ import Foundation
 typealias Debounce<T> = (_ : T) -> Void
 
 extension DispatchQueue {
-    func debounce(interval: Int, action: @escaping (() -> Void)) -> () -> Void {
-        var lastFireTime = DispatchTime.now()
-        let dispatchDelay = DispatchTimeInterval.milliseconds(interval)
-        
-        return {
-            lastFireTime = DispatchTime.now()
-            let dispatchTime: DispatchTime = DispatchTime.now() + dispatchDelay
+    func debounce(interval: DispatchTimeInterval, action: @escaping (() -> Void)) -> () -> Void {
+        {
+            let dispatchIn = DispatchTime.now() + interval
             
-            self.asyncAfter(deadline: dispatchTime) {
-                let when: DispatchTime = lastFireTime + dispatchDelay
-                let now = DispatchTime.now()
-                if now.rawValue >= when.rawValue {
+            self.asyncAfter(deadline: dispatchIn) {
+                if DispatchTime.now() >= dispatchIn {
                     action()
                 }
             }

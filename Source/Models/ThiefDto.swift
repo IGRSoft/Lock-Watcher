@@ -10,7 +10,7 @@ import CoreLocation
 import AppKit
 
 enum TriggerType: String {
-    case setup, onWakeUp, onWrongPassword, onBatteryPower, usbConnected, logedIn
+    case setup, onWakeUp, onWrongPassword, onBatteryPower, usbConnected, logedIn, debug
 }
 
 extension TriggerType {

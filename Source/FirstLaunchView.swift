@@ -8,26 +8,30 @@
 
 import SwiftUI
 
-struct FirstLaunchView: View {
+struct FirstLaunchView<AppSettingsModel>: View where AppSettingsModel: AppSettingsProtocol {
     
-    enum StateMode: Int {
+    enum StateMode: Int, CaseIterable {
         case idle
         case inProgress
         case success
         case fault
         
-        static let allValues = [idle, inProgress, success, fault]
+        static var allCases: [StateMode] {
+            [.idle, .inProgress, .success, .fault]
+        }
     }
     
-    private struct Size {
-        static let width: CGFloat = 320
-        static let height: CGFloat = 220
+    private enum Size: CGFloat {
+        typealias RawValue = CGFloat
         
-        static let minPadding: CGFloat = 8
-        static let maxPadding: CGFloat = 16 //double of min
+        case width = 320
+        case height = 220
+        
+        case minPadding = 8
+        case maxPadding = 16 //double of min
     }
     
-    @ObservedObject var settings: AppSettings
+    @ObservedObject var settings: AppSettingsModel
     @ObservedObject var thiefManager: ThiefManager
     
     @Binding var isHidden: Bool
@@ -36,8 +40,8 @@ struct FirstLaunchView: View {
     @State private var state: StateMode = .idle
     @State private var successCountDown = AppSettings.firstLaunchSuccessConunt
     
-    @State private var windowSize = CGSize(width: Size.width, height: Size.height)
-    @State private var safeArea = CGSize(width: Size.width - Size.minPadding, height: Size.height - Size.minPadding)
+    @State private var windowSize = CGSize(width: Size.width.rawValue, height: Size.height.rawValue)
+    @State private var safeArea = CGSize(width: Size.width.rawValue - Size.minPadding.rawValue, height: Size.height.rawValue - Size.minPadding.rawValue)
     
     @State var isNeedRestart: Bool = false
     
@@ -46,7 +50,7 @@ struct FirstLaunchView: View {
     @State private var timer: Timer?
     
     var body: some View {
-        VStack(alignment: .center, spacing: Size.maxPadding) {
+        VStack(alignment: .center, spacing: Size.maxPadding.rawValue) {
             switch state {
             case .idle:
                 FirstLaunchOptionsViews(settings: settings)
@@ -100,7 +104,7 @@ struct FirstLaunchView: View {
                 }
             }
         }
-        .padding(EdgeInsets(top: Size.maxPadding, leading: Size.maxPadding, bottom: Size.maxPadding, trailing: Size.maxPadding))
+        .padding(EdgeInsets(top: Size.maxPadding.rawValue, leading: Size.maxPadding.rawValue, bottom: Size.maxPadding.rawValue, trailing: Size.maxPadding.rawValue))
         .frame(width: windowSize.width, height: windowSize.height, alignment: .center)
         .onDisappear() {
             timer?.invalidate()

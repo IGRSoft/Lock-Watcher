@@ -12,7 +12,7 @@ class TriggerManager {
     
     typealias TriggerBlock = ((ThiefDto) -> Void)
     
-    private var settings: AppSettings?
+    private var settings: (any AppSettingsProtocol)?
     
     var runListener: ((BaseListenerProtocol, Bool) -> ())?
     
@@ -29,7 +29,7 @@ class TriggerManager {
         return listeners
     }()
     
-    public func start(settings: AppSettings?, _ trigerBlock: @escaping TriggerBlock = {trigered in}) {
+    public func start(settings: (any AppSettingsProtocol)?, _ trigerBlock: @escaping TriggerBlock = {trigered in}) {
         os_log(.debug, "Starting all triggers")
         
         let runListener:(BaseListenerProtocol, Bool) -> () = {listener, isEnabled in

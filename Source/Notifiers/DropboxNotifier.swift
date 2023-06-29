@@ -17,11 +17,11 @@ class DropboxNotifier {
     
     typealias DropboxNotifierAuthCallback = (() -> Void)
     
-    private weak var settings: AppSettings?
+    private weak var settings: (any AppSettingsProtocol)?
     
     lazy var client = DropboxClientsManager.authorizedClient
     
-    func register(with settings: AppSettings?) {
+    func register(with settings: (any AppSettingsProtocol)?) {
         self.settings = settings
         
         DropboxClientsManager.setupWithAppKeyDesktop("wg60852o20nf6eh")

@@ -1,0 +1,13 @@
+//
+//  uitest-debug.xcconfig
+//  Lock-Watcher
+//
+//  Created by dev on 30.05.2023.
+//  Copyright © 2023. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "../debug.xcconfig"
+#include "uitest.xcconfig"
