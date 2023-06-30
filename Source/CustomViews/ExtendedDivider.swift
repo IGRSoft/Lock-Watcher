@@ -8,16 +8,6 @@
 
 import SwiftUI
 
-extension View {
-    @ViewBuilder func applyIf<T: View>(_ condition: @autoclosure () -> Bool, apply: (Self) -> T, else: (Self) -> T) -> some View {
-        if condition() {
-            apply(self)
-        } else {
-            `else`(self)
-        }
-    }
-}
-
 struct ExtendedDivider: View {
     @Binding var isExtended: Bool
     

@@ -1,5 +1,5 @@
 //
-//  NSApp+Settings.swift
+//  NSApplication+Settings.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii P on 28.06.2023.

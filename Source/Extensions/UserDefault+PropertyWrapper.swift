@@ -1,6 +1,6 @@
 //
-//  UserDefault+IGRExtension.swift
-//  UserDefault+IGRExtension
+//  PropertyWrapper.swift
+//  PropertyWrapper
 //
 //  Created by Vitalii Parovishnyk on 29.08.2021.
 //

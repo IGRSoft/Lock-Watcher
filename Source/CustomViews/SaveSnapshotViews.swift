@@ -48,7 +48,7 @@ struct AddLocationToSnapshotView: View {
                 }
             }
         }
-        /*.alert("OpenSettings", isPresented: $showingAlert) {
+        .alert("OpenSettings", isPresented: $showingAlert) {
             Button("ButtonSettings") {
                 NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices")!)
                 addLocationToSnapshot = false
@@ -56,7 +56,7 @@ struct AddLocationToSnapshotView: View {
             Button("ButtonCancel", role: .cancel) {
                 addLocationToSnapshot = false
             }
-        }*/
+        }
     }
 }
 

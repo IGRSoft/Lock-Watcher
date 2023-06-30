@@ -7,31 +7,44 @@
 
 import Foundation
 import EasyStash
+import Combine
 
-class DatabaseManager: Equatable {
-    public static func == (lhs: DatabaseManager, rhs: DatabaseManager) -> Bool {
-        return lhs.storage?.folderUrl == rhs.storage?.folderUrl
-    }
+protocol DatabaseManagerProtocol: ObservableObject {
+    func send(_ thiefDto: ThiefDto) -> DatabaseDtoList
     
+    func remove(_ dto: DatabaseDto) -> DatabaseDtoList
+    
+    var latestImages: [DatabaseDto] { get }
+    
+    var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { get }
+}
+
+class DatabaseManager: DatabaseManagerProtocol {    
     private let kImagesKey = "images"
     
-    private var settings: (any AppSettingsProtocol)
+    private var settings: any AppSettingsProtocol
     
     private var storage: Storage? = nil
     
-    init(settings: (any AppSettingsProtocol)) {
+    @Published private(set) var latestImages: [DatabaseDto] = .init()
+    
+    var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { $latestImages }
+    
+    init(settings: any AppSettingsProtocol) {
         self.settings = settings
         
         var options: Options = Options()
         options.folder = "Thiefs"
         
         storage = try? Storage(options: options)
+        
+        latestImages.append(contentsOf: readImages().dtos)
     }
     
-    func send(_ thiefDto: ThiefDto) -> Bool {
+    func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
         let dto = DatabaseDto(with: thiefDto)
         
-        let images = latestImages()
+        let images = readImages()
         
         images.append(dto)
         images.dtos = images.dtos.suffix(settings.options.keepLastActionsCount)
@@ -40,14 +53,16 @@ class DatabaseManager: Equatable {
             try storage?.save(object: images, forKey: kImagesKey)
         } catch {
             print(error)
-            return false
+            return images
         }
         
-        return true
+        latestImages = images.dtos
+        
+        return images
     }
     
-    func remove(_ dto: DatabaseDto) {
-        let images = latestImages()
+    func remove(_ dto: DatabaseDto) -> DatabaseDtoList {
+        let images = readImages()
         
         images.dtos.removeAll {$0.date == dto.date}
         
@@ -56,10 +71,14 @@ class DatabaseManager: Equatable {
         } catch {
             print(error)
         }
+        
+        latestImages = images.dtos
+        
+        return images
     }
     
-    func latestImages() -> DatabaseDtoList {
-        var images: DatabaseDtoList = DatabaseDtoList(dtos: [DatabaseDto]())
+    private func readImages() -> DatabaseDtoList {
+        var images: DatabaseDtoList = DatabaseDtoList(dtos: .init())
         do {
             if let imgs = try storage?.load(forKey: kImagesKey, as: DatabaseDtoList.self) {
                 images = imgs
@@ -69,5 +88,11 @@ class DatabaseManager: Equatable {
         }
         
         return images
+    }
+}
+
+extension DatabaseManager: Equatable {
+    public static func == (lhs: DatabaseManager, rhs: DatabaseManager) -> Bool {
+        return lhs.storage?.folderUrl == rhs.storage?.folderUrl
     }
 }

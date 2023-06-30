@@ -26,17 +26,17 @@ class NetworkUtil {
         return publicIP
     }
     
-    func getTraceRoute(host: String, compleate: @escaping (String) -> ()) {
+    func getTraceRoute(host: String, complete: @escaping (String) -> ()) {
         var traceRoute = ""
         
-        simpleTracer = SimpleTracer.trace(host: host, maxTraceTTL: 15) { (result) in
+        simpleTracer = SimpleTracer.trace(host: host, maxTraceTTL: 16) { (result) in
             switch result {
             case .finished(_, let ip, _):
                 traceRoute += "\(ip)}"
-                compleate(traceRoute)
+                complete(traceRoute)
             case .failed(let error):
                 traceRoute += "\(error)}"
-                compleate(traceRoute)
+                complete(traceRoute)
             case .start(_, let ip, _):
                 traceRoute += "Trace route: { \(ip)\n"
             case .router(_, let ip, _):

@@ -26,10 +26,6 @@ struct SettingsView<AppSettingsModel>: View where AppSettingsModel: AppSettingsP
     
     private var accessGrantedBlock: AppEmptyClosure?
     
-    func showSnapshot(identifier: String) {
-        thiefManager.showSnapshot(identifier: identifier)
-    }
-    
     init(settings: AppSettingsModel, thiefManager: ThiefManager) {
         self.settings = settings
         self.thiefManager = thiefManager

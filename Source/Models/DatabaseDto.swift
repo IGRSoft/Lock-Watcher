@@ -35,7 +35,7 @@ class DatabaseDtoList: Codable, ObservableObject {
     }
 }
 
-class DatabaseDto: Codable, Identifiable {
+public class DatabaseDto: Codable, Identifiable {
     
     enum CodingKeys: String, CodingKey {
         case date, data, path
@@ -45,7 +45,7 @@ class DatabaseDto: Codable, Identifiable {
     var data: Data
     var path: URL?
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encode(date, forKey: .date)
@@ -53,7 +53,7 @@ class DatabaseDto: Codable, Identifiable {
         try container.encodeIfPresent(path, forKey: .path)
     }
     
-    required init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         date = try container.decode(Date.self, forKey: .date)
@@ -65,5 +65,22 @@ class DatabaseDto: Codable, Identifiable {
         date = thiefDto.date
         data = thiefDto.snapshot!.jpegData()
         path = thiefDto.filepath
+    }
+}
+
+extension DatabaseDto: Equatable, Hashable {
+    public static func == (lhs: DatabaseDto, rhs: DatabaseDto) -> Bool {
+        return lhs.date == rhs.date &&
+        lhs.data == rhs.data &&
+        lhs.path == rhs.path
+    }
+    
+    public static func < (lhs: DatabaseDto, rhs: DatabaseDto) -> Bool {
+        return lhs.date < rhs.date
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(date)
+        hasher.combine(data)
     }
 }

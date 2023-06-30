@@ -14,10 +14,12 @@ import CoreLocation
 import UserNotifications
 
 protocol ThiefManagerProtocol: ObservableObject {
+    func detectedTrigger(_ closure: @escaping (Bool) -> Void)
     
+    var databaseManager: any DatabaseManagerProtocol { get }
 }
 
-class ThiefManager: NSObject, ThiefManagerProtocol{
+final class ThiefManager: NSObject, ThiefManagerProtocol{
     typealias WatchBlock = ((ThiefDto) -> Void)
     
     private let notificationManager: NotificationManager
@@ -26,7 +28,7 @@ class ThiefManager: NSObject, ThiefManagerProtocol{
     private(set) var settings: (any AppSettingsProtocol)
     
     private var lastThiefDetection = ThiefDto()
-    @Published var databaseManager: DatabaseManager
+    @Published var databaseManager: any DatabaseManagerProtocol
     private let networkUtil = NetworkUtil()
     
     private var watchBlock: WatchBlock = {_ in}
@@ -36,7 +38,7 @@ class ThiefManager: NSObject, ThiefManagerProtocol{
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
     
-    init(settings: (any AppSettingsProtocol), watchBlock: @escaping WatchBlock = {_ in}) {
+    init(settings: any AppSettingsProtocol, watchBlock: @escaping WatchBlock = {_ in}) {
         self.settings = settings
         
         notificationManager = NotificationManager(settings: settings)
@@ -165,10 +167,8 @@ class ThiefManager: NSObject, ThiefManagerProtocol{
     }
     
     func showSnapshot(identifier: String) {
-        if let dto = databaseManager.latestImages().dtos.first(where: { Date.dateFormat.string(from: $0.date) == identifier }) {
-            if let filepath = dto.path {
-                NSWorkspace.shared.open(filepath)
-            }
+        if let filePath = databaseManager.latestImages.first(where: { Date.dateFormat.string(from: $0.date) == identifier })?.path {
+            NSWorkspace.shared.open(filePath)
         }
     }
 }

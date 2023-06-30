@@ -17,10 +17,9 @@ class FileSystemUtil {
         
         documentURL = documentURL.appendingPathComponent("Lock-Watcher")
         
-        let fm = FileManager.default
-        if fm.fileExists(atPath: documentURL.path) == false {
+        if fileManager.fileExists(atPath: documentURL.path) == false {
             do {
-                try fm.createDirectory(at: documentURL, withIntermediateDirectories: true)
+                try fileManager.createDirectory(at: documentURL, withIntermediateDirectories: true)
             }
             catch {
                 os_log(.debug, "error saving: \(error.localizedDescription)")

@@ -12,6 +12,8 @@ protocol BaseCoordinatorProtocol {
     
     associatedtype SettingsModel: AppSettingsProtocol
     
+    associatedtype ThiefManagerModel: ThiefManagerProtocol
+    
     func displayMainWindow()
     
     func closeMainWindow()
@@ -25,6 +27,8 @@ protocol BaseCoordinatorProtocol {
 
 class MainCoordinatorPreview: BaseCoordinatorProtocol {
     typealias SettingsModel = AppSettings
+    
+    typealias ThiefManagerModel = ThiefManager
     
     func displayMainWindow() {}
     

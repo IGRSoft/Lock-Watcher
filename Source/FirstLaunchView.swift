@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FirstLaunchView<AppSettingsModel>: View where AppSettingsModel: AppSettingsProtocol {
+struct FirstLaunchView<AppSettingsModel, ThiefManagerModel>: View where AppSettingsModel: AppSettingsProtocol, ThiefManagerModel: ThiefManagerProtocol {
     
     enum StateMode: Int, CaseIterable {
         case idle
@@ -32,7 +32,7 @@ struct FirstLaunchView<AppSettingsModel>: View where AppSettingsModel: AppSettin
     }
     
     @ObservedObject var settings: AppSettingsModel
-    @ObservedObject var thiefManager: ThiefManager
+    @ObservedObject var thiefManager: ThiefManagerModel
     
     @Binding var isHidden: Bool
     @State var closeClosure: AppEmptyClosure

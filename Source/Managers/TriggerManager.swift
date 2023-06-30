@@ -29,14 +29,14 @@ class TriggerManager {
         return listeners
     }()
     
-    public func start(settings: (any AppSettingsProtocol)?, _ trigerBlock: @escaping TriggerBlock = {trigered in}) {
+    public func start(settings: (any AppSettingsProtocol)?, _ triggerBlock: @escaping TriggerBlock = { triggered in }) {
         os_log(.debug, "Starting all triggers")
         
-        let runListener:(BaseListenerProtocol, Bool) -> () = {listener, isEnabled in
+        let runListener:(BaseListenerProtocol, Bool) -> () = { listener, isEnabled in
             if isEnabled == true {
                 if listener.isRunning == false {
-                    listener.start() { [weak self] type, trigered in
-                        trigerBlock(trigered)
+                    listener.start() { [weak self] type, triggered in
+                        triggerBlock(triggered)
                         
                         self?.restartListener(type: type)
                     }

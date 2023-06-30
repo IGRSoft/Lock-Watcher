@@ -10,8 +10,8 @@ import Foundation
 extension Date {
     static let dateFormat: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
         return formatter
     }()
 }

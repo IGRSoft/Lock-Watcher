@@ -1,5 +1,5 @@
 //
-//  NSImage+IGRExtension.swift
+//  NSImage+Text.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 10.08.2021.
@@ -35,17 +35,5 @@ extension NSImage {
         text.draw(in: textRect, withAttributes: textFontAttributes)
         image.unlockFocus()
         return image
-    }
-    
-    func jpegData() -> Data {
-        guard let tiffData = self.tiffRepresentation, let bitmap: NSBitmapImageRep = NSBitmapImageRep(data: tiffData) else {
-            return Data()
-        }
-        
-        guard let data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: 0.9]) else {
-            return Data()
-        }
-        
-        return data
     }
 }

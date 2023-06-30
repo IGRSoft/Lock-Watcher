@@ -13,11 +13,15 @@ class MainCoordinator: BaseCoordinatorProtocol {
     
     typealias SettingsModel = AppSettings
     
+    typealias ThiefManagerModel = ThiefManager
+    
     private let logger: Log
     
     private var settings: SettingsModel
     
-    private var thiefManager: ThiefManager
+    private var thiefManager: ThiefManagerModel
+    
+    private lazy var popoverViewModel: PopoverViewModel = PopoverViewModel(thiefManager: thiefManager)
     
     /// popover with configuration to display from status bar icon
     ///
@@ -26,14 +30,14 @@ class MainCoordinator: BaseCoordinatorProtocol {
         popover.behavior = .transient
         popover.animates = false
         popover.contentViewController = NSViewController()
-        popover.contentViewController?.view = NSHostingView(rootView: PopoverView(thiefManager: thiefManager))
+        popover.contentViewController?.view = NSHostingView(rootView: PopoverView(viewModel: popoverViewModel))
         
         return popover
     }()
     
     private let statusBarButton: NSStatusBarButton
     
-    init(logger: Log = Log(category: .coordinator), settings: SettingsModel, thiefManager: ThiefManager, statusBarButton: NSStatusBarButton) {
+    init(logger: Log = Log(category: .coordinator), settings: SettingsModel, thiefManager: ThiefManagerModel, statusBarButton: NSStatusBarButton) {
         self.logger = logger
         self.settings = settings
         self.thiefManager = thiefManager
@@ -43,7 +47,7 @@ class MainCoordinator: BaseCoordinatorProtocol {
     func displayMainWindow() {
         showSecurityAccessAlert { [unowned self] granted in
             if granted {
-                statusBarButton.image = MainCoordinator.statusBarIcon()
+                statusBarButton.image = .statusBarIcon()
                 showPopover(for: statusBarButton)
             }
         }
@@ -62,7 +66,6 @@ class MainCoordinator: BaseCoordinatorProtocol {
     }
     
     func displayFirstLaunchWindowIfNeed(isHidden: Binding<Bool>, closeClosure: @escaping AppEmptyClosure) {
-        settings.options.isFirstLaunch = true
         if settings.options.isFirstLaunch {
             settings.options.isFirstLaunch = false
             FirstLaunchView(settings: settings, thiefManager: thiefManager, isHidden: isHidden, closeClosure: closeClosure)
@@ -108,9 +111,4 @@ class MainCoordinator: BaseCoordinatorProtocol {
         
         completion(isValid)
     }
-    
-    static func statusBarIcon(triggered: Bool = false) -> NSImage? {
-        return triggered ? .init(named: "MenuIconAlert") : .init(named: "MenuIcon")
-    }
 }
-
