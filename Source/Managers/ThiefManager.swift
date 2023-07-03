@@ -16,7 +16,11 @@ import UserNotifications
 protocol ThiefManagerProtocol: ObservableObject {
     func detectedTrigger(_ closure: @escaping (Bool) -> Void)
     
+    func restartWatching()
+    
     var databaseManager: any DatabaseManagerProtocol { get }
+    
+    func setupLocationManager(enable: Bool)
 }
 
 final class ThiefManager: NSObject, ThiefManagerProtocol{
@@ -167,7 +171,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
     }
     
     func showSnapshot(identifier: String) {
-        if let filePath = databaseManager.latestImages.first(where: { Date.dateFormat.string(from: $0.date) == identifier })?.path {
+        if let filePath = databaseManager.latestImages.first(where: { Date.defaultFormat.string(from: $0.date) == identifier })?.path {
             NSWorkspace.shared.open(filePath)
         }
     }
@@ -204,4 +208,18 @@ extension ThiefManager: UNUserNotificationCenterDelegate {
         let identifier = response.notification.request.identifier;
         showSnapshot(identifier: identifier)
     }
+}
+
+class ThiefManagerPreview: ThiefManagerProtocol {
+    func setupLocationManager(enable: Bool) {
+    }
+    
+    func detectedTrigger(_ closure: @escaping (Bool) -> Void) {
+        closure(true)
+    }
+    
+    func restartWatching() {
+    }
+    
+    var databaseManager: any DatabaseManagerProtocol = DatabaseManager(settings: AppSettings())
 }

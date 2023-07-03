@@ -35,10 +35,10 @@ struct FirstLaunchView<AppSettingsModel, ThiefManagerModel>: View where AppSetti
     @ObservedObject var thiefManager: ThiefManagerModel
     
     @Binding var isHidden: Bool
-    @State var closeClosure: AppEmptyClosure
+    @State var closeClosure: Commons.EmptyClosure
     
     @State private var state: StateMode = .idle
-    @State private var successCountDown = AppSettings.firstLaunchSuccessConunt
+    @State private var successCountDown = AppSettings.firstLaunchSuccessCount
     
     @State private var windowSize = CGSize(width: Size.width.rawValue, height: Size.height.rawValue)
     @State private var safeArea = CGSize(width: Size.width.rawValue - Size.minPadding.rawValue, height: Size.height.rawValue - Size.minPadding.rawValue)

@@ -23,7 +23,7 @@ class NotificationNotifier: NSObject {
             notificationCenter.getNotificationSettings { (settings) in
                 if settings.authorizationStatus == .authorized {
                     
-                    let date = Date.dateFormat.string(from: thiefDto.date)
+                    let date = Date.defaultFormat.string(from: thiefDto.date)
                     let content = UNMutableNotificationContent()
                     content.title = String(format: NSLocalizedString("SnapshotAt", comment: ""), arguments: [date])
                     content.body = thiefDto.triggerType.info

@@ -8,10 +8,33 @@
 
 import SwiftUI
 
-struct ExtendedDivider: View {
-    @Binding var isExtended: Bool
+struct ExtendedDividerModifier: ViewModifier {
     
-    @State var title = ""
+    var isExtended: Binding<Bool>
+    
+    var titleKey: String = ""
+    var font: Font = .headline
+    var lineWidth: CGFloat = 1
+    var lineColor: Color = Color("divider")
+    
+    public func body(content: Content) -> some View {
+        ExtendedDivider(isExtended: isExtended, titleKey: titleKey, font: font, lineWidth: lineWidth, lineColor: lineColor)
+        if isExtended.wrappedValue {
+            content
+        }
+    }
+}
+
+extension View {
+    func extended(_ isExtended: Binding<Bool>, titleKey: String = "", font: Font = .headline, lineWidth: CGFloat = 1, lineColor: Color = Color("divider")) -> some View {
+        modifier(ExtendedDividerModifier(isExtended: isExtended, titleKey: titleKey,font: font, lineWidth: lineWidth, lineColor: lineColor))
+    }
+}
+
+struct ExtendedDivider: View {
+    var isExtended: Binding<Bool>
+    
+    @State var titleKey = ""
     @State var font: Font = .headline
     @State var lineWidth: CGFloat = 1
     @State var lineColor = Color("divider")
@@ -20,22 +43,22 @@ struct ExtendedDivider: View {
         HStack {
             ExtendedDividerLine(width: lineWidth, color: lineColor)
             Button(action: {
-                isExtended.toggle()
+                isExtended.wrappedValue.toggle()
             }) {
                 HStack {
-                    if title.count > 0 {
-                        Text(NSLocalizedString(title, comment: ""))
+                    if !titleKey.isEmpty {
+                        Text(NSLocalizedString(titleKey, comment: ""))
                             .font(font)
                     }
-                    Image(systemName: isExtended ? "chevron.compact.down" : "chevron.compact.up")
+                    Image(systemName: isExtended.wrappedValue ? "chevron.compact.down" : "chevron.compact.up")
                         .font(font)
-                        .foregroundColor(isExtended ? Color("extendedMenu") : Color("defaultMenu"))
+                        .foregroundColor(isExtended.wrappedValue ? Color("extendedMenu") : Color("defaultMenu"))
                 }
             }.buttonStyle(BorderlessButtonStyle())
             ExtendedDividerLine(width: lineWidth, color: lineColor)
         }
         .onTapGesture {
-            isExtended.toggle()
+            isExtended.wrappedValue.toggle()
         }
         .padding(4)
     }

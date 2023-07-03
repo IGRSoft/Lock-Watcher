@@ -1,6 +1,6 @@
 //
 //  NSImage+Data.swift
-//  Lock-Watcher
+//  IGR Software
 //
 //  Created by Vitalii P on 29.06.2023.
 //  Copyright © 2023 IGR Soft. All rights reserved.
@@ -9,7 +9,13 @@
 import AppKit
 
 extension NSImage {
-    func jpegData() -> Data {
+    
+    /// Represent Image as jpeg Data
+    ///
+    /// return data of image on success and
+    /// empty data on fault
+    ///
+    var jpegData: Data {
         guard let tiffData = self.tiffRepresentation, let bitmap: NSBitmapImageRep = NSBitmapImageRep(data: tiffData) else {
             return Data()
         }

@@ -1,39 +1,13 @@
 //
-//  InfoViews.swift
+//  LastThiefDetectionView.swift
 //  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 26.12.2021.
+//  Created by Vitalii P on 03.07.2023.
+//  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
 import SwiftUI
 import LocalAuthentication
-import Combine
-
-struct InfoView: View {
-    var thiefManager: any ThiefManagerProtocol
-    
-    @Binding var isInfoHidden: Bool
-    
-    var body: some View {
-        VStack(alignment: .center) {
-            ExtendedDivider(isExtended: $isInfoHidden, font: .title)
-            if !isInfoHidden {
-                if AppSettings.isDebug {
-                    Button("Debug") {
-                        thiefManager.detectedTrigger({ _ in })
-                    }
-                }
-                Button("ButtonSettings") {
-                    NSApplication.displaySettingsWindow()
-                }
-                Button("Quit") {
-                    exit(0)
-                }
-                Link("© IGR Software 2008 - 2023", destination: URL(string: "https://igrsoft.com")!)
-            }
-        }
-    }
-}
 
 struct LastThiefDetectionView: View {
     @StateObject private var viewModel: LastThiefDetectionViewModel
@@ -43,23 +17,26 @@ struct LastThiefDetectionView: View {
     }
     
     var body: some View {
-        VStack(alignment: .center, spacing: 8.0) {
+        let _ = Self._printChanges()
+        
+        VStack(alignment: .center, spacing: ViewConstants.spacing) {
             
-            if let lastImage = viewModel.selectedItem,
-               let image = NSImage(data: lastImage.data) {
+            if let lastImage = viewModel.selectedItem, let image = NSImage(data: lastImage.data) {
                 Text("LastSnapshot")
                 
                 Image(nsImage: image)
                     .resizable()
-                    .scaledToFit().frame(height: 240, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity, minHeight: 240, maxHeight: 240, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
-                        if let filepath = lastImage.path {
-                            NSWorkspace.shared.open(filepath)
+                        guard let filePath = lastImage.path else {
+                            return
                         }
+                        NSWorkspace.shared.open(filePath)
                     }
                     .cornerRadius(4)
                 
-                Text("\(lastImage.date, formatter: Date.dateFormat)")
+                Text("\(lastImage.date, formatter: Date.defaultFormat)")
                 
                 if viewModel.latestImages.count > 1 {
                     ScrollView(.horizontal) {
@@ -74,8 +51,9 @@ struct LastThiefDetectionView: View {
                                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                                 .cornerRadius(3)
                                             
-                                            Text("\(imageDto.date, formatter: Date.dateFormat)")
-                                                .padding(2)
+                                            Text("\(imageDto.date, formatter: Date.defaultFormat)")
+                                                .font(.callout)
+                                                .padding(4)
                                                 .background(lastImage == imageDto ? Color.accentColor : Color.gray)
                                                 .cornerRadius(3)
                                         }
@@ -100,7 +78,7 @@ struct LastThiefDetectionView: View {
                             }
                         }
                     }
-                    .frame(height: 128, alignment: .leading)
+                    .frame(height: 148, alignment: .leading)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8.0).stroke(Color.gray, lineWidth: 1)
                     )
@@ -108,6 +86,7 @@ struct LastThiefDetectionView: View {
             } else {
                 Text("Nothing to show")
                     .font(.title2)
+                    .padding()
             }
         }
     }
@@ -136,5 +115,11 @@ struct LastThiefDetectionView: View {
         } else {
             action()
         }
+    }
+}
+
+struct LastThiefDetectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        LastThiefDetectionView(viewModel: LastThiefDetectionViewModel(databaseManager: DatabaseManagerPreview()))
     }
 }

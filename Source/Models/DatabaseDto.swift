@@ -63,7 +63,7 @@ public class DatabaseDto: Codable, Identifiable {
     
     init(with thiefDto: ThiefDto) {
         date = thiefDto.date
-        data = thiefDto.snapshot!.jpegData()
+        data = thiefDto.snapshot!.jpegData
         path = thiefDto.filepath
     }
 }
@@ -82,5 +82,11 @@ extension DatabaseDto: Equatable, Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(date)
         hasher.combine(data)
+    }
+}
+
+extension DatabaseDtoList {
+    static var empty: DatabaseDtoList {
+        DatabaseDtoList(dtos: [])
     }
 }

@@ -1,6 +1,6 @@
 //
 //  View+ApplyIf.swift
-//  Lock-Watcher
+//  IGR Software
 //
 //  Created by Vitalii P on 30.06.2023.
 //  Copyright © 2023 IGR Soft. All rights reserved.

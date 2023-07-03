@@ -10,14 +10,18 @@ import SwiftUI
 import Combine
 
 class LastThiefDetectionViewModel: ObservableObject {
+    
+    //MARK: - Dependency Injection
     var databaseManager: any DatabaseManagerProtocol
     
     @Published var isPreviewActive: Bool = false
     @Published var isUnlocked = false
     
+    //MARK: - Variables
     @Published var selectedItem: DatabaseDto?
     @Published var latestImages: [DatabaseDto] = .init()
     
+    //MARK: - Combine
     private var cancellables = Set<AnyCancellable>()
     
     init(databaseManager: any DatabaseManagerProtocol) {
@@ -27,6 +31,7 @@ class LastThiefDetectionViewModel: ObservableObject {
     }
     
     private func setupPublishers() {
+        // listen when new image has been added to database
         databaseManager.latestImagesPublisher.sink { [weak self] dtos in
             self?.update(list: dtos)
         }

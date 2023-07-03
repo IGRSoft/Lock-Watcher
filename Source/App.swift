@@ -9,8 +9,6 @@
 import SwiftUI
 import UserNotifications
 
-typealias AppEmptyClosure = () -> Void
-
 @main
 struct MainApp: App {
     
@@ -18,7 +16,7 @@ struct MainApp: App {
     
     var body: some Scene {
         Settings {
-            SettingsView(settings: appDelegate.settings, thiefManager: appDelegate.thiefManager)
+            SettingsView(viewModel: SettingsViewModel(settings: appDelegate.settings, thiefManager: appDelegate.thiefManager))
         }
     }
     
@@ -37,7 +35,11 @@ struct MainApp: App {
         /// General coordinator to manipulate windows
         ///
         private lazy var coordinator: any BaseCoordinatorProtocol = { [unowned self] in
-            MainCoordinator(settings: settings, thiefManager: thiefManager, statusBarButton: statusBarItem.button!)
+            guard let button = statusBarItem.button else {
+                fatalError("impossible construct main coordinator, missed status Bar button")
+            }
+            
+            return MainCoordinator(settings: settings, thiefManager: thiefManager, statusBarButton: button)
         }()
         
         /// base statusBar item
@@ -73,12 +75,8 @@ struct MainApp: App {
             }
         }
         
-        func applicationDidBecomeActive(_ notification: Notification) {
-            DispatchQueue.main.debounce(interval: .milliseconds(100)) { [weak self] in self?.coordinator.displayMainWindow() }()
-        }
-        
         private func applyTheme() {
-            NSApplication.hideDockIcon()
+            NSApplication.setDockIcon(hidden: true)
         }
     }
 }

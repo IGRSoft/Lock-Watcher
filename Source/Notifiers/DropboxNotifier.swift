@@ -47,7 +47,7 @@ class DropboxNotifier {
         }
         
         do {
-            guard let data = image?.jpegData(), data.isEmpty == false else {
+            guard let data = image?.jpegData, data.isEmpty == false else {
                 throw DropboxNotifierError.emptyData
             }
             

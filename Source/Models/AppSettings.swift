@@ -9,39 +9,39 @@ import Foundation
 import Combine
 
 struct UISettings: Codable {
-    var isSecurityInfoHidden = true
-    var isSnapshotInfoHidden = false
-    var isOptionsInfoHidden = false
-    var isSyncInfoHidden = true
+    var isSecurityInfoExpand: Bool = true
+    var isSnapshotInfoExpand: Bool = false
+    var isOptionsInfoExpand: Bool = false
+    var isSyncInfoExpand: Bool = true
 }
 
 struct OptionsSettings: Codable {
-    var isFirstLaunch = true
-    var keepLastActionsCount = 10
-    var isSaveSnapshotToDisk = false
-    var addLocationToSnapshot = false
-    var addIPAddressToSnapshot = false
-    var addTraceRouteToSnapshot = false
-    var traceRouteServer = ""
-    var isProtected = false
+    var isFirstLaunch: Bool = true
+    var keepLastActionsCount: Int = 10
+    var isSaveSnapshotToDisk: Bool = false
+    var addLocationToSnapshot: Bool = false
+    var addIPAddressToSnapshot: Bool = false
+    var addTraceRouteToSnapshot: Bool = false
+    var traceRouteServer: String = ""
+    var isProtected: Bool = false
 }
 
 struct TriggerSettings: Codable {
-    var isUseSnapshotOnWakeUp = true
-    var isUseSnapshotOnLogin = true
-    var isUseSnapshotOnWrongPassword = false
-    var isUseSnapshotOnSwitchToBatteryPower = false
-    var isUseSnapshotOnUSBMount = false
+    var isUseSnapshotOnWakeUp: Bool = true
+    var isUseSnapshotOnLogin: Bool = true
+    var isUseSnapshotOnWrongPassword: Bool = false
+    var isUseSnapshotOnSwitchToBatteryPower: Bool = false
+    var isUseSnapshotOnUSBMount: Bool = false
 }
 
 struct SyncSettings: Codable {
-    var isSaveSnapshotToDisk = false
-    var isSendNotificationToMail = false
-    var mailRecipient = ""
-    var isICloudSyncEnable = true
-    var isDropboxEnable = false
-    var dropboxName = ""
-    var isUseSnapshotLocalNotification = false
+    var isSaveSnapshotToDisk: Bool = false
+    var isSendNotificationToMail: Bool = false
+    var mailRecipient: String = ""
+    var isICloudSyncEnable: Bool = true
+    var isDropboxEnable: Bool = false
+    var dropboxName: String = ""
+    var isUseSnapshotLocalNotification: Bool = false
 }
 
 protocol AppSettingsProtocol: ObservableObject {
@@ -49,7 +49,7 @@ protocol AppSettingsProtocol: ObservableObject {
     
     static var isDebug: Bool { get }
     
-    static var firstLaunchSuccessConunt: Int { get }
+    static var firstLaunchSuccessCount: Int { get }
     
     var options: OptionsSettings { get set }
     
@@ -64,14 +64,14 @@ final class AppSettings: AppSettingsProtocol {
     internal let objectWillChange = PassthroughSubject<Void, Never>()
     
 #if NON_MAS_CONFIG
-    static var isMASBuild = false
+    static var isMASBuild: Bool = false
 #else
-    static var isMASBuild = true
+    static var isMASBuild: Bool = true
 #endif
     
-    static var isDebug = true
+    static var isDebug: Bool = true
     
-    static var firstLaunchSuccessConunt = 15
+    static var firstLaunchSuccessCount = 15
     
     @UserDefault("OptionsSettings", defaultValue: OptionsSettings()) var options: OptionsSettings {
         didSet {

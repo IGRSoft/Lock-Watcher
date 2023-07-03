@@ -30,7 +30,7 @@ class iCloudNotifier {
         }
         
         do {
-            let data = image?.jpegData()
+            let data = image?.jpegData
             try data?.write(to: iCloudURL)
         } catch {
             print(error)

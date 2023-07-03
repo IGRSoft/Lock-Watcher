@@ -11,31 +11,42 @@ import SwiftUI
 
 class MainCoordinator: BaseCoordinatorProtocol {
     
+    //MARK: - dependency injection
+    //
     typealias SettingsModel = AppSettings
     
     typealias ThiefManagerModel = ThiefManager
     
-    private let logger: Log
-    
+    // App settings
     private var settings: SettingsModel
     
+    // Thief Manager
     private var thiefManager: ThiefManagerModel
     
-    private lazy var popoverViewModel: PopoverViewModel = PopoverViewModel(thiefManager: thiefManager)
+    // Logger for module
+    private let logger: Log
+    
+    //MARK: - variables
+    
+    private lazy var mainViewModel = MainViewModel(thiefManager: thiefManager)
     
     /// popover with configuration to display from status bar icon
     ///
-    private lazy var popover: NSPopover = {
+    private lazy var mainPopover: NSPopover = {
         let popover = NSPopover.init()
         popover.behavior = .transient
         popover.animates = false
         popover.contentViewController = NSViewController()
-        popover.contentViewController?.view = NSHostingView(rootView: PopoverView(viewModel: popoverViewModel))
+        popover.contentViewController?.view = NSHostingView(rootView: MainView(viewModel: mainViewModel))
         
         return popover
     }()
     
+    /// Status Bar button to connect popover to it to display main window
+    ///
     private let statusBarButton: NSStatusBarButton
+    
+    //MARK: - initialising
     
     init(logger: Log = Log(category: .coordinator), settings: SettingsModel, thiefManager: ThiefManagerModel, statusBarButton: NSStatusBarButton) {
         self.logger = logger
@@ -43,6 +54,8 @@ class MainCoordinator: BaseCoordinatorProtocol {
         self.thiefManager = thiefManager
         self.statusBarButton = statusBarButton
     }
+    
+    //MARK: - public funcs
     
     func displayMainWindow() {
         showSecurityAccessAlert { [unowned self] granted in
@@ -52,47 +65,47 @@ class MainCoordinator: BaseCoordinatorProtocol {
             }
         }
     }
-            
+    
     func closeMainWindow() {
         closePopover(statusBarButton)
     }
-        
+    
     func toggleMainWindow() {
-        if popover.isShown {
+        if mainPopover.isShown {
             closePopover(statusBarButton)
         } else {
             showPopover(for: statusBarButton)
         }
     }
     
-    func displayFirstLaunchWindowIfNeed(isHidden: Binding<Bool>, closeClosure: @escaping AppEmptyClosure) {
+    func displayFirstLaunchWindowIfNeed(isHidden: Binding<Bool>, closeClosure: @escaping Commons.EmptyClosure) {
         if settings.options.isFirstLaunch {
             settings.options.isFirstLaunch = false
             FirstLaunchView(settings: settings, thiefManager: thiefManager, isHidden: isHidden, closeClosure: closeClosure)
                 .openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
         }
     }
-        
+    
     func displaySettingsWindow() {
         NSApplication.displaySettingsWindow()
     }
     
+    //MARK: - private funcs
+    
+    /// show popover down from StatusBar button
+    ///
     private func showPopover(for button: NSStatusBarButton) {
-        popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
+        mainPopover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
     }
     
+    /// dismiss popover for StatusBar button
+    ///
     private func closePopover(_ sender: NSStatusBarButton?) {
-        popover.performClose(sender)
+        mainPopover.performClose(sender)
     }
     
-    func togglePopover(_ sender: NSStatusBarButton) {
-        if popover.isShown {
-            closePopover(sender)
-        } else {
-            showPopover(for: sender)
-        }
-    }
-    
+    /// alert to ask password to grant access to application
+    ///
     private func showSecurityAccessAlert(completion: (Bool) -> Void) {
         var isValid = true
         if settings.options.isProtected && SecurityUtil.hasPassword() {

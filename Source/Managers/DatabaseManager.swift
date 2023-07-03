@@ -96,3 +96,17 @@ extension DatabaseManager: Equatable {
         return lhs.storage?.folderUrl == rhs.storage?.folderUrl
     }
 }
+
+class DatabaseManagerPreview: DatabaseManagerProtocol {
+    func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
+        .empty
+    }
+    
+    func remove(_ dto: DatabaseDto) -> DatabaseDtoList {
+        .empty
+    }
+    
+    @Published private(set) var latestImages: [DatabaseDto] = .init()
+    
+    var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { $latestImages }
+}
