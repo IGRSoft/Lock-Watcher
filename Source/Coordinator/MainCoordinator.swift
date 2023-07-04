@@ -40,7 +40,7 @@ class MainCoordinator: BaseCoordinatorProtocol {
     
     private var firstLaunchWindow: NSWindow?
     
-    //MARK: - initialising
+    //MARK: - initialiser
     
     init(logger: Log = Log(category: .coordinator), settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol, statusBarButton: NSStatusBarButton) {
         self.logger = logger
@@ -72,6 +72,9 @@ class MainCoordinator: BaseCoordinatorProtocol {
         }
     }
     
+    /// Display FirstLaunch Window If first launch of app
+    /// - Parameter closeClosure: callback on close by timer
+    ///
     func displayFirstLaunchWindowIfNeed(closeClosure: @escaping Commons.EmptyClosure) {
         if settings.options.isFirstLaunch {
             settings.options.isFirstLaunch = false

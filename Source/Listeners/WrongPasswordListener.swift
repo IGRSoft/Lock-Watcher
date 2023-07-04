@@ -10,7 +10,15 @@ import LocalAuthentication
 import os
 import AppKit
 
-class WrongPasswordListener: BaseListener, BaseListenerProtocol {
+/// Check unauthorised login and trigger
+/// 
+class WrongPasswordListener: BaseListenerProtocol {
+    //MARK: - Dependency injection
+    
+    private let logger: Log
+    
+    //MARK: - Variables
+    
     private let kServiceName = "com.igrsoft.XPCAuthentication"
     
     var listenerAction: ListenerAction?
@@ -20,50 +28,44 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
     
     var lastScreenLockDate = Date()
     
-    deinit {
-        connection.invalidate()
-    }
-    
     private lazy var connection: NSXPCConnection = {
         let connection = NSXPCConnection(serviceName: kServiceName)
         connection.remoteObjectInterface = NSXPCInterface(with: XPCAuthenticationProtocol.self)
         connection.resume()
         
-        connection.interruptionHandler = {
-            os_log(.error, "Service XPCAuthentication interupted")
+        connection.interruptionHandler = { [weak self] in
+            self?.logger.error("XPCAuthentication interrupted")
         }
         
-        connection.invalidationHandler = {
-            os_log(.error, "Service XPCAuthentication invalidated")
+        connection.invalidationHandler = { [weak self] in
+            self?.logger.error("XPCAuthentication invalidated")
         }
         
         return connection
     }()
     
-    private lazy var service: XPCAuthenticationProtocol = {
-        let service = connection.remoteObjectProxyWithErrorHandler { error in
-            os_log(.error, "Received error: \(error.localizedDescription)")
+    private lazy var service: XPCAuthenticationProtocol  = { [weak self] in
+        let service = self?.connection.remoteObjectProxyWithErrorHandler { error in
+            self?.logger.error("Received error: \(error.localizedDescription)")
         } as! XPCAuthenticationProtocol
         
         return service
     }()
     
-    @objc private func occlusionStateChanged() {
-        if NSApp.occlusionState.contains(.visible) {
-            os_log(.debug, "WrongPasswordListener screen unlocked")
-            isScreenLocked = false
-        } else {
-            os_log(.debug, "WrongPasswordListener screen locked")
-            
-            lastScreenLockDate = Date()
-            isScreenLocked = true
-            
-            readDate()
-        }
+    //MARK: - initialiser
+    
+    init(logger: Log = Log(category: .wrongPasswordListener)) {
+        self.logger = logger
     }
     
+    deinit {
+        connection.invalidate()
+    }
+    
+    //MARK: - public
+    
     func start(_ action: @escaping ListenerAction) {
-        os_log(.debug, "WrongPasswordListener started")
+        logger.debug("started")
         
         self.listenerAction = action
         
@@ -75,15 +77,27 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
         isRunning = true
     }
     
-    func readDate() {
-        os_log(.debug, "WrongPasswordListener detecting AuthenticationFailed from \(self.lastScreenLockDate)")
+    func stop() {
+        self.listenerAction = nil
         
-        service.detectedAuthenticationFailedFromDate(lastScreenLockDate) { [weak self] (detectedFailed) in
+        NotificationCenter.default.removeObserver(self, name: NSApplication.didChangeOcclusionStateNotification, object: nil)
+        
+        logger.debug("stoped")
+                
+        isRunning = false
+    }
+    
+    //MARK: - private
+    
+    private func readDate() {
+        logger.debug("WrongPasswordListener detecting AuthenticationFailed from \(self.lastScreenLockDate)")
+        
+        service.detectedAuthenticationFailedFromDate(lastScreenLockDate) { [weak self] detectedFailed in
             let thief = ThiefDto()
             
             if detectedFailed {
                 self?.lastScreenLockDate = Date()
-                os_log(.debug, "Detected Authentication Failed")
+                self?.logger.debug("Detected Authentication Failed")
                 thief.triggerType = .onWrongPassword
             }
             
@@ -93,13 +107,17 @@ class WrongPasswordListener: BaseListener, BaseListenerProtocol {
         }
     }
     
-    func stop() {
-        self.listenerAction = nil
-        
-        NotificationCenter.default.removeObserver(self, name: NSApplication.didChangeOcclusionStateNotification, object: nil)
-        
-        os_log(.debug, "WrongPasswordListener stoped")
-        
-        isRunning = false
+    @objc private func occlusionStateChanged() {
+        if NSApp.occlusionState.contains(.visible) {
+            logger.debug("screen unlocked")
+            isScreenLocked = false
+        } else {
+            logger.debug("screen locked")
+            
+            lastScreenLockDate = Date()
+            isScreenLocked = true
+            
+            readDate()
+        }
     }
 }

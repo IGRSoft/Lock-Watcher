@@ -14,12 +14,17 @@ struct Log {
     enum Category: String {
         case application
         case network
-        case webSocket
         case url
         case coordinator
         case settings
         
         case fileSystem
+        
+        case powerListener
+        case wakeUpListener
+        case wrongPasswordListener
+        case usbListener
+        case loginListener
     }
     
     private static var subsystem = Bundle.main.bundleIdentifier!

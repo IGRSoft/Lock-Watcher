@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-/// Property Wrapper for UserDefault
+/// Property Wrapper for UserDefault to store Codable structures
 /// 
 @propertyWrapper
 struct UserDefault<T: Codable> {

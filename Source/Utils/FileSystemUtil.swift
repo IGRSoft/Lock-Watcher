@@ -14,7 +14,7 @@ class FileSystemUtil {
     
     private var logger: Log
     
-    //MARK: - Initialiser
+    //MARK: - initialiser
     
     init(logger: Log = Log(category: .fileSystem)) {
         self.logger = logger

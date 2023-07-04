@@ -16,11 +16,11 @@ class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     
     typealias DomainViewConstant = MainDomain
     
-    //MARK: - typealias
+    //MARK: - Types
     
     typealias SettingsTriggerWatchBlock = ((TriggerType) -> Void)
     
-    //MARK: - DomainViewConstantProtocol
+    //MARK: - Dependency injection
     
     @Published var thiefManager: any ThiefManagerProtocol
     
@@ -36,7 +36,7 @@ class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     
     var accessGrantedBlock: Commons.EmptyClosure?
     
-    //MARK: - Initialise
+    //MARK: - initialiser
     
     init(thiefManager: any ThiefManagerProtocol, isInfoExtended: Bool = false) {
         self.thiefManager = thiefManager

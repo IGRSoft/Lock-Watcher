@@ -232,7 +232,9 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     }
     
     var accessGrantedBlock: Commons.EmptyClosure?
-        
+    
+    //MARK: - initialiser
+    
     init(settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol) {
         self.settings = settings
         self.thiefManager = thiefManager

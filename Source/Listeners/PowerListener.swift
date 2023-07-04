@@ -6,13 +6,23 @@
 //
 
 import Foundation
-import os
 
-class PowerListener: BaseListener, BaseListenerProtocol {
-    enum PowerMode: Int {
+/// Listen power xpc service on power status changes
+/// 
+class PowerListener: BaseListenerProtocol {
+    
+    //MARK: - Types
+    
+    private enum PowerMode: Int {
         case battery = 0
         case ac = 1
     }
+    
+    //MARK: - Dependency injection
+    
+    private let logger: Log
+    
+    //MARK: - Variables
     
     private let kServiceName = "com.igrsoft.XPCPower"
     
@@ -20,42 +30,50 @@ class PowerListener: BaseListener, BaseListenerProtocol {
     
     var isRunning = false
     
-    deinit {
-        connection.invalidate()
-    }
-    
     private lazy var connection: NSXPCConnection = {
         let connection = NSXPCConnection(serviceName: kServiceName)
         connection.remoteObjectInterface = NSXPCInterface(with: XPCPowerProtocol.self)
         connection.resume()
         
-        connection.interruptionHandler = {
-            os_log(.error, "Service XPCPower interupted")
+        connection.interruptionHandler = { [weak self] in
+            self?.logger.error("XPCPower interrupted")
         }
         
-        connection.invalidationHandler = {
-            os_log(.error, "Service XPCPower invalidated")
+        connection.invalidationHandler = { [weak self] in
+            self?.logger.error("XPCPower invalidated")
         }
         
         return connection
     }()
     
-    private lazy var service: XPCPowerProtocol  = {
-        let service = connection.remoteObjectProxyWithErrorHandler { error in
-            os_log(.error, "Received error: \(error.localizedDescription)")
+    private lazy var service: XPCPowerProtocol  = { [weak self] in
+        let service = self?.connection.remoteObjectProxyWithErrorHandler { error in
+            self?.logger.error("Received error: \(error.localizedDescription)")
         } as! XPCPowerProtocol
-                
+        
         return service
     }()
     
+    //MARK: - initialiser
+    
+    init(logger: Log = Log(category: .powerListener)) {
+        self.logger = logger
+    }
+    
+    deinit {
+        connection.invalidate()
+    }
+    
+    //MARK: - public
+    
     func start(_ action: @escaping ListenerAction) {
-        os_log(.debug, "PowerListener started")
+        logger.debug("started")
         
         self.listenerAction = action
         
         service.startCheckPower { [weak self] mode in
             let powerMode = PowerMode.init(rawValue: mode)
-            os_log(.debug, "Power switched to \(powerMode == .battery ? "Battery" : "AC Power")")
+            self?.logger.debug("Power switched to \(powerMode == .battery ? "Battery" : "AC Power")")
             
             let thief = ThiefDto()
             if powerMode == .battery {
@@ -74,7 +92,7 @@ class PowerListener: BaseListener, BaseListenerProtocol {
         self.listenerAction = nil
         (connection.remoteObjectProxy as? XPCPowerProtocol)?.stopCheckPower()
         
-        os_log(.debug, "PowerListener stoped")
+        logger.debug("stoped")
         
         isRunning = false
     }

@@ -83,7 +83,7 @@
 		A58FC72C26E2814E007674F6 /* DatabaseDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519998526DA4BFB00F482BC /* DatabaseDto.swift */; };
 		A58FC72D26E2814E007674F6 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
 		A58FC72E26E2814E007674F6 /* WrongPasswordListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */; };
-		A58FC72F26E2814E007674F6 /* BaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79425A5D13000EEA7DD /* BaseListener.swift */; };
+		A58FC72F26E2814E007674F6 /* BaseListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79425A5D13000EEA7DD /* BaseListenerProtocol.swift */; };
 		A58FC73026E2814E007674F6 /* USBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0788C26B9A78400A7D578 /* USBListener.swift */; };
 		A58FC73126E2814E007674F6 /* FileSystemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */; };
 		A58FC73226E2814E007674F6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
@@ -194,7 +194,7 @@
 		A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */; };
 		A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */; };
 		A5E6D78E25A5CD2E00EEA7DD /* TriggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78D25A5CD2E00EEA7DD /* TriggerManager.swift */; };
-		A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79425A5D13000EEA7DD /* BaseListener.swift */; };
+		A5E6D79525A5D13000EEA7DD /* BaseListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79425A5D13000EEA7DD /* BaseListenerProtocol.swift */; };
 		A5E6D79F25A5D1AE00EEA7DD /* PowerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */; };
 		A5E6D7A625A5D1EB00EEA7DD /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */; };
 		A5EFE8B826E2B587001FC4EA /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EFE8B726E2B587001FC4EA /* Date+Formatter.swift */; };
@@ -411,7 +411,7 @@
 		A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefManager.swift; sourceTree = "<group>"; };
 		A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A5E6D78D25A5CD2E00EEA7DD /* TriggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerManager.swift; sourceTree = "<group>"; };
-		A5E6D79425A5D13000EEA7DD /* BaseListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListener.swift; sourceTree = "<group>"; };
+		A5E6D79425A5D13000EEA7DD /* BaseListenerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListenerProtocol.swift; sourceTree = "<group>"; };
 		A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerListener.swift; sourceTree = "<group>"; };
 		A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		A5EFE8B726E2B587001FC4EA /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
@@ -554,15 +554,15 @@
 			children = (
 				A5EFE8B726E2B587001FC4EA /* Date+Formatter.swift */,
 				A56F1A7C278A29630066CA78 /* DispatchQueue+Debounce.swift */,
-				A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */,
 				A5A252112A4E18FD00889F5C /* NSApplication+Dock.swift */,
+				A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */,
 				A5A252082A4E0ACE00889F5C /* NSImage+Data.swift */,
 				A5A2520B2A4E0B6900889F5C /* NSImage+SatusBar.swift */,
 				A5457A8B26C1FB1400386738 /* NSImage+Text.swift */,
 				A56CFFBA27A48D6A00CB137B /* String+Regex.swift */,
 				A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */,
-				A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */,
 				A5A252182A4F416600889F5C /* View+ApplyIf.swift */,
+				A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -836,12 +836,12 @@
 		A5E6D79325A5D11200EEA7DD /* Listeners */ = {
 			isa = PBXGroup;
 			children = (
-				A5E6D79425A5D13000EEA7DD /* BaseListener.swift */,
+				A5E6D79425A5D13000EEA7DD /* BaseListenerProtocol.swift */,
+				A54A1F792703769800176069 /* LoginListener.swift */,
 				A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */,
+				A5A0788C26B9A78400A7D578 /* USBListener.swift */,
 				A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */,
 				A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */,
-				A5A0788C26B9A78400A7D578 /* USBListener.swift */,
-				A54A1F792703769800176069 /* LoginListener.swift */,
 			);
 			path = Listeners;
 			sourceTree = "<group>";
@@ -1229,7 +1229,7 @@
 				A58FC72D26E2814E007674F6 /* XPCMailProtocol.swift in Sources */,
 				A58FC72E26E2814E007674F6 /* WrongPasswordListener.swift in Sources */,
 				A5A565832A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */,
-				A58FC72F26E2814E007674F6 /* BaseListener.swift in Sources */,
+				A58FC72F26E2814E007674F6 /* BaseListenerProtocol.swift in Sources */,
 				A5E49CC92A52FA1100C3740B /* ViewProtocols.swift in Sources */,
 				A5AA31E92778D6E600A064B6 /* InfoViews.swift in Sources */,
 				A5A565892A54A15200D7E030 /* FirstLaunchProgressViewModel.swift in Sources */,
@@ -1301,7 +1301,7 @@
 				A599EB2327AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */,
 				A5D23E3027A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
 				A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */,
-				A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */,
+				A5E6D79525A5D13000EEA7DD /* BaseListenerProtocol.swift in Sources */,
 				A5A565822A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */,
 				A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */,
 				A5E49CC82A52FA1100C3740B /* ViewProtocols.swift in Sources */,

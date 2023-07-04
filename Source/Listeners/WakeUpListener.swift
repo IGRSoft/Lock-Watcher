@@ -7,15 +7,32 @@
 
 import Foundation
 import Cocoa
-import os
 
-class WakeUpListener: BaseListener, BaseListenerProtocol {
+/// Listen screen wake up notification from NSWorkspace
+///
+class WakeUpListener: BaseListenerProtocol {
+    
+    //MARK: - Dependency injection
+    
+    private let logger: Log
+    
+    //MARK: - Variables
+    
     var listenerAction: ListenerAction?
     
     var isRunning: Bool = false
     
+    //MARK: - initialiser
+    
+    init(logger: Log = Log(category: .wakeUpListener)) {
+        self.logger = logger
+    }
+    
+    //MARK: - public
+    
     func start(_ action: @escaping ListenerAction) {
-        os_log(.debug, "WakeUpListener started")
+        logger.debug("started")
+        
         isRunning = true
         listenerAction = action
         
@@ -26,14 +43,17 @@ class WakeUpListener: BaseListener, BaseListenerProtocol {
     }
     
     func stop() {
-        os_log(.debug, "WakeUpListener stoped")
+        logger.debug("stoped")
+        
         isRunning = false
         listenerAction = nil
         
         NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.screensDidWakeNotification, object: nil)
     }
     
-    @objc func receiveWakeNotification() {
+    //MARK: - private
+    
+    @objc private func receiveWakeNotification() {
         let thief = ThiefDto()
         thief.triggerType = .onWakeUp
         

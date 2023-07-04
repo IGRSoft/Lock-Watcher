@@ -9,7 +9,15 @@ import Foundation
 import Cocoa
 import os
 
-class LoginListener: BaseListener, BaseListenerProtocol {
+/// check Occlusion State changes to detect status of user
+///
+class LoginListener: BaseListenerProtocol {
+    //MARK: - Dependency injection
+    
+    private let logger: Log
+    
+    //MARK: - Variables
+    
     var listenerAction: ListenerAction?
     
     var isRunning: Bool = false
@@ -27,11 +35,21 @@ class LoginListener: BaseListener, BaseListenerProtocol {
         return debouncedFunction
     }()
     
+    //MARK: - initialiser
+    
+    init(logger: Log = Log(category: .loginListener)) {
+        self.logger = logger
+    }
+    
+    //MARK: - public
+    
     func start(_ action: @escaping ListenerAction) {
-        os_log(.debug, "LoginListener started")
+        logger.debug("started")
+        
         isRunning = true
         listenerAction = action
         
+        // start in 1s to ignore first notification
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             NotificationCenter.default.addObserver(self,
                                                    selector: #selector(self.sessionDidBecomeActiveNotification),
@@ -41,16 +59,18 @@ class LoginListener: BaseListener, BaseListenerProtocol {
     }
     
     func stop() {
-        os_log(.debug, "LoginListener stoped")
+        logger.debug("stoped")
         isRunning = false
         listenerAction = nil
         
         NotificationCenter.default.removeObserver(self, name: NSApplication.didChangeOcclusionStateNotification, object: nil)
     }
     
-    @objc func sessionDidBecomeActiveNotification() {
-        os_log(.debug, "LoginListener didChangeOcclusionStateNotification")
-        
+    //MARK: - private
+    
+    @objc private func sessionDidBecomeActiveNotification() {
+        logger.debug("didChangeOcclusionStateNotification")
+                
         debouncedThief()
     }
 }

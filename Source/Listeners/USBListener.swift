@@ -9,13 +9,30 @@ import Foundation
 import Cocoa
 import os
 
-class USBListener: BaseListener, BaseListenerProtocol {
+/// Listen usb mount to send trigger
+/// 
+class USBListener: BaseListenerProtocol {
+    
+    //MARK: - Dependency injection
+    
+    private let logger: Log
+    
+    //MARK: - Variables
+    
     var listenerAction: ListenerAction?
     
     var isRunning: Bool = false
     
+    //MARK: - initialiser
+    
+    init(logger: Log = Log(category: .usbListener)) {
+        self.logger = logger
+    }
+    
+    //MARK: - public
+    
     func start(_ action: @escaping ListenerAction) {
-        os_log(.debug, "USBListener started")
+        logger.debug("started")
         isRunning = true
         listenerAction = action
         
@@ -26,14 +43,16 @@ class USBListener: BaseListener, BaseListenerProtocol {
     }
     
     func stop() {
-        os_log(.debug, "USBListener stoped")
+        logger.debug("stoped")
         isRunning = false
         listenerAction = nil
         
         NSWorkspace.shared.notificationCenter.removeObserver(self, name: NSWorkspace.didMountNotification, object: nil)
     }
     
-    @objc func receiveUSBNotification() {
+    //MARK: - private
+    
+    @objc private func receiveUSBNotification() {
         let thief = ThiefDto()
         thief.triggerType = .usbConnected
         
