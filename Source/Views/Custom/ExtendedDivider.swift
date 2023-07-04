@@ -32,6 +32,26 @@ extension View {
 }
 
 struct ExtendedDivider: View {
+    
+    private struct ExtendedDividerLine: View {
+        @State var width: CGFloat = 1
+        @State var color: Color = .gray
+        
+        var direction: Axis.Set = .horizontal
+        
+        var body: some View {
+            Rectangle()
+                .fill(color)
+                .applyIf(direction == .vertical) {
+                    $0.frame(width: width)
+                        .edgesIgnoringSafeArea(.vertical)
+                } else: {
+                    $0.frame(height: width)
+                        .edgesIgnoringSafeArea(.horizontal)
+                }
+        }
+    }
+    
     var isExtended: Binding<Bool>
     
     @State var titleKey = ""
@@ -64,21 +84,10 @@ struct ExtendedDivider: View {
     }
 }
 
-struct ExtendedDividerLine: View {
-    @State var width: CGFloat = 1
-    @State var color: Color = .gray
-    
-    var direction: Axis.Set = .horizontal
-    
-    var body: some View {
-        Rectangle()
-            .fill(color)
-            .applyIf(direction == .vertical) {
-                $0.frame(width: width)
-                    .edgesIgnoringSafeArea(.vertical)
-            } else: {
-                $0.frame(height: width)
-                    .edgesIgnoringSafeArea(.horizontal)
-            }
+struct ExtendedDivider_Previews: PreviewProvider {
+    static var previews: some View {
+        ExtendedDivider(isExtended: .constant(true))
+        
+        ExtendedDivider(isExtended: .constant(false))
     }
 }

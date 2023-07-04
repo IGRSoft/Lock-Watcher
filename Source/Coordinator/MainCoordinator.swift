@@ -12,16 +12,8 @@ import SwiftUI
 class MainCoordinator: BaseCoordinatorProtocol {
     
     //MARK: - dependency injection
-    //
-    typealias SettingsModel = AppSettings
-    
-    typealias ThiefManagerModel = ThiefManager
-    
-    // App settings
-    private var settings: SettingsModel
-    
-    // Thief Manager
-    private var thiefManager: ThiefManagerModel
+    private var settings: any AppSettingsProtocol
+    private var thiefManager: any ThiefManagerProtocol
     
     // Logger for module
     private let logger: Log
@@ -46,9 +38,11 @@ class MainCoordinator: BaseCoordinatorProtocol {
     ///
     private let statusBarButton: NSStatusBarButton
     
+    private var firstLaunchWindow: NSWindow?
+    
     //MARK: - initialising
     
-    init(logger: Log = Log(category: .coordinator), settings: SettingsModel, thiefManager: ThiefManagerModel, statusBarButton: NSStatusBarButton) {
+    init(logger: Log = Log(category: .coordinator), settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol, statusBarButton: NSStatusBarButton) {
         self.logger = logger
         self.settings = settings
         self.thiefManager = thiefManager
@@ -78,10 +72,13 @@ class MainCoordinator: BaseCoordinatorProtocol {
         }
     }
     
-    func displayFirstLaunchWindowIfNeed(isHidden: Binding<Bool>, closeClosure: @escaping Commons.EmptyClosure) {
+    func displayFirstLaunchWindowIfNeed(closeClosure: @escaping Commons.EmptyClosure) {
         if settings.options.isFirstLaunch {
             settings.options.isFirstLaunch = false
-            FirstLaunchView(settings: settings, thiefManager: thiefManager, isHidden: isHidden, closeClosure: closeClosure)
+            firstLaunchWindow = FirstLaunchView(viewModel: FirstLaunchViewModel(settings: settings, thiefManager: thiefManager, closeClosure: { [weak self] in
+                self?.firstLaunchWindow?.close()
+                closeClosure()
+            }))
                 .openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
         }
     }

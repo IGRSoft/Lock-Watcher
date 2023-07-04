@@ -16,8 +16,8 @@
 		A51999A326DA764A00F482BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A519999D26DA764A00F482BC /* Assets.xcassets */; };
 		A51ABA2D283BE98200007B15 /* DeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51ABA2C283BE98200007B15 /* DeviceUtil.swift */; };
 		A51ABA2E283BE98200007B15 /* DeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51ABA2C283BE98200007B15 /* DeviceUtil.swift */; };
-		A5258AC72831652B0034E32F /* FirstLaunchViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5258AC62831652B0034E32F /* FirstLaunchViews.swift */; };
-		A5258AC82831652B0034E32F /* FirstLaunchViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5258AC62831652B0034E32F /* FirstLaunchViews.swift */; };
+		A5258AC72831652B0034E32F /* FirstLaunchFaultViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5258AC62831652B0034E32F /* FirstLaunchFaultViews.swift */; };
+		A5258AC82831652B0034E32F /* FirstLaunchFaultViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5258AC62831652B0034E32F /* FirstLaunchFaultViews.swift */; };
 		A533D7BC25A8FCC20046B7C8 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */; };
 		A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */; };
 		A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */; };
@@ -120,8 +120,8 @@
 		A599EB2A27AB0B07003A69B5 /* SecurityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */; };
 		A599EB2D27AB0BE1003A69B5 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A599EB2C27AB0BE1003A69B5 /* KeychainAccess */; };
 		A599EB2F27AB0C09003A69B5 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A599EB2E27AB0C09003A69B5 /* KeychainAccess */; };
-		A599EB3127AB1259003A69B5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB3027AB1259003A69B5 /* BaseView.swift */; };
-		A599EB3227AB1259003A69B5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB3027AB1259003A69B5 /* BaseView.swift */; };
+		A599EB3127AB1259003A69B5 /* ProtectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB3027AB1259003A69B5 /* ProtectionView.swift */; };
+		A599EB3227AB1259003A69B5 /* ProtectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB3027AB1259003A69B5 /* ProtectionView.swift */; };
 		A599EB3427AB1BF0003A69B5 /* policy.html in Resources */ = {isa = PBXBuildFile; fileRef = A599EB3327AB1BF0003A69B5 /* policy.html */; };
 		A599EB3527AB1BF0003A69B5 /* policy.html in Resources */ = {isa = PBXBuildFile; fileRef = A599EB3327AB1BF0003A69B5 /* policy.html */; };
 		A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0788C26B9A78400A7D578 /* USBListener.swift */; };
@@ -141,6 +141,22 @@
 		A5A252222A52DDBE00889F5C /* AppCommons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A252202A52DDBE00889F5C /* AppCommons.swift */; };
 		A5A565712A53653000D7E030 /* MainDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565702A53653000D7E030 /* MainDomain.swift */; };
 		A5A565722A53653000D7E030 /* MainDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565702A53653000D7E030 /* MainDomain.swift */; };
+		A5A565762A54229100D7E030 /* FirstLaunchOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565752A54229100D7E030 /* FirstLaunchOptionsView.swift */; };
+		A5A565772A54229100D7E030 /* FirstLaunchOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565752A54229100D7E030 /* FirstLaunchOptionsView.swift */; };
+		A5A565792A5424D200D7E030 /* FirstLaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565782A5424D200D7E030 /* FirstLaunchViewModel.swift */; };
+		A5A5657A2A5424D200D7E030 /* FirstLaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565782A5424D200D7E030 /* FirstLaunchViewModel.swift */; };
+		A5A5657C2A54263900D7E030 /* FirstLaunchDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5657B2A54263900D7E030 /* FirstLaunchDomain.swift */; };
+		A5A5657D2A54263900D7E030 /* FirstLaunchDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5657B2A54263900D7E030 /* FirstLaunchDomain.swift */; };
+		A5A5657F2A54810300D7E030 /* FirstLaunchProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5657E2A54810300D7E030 /* FirstLaunchProgressView.swift */; };
+		A5A565802A54810300D7E030 /* FirstLaunchProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5657E2A54810300D7E030 /* FirstLaunchProgressView.swift */; };
+		A5A565822A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565812A54854900D7E030 /* FirstLaunchOptionsViewModel.swift */; };
+		A5A565832A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565812A54854900D7E030 /* FirstLaunchOptionsViewModel.swift */; };
+		A5A565852A549B7700D7E030 /* LaunchAtLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565842A549B7700D7E030 /* LaunchAtLoginView.swift */; };
+		A5A565862A549B7700D7E030 /* LaunchAtLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565842A549B7700D7E030 /* LaunchAtLoginView.swift */; };
+		A5A565882A54A15200D7E030 /* FirstLaunchProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565872A54A15200D7E030 /* FirstLaunchProgressViewModel.swift */; };
+		A5A565892A54A15200D7E030 /* FirstLaunchProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565872A54A15200D7E030 /* FirstLaunchProgressViewModel.swift */; };
+		A5A5658B2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5658A2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift */; };
+		A5A5658C2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5658A2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift */; };
 		A5AA31D72778961400A064B6 /* NotificationNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31D62778961400A064B6 /* NotificationNotifier.swift */; };
 		A5AA31D82778961400A064B6 /* NotificationNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31D62778961400A064B6 /* NotificationNotifier.swift */; };
 		A5AA31DF2778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */; };
@@ -294,7 +310,7 @@
 		A51999A126DA764A00F482BC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A51999A626DA771600F482BC /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A51ABA2C283BE98200007B15 /* DeviceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceUtil.swift; sourceTree = "<group>"; };
-		A5258AC62831652B0034E32F /* FirstLaunchViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchViews.swift; sourceTree = "<group>"; };
+		A5258AC62831652B0034E32F /* FirstLaunchFaultViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchFaultViews.swift; sourceTree = "<group>"; };
 		A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpListener.swift; sourceTree = "<group>"; };
 		A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongPasswordListener.swift; sourceTree = "<group>"; };
 		A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemUtil.swift; sourceTree = "<group>"; };
@@ -344,7 +360,7 @@
 		A5942650283FE287008A38E6 /* PermissionsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsUtils.swift; sourceTree = "<group>"; };
 		A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityAlertView.swift; sourceTree = "<group>"; };
 		A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityUtil.swift; sourceTree = "<group>"; };
-		A599EB3027AB1259003A69B5 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		A599EB3027AB1259003A69B5 /* ProtectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtectionView.swift; sourceTree = "<group>"; };
 		A599EB3327AB1BF0003A69B5 /* policy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = policy.html; sourceTree = "<group>"; };
 		A5A0788C26B9A78400A7D578 /* USBListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBListener.swift; sourceTree = "<group>"; };
 		A5A252082A4E0ACE00889F5C /* NSImage+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Data.swift"; sourceTree = "<group>"; };
@@ -355,6 +371,14 @@
 		A5A2521C2A4F516B00889F5C /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A5A252202A52DDBE00889F5C /* AppCommons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCommons.swift; sourceTree = "<group>"; };
 		A5A565702A53653000D7E030 /* MainDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDomain.swift; sourceTree = "<group>"; };
+		A5A565752A54229100D7E030 /* FirstLaunchOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchOptionsView.swift; sourceTree = "<group>"; };
+		A5A565782A5424D200D7E030 /* FirstLaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchViewModel.swift; sourceTree = "<group>"; };
+		A5A5657B2A54263900D7E030 /* FirstLaunchDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchDomain.swift; sourceTree = "<group>"; };
+		A5A5657E2A54810300D7E030 /* FirstLaunchProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchProgressView.swift; sourceTree = "<group>"; };
+		A5A565812A54854900D7E030 /* FirstLaunchOptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchOptionsViewModel.swift; sourceTree = "<group>"; };
+		A5A565842A549B7700D7E030 /* LaunchAtLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginView.swift; sourceTree = "<group>"; };
+		A5A565872A54A15200D7E030 /* FirstLaunchProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchProgressViewModel.swift; sourceTree = "<group>"; };
+		A5A5658A2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchSuccessView.swift; sourceTree = "<group>"; };
 		A5AA31D62778961400A064B6 /* NotificationNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNotifier.swift; sourceTree = "<group>"; };
 		A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectSnapshotViews.swift; sourceTree = "<group>"; };
 		A5AA31E12778D64400A064B6 /* SaveSnapshotViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSnapshotViews.swift; sourceTree = "<group>"; };
@@ -626,8 +650,7 @@
 		A5A2521B2A4F515900889F5C /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				A5E49CCD2A53583F00C3740B /* LastThiefDetection */,
-				A5A252142A4E246300889F5C /* Info */,
+				A5A5658E2A54A82800D7E030 /* Subviews */,
 				A58C63C02A4C5AF6004DE972 /* MainView.swift */,
 				A5A2521C2A4F516B00889F5C /* MainViewModel.swift */,
 				A5A565702A53653000D7E030 /* MainDomain.swift */,
@@ -638,25 +661,74 @@
 		A5A2521F2A52DC8500889F5C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */,
+				A5A565842A549B7700D7E030 /* LaunchAtLoginView.swift */,
+				A599EB3027AB1259003A69B5 /* ProtectionView.swift */,
+				A5AA31E12778D64400A064B6 /* SaveSnapshotViews.swift */,
+				A5E49CC42A52EDE300C3740B /* SettingsDomain.swift */,
 				A5C6DBF325796A90009DE750 /* SettingsView.swift */,
 				A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */,
-				A5E49CC42A52EDE300C3740B /* SettingsDomain.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		A5A565732A541BD000D7E030 /* FirstLaunch */ = {
+			isa = PBXGroup;
+			children = (
+				A5A5657B2A54263900D7E030 /* FirstLaunchDomain.swift */,
+				A5A5658D2A54A81000D7E030 /* Subviews */,
+				A5A565872A54A15200D7E030 /* FirstLaunchProgressViewModel.swift */,
+				A5D23E2F27A1DFAE001C0370 /* FirstLaunchView.swift */,
+				A5A565782A5424D200D7E030 /* FirstLaunchViewModel.swift */,
+			);
+			path = FirstLaunch;
+			sourceTree = "<group>";
+		};
+		A5A565742A541CD800D7E030 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */,
+				A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		A5A5658D2A54A81000D7E030 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				A5A5658F2A54A83B00D7E030 /* FirstLaunchOptions */,
+				A5A5657E2A54810300D7E030 /* FirstLaunchProgressView.swift */,
+				A5258AC62831652B0034E32F /* FirstLaunchFaultViews.swift */,
+				A5A5658A2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		A5A5658E2A54A82800D7E030 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				A5E49CCD2A53583F00C3740B /* LastThiefDetection */,
+				A5A252142A4E246300889F5C /* Info */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		A5A5658F2A54A83B00D7E030 /* FirstLaunchOptions */ = {
+			isa = PBXGroup;
+			children = (
+				A5A565812A54854900D7E030 /* FirstLaunchOptionsViewModel.swift */,
+				A5A565752A54229100D7E030 /* FirstLaunchOptionsView.swift */,
+			);
+			path = FirstLaunchOptions;
 			sourceTree = "<group>";
 		};
 		A5AA31DD2778D59300A064B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A5A2521F2A52DC8500889F5C /* Settings */,
+				A5A565742A541CD800D7E030 /* Custom */,
+				A5A565732A541BD000D7E030 /* FirstLaunch */,
 				A5A2521B2A4F515900889F5C /* Main */,
-				A599EB3027AB1259003A69B5 /* BaseView.swift */,
-				A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */,
-				A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */,
-				A5D23E2F27A1DFAE001C0370 /* FirstLaunchView.swift */,
-				A5258AC62831652B0034E32F /* FirstLaunchViews.swift */,
-				A5AA31E12778D64400A064B6 /* SaveSnapshotViews.swift */,
-				A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */,
+				A5A2521F2A52DC8500889F5C /* Settings */,
 				A5E49CC72A52FA1100C3740B /* ViewProtocols.swift */,
 			);
 			path = Views;
@@ -1156,22 +1228,27 @@
 				A5D23E3127A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
 				A58FC72D26E2814E007674F6 /* XPCMailProtocol.swift in Sources */,
 				A58FC72E26E2814E007674F6 /* WrongPasswordListener.swift in Sources */,
+				A5A565832A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */,
 				A58FC72F26E2814E007674F6 /* BaseListener.swift in Sources */,
 				A5E49CC92A52FA1100C3740B /* ViewProtocols.swift in Sources */,
 				A5AA31E92778D6E600A064B6 /* InfoViews.swift in Sources */,
+				A5A565892A54A15200D7E030 /* FirstLaunchProgressViewModel.swift in Sources */,
 				A58C63FC2A4D5B8B004DE972 /* Logger.swift in Sources */,
-				A599EB3227AB1259003A69B5 /* BaseView.swift in Sources */,
+				A599EB3227AB1259003A69B5 /* ProtectionView.swift in Sources */,
 				A5A252222A52DDBE00889F5C /* AppCommons.swift in Sources */,
 				A58FC73026E2814E007674F6 /* USBListener.swift in Sources */,
 				A54A1F7B2703769800176069 /* LoginListener.swift in Sources */,
 				A5E49CCC2A53582C00C3740B /* LastThiefDetectionView.swift in Sources */,
-				A5258AC82831652B0034E32F /* FirstLaunchViews.swift in Sources */,
+				A5258AC82831652B0034E32F /* FirstLaunchFaultViews.swift in Sources */,
 				A5D23E3427A1E4BA001C0370 /* View+OpenWindow.swift in Sources */,
 				A58FC73126E2814E007674F6 /* FileSystemUtil.swift in Sources */,
+				A5A5657D2A54263900D7E030 /* FirstLaunchDomain.swift in Sources */,
+				A5A565772A54229100D7E030 /* FirstLaunchOptionsView.swift in Sources */,
 				A58FC73226E2814E007674F6 /* SettingsView.swift in Sources */,
 				A58C63C52A4C7C6E004DE972 /* NSApplication+Settings.swift in Sources */,
 				A599EB2A27AB0B07003A69B5 /* SecurityUtil.swift in Sources */,
 				A5AA31D82778961400A064B6 /* NotificationNotifier.swift in Sources */,
+				A5A5657A2A5424D200D7E030 /* FirstLaunchViewModel.swift in Sources */,
 				A58FC73326E2814E007674F6 /* UserDefault+PropertyWrapper.swift in Sources */,
 				A56F1A7E278A29630066CA78 /* DispatchQueue+Debounce.swift in Sources */,
 				A58FC73426E2814E007674F6 /* ThiefDto.swift in Sources */,
@@ -1202,12 +1279,15 @@
 				A58FC73E26E2814E007674F6 /* ThiefManager.swift in Sources */,
 				A58FC73F26E2814E007674F6 /* DatabaseManager.swift in Sources */,
 				A51ABA2E283BE98200007B15 /* DeviceUtil.swift in Sources */,
+				A5A565802A54810300D7E030 /* FirstLaunchProgressView.swift in Sources */,
 				A58FC74026E2814E007674F6 /* XPCPowerProtocol.swift in Sources */,
 				A5A252172A4E247400889F5C /* LastThiefDetectionViewModel.swift in Sources */,
 				A5A2521A2A4F416600889F5C /* View+ApplyIf.swift in Sources */,
 				A5AA31E02778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
 				A58FC74126E2814E007674F6 /* WakeUpListener.swift in Sources */,
 				A58FC76326E282C7007674F6 /* MailNotifier.swift in Sources */,
+				A5A565862A549B7700D7E030 /* LaunchAtLoginView.swift in Sources */,
+				A5A5658C2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */,
 				A58FC74226E2814E007674F6 /* DropboxNotifier.swift in Sources */,
 				A5BC810D2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */,
 			);
@@ -1222,22 +1302,27 @@
 				A5D23E3027A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
 				A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */,
 				A5E6D79525A5D13000EEA7DD /* BaseListener.swift in Sources */,
+				A5A565822A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */,
 				A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */,
 				A5E49CC82A52FA1100C3740B /* ViewProtocols.swift in Sources */,
 				A5AA31E82778D6E600A064B6 /* InfoViews.swift in Sources */,
+				A5A565882A54A15200D7E030 /* FirstLaunchProgressViewModel.swift in Sources */,
 				A58C63FB2A4D5B8B004DE972 /* Logger.swift in Sources */,
-				A599EB3127AB1259003A69B5 /* BaseView.swift in Sources */,
+				A599EB3127AB1259003A69B5 /* ProtectionView.swift in Sources */,
 				A5A252212A52DDBE00889F5C /* AppCommons.swift in Sources */,
 				A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */,
 				A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */,
 				A5E49CCB2A53582C00C3740B /* LastThiefDetectionView.swift in Sources */,
-				A5258AC72831652B0034E32F /* FirstLaunchViews.swift in Sources */,
+				A5258AC72831652B0034E32F /* FirstLaunchFaultViews.swift in Sources */,
 				A5D23E3327A1E4BA001C0370 /* View+OpenWindow.swift in Sources */,
 				A56D11E126DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift in Sources */,
+				A5A5657C2A54263900D7E030 /* FirstLaunchDomain.swift in Sources */,
+				A5A565762A54229100D7E030 /* FirstLaunchOptionsView.swift in Sources */,
 				A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */,
 				A58C63C42A4C7C6E004DE972 /* NSApplication+Settings.swift in Sources */,
 				A599EB2927AB0B07003A69B5 /* SecurityUtil.swift in Sources */,
 				A5AA31D72778961400A064B6 /* NotificationNotifier.swift in Sources */,
+				A5A565792A5424D200D7E030 /* FirstLaunchViewModel.swift in Sources */,
 				A5E6D79F25A5D1AE00EEA7DD /* PowerListener.swift in Sources */,
 				A56F1A7D278A29630066CA78 /* DispatchQueue+Debounce.swift in Sources */,
 				A5E6D78E25A5CD2E00EEA7DD /* TriggerManager.swift in Sources */,
@@ -1268,12 +1353,15 @@
 				A54A1F7A2703769800176069 /* LoginListener.swift in Sources */,
 				A51ABA2D283BE98200007B15 /* DeviceUtil.swift in Sources */,
 				A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */,
+				A5A5657F2A54810300D7E030 /* FirstLaunchProgressView.swift in Sources */,
 				A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */,
 				A5A252162A4E247400889F5C /* LastThiefDetectionViewModel.swift in Sources */,
 				A5A252192A4F416600889F5C /* View+ApplyIf.swift in Sources */,
 				A5AA31DF2778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 				A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */,
+				A5A565852A549B7700D7E030 /* LaunchAtLoginView.swift in Sources */,
+				A5A5658B2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */,
 				A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */,
 				A5BC810C2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */,
 			);

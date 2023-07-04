@@ -9,6 +9,14 @@
 import SwiftUI
 
 extension View {
+    
+    /// Display first or second view depends of condition
+    /// - Parameters:
+    ///   - condition: boo condition
+    ///   - apply: first view
+    ///   - else: second view
+    /// - Returns: some view
+    /// 
     @ViewBuilder func applyIf<T: View>(_ condition: @autoclosure () -> Bool, apply: (Self) -> T, else: (Self) -> T) -> some View {
         if condition() {
             apply(self)

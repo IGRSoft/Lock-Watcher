@@ -101,7 +101,7 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         //ForEach(["en", "ru", "uk"], id: \.self) { id in
-        SettingsView(viewModel: SettingsViewModel(settings: AppSettings(), thiefManager: ThiefManager(settings: AppSettings())))
+        SettingsView(viewModel: SettingsViewModel.preview)
         //.environment(\.locale, .init(identifier: id))
         //}
     }

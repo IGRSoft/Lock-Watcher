@@ -21,7 +21,7 @@ struct InfoView: View {
         
         VStack(alignment: .leading) {
             VStack(alignment: .center) {
-                if AppSettings.isDebug {
+                if AppSettings.isImageCaptureDebug {
                     Button(action: viewModel.debugTrigger, label: viewModel.debugTitle)
                 }
                 Button(action: viewModel.openSettings, label: viewModel.openSettingsTitle)

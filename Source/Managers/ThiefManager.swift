@@ -21,12 +21,14 @@ protocol ThiefManagerProtocol: ObservableObject {
     var databaseManager: any DatabaseManagerProtocol { get }
     
     func setupLocationManager(enable: Bool)
+    
+    func showSnapshot(identifier: String)
 }
 
 final class ThiefManager: NSObject, ThiefManagerProtocol{
     typealias WatchBlock = ((ThiefDto) -> Void)
     
-    private let notificationManager: NotificationManager
+    private let notificationManager: NotificationManagerProtocol
     public let objectWillChange = ObservableObjectPublisher()
     
     private(set) var settings: (any AppSettingsProtocol)
@@ -105,7 +107,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
         os_log(.debug, "Detected trigered action: \(self.lastThiefDetection.triggerType.rawValue)")
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings.sync.isSaveSnapshotToDisk
-        guard !AppSettings.isDebug else {
+        guard !AppSettings.isImageCaptureDebug else {
             let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
             let date = Date()
             lastThiefDetection.triggerType = .debug
@@ -131,7 +133,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
     }
     
     func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {
-        guard let filepath = FileSystemUtil.store(image: snapshot, forKey: filename) else {
+        guard let filePath = FileSystemUtil().store(image: snapshot, forKey: filename) else {
             assert(false, "wrong file path")
             return
         }
@@ -139,9 +141,9 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
         lastThiefDetection.snapshot = snapshot
         lastThiefDetection.date = date
         lastThiefDetection.coordinate = coordinate
-        lastThiefDetection.filepath = filepath
+        lastThiefDetection.filepath = filePath
         
-        let compleate:(ThiefDto) -> () = { [weak self] dto in
+        let complete:(ThiefDto) -> () = { [weak self] dto in
             
             let _ = self?.notificationManager.send(dto)
             let _ = self?.databaseManager.send(dto)
@@ -163,10 +165,10 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
                 }
                 
                 lastThiefDetection.traceRoute = traceRouteLog
-                compleate(lastThiefDetection)
+                complete(lastThiefDetection)
             }
         } else {
-            compleate(lastThiefDetection)
+            complete(lastThiefDetection)
         }
     }
     
@@ -204,13 +206,16 @@ extension ThiefManager: CLLocationManagerDelegate {
 }
 
 extension ThiefManager: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+    func userNotificationCenter(_ centre: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let identifier = response.notification.request.identifier;
         showSnapshot(identifier: identifier)
     }
 }
 
 class ThiefManagerPreview: ThiefManagerProtocol {
+    func showSnapshot(identifier: String) {
+    }
+    
     func setupLocationManager(enable: Bool) {
     }
     

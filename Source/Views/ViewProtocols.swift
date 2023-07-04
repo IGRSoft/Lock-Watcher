@@ -25,4 +25,8 @@ protocol DomainViewConstantProtocol {
 
 enum ViewConstants {
     static let spacing: CGFloat = 8
+    
+    static let padding: CGFloat = 8
+    
+    static let doublePadding: CGFloat = padding * 2
 }

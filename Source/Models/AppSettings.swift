@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 struct UISettings: Codable {
     var isSecurityInfoExpand: Bool = true
@@ -44,10 +45,10 @@ struct SyncSettings: Codable {
     var isUseSnapshotLocalNotification: Bool = false
 }
 
-protocol AppSettingsProtocol: ObservableObject {
+protocol AppSettingsProtocol {
     static var isMASBuild: Bool { get }
     
-    static var isDebug: Bool { get }
+    static var isImageCaptureDebug: Bool { get }
     
     static var firstLaunchSuccessCount: Int { get }
     
@@ -61,39 +62,41 @@ protocol AppSettingsProtocol: ObservableObject {
 }
 
 final class AppSettings: AppSettingsProtocol {
-    internal let objectWillChange = PassthroughSubject<Void, Never>()
-    
 #if NON_MAS_CONFIG
     static var isMASBuild: Bool = false
 #else
     static var isMASBuild: Bool = true
 #endif
     
-    static var isDebug: Bool = true
+    static var isImageCaptureDebug: Bool = false
     
     static var firstLaunchSuccessCount = 15
     
-    @UserDefault("OptionsSettings", defaultValue: OptionsSettings()) var options: OptionsSettings {
-        didSet {
-            objectWillChange.send()
-        }
-    }
+    @UserDefault("OptionsSettings", defaultValue: OptionsSettings())
+    var options: OptionsSettings
     
-    @UserDefault("TriggerSettings", defaultValue: TriggerSettings()) var triggers: TriggerSettings {
-        didSet {
-            objectWillChange.send()
-        }
-    }
+    @UserDefault("TriggerSettings", defaultValue: TriggerSettings())
+    var triggers: TriggerSettings
     
-    @UserDefault("SyncSettings", defaultValue: SyncSettings()) var sync: SyncSettings {
-        didSet {
-            objectWillChange.send()
-        }
-    }
+    @UserDefault("SyncSettings", defaultValue: SyncSettings())
+    var sync: SyncSettings
     
-    @UserDefault("UISettings", defaultValue: UISettings()) var ui: UISettings {
-        didSet {
-            objectWillChange.send()
-        }
-    }
+    @UserDefault("UISettings", defaultValue: UISettings())
+    var ui: UISettings
+}
+
+final class AppSettingsPreview: AppSettingsProtocol {
+    static var isMASBuild: Bool = true
+    
+    static var isImageCaptureDebug: Bool = true
+    
+    static var firstLaunchSuccessCount: Int = 15
+    
+    var options: OptionsSettings = .init()
+    
+    var triggers: TriggerSettings = .init()
+    
+    var sync: SyncSettings = .init()
+    
+    var ui: UISettings = .init()
 }

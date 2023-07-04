@@ -17,6 +17,9 @@ struct MainView: View {
     }
     
     var body: some View {
+        
+        let _ = Self._printChanges()
+        
         if viewModel.isAccessGranted {
             VStack(alignment: .leading) {
                 LastThiefDetectionView(viewModel: viewModel.lastThiefDetectionViewModel)
@@ -37,7 +40,7 @@ struct MainView: View {
 struct PopoverView_Previews: PreviewProvider {
     static var previews: some View {
         //ForEach(["en", "ru", "uk"], id: \.self) { id in
-        MainView(viewModel: MainViewModel(thiefManager: ThiefManager(settings: AppSettings())))
+        MainView(viewModel: MainViewModel.preview)
         //.environment(\.locale, .init(identifier: id))
         //}
     }

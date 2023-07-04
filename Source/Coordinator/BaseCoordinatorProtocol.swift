@@ -10,13 +10,6 @@ import SwiftUI
 
 protocol BaseCoordinatorProtocol {
     
-    
-    /// Models to send objects to swift ui view
-    ///
-    associatedtype SettingsModel: AppSettingsProtocol
-    
-    associatedtype ThiefManagerModel: ThiefManagerProtocol
-    
     /// Controll windows
     /// 
     func displayMainWindow()
@@ -30,15 +23,12 @@ protocol BaseCoordinatorProtocol {
     ///   - isHidden: Binding bool to control visibility with SwiftUI
     ///   - closeClosure: callback on close window
     ///
-    func displayFirstLaunchWindowIfNeed(isHidden: Binding<Bool>, closeClosure: @escaping Commons.EmptyClosure)
+    func displayFirstLaunchWindowIfNeed(closeClosure: @escaping Commons.EmptyClosure)
         
     func displaySettingsWindow()
 }
 
 class MainCoordinatorPreview: BaseCoordinatorProtocol {
-    typealias SettingsModel = AppSettings
-    
-    typealias ThiefManagerModel = ThiefManager
     
     func displayMainWindow() {}
     
@@ -46,7 +36,7 @@ class MainCoordinatorPreview: BaseCoordinatorProtocol {
     
     func toggleMainWindow() {}
     
-    func displayFirstLaunchWindowIfNeed(isHidden: Binding<Bool> = .constant(false), closeClosure: @escaping Commons.EmptyClosure = { } ) {}
+    func displayFirstLaunchWindowIfNeed(closeClosure: @escaping Commons.EmptyClosure = { } ) {}
         
     func displaySettingsWindow() {}
 }

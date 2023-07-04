@@ -1,5 +1,5 @@
 //
-//  BaseView.swift
+//  ProtectionView.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 02.02.2022.
@@ -7,19 +7,6 @@
 //
 
 import SwiftUI
-import LaunchAtLogin
-
-struct LaunchAtLoginView: View {
-    init() {
-        LaunchAtLogin.migrateIfNeeded()
-    }
-    
-    var body: some View {
-        VStack(spacing: 16.0) {
-            LaunchAtLogin.Toggle(LocalizedStringKey("LaunchAtLogin"))
-        }
-    }
-}
 
 struct ProtectionView: View {
     @Binding var isProtectionEnable : Bool
@@ -39,5 +26,13 @@ struct ProtectionView: View {
             }
             .disabled(isProtectionEnable == false || password.isEmpty)
         })
+    }
+}
+
+struct ProtectionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProtectionView(isProtectionEnable: .constant(true))
+        
+        ProtectionView(isProtectionEnable: .constant(false))
     }
 }

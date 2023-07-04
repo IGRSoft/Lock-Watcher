@@ -9,12 +9,16 @@ import Foundation
 import AppKit
 import CoreLocation
 
-class NotificationManager {
+protocol NotificationManagerProtocol {
+    func send(_ thiefDto: ThiefDto) -> Bool
+}
+
+class NotificationManager: NotificationManagerProtocol {
     private lazy var mailNotifier = MailNotifier()
     private lazy var icloudNotifier = iCloudNotifier()
     private lazy var dropboxNotifier = DropboxNotifier()
     private lazy var notificationNotifier = NotificationNotifier()
-    private weak var settings: (any AppSettingsProtocol)!
+    private var settings: (any AppSettingsProtocol)!
     
     init(settings: any AppSettingsProtocol) {
         self.settings = settings

@@ -14,6 +14,4 @@ struct MainDomain: DomainViewConstant {
     var window: CGRect = .init(origin: .zero, size: .init(width: 340, height: CGFloat.infinity))
     
     var border: EdgeInsets = .init(top: 10, leading: 16, bottom: 10, trailing: 16)
-    
-    
 }

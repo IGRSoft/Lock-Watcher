@@ -26,10 +26,10 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     
     @Published private var settings: any AppSettingsProtocol
     
+    //MARK: - Variables
+    
     @Published var isInfoHidden = true
     @Published var isAccessGranted = true
-    
-    //MARK: - Variables
     
     internal let objectWillChange = PassthroughSubject<Void, Never>()
     
@@ -237,4 +237,8 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         self.settings = settings
         self.thiefManager = thiefManager
     }
+}
+
+extension SettingsViewModel {
+    static var preview: SettingsViewModel = SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview())
 }

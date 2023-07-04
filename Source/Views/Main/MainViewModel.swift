@@ -45,3 +45,7 @@ class MainViewModel: ObservableObject, DomainViewConstantProtocol {
         self.lastThiefDetectionViewModel = LastThiefDetectionViewModel(databaseManager: thiefManager.databaseManager)
     }
 }
+
+extension MainViewModel {
+    static var preview: MainViewModel = MainViewModel(thiefManager: ThiefManagerPreview())
+}

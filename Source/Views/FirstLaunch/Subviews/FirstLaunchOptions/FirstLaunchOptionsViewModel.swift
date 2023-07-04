@@ -1,0 +1,60 @@
+//
+//  FirstLaunchOptionsViewModel.swift
+//  Lock-Watcher
+//
+//  Created by Vitalii P on 04.07.2023.
+//  Copyright © 2023 IGR Soft. All rights reserved.
+//
+
+import SwiftUI
+import Combine
+
+final class FirstLaunchOptionsViewModel: ObservableObject {
+    let objectWillChange = PassthroughSubject<Void, Never>()
+    
+    @Published var settings: any AppSettingsProtocol
+    
+    init(settings: any AppSettingsProtocol) {
+        self.settings = settings
+    }
+    
+    var isUseSnapshotOnWakeUp: Binding<Bool> {
+        Binding<Bool>(get: {
+            self.settings.triggers.isUseSnapshotOnWakeUp
+        }, set: {
+            self.settings.triggers.isUseSnapshotOnWakeUp = $0
+            self.objectWillChange.send()
+        })
+    }
+    
+    var isUseSnapshotOnLogin: Binding<Bool> {
+        Binding<Bool>(get: {
+            self.settings.triggers.isUseSnapshotOnLogin
+        }, set: {
+            self.settings.triggers.isUseSnapshotOnLogin = $0
+            self.objectWillChange.send()
+        })
+    }
+    
+    var addLocationToSnapshot: Binding<Bool> {
+        Binding<Bool>(get: {
+            self.settings.options.addLocationToSnapshot
+        }, set: {
+            self.settings.options.addLocationToSnapshot = $0
+            self.objectWillChange.send()
+        })
+    }
+    
+    var isICloudSyncEnable: Binding<Bool> {
+        Binding<Bool>(get: {
+            self.settings.sync.isICloudSyncEnable
+        }, set: {
+            self.settings.sync.isICloudSyncEnable = $0
+            self.objectWillChange.send()
+        })
+    }
+}
+
+extension FirstLaunchOptionsViewModel {
+    static var preview = FirstLaunchOptionsViewModel(settings: AppSettingsPreview())
+}

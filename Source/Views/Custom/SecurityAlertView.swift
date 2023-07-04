@@ -38,7 +38,13 @@ struct SecurityAlertView: View {
                     Text("ButtonCancel")
                 }
                 Spacer()
-            }.padding(0)
+            }.padding(.zero)
         }.background(Color(white: 0.9))
+    }
+}
+
+struct SecurityAlertView_Previews: PreviewProvider {
+    static var previews: some View {
+        SecurityAlertView(password: .constant("1234"), isPresented: .constant(true))
     }
 }

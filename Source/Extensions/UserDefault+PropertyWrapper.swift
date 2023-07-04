@@ -15,15 +15,13 @@ struct UserDefault<T: Codable> {
     let key: String
     let defaultValue: T
     
-    private let userDefaultsId = "com.igrsoft.Lock-Watcher-defaults"
-    
     private let userDefaults: UserDefaults
     
     init(_ key: String, defaultValue: T) {
         self.key = key
         self.defaultValue = defaultValue
         
-        self.userDefaults = UserDefaults.init(suiteName: userDefaultsId)!
+        self.userDefaults = UserDefaults.init(suiteName: Secrets.userDefaultsId)!
     }
     
     var wrappedValue: T {

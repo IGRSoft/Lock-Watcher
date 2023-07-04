@@ -28,8 +28,10 @@ struct MainApp: App {
         
         /// General Thief manager based on settings
         ///
-        fileprivate lazy var thiefManager = ThiefManager(settings: settings) { [unowned self] dto in
-            statusBarItem.button?.image = .statusBarIcon(triggered: dto.triggerType != .setup)
+        fileprivate lazy var thiefManager: any ThiefManagerProtocol = ThiefManager(settings: settings) { [unowned self] dto in
+            DispatchQueue.main.async { [weak self] in
+                self?.statusBarItem.button?.image = .statusBarIcon(triggered: dto.triggerType != .setup)
+            }
         }
         
         /// General coordinator to manipulate windows
@@ -64,7 +66,7 @@ struct MainApp: App {
         func applicationDidFinishLaunching(_ notification: Notification) {
             applyTheme()
             
-            coordinator.displayFirstLaunchWindowIfNeed(isHidden: .constant(false)) { [weak self] in self?.coordinator.displayMainWindow() }
+            coordinator.displayFirstLaunchWindowIfNeed { [weak self] in self?.coordinator.displayMainWindow() }
             
             process(localNotification: notification)
         }

@@ -18,6 +18,8 @@ struct Log {
         case url
         case coordinator
         case settings
+        
+        case fileSystem
     }
     
     private static var subsystem = Bundle.main.bundleIdentifier!

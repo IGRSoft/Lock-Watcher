@@ -33,7 +33,7 @@ struct SendNotificationToMailView: View {
 }
 
 struct AddLocationToSnapshotView: View {
-    @Binding var addLocationToSnapshot : Bool
+    @Binding var addLocationToSnapshot: Bool
     
     @State private var showingAlert = false
     

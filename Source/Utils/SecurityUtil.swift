@@ -11,20 +11,17 @@ import KeychainAccess
 import CryptoKit
 
 class SecurityUtil {
-    private static let soul = "fd2JqkXql2fs\nR."
-    private static let keychainId = "com.igrsoft.Lock-Watcher-access-token"
-    private static let appKey = "lockwatchertoken"
     
     class func save(password: String) {
-        let keychain = Keychain(service: keychainId)
+        let keychain = Keychain(service: Secrets.keychainId)
         let hashString = hashString(for: password)
         
-        keychain[appKey] = hashString
+        keychain[Secrets.appKey] = hashString
     }
     
     class func isValid(password: String) -> Bool {
-        let keychain = Keychain(service: keychainId)
-        let token = keychain[appKey]
+        let keychain = Keychain(service: Secrets.keychainId)
+        let token = keychain[Secrets.appKey]
         let hashString = hashString(for: password)
         
         if token?.isEmpty != false || hashString.isEmpty != false {
@@ -35,14 +32,14 @@ class SecurityUtil {
     }
     
     class func hasPassword() -> Bool {
-        let keychain = Keychain(service: keychainId)
-        let token = keychain[appKey]
+        let keychain = Keychain(service: Secrets.keychainId)
+        let token = keychain[Secrets.appKey]
         
         return token?.isEmpty == false
     }
     
     private class func hashString(for password: String) -> String {
-        let dataToPack = Data((soul + password).utf8)
+        let dataToPack = Data((Secrets.soul + password).utf8)
         let hashed = SHA256.hash(data: dataToPack)
         return hashed.compactMap { String(format: "%02x", $0) }.joined()
     }
