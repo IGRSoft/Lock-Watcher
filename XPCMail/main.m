@@ -44,5 +44,6 @@ int main(int argc, const char *argv[])
     
     // Resuming the serviceListener starts this service. This method does not return.
     [listener resume];
+    
     return 0;
 }

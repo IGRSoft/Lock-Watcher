@@ -9,30 +9,49 @@ import Foundation
 import CoreLocation
 import AppKit
 
+/// list of all triggers in app
+///
 enum TriggerType: String {
     case setup, onWakeUp, onWrongPassword, onBatteryPower, usbConnected, logedIn, debug
 }
 
 extension TriggerType {
-    var info: String {
+    var name: String {
         return NSLocalizedString("TrigerType_\(self.rawValue)", comment: "")
     }
 }
 
+/// Object that contains all data on trigger action
+///
 public class ThiefDto: Equatable {
     public static func == (lhs: ThiefDto, rhs: ThiefDto) -> Bool {
         return lhs.date == rhs.date
     }
     
+    // current coordinate of device
     var coordinate: CLLocationCoordinate2D?
+    
+    // ip address of session
     var ipAddress: String?
+    
+    // trace route of session
     var traceRoute: String?
+    
+    // trigger type
     var triggerType: TriggerType = .setup
+    
+    // image from camera
     var snapshot: NSImage?
-    var filepath: URL?
+    
+    // image file location
+    var filePath: URL?
+    
+    // data of image
     var date: Date = Date()
     
-    func info() -> String {
+    /// information about object
+    /// 
+    func description() -> String {
         var objects = [String]()
         
         if let coordinate = coordinate {

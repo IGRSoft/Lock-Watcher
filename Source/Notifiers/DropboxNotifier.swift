@@ -9,7 +9,13 @@ import AppKit
 import CoreLocation
 import SwiftyDropbox
 
-class DropboxNotifier {
+class DropboxNotifier: NotifierProtocol {
+    
+    //MARK: - Dependency injection
+    
+    private var logger: Log
+    
+    //MARK: - Types
     
     enum DropboxNotifierError: Error {
         case emptyData
@@ -17,14 +23,24 @@ class DropboxNotifier {
     
     typealias DropboxNotifierAuthCallback = (() -> Void)
     
+    //MARK: - Variables
+    
     private var settings: (any AppSettingsProtocol)!
     
     lazy var client = DropboxClientsManager.authorizedClient
     
+    //MARK: - initialiser
+    
+    init(logger: Log = .init(category: .dropboxNotifier)) {
+        self.logger = logger
+    }
+    
+    //MARK: - public
+    
     func register(with settings: any AppSettingsProtocol) {
         self.settings = settings
         
-        DropboxClientsManager.setupWithAppKeyDesktop("wg60852o20nf6eh")
+        DropboxClientsManager.setupWithAppKeyDesktop(Secrets.dropboxKey)
         
         NSAppleEventManager.shared().setEventHandler(self,
                                                      andSelector: #selector(handleGetURLEvent),
@@ -35,13 +51,16 @@ class DropboxNotifier {
     func send(_ thiefDto: ThiefDto) -> Bool {
         var result = true
         
-        guard let filepath = thiefDto.filepath else {
-            assert(false, "wrong file path")
+        guard let filePath = thiefDto.filePath else {
+            let msg = "wrong file path"
+            logger.error(msg)
+            assert(false, msg)
+            
             return false
         }
         
-        var image = NSImage(contentsOf: filepath)
-        let info = thiefDto.info()
+        var image = NSImage(contentsOf: filePath)
+        let info = thiefDto.description()
         if info.isEmpty == false {
             image = image?.imageWithText(text: info)
         }
@@ -51,20 +70,22 @@ class DropboxNotifier {
                 throw DropboxNotifierError.emptyData
             }
             
-            let _ = client?.files.upload(path: "/\(filepath.path.split(separator: "/").last ?? "image.jpeg")", input: data)
-                .response { response, error in
-                    if let response = response {
-                        print(response)
-                    } else if let error = error {
-                        print(error)
+            logger.debug("send: \(thiefDto)")
+            
+            let _ = client?.files.upload(path: "/\(filePath.path.split(separator: "/").last ?? "image.jpeg")", input: data)
+                .response { [weak self] response, error in
+                    if let response {
+                        self?.logger.debug("\(response)")
+                    } else if let error {
+                        self?.logger.error("\(error)")
                     }
                 }
-                .progress { progressData in
-                    print(progressData)
+                .progress { [weak self] progressData in
+                    self?.logger.debug("progress: \(progressData)")
                 }
         } catch {
             result = false
-            print(error)
+            logger.error("\(error.localizedDescription)")
         }
         
         return result
@@ -83,28 +104,39 @@ class DropboxNotifier {
         DropboxClientsManager.unlinkClients()
     }
     
-    @objc func handleGetURLEvent(_ event: NSAppleEventDescriptor?, replyEvent: NSAppleEventDescriptor?) {
-        if let aeEventDescriptor = event?.paramDescriptor(forKeyword: AEKeyword(keyDirectObject)) {
-            if let urlStr = aeEventDescriptor.stringValue {
-                // this brings your application back the foreground on redirect
-                NSApp.activate(ignoringOtherApps: true)
-                let url = URL(string: urlStr)!
-                let oauthCompletion: DropboxOAuthCompletion = { [weak self] in
-                    if let authResult = $0 {
-                        switch authResult {
-                        case .success:
-                            let currentAccount = self?.client?.users.getCurrentAccount()
-                            currentAccount?.response(completionHandler: { user, error in
-                                if let displayName = user?.name.displayName {
-                                    self?.settings?.sync.dropboxName = displayName
-                                }
-                            })
-                        case .cancel, .error:
-                            self?.settings?.sync.dropboxName = ""
-                        }
+    //MARK: - private
+    
+    @objc private func handleGetURLEvent(_ event: NSAppleEventDescriptor?, replyEvent: NSAppleEventDescriptor?) {
+        guard let aeEventDescriptor = event?.paramDescriptor(forKeyword: AEKeyword(keyDirectObject)), let urlStr = aeEventDescriptor.stringValue else {
+            return
+        }
+        
+        processUrl(string: urlStr)
+    }
+    
+    private func processUrl(string: String) {
+        guard let url = URL(string: string) else {
+            let msg = "unable to construct url: \(string)"
+            logger.error(msg)
+            return
+        }
+        
+        // this brings your application back the foreground on redirect
+        NSApp.activate(ignoringOtherApps: true)
+        
+        DropboxClientsManager.handleRedirectURL(url) { [weak self] authResult in
+            switch authResult {
+            case .success:
+                let currentAccount = self?.client?.users.getCurrentAccount()
+                currentAccount?.response(completionHandler: { user, error in
+                    if let displayName = user?.name.displayName {
+                        self?.settings?.sync.dropboxName = displayName
                     }
-                }
-                DropboxClientsManager.handleRedirectURL(url, completion: oauthCompletion)
+                })
+            case .cancel, .error:
+                self?.settings?.sync.dropboxName = ""
+            case .none:
+                break
             }
         }
     }

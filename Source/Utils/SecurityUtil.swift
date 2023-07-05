@@ -10,7 +10,10 @@ import Foundation
 import KeychainAccess
 import CryptoKit
 
-class SecurityUtil {
+protocol SecurityUtilProtocol {
+}
+
+class SecurityUtil: SecurityUtilProtocol {
     
     class func save(password: String) {
         let keychain = Keychain(service: Secrets.keychainId)

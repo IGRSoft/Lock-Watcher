@@ -6,13 +6,22 @@
 //
 
 import Foundation
-import os
 
-class TriggerManager {
-    
+protocol TriggerManagerProtocol {
     typealias TriggerBlock = ((ThiefDto) -> Void)
     
+    func start(settings: (any AppSettingsProtocol)?, triggerBlock: @escaping TriggerBlock)
+    
+    func stop()
+}
+
+final class TriggerManager: TriggerManagerProtocol {
+    
+    //MARK: - Dependency injection
+    
     private var settings: (any AppSettingsProtocol)?
+    
+    private var logger: Log
     
     var runListener: ((BaseListenerProtocol, Bool) -> ())?
     
@@ -29,8 +38,15 @@ class TriggerManager {
         return listeners
     }()
     
-    public func start(settings: (any AppSettingsProtocol)?, _ triggerBlock: @escaping TriggerBlock = { triggered in }) {
-        os_log(.debug, "Starting all triggers")
+    init(logger: Log = .init(category: .triggerManager)) {
+        self.logger = logger
+    }
+    
+    //MARK: - public
+    
+    public func start(settings: (any AppSettingsProtocol)?, triggerBlock: @escaping TriggerBlock = { triggered in }) {
+        
+        logger.debug("Starting all triggers")
         
         let runListener:(BaseListenerProtocol, Bool) -> () = { listener, isEnabled in
             if isEnabled == true {
@@ -77,6 +93,16 @@ class TriggerManager {
         self.settings = settings
     }
     
+    public func stop() {
+        logger.debug("Stop all triggers")
+                
+        for listener in self.listeners.values {
+            listener.stop()
+        }
+    }
+    
+    //MARK: - private
+    
     private func restartListener(type: ListenerName) {
         if let l = self.listeners[type] {
             l.stop()
@@ -98,13 +124,5 @@ class TriggerManager {
         
         self.listeners[type] = listener
         self.runListener?(listener, true)
-    }
-    
-    public func stop() {
-        os_log(.debug, "Stop all triggers")
-        
-        for listener in self.listeners.values {
-            listener.stop()
-        }
     }
 }

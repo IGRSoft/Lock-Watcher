@@ -6,43 +6,80 @@
 //
 
 import Foundation
-import os
 import CoreLocation
 
-class MailNotifier {
+/// Start XPCMail service to send message to Mail app
+/// uses default account to send mail
+/// 
+class MailNotifier: NotifierProtocol {
+    
+    //MARK: - Dependency injection
+    
+    private var logger: Log
+    
+    //MARK: - Variables
+    
+    private var settings: (any AppSettingsProtocol)!
+    
     private let kServiceName = "com.igrsoft.XPCMail"
-    
-    private var connection: NSXPCConnection?
-    
-    private var service: XPCMailProtocol {
+        
+    private lazy var connection: NSXPCConnection = {
         let connection = NSXPCConnection(serviceName: kServiceName)
         connection.remoteObjectInterface = NSXPCInterface(with: XPCMailProtocol.self)
         connection.resume()
         
-        connection.interruptionHandler = {
-            os_log(.error, "Service MailNotifier interupted")
+        connection.interruptionHandler = { [weak self] in
+            self?.logger.error("XPCMail interrupted")
         }
         
-        connection.invalidationHandler = {
-            os_log(.error, "Service MailNotifier invalidated")
+        connection.invalidationHandler = { [weak self] in
+            self?.logger.error("XPCMail invalidated")
         }
         
-        let service = connection.remoteObjectProxyWithErrorHandler { error in
-            os_log(.error, "Received error: \(error.localizedDescription)")
-        } as? XPCMailProtocol
+        return connection
+    }()
+    
+    private lazy var service: XPCMailProtocol = {
+        let service = connection.remoteObjectProxyWithErrorHandler { [weak self] error in
+            self?.logger.error("Received error: \(error.localizedDescription)")
+        } as! XPCMailProtocol
         
-        self.connection = connection
-        
-        return service!
+        return service
+    }()
+    
+    //MARK: - initialiser
+    
+    init(logger: Log = .init(category: .mailNotifier)) {
+        self.logger = logger
     }
     
-    func send(_ thiefDto: ThiefDto, to mail: String) -> Bool {
-        guard let filepath = thiefDto.filepath?.path else {
-            assert(false, "wrong file path")
+    //MARK: - public
+    
+    func register(with settings: any AppSettingsProtocol) {
+        self.settings = settings
+    }
+    
+    func send(_ thiefDto: ThiefDto) -> Bool {
+        guard let filePath = thiefDto.filePath?.path else {
+            let msg = "wrong file path"
+            logger.error(msg)
+            assert(false, msg)
+            
             return false
         }
         
-        service.sendMail(mail, coordinates: thiefDto.coordinate ?? kCLLocationCoordinate2DInvalid, attachment: filepath)
+        let mail = settings.sync.mailRecipient
+        guard !mail.isEmpty else {
+            let msg = "missed mail address"
+            logger.error(msg)
+            assert(false, msg)
+            
+            return false
+        }
+        
+        logger.debug("send: \(thiefDto)")
+        
+        service.sendMail(mail, coordinates: thiefDto.coordinate ?? kCLLocationCoordinate2DInvalid, attachment: filePath)
         
         return true
     }

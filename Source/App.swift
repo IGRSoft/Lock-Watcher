@@ -16,7 +16,7 @@ struct MainApp: App {
     
     var body: some Scene {
         Settings {
-            SettingsView(viewModel: SettingsViewModel(settings: appDelegate.settings, thiefManager: appDelegate.thiefManager))
+            appDelegate.settingsView
         }
     }
     
@@ -24,11 +24,11 @@ struct MainApp: App {
         
         /// General settings object
         ///
-        fileprivate lazy var settings = AppSettings()
+        private lazy var settings = AppSettings()
         
         /// General Thief manager based on settings
         ///
-        fileprivate lazy var thiefManager: any ThiefManagerProtocol = ThiefManager(settings: settings) { [unowned self] dto in
+        private lazy var thiefManager: any ThiefManagerProtocol = ThiefManager(settings: settings) { [unowned self] dto in
             DispatchQueue.main.async { [weak self] in
                 self?.statusBarItem.button?.image = .statusBarIcon(triggered: dto.triggerType != .setup)
             }
@@ -43,6 +43,10 @@ struct MainApp: App {
             
             return MainCoordinator(settings: settings, thiefManager: thiefManager, statusBarButton: button)
         }()
+        
+        private lazy var settingsViewModel: SettingsViewModel = SettingsViewModel(settings: settings, thiefManager: thiefManager)
+        
+        private(set) lazy var settingsView = SettingsView(viewModel: settingsViewModel)
         
         /// base statusBar item
         ///

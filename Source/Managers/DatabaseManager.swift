@@ -19,16 +19,24 @@ protocol DatabaseManagerProtocol: ObservableObject {
     var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { get }
 }
 
-class DatabaseManager: DatabaseManagerProtocol {    
-    private let kImagesKey = "images"
+class DatabaseManager: DatabaseManagerProtocol {
     
+    //MARK: - Dependency injection
     private var settings: any AppSettingsProtocol
+    
+    //MARK: - Variables
+    
+    private let kImagesKey = "images"
     
     private var storage: Storage? = nil
     
     @Published private(set) var latestImages: [DatabaseDto] = .init()
     
+    //MARK: - Combine
+    
     var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { $latestImages }
+    
+    //MARK: - initialiser
     
     init(settings: any AppSettingsProtocol) {
         self.settings = settings
@@ -40,6 +48,8 @@ class DatabaseManager: DatabaseManagerProtocol {
         
         latestImages.append(contentsOf: readImages().dtos)
     }
+    
+    //MARK: - public
     
     func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
         let dto = DatabaseDto(with: thiefDto)
@@ -77,6 +87,8 @@ class DatabaseManager: DatabaseManagerProtocol {
         return images
     }
     
+    //MARK: - private
+    
     private func readImages() -> DatabaseDtoList {
         var images: DatabaseDtoList = DatabaseDtoList(dtos: .init())
         do {
@@ -88,12 +100,6 @@ class DatabaseManager: DatabaseManagerProtocol {
         }
         
         return images
-    }
-}
-
-extension DatabaseManager: Equatable {
-    public static func == (lhs: DatabaseManager, rhs: DatabaseManager) -> Bool {
-        return lhs.storage?.folderUrl == rhs.storage?.folderUrl
     }
 }
 

@@ -157,6 +157,10 @@
 		A5A565892A54A15200D7E030 /* FirstLaunchProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565872A54A15200D7E030 /* FirstLaunchProgressViewModel.swift */; };
 		A5A5658B2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5658A2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift */; };
 		A5A5658C2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5658A2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift */; };
+		A5A565912A55863600D7E030 /* DatabaseDtoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565902A55863600D7E030 /* DatabaseDtoList.swift */; };
+		A5A565922A55863600D7E030 /* DatabaseDtoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565902A55863600D7E030 /* DatabaseDtoList.swift */; };
+		A5A565942A5588D800D7E030 /* NotifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565932A5588D800D7E030 /* NotifierProtocol.swift */; };
+		A5A565952A5588D800D7E030 /* NotifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A565932A5588D800D7E030 /* NotifierProtocol.swift */; };
 		A5AA31D72778961400A064B6 /* NotificationNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31D62778961400A064B6 /* NotificationNotifier.swift */; };
 		A5AA31D82778961400A064B6 /* NotificationNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31D62778961400A064B6 /* NotificationNotifier.swift */; };
 		A5AA31DF2778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */; };
@@ -379,6 +383,8 @@
 		A5A565842A549B7700D7E030 /* LaunchAtLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginView.swift; sourceTree = "<group>"; };
 		A5A565872A54A15200D7E030 /* FirstLaunchProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchProgressViewModel.swift; sourceTree = "<group>"; };
 		A5A5658A2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchSuccessView.swift; sourceTree = "<group>"; };
+		A5A565902A55863600D7E030 /* DatabaseDtoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDtoList.swift; sourceTree = "<group>"; };
+		A5A565932A5588D800D7E030 /* NotifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifierProtocol.swift; sourceTree = "<group>"; };
 		A5AA31D62778961400A064B6 /* NotificationNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNotifier.swift; sourceTree = "<group>"; };
 		A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectSnapshotViews.swift; sourceTree = "<group>"; };
 		A5AA31E12778D64400A064B6 /* SaveSnapshotViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSnapshotViews.swift; sourceTree = "<group>"; };
@@ -531,6 +537,7 @@
 				A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */,
 				A519997B26D92E6100F482BC /* DropboxNotifier.swift */,
 				A5AA31D62778961400A064B6 /* NotificationNotifier.swift */,
+				A5A565932A5588D800D7E030 /* NotifierProtocol.swift */,
 			);
 			path = Notifiers;
 			sourceTree = "<group>";
@@ -570,9 +577,9 @@
 		A54E4A1826108E9600E7B1D4 /* XPCAuthentication */ = {
 			isa = PBXGroup;
 			children = (
+				A54E4A1F26108E9600E7B1D4 /* Info.plist */,
 				A54E4A562610AA3C00E7B1D4 /* main.swift */,
 				A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */,
-				A54E4A1F26108E9600E7B1D4 /* Info.plist */,
 				A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */,
 			);
 			path = XPCAuthentication;
@@ -811,13 +818,13 @@
 		A5E6D75325A5BB6C00EEA7DD /* XPCPower */ = {
 			isa = PBXGroup;
 			children = (
+				A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */,
+				A5E6D75A25A5BB6C00EEA7DD /* Info.plist */,
+				A5E6D75825A5BB6C00EEA7DD /* main.m */,
+				A5E6D76D25A5BC8A00EEA7DD /* XPCPower-Bridging-Header.h */,
 				A5E6D75525A5BB6C00EEA7DD /* XPCPower.h */,
 				A5E6D75625A5BB6C00EEA7DD /* XPCPower.m */,
-				A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */,
-				A5E6D75825A5BB6C00EEA7DD /* main.m */,
-				A5E6D75A25A5BB6C00EEA7DD /* Info.plist */,
 				A5E6D76E25A5BC8B00EEA7DD /* XPCPowerProtocol.swift */,
-				A5E6D76D25A5BC8A00EEA7DD /* XPCPower-Bridging-Header.h */,
 			);
 			path = XPCPower;
 			sourceTree = "<group>";
@@ -852,6 +859,7 @@
 				A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */,
 				A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */,
 				A519998526DA4BFB00F482BC /* DatabaseDto.swift */,
+				A5A565902A55863600D7E030 /* DatabaseDtoList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1227,6 +1235,7 @@
 				A599EB2427AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */,
 				A5D23E3127A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
 				A58FC72D26E2814E007674F6 /* XPCMailProtocol.swift in Sources */,
+				A5A565922A55863600D7E030 /* DatabaseDtoList.swift in Sources */,
 				A58FC72E26E2814E007674F6 /* WrongPasswordListener.swift in Sources */,
 				A5A565832A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */,
 				A58FC72F26E2814E007674F6 /* BaseListenerProtocol.swift in Sources */,
@@ -1289,6 +1298,7 @@
 				A5A565862A549B7700D7E030 /* LaunchAtLoginView.swift in Sources */,
 				A5A5658C2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */,
 				A58FC74226E2814E007674F6 /* DropboxNotifier.swift in Sources */,
+				A5A565952A5588D800D7E030 /* NotifierProtocol.swift in Sources */,
 				A5BC810D2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1301,6 +1311,7 @@
 				A599EB2327AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */,
 				A5D23E3027A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
 				A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */,
+				A5A565912A55863600D7E030 /* DatabaseDtoList.swift in Sources */,
 				A5E6D79525A5D13000EEA7DD /* BaseListenerProtocol.swift in Sources */,
 				A5A565822A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */,
 				A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */,
@@ -1363,6 +1374,7 @@
 				A5A565852A549B7700D7E030 /* LaunchAtLoginView.swift in Sources */,
 				A5A5658B2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */,
 				A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */,
+				A5A565942A5588D800D7E030 /* NotifierProtocol.swift in Sources */,
 				A5BC810C2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,7 @@ import SwiftUI
 protocol BaseCoordinatorProtocol {
     
     /// Controll windows
-    /// 
+    ///
     func displayMainWindow()
     
     func closeMainWindow()
@@ -24,7 +24,7 @@ protocol BaseCoordinatorProtocol {
     ///   - closeClosure: callback on close window
     ///
     func displayFirstLaunchWindowIfNeed(closeClosure: @escaping Commons.EmptyClosure)
-        
+    
     func displaySettingsWindow()
 }
 
@@ -37,6 +37,6 @@ class MainCoordinatorPreview: BaseCoordinatorProtocol {
     func toggleMainWindow() {}
     
     func displayFirstLaunchWindowIfNeed(closeClosure: @escaping Commons.EmptyClosure = { } ) {}
-        
+    
     func displaySettingsWindow() {}
 }

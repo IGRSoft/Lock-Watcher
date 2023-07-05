@@ -5,10 +5,8 @@
 //  Created by Vitalii Parovishnyk on 09.01.2021.
 //
 
-import Foundation
-import LocalAuthentication
-import os
 import AppKit
+import LocalAuthentication
 
 /// Check unauthorised login and trigger
 /// 

@@ -13,7 +13,7 @@ struct ProtectionView: View {
     @State var password : String = ""
     
     var body: some View {
-        HStack(spacing: 8.0, content: {
+        HStack(spacing: ViewConstants.spacing, content: {
             Toggle(isOn: $isProtectionEnable) {
                 Text("ProtectAccess")
             }

@@ -7,9 +7,12 @@
 
 import Foundation
 import AppKit
-import os
 
-class FileSystemUtil {
+protocol FileSystemUtilProtocol {
+    func store(image: NSImage, forKey key: String) -> URL?
+}
+
+class FileSystemUtil: FileSystemUtilProtocol {
     //MARK: - Dependency Injection
     
     private var logger: Log
@@ -22,6 +25,8 @@ class FileSystemUtil {
     
     //MARK: - public
     
+    /// Save image to User/Documents/Lock-Watcher directory as jpeg file
+    ///
     func store(image: NSImage, forKey key: String) -> URL? {
         if let filePath = filePath(forKey: key) {
             do {
@@ -41,6 +46,10 @@ class FileSystemUtil {
     
     //MARK: - private
     
+    /// Generate image path for trigger key
+    /// - Parameter key: trigger key
+    /// - Returns: url for jpeg file
+    ///
     private func filePath(forKey key: String) -> URL? {
         let fileManager = FileManager.default
         guard var documentURL = fileManager.urls(for: .documentDirectory,

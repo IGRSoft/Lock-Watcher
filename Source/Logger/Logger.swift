@@ -9,6 +9,8 @@
 import Foundation
 import os
 
+/// print logs to console from categories
+/// 
 struct Log {
     
     enum Category: String {
@@ -25,11 +27,21 @@ struct Log {
         case wrongPasswordListener
         case usbListener
         case loginListener
+        
+        case thiefManager
+        case triggerManager
+        
+        case mailNotifier
+        case iCloudNotifier
+        case dropboxNotifier
+        case notificationNotifier
+        
+        case networkUtil
     }
     
     private static var subsystem = Bundle.main.bundleIdentifier!
     
-    private let logger: Logger!
+    private let logger: Logger
     
     init(category: Category) {
         logger = Logger(subsystem: Log.subsystem, category: category.rawValue)

@@ -11,9 +11,14 @@
 
 @implementation XPCMail
 
-- (void)sendMail:(NSString *)to
-     coordinates:(CLLocationCoordinate2D)coordinates
-      attachment:(NSString *)attachment {
+/// send email on trigger via Mail app
+/// - Parameters:
+///   - to: email of recipient
+///   - coordinates: CLLocationCoordinate2D to add to body
+///   - attachment: path to image
+///   
+- (void)sendMail:(NSString *)to coordinates:(CLLocationCoordinate2D)coordinates attachment:(NSString *)attachment {
+    
     /* create a Scripting Bridge object for talking to the Mail application */
     MailApplication *mail = [SBApplication applicationWithBundleIdentifier:@"com.apple.Mail"];
     

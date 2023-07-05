@@ -36,4 +36,5 @@ enum Secrets {
     static let keychainId = ""
     static let appKey = ""
     static let userDefaultsId = ""
+    static let dropboxKey = ""
 }

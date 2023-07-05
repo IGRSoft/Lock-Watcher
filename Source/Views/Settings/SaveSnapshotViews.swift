@@ -22,7 +22,7 @@ struct SendNotificationToMailView: View {
     @Binding var mailRecipient : String
     
     var body: some View {
-        HStack(spacing: 8.0, content: {
+        HStack(spacing: ViewConstants.spacing, content: {
             Toggle(isOn: $isSendNotificationToMail) {
                 Text("SendToMail")
             }
@@ -75,7 +75,7 @@ struct TraceRouteToSnapshotView: View {
     @Binding var traceRouteServer : String
     
     var body: some View {
-        HStack(spacing: 8.0, content: {
+        HStack(spacing: ViewConstants.spacing, content: {
             Toggle(isOn: $isAddTraceRouteToSnapshot) {
                 Text("AddTraceRoute")
             }
@@ -110,7 +110,7 @@ struct DropboxView: View {
     @Binding var dropboxName : String
     
     var body: some View {
-        HStack(spacing: 8.0, content: {
+        HStack(spacing: ViewConstants.spacing, content: {
             
             if dropboxName.isEmpty == false {
                 Toggle(isOn: $isDropboxEnable) {

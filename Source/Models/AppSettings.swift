@@ -9,6 +9,8 @@ import Foundation
 import Combine
 import SwiftUI
 
+/// Store UI settings
+///
 struct UISettings: Codable {
     var isSecurityInfoExpand: Bool = true
     var isSnapshotInfoExpand: Bool = false
@@ -16,6 +18,8 @@ struct UISettings: Codable {
     var isSyncInfoExpand: Bool = true
 }
 
+/// Store app options variables
+///
 struct OptionsSettings: Codable {
     var isFirstLaunch: Bool = true
     var keepLastActionsCount: Int = 10
@@ -27,6 +31,8 @@ struct OptionsSettings: Codable {
     var isProtected: Bool = false
 }
 
+/// Store triggers settings
+///
 struct TriggerSettings: Codable {
     var isUseSnapshotOnWakeUp: Bool = true
     var isUseSnapshotOnLogin: Bool = true
@@ -35,6 +41,8 @@ struct TriggerSettings: Codable {
     var isUseSnapshotOnUSBMount: Bool = false
 }
 
+/// Store Sync settings
+///
 struct SyncSettings: Codable {
     var isSaveSnapshotToDisk: Bool = false
     var isSendNotificationToMail: Bool = false
@@ -61,6 +69,8 @@ protocol AppSettingsProtocol {
     var ui: UISettings { get set }
 }
 
+/// Store All settings of app to UserDefaults
+///
 final class AppSettings: AppSettingsProtocol {
 #if NON_MAS_CONFIG
     static var isMASBuild: Bool = false
@@ -85,6 +95,8 @@ final class AppSettings: AppSettingsProtocol {
     var ui: UISettings
 }
 
+/// class for Preview
+/// 
 final class AppSettingsPreview: AppSettingsProtocol {
     static var isMASBuild: Bool = true
     

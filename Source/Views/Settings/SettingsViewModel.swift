@@ -22,9 +22,9 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     
     //MARK: - Dependency injection
     
-    @Published private(set) var thiefManager: any ThiefManagerProtocol
+    private var thiefManager: any ThiefManagerProtocol
     
-    @Published private var settings: any AppSettingsProtocol
+    private var settings: any AppSettingsProtocol
     
     //MARK: - Variables
     
@@ -238,6 +238,14 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     init(settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol) {
         self.settings = settings
         self.thiefManager = thiefManager
+    }
+    
+    func restartWatching() {
+        thiefManager.restartWatching()
+    }
+    
+    func setupLocationManager(enable: Bool) {
+        thiefManager.setupLocationManager(enable: enable)
     }
 }
 

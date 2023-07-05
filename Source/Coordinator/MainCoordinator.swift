@@ -66,9 +66,9 @@ class MainCoordinator: BaseCoordinatorProtocol {
     
     func toggleMainWindow() {
         if mainPopover.isShown {
-            closePopover(statusBarButton)
+            closeMainWindow()
         } else {
-            showPopover(for: statusBarButton)
+            displayMainWindow()
         }
     }
     

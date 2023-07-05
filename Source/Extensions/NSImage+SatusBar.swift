@@ -10,7 +10,7 @@ import AppKit
 
 extension NSImage {
     
-    /// icon for statusbar button for triggered status
+    /// icon for status bar button for triggered status
     ///
     static func statusBarIcon(triggered: Bool = false) -> NSImage? {
         return triggered ? .init(named: "MenuIconAlert") : .init(named: "MenuIcon")

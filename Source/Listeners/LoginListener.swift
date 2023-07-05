@@ -7,7 +7,6 @@
 
 import Foundation
 import Cocoa
-import os
 
 /// check Occlusion State changes to detect status of user
 ///

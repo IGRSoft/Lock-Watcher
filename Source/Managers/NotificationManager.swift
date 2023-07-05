@@ -13,25 +13,38 @@ protocol NotificationManagerProtocol {
     func send(_ thiefDto: ThiefDto) -> Bool
 }
 
+/// manage notifiers to send data to it
+/// 
 class NotificationManager: NotificationManagerProtocol {
-    private lazy var mailNotifier = MailNotifier()
-    private lazy var icloudNotifier = iCloudNotifier()
-    private lazy var dropboxNotifier = DropboxNotifier()
-    private lazy var notificationNotifier = NotificationNotifier()
-    private var settings: (any AppSettingsProtocol)!
+    
+    //MARK: - Dependency injection
+    
+    private var settings: any AppSettingsProtocol
+    
+    //MARK: - Variables
+    
+    private lazy var mailNotifier: NotifierProtocol = MailNotifier()
+    private lazy var icloudNotifier: NotifierProtocol = iCloudNotifier()
+    private lazy var dropboxNotifier: NotifierProtocol = DropboxNotifier()
+    private lazy var notificationNotifier: NotifierProtocol = NotificationNotifier()
+    
+    //MARK: - initialiser
     
     init(settings: any AppSettingsProtocol) {
         self.settings = settings
         
+        mailNotifier.register(with: settings)
         dropboxNotifier.register(with: settings)
     }
+    
+    //MARK: - public
     
     func send(_ thiefDto: ThiefDto) -> Bool {
         var result = false
         
         let mail = settings.sync.mailRecipient
         if AppSettings.isMASBuild == false, settings.sync.isSendNotificationToMail, !mail.isEmpty {
-            result = mailNotifier.send(thiefDto, to: mail)
+            result = mailNotifier.send(thiefDto)
         }
         
         if settings.sync.isICloudSyncEnable {

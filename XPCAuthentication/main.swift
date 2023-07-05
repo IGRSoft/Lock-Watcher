@@ -8,6 +8,9 @@
 import Foundation
 
 final class XPCAuthenticationDelegate: NSObject, NSXPCListenerDelegate {
+    
+    /// NSXPCListenerDelegate
+    /// 
     func listener(_ listener: NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool {
         let exportedObject = XPCAuthentication()
         newConnection.exportedInterface = NSXPCInterface(with: XPCAuthenticationProtocol.self)
@@ -21,4 +24,3 @@ let delegate = XPCAuthenticationDelegate()
 let listener = NSXPCListener.service()
 listener.delegate = delegate
 listener.resume()
-// RunLoop.main.run() Not sure if necessary

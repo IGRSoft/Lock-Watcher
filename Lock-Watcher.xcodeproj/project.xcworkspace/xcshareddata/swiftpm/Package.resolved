@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/IGRSoft/PhotoSnap.git",
       "state" : {
-        "revision" : "8ad96ef777d2f9517d78d1e1cedc940cc9fe4686",
-        "version" : "0.2.1"
+        "revision" : "0b4834bd1a36bc7e7998d0cfa2e80842f784910c",
+        "version" : "0.2.2"
       }
     },
     {

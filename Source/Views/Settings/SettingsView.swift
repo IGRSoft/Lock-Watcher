@@ -21,7 +21,7 @@ struct SettingsView: View {
         if viewModel.isAccessGranted {
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading, spacing: 8.0) {
+                    VStack(alignment: .leading, spacing: ViewConstants.spacing) {
                         LaunchAtLoginView()
                         
                         ProtectionView(isProtectionEnable: viewModel.isProtected)
@@ -30,28 +30,28 @@ struct SettingsView: View {
                 
                 VStack(alignment: .leading) {
                     UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: viewModel.isUseSnapshotOnWakeUp)
-                        .onChange(of: viewModel.isUseSnapshotOnWakeUp.wrappedValue, perform: { [weak thiefManager = viewModel.thiefManager] value in
-                            thiefManager?.restartWatching()
+                        .onChange(of: viewModel.isUseSnapshotOnWakeUp.wrappedValue, perform: { value in
+                            viewModel.restartWatching()
                         })
                     UseSnapshotOnLoginView(isUseSnapshotOnLogin: viewModel.isUseSnapshotOnLogin)
-                        .onChange(of: viewModel.isUseSnapshotOnLogin.wrappedValue, perform: { [weak thiefManager = viewModel.thiefManager] value in
-                            thiefManager?.restartWatching()
+                        .onChange(of: viewModel.isUseSnapshotOnLogin.wrappedValue, perform: { value in
+                            viewModel.restartWatching()
                         })
                     if AppSettings.isMASBuild == false {
                         UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: viewModel.isUseSnapshotOnWrongPassword)
-                            .onChange(of: viewModel.isUseSnapshotOnWrongPassword.wrappedValue, perform: { [weak thiefManager = viewModel.thiefManager] value in
-                                thiefManager?.restartWatching()
+                            .onChange(of: viewModel.isUseSnapshotOnWrongPassword.wrappedValue, perform: { value in
+                                viewModel.restartWatching()
                             })
                     }
                     if DeviceUtil.device() == .laptop {
                         UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: viewModel.isUseSnapshotOnSwitchToBatteryPower)
-                            .onChange(of: viewModel.isUseSnapshotOnSwitchToBatteryPower.wrappedValue, perform: { [weak thiefManager = viewModel.thiefManager] value in
-                                thiefManager?.restartWatching()
+                            .onChange(of: viewModel.isUseSnapshotOnSwitchToBatteryPower.wrappedValue, perform: { value in
+                                viewModel.restartWatching()
                             })
                     }
                     UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: viewModel.isUseSnapshotOnUSBMount)
-                        .onChange(of: viewModel.isUseSnapshotOnUSBMount.wrappedValue, perform: { [weak thiefManager = viewModel.thiefManager] value in
-                            thiefManager?.restartWatching()
+                        .onChange(of: viewModel.isUseSnapshotOnUSBMount.wrappedValue, perform: { value in
+                            viewModel.restartWatching()
                         })
                 }
                 .extended(viewModel.isSnapshotInfoExpand, titleKey: "SettingsMenuSnapshot")
@@ -60,8 +60,8 @@ struct SettingsView: View {
                     KeepLastCountView(keepLastActionsCount: viewModel.keepLastActionsCount)
                     
                     AddLocationToSnapshotView(addLocationToSnapshot: viewModel.addLocationToSnapshot)
-                        .onChange(of: viewModel.addLocationToSnapshot.wrappedValue, perform: { [weak thiefManager = viewModel.thiefManager] value in
-                            thiefManager?.setupLocationManager(enable: value)
+                        .onChange(of: viewModel.addLocationToSnapshot.wrappedValue, perform: { value in
+                            viewModel.setupLocationManager(enable: value)
                         })
                     
                     AddIPAddressToSnapshotView(addIPAddressToSnapshot: viewModel.addIPAddressToSnapshot)
@@ -73,7 +73,7 @@ struct SettingsView: View {
                 .extended(viewModel.isOptionsInfoExpand, titleKey: "SettingsMenuOptions")
                 
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading, spacing: 8.0) {
+                    VStack(alignment: .leading, spacing: ViewConstants.spacing) {
                         if AppSettings.isMASBuild == false {
                             SendNotificationToMailView(isSendNotificationToMail: viewModel.isSendNotificationToMail, mailRecipient: viewModel.mailRecipient)
                                 .onChange(of: viewModel.isSendNotificationToMail.wrappedValue, perform: {_ in })

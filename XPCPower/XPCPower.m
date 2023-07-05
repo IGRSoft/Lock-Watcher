@@ -13,14 +13,14 @@
 #import <IOKit/ps/IOPowerSources.h>
 #import <IOKit/pwr_mgt/IOPMLib.h>
 
-typedef void (^FoudChangesInPowerBlock)(NSInteger);
+typedef void (^FoundChangesInPowerBlock)(NSInteger);
 
 @interface XPCPower () {
     CFRunLoopRef _runLoop;
     CFRunLoopSourceRef _runLoopSource;
 }
 
-@property (nonatomic, strong) FoudChangesInPowerBlock foudChangesInPowerBlock;
+@property (nonatomic, strong) FoundChangesInPowerBlock foudChangesInPowerBlock;
 @property (nonatomic, assign) IGRPowerMode powerMode;
 
 @end
@@ -56,13 +56,13 @@ void IGRPowerMonitorCallback(void *context) {
         }
         else if (isBatteryPower && xpcPower.powerMode == IGRPowerModeACPower) {
             xpcPower.powerMode = IGRPowerModeBattery;
-            void(^foudChangesInPowerBlock)(NSInteger) = [xpcPower.foudChangesInPowerBlock copy];
-            foudChangesInPowerBlock(xpcPower.powerMode);
+            void(^foundChangesInPowerBlock)(NSInteger) = [xpcPower.foudChangesInPowerBlock copy];
+            foundChangesInPowerBlock(xpcPower.powerMode);
         }
         else if (isACPower && xpcPower.powerMode == IGRPowerModeBattery) {
             xpcPower.powerMode = IGRPowerModeACPower;
-            void(^foudChangesInPowerBlock)(NSInteger) = [xpcPower.foudChangesInPowerBlock copy];
-            foudChangesInPowerBlock(xpcPower.powerMode);
+            void(^foundChangesInPowerBlock)(NSInteger) = [xpcPower.foudChangesInPowerBlock copy];
+            foundChangesInPowerBlock(xpcPower.powerMode);
         }
     }
 }
@@ -82,7 +82,7 @@ void IGRPowerMonitorCallback(void *context) {
 
 - (void)stopCustomLoop {
     if (_runLoopSource && _runLoop) {
-        CFRunLoopRemoveSource(_runLoop,_runLoopSource,kCFRunLoopDefaultMode);
+        CFRunLoopRemoveSource(_runLoop,_runLoopSource, kCFRunLoopDefaultMode);
     }
     if (_runLoopSource){
         CFRelease(_runLoopSource);

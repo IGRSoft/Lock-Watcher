@@ -7,7 +7,6 @@
 
 import Foundation
 import Cocoa
-import os
 
 /// Listen usb mount to send trigger
 /// 

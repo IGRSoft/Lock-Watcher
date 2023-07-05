@@ -7,13 +7,12 @@
 
 import Foundation
 import AppKit
-import os
 import PhotoSnap
 import Combine
 import CoreLocation
 import UserNotifications
 
-protocol ThiefManagerProtocol: ObservableObject {
+protocol ThiefManagerProtocol {
     func detectedTrigger(_ closure: @escaping (Bool) -> Void)
     
     func restartWatching()
@@ -25,27 +24,50 @@ protocol ThiefManagerProtocol: ObservableObject {
     func showSnapshot(identifier: String)
 }
 
-final class ThiefManager: NSObject, ThiefManagerProtocol{
+final class ThiefManager: NSObject, ThiefManagerProtocol {
+    
+    //MARK: - Types
+    
     typealias WatchBlock = ((ThiefDto) -> Void)
     
+    //MARK: - Dependency injection
+    
+    private var triggerManager: TriggerManagerProtocol
+    
     private let notificationManager: NotificationManagerProtocol
-    public let objectWillChange = ObservableObjectPublisher()
-    
-    private(set) var settings: (any AppSettingsProtocol)
-    
-    private var lastThiefDetection = ThiefDto()
-    @Published var databaseManager: any DatabaseManagerProtocol
-    private let networkUtil = NetworkUtil()
     
     private var watchBlock: WatchBlock = {_ in}
     
-    lazy var triggerManager = TriggerManager()
+    private(set) var settings: any AppSettingsProtocol
     
+    private var logger: Log
+    
+    //MARK: - Variables
+    
+    private var lastThiefDetection = ThiefDto()
+    
+    /// store ThiefDto in database
+    ///
+    var databaseManager: any DatabaseManagerProtocol
+    
+    /// fetch ip address and trace route
+    ///
+    private lazy var networkUtil: NetworkUtilProtocol = NetworkUtil()
+    
+    private lazy var fileSystemUtil: FileSystemUtilProtocol = FileSystemUtil()
+    
+    /// fetch current location
+    ///
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
     
-    init(settings: any AppSettingsProtocol, watchBlock: @escaping WatchBlock = {_ in}) {
+    //MARK: - initialiser
+    
+    init(settings: any AppSettingsProtocol, triggerManager: TriggerManagerProtocol = TriggerManager(), logger: Log = .init(category: .thiefManager), watchBlock: @escaping WatchBlock = { _ in }) {
         self.settings = settings
+        self.triggerManager = triggerManager
+        self.watchBlock = watchBlock
+        self.logger = logger
         
         notificationManager = NotificationManager(settings: settings)
         
@@ -53,8 +75,6 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
         
         super.init()
         
-        self.watchBlock = watchBlock
-                
         if (settings.options.addLocationToSnapshot) {
             setupLocationManager(enable: true)
         }
@@ -64,7 +84,9 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
         UNUserNotificationCenter.current().delegate = self
     }
     
-    func setupLocationManager(enable: Bool) {
+    //MARK: - public
+    
+    public func setupLocationManager(enable: Bool) {
         if enable {
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
@@ -74,37 +96,20 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
         }
     }
     
-    private func startWatching(_ watchBlock: @escaping WatchBlock = {trigered in}) {
-        os_log(.debug, "Start Watching")
-        
-        self.watchBlock = watchBlock
-        triggerManager.start(settings: settings) {[weak self] trigered in
-            watchBlock(trigered)
-            
-            if trigered.triggerType != .setup {
-                DispatchQueue.main.async {
-                    self?.lastThiefDetection.triggerType = trigered.triggerType
-                    self?.detectedTrigger()
-                }
-            }
-            
-            self?.startWatching(watchBlock)
-        }
-    }
-    
     public func stopWatching() {
-        os_log(.debug, "Stop Watching")
+        logger.debug("Stop Watching")
         triggerManager.stop()
     }
     
     public func restartWatching() {
-        triggerManager.start(settings: settings) {[weak self] trigered in
-            self?.watchBlock(trigered)
+        triggerManager.start(settings: settings) {[weak self] triggered in
+            self?.watchBlock(triggered)
         }
     }
     
     public func detectedTrigger(_ closure: @escaping (Bool) -> Void = {_ in }) {
-        os_log(.debug, "Detected trigered action: \(self.lastThiefDetection.triggerType.rawValue)")
+        logger.debug("Detected trigered action: \(self.lastThiefDetection.triggerType.rawValue)")
+        
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings.sync.isSaveSnapshotToDisk
         guard !AppSettings.isImageCaptureDebug else {
@@ -121,7 +126,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
         
         ps.fetchSnapshot() { [weak self] photoModel in
             if let img = photoModel.images.last {
-                os_log(.debug, "\(img)")
+                self?.logger.debug("\(img)")
                 let date = Date()
                 self?.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
                 
@@ -133,23 +138,22 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
     }
     
     func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {
-        guard let filePath = FileSystemUtil().store(image: snapshot, forKey: filename) else {
-            assert(false, "wrong file path")
+        guard let filePath = fileSystemUtil.store(image: snapshot, forKey: filename) else {
+            let msg = "wrong file path"
+            logger.error(msg)
+            assert(false, msg)
             return
         }
         
         lastThiefDetection.snapshot = snapshot
         lastThiefDetection.date = date
         lastThiefDetection.coordinate = coordinate
-        lastThiefDetection.filepath = filePath
+        lastThiefDetection.filePath = filePath
         
         let complete:(ThiefDto) -> () = { [weak self] dto in
-            
             let _ = self?.notificationManager.send(dto)
             let _ = self?.databaseManager.send(dto)
-            
-            self?.objectWillChange.send()
-            
+                        
             self?.watchBlock(dto)
         }
         
@@ -160,7 +164,9 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
         if settings.options.addTraceRouteToSnapshot {
             networkUtil.getTraceRoute(host: settings.options.traceRouteServer) { [weak self] traceRouteLog in
                 guard let lastThiefDetection = self?.lastThiefDetection else {
-                    assert(false, "wrong dto")
+                    let msg = "wrong DTO"
+                    self?.logger.error(msg)
+                    assert(false, msg)
                     return
                 }
                 
@@ -177,6 +183,27 @@ final class ThiefManager: NSObject, ThiefManagerProtocol{
             NSWorkspace.shared.open(filePath)
         }
     }
+    
+    //MARK: - private
+    
+    private func startWatching(_ watchBlock: @escaping WatchBlock = { triggered in} ) {
+        
+        logger.debug("Start Watching")
+        
+        self.watchBlock = watchBlock
+        triggerManager.start(settings: settings) {[weak self] triggered in
+            watchBlock(triggered)
+            
+            if triggered.triggerType != .setup {
+                DispatchQueue.main.async {
+                    self?.lastThiefDetection.triggerType = triggered.triggerType
+                    self?.detectedTrigger()
+                }
+            }
+            
+            self?.startWatching(watchBlock)
+        }
+    }
 }
 
 extension ThiefManager: CLLocationManagerDelegate {
@@ -185,23 +212,25 @@ extension ThiefManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        os_log(.debug, "\(error.localizedDescription)")
+        logger.debug("\(error.localizedDescription)")
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        os_log(.debug, "location manager auth status changed to: " )
+        var statusName = "Unknown"
         switch status {
         case .restricted:
-            os_log(.debug, "restricted")
+            statusName = "restricted"
         case .denied:
-            os_log(.debug, "denied")
+            statusName = "denied"
         case .authorized:
-            os_log(.debug, "authorized")
+            statusName = "authorised"
         case .notDetermined:
-            os_log(.debug, "not yet determined")
+            statusName = "not yet determined"
         default:
-            os_log(.debug, "Unknown")
+            break
         }
+        
+        logger.debug("location manager auth status changed to: \(statusName)")
     }
 }
 
@@ -226,5 +255,5 @@ class ThiefManagerPreview: ThiefManagerProtocol {
     func restartWatching() {
     }
     
-    var databaseManager: any DatabaseManagerProtocol = DatabaseManager(settings: AppSettings())
+    var databaseManager: any DatabaseManagerProtocol = DatabaseManager(settings: AppSettingsPreview())
 }
