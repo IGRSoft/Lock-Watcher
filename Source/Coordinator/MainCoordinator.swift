@@ -8,19 +8,23 @@
 
 import AppKit
 import SwiftUI
+import LocalAuthentication
 
 class MainCoordinator: BaseCoordinatorProtocol {
     
     //MARK: - dependency injection
+    
     private var settings: any AppSettingsProtocol
     private var thiefManager: any ThiefManagerProtocol
-    
-    // Logger for module
-    private let logger: Log
     
     //MARK: - variables
     
     private lazy var mainViewModel = MainViewModel(thiefManager: thiefManager)
+    
+    private var isUnlocked = false
+    
+    // Logger for module
+    private let logger: Log
     
     /// popover with configuration to display from status bar icon
     ///
@@ -123,5 +127,34 @@ class MainCoordinator: BaseCoordinatorProtocol {
         }
         
         completion(isValid)
+    }
+    
+    #warning("Add next release")
+    
+    /// Grant access by bio or watch unlock
+    /// - Parameter action: callback on success
+    ///
+    private func authenticate(action: @escaping (Bool) -> Void) {
+        
+        Timer.scheduledTimer(withTimeInterval: 900.0, repeats: false) { [weak self] _ in
+            self?.isUnlocked = false
+        }
+        
+        if isUnlocked == false {
+            let context = LAContext()
+            var error: NSError?
+            
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, error: &error) {
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, localizedReason: NSLocalizedString("AuthInfo", comment: "")) { [weak self] success, authenticationError in
+                    self?.isUnlocked = success
+                    action(success == true)
+                }
+            } else {
+                isUnlocked = true
+                action(true)
+            }
+        } else {
+            action(true)
+        }
     }
 }

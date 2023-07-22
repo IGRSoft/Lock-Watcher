@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import LocalAuthentication
 
 struct LastThiefDetectionView: View {
     @StateObject private var viewModel: LastThiefDetectionViewModel
@@ -88,32 +87,6 @@ struct LastThiefDetectionView: View {
                     .font(.title2)
                     .padding()
             }
-        }
-    }
-    
-    func authenticate(action: @escaping () -> Void) {
-        
-        Timer.scheduledTimer(withTimeInterval: 900.0, repeats: false) { (Timer) in
-            viewModel.isUnlocked = false
-        }
-        
-        if viewModel.isUnlocked == false {
-            let context = LAContext()
-            var error: NSError?
-            
-            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, error: &error) {
-                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, localizedReason: NSLocalizedString("AuthInfo", comment: "")) { success, authenticationError in
-                    viewModel.isUnlocked = success
-                    if viewModel.isUnlocked {
-                        action()
-                    }
-                }
-            } else {
-                viewModel.isUnlocked = true
-                action()
-            }
-        } else {
-            action()
         }
     }
 }
