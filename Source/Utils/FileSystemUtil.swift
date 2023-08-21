@@ -12,7 +12,7 @@ protocol FileSystemUtilProtocol {
     func store(image: NSImage, forKey key: String) -> URL?
 }
 
-class FileSystemUtil: FileSystemUtilProtocol {
+public class FileSystemUtil: FileSystemUtilProtocol {
     //MARK: - Dependency Injection
     
     private var logger: Log

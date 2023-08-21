@@ -16,9 +16,9 @@ struct InfoView: View {
     }
     
     var body: some View {
-        
+#if DEBUG
         let _ = Self._printChanges()
-        
+#endif
         VStack(alignment: .leading) {
             VStack(alignment: .center) {
                 if AppSettings.isImageCaptureDebug {

@@ -11,7 +11,7 @@ import CoreLocation
 /// Start XPCMail service to send message to Mail app
 /// uses default account to send mail
 /// 
-class MailNotifier: NotifierProtocol {
+final class MailNotifier: NotifierProtocol {
     
     //MARK: - Dependency injection
     

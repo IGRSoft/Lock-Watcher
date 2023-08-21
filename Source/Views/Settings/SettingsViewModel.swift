@@ -238,14 +238,26 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     init(settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol) {
         self.settings = settings
         self.thiefManager = thiefManager
+        
+        watchDropboxUserNameUpdate()
     }
     
+    /// restart Watchers in the ThiefManager on triggers settings update
     func restartWatching() {
         thiefManager.restartWatching()
     }
     
+    ///toggle Location Manager state for ThiefManager
     func setupLocationManager(enable: Bool) {
         thiefManager.setupLocationManager(enable: enable)
+    }
+    
+    /// Starting watch a dropbox user update to change name on Settings view
+    private func watchDropboxUserNameUpdate() {
+        thiefManager.watchDropboxUserNameUpdate { [weak self] name in
+            self?.settings.sync.dropboxName = name
+            self?.objectWillChange.send()
+        }
     }
 }
 

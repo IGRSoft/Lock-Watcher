@@ -10,7 +10,7 @@ import LocalAuthentication
 
 /// Check unauthorised login and trigger
 /// 
-class WrongPasswordListener: BaseListenerProtocol {
+final class WrongPasswordListener: BaseListenerProtocol {
     //MARK: - Dependency injection
     
     private let logger: Log

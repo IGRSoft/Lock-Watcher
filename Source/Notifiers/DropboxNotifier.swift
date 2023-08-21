@@ -9,7 +9,11 @@ import AppKit
 import CoreLocation
 import SwiftyDropbox
 
-class DropboxNotifier: NotifierProtocol {
+protocol DropboxNotifierProtocol {
+    func completeDropboxAuthWith(url: URL, completionHandler handler: @escaping Commons.StringClosure)
+}
+
+final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
     
     //MARK: - Dependency injection
     
@@ -24,9 +28,7 @@ class DropboxNotifier: NotifierProtocol {
     typealias DropboxNotifierAuthCallback = (() -> Void)
     
     //MARK: - Variables
-    
-    private var settings: (any AppSettingsProtocol)!
-    
+        
     lazy var client = DropboxClientsManager.authorizedClient
     
     //MARK: - initialiser
@@ -38,14 +40,7 @@ class DropboxNotifier: NotifierProtocol {
     //MARK: - public
     
     func register(with settings: any AppSettingsProtocol) {
-        self.settings = settings
-        
         DropboxClientsManager.setupWithAppKeyDesktop(Secrets.dropboxKey)
-        
-        NSAppleEventManager.shared().setEventHandler(self,
-                                                     andSelector: #selector(handleGetURLEvent),
-                                                     forEventClass: AEEventClass(kInternetEventClass),
-                                                     andEventID: AEEventID(kAEGetURL))
     }
     
     func send(_ thiefDto: ThiefDto) -> Bool {
@@ -96,7 +91,7 @@ class DropboxNotifier: NotifierProtocol {
         DropboxClientsManager.authorizeFromControllerV2(sharedApplication: NSApplication.shared,
                                                         controller: controller,
                                                         loadingStatusDelegate: nil,
-                                                        openURL: {(url: URL) -> Void in NSWorkspace.shared.open(url)},
+                                                        openURL: { url in NSWorkspace.shared.open(url) },
                                                         scopeRequest: scopeRequest)
     }
     
@@ -104,23 +99,7 @@ class DropboxNotifier: NotifierProtocol {
         DropboxClientsManager.unlinkClients()
     }
     
-    //MARK: - private
-    
-    @objc private func handleGetURLEvent(_ event: NSAppleEventDescriptor?, replyEvent: NSAppleEventDescriptor?) {
-        guard let aeEventDescriptor = event?.paramDescriptor(forKeyword: AEKeyword(keyDirectObject)), let urlStr = aeEventDescriptor.stringValue else {
-            return
-        }
-        
-        processUrl(string: urlStr)
-    }
-    
-    private func processUrl(string: String) {
-        guard let url = URL(string: string) else {
-            let msg = "unable to construct url: \(string)"
-            logger.error(msg)
-            return
-        }
-        
+    func completeDropboxAuthWith(url: URL, completionHandler handler: @escaping Commons.StringClosure) {
         // this brings your application back the foreground on redirect
         NSApp.activate(ignoringOtherApps: true)
         
@@ -130,11 +109,11 @@ class DropboxNotifier: NotifierProtocol {
                 let currentAccount = self?.client?.users.getCurrentAccount()
                 currentAccount?.response(completionHandler: { user, error in
                     if let displayName = user?.name.displayName {
-                        self?.settings?.sync.dropboxName = displayName
+                        handler(displayName)
                     }
                 })
             case .cancel, .error:
-                self?.settings?.sync.dropboxName = ""
+                handler("")
             case .none:
                 break
             }

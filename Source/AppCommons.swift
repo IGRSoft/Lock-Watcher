@@ -12,6 +12,10 @@ struct Commons {
     /// General closure for empty response
     ///
     typealias EmptyClosure = () -> Void
+    
+    typealias BoolClosure = (Bool) -> Void
+    
+    typealias StringClosure = (String) -> Void
 }
 
 /// default states for SwiftUI View

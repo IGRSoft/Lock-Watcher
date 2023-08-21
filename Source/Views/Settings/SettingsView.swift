@@ -16,8 +16,9 @@ struct SettingsView: View {
     }
     
     var body: some View {
+#if DEBUG
         let _ = Self._printChanges()
-        
+#endif
         if viewModel.isAccessGranted {
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {

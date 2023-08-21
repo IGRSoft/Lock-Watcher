@@ -10,7 +10,7 @@ import Cocoa
 
 /// Listen screen wake up notification from NSWorkspace
 ///
-class WakeUpListener: BaseListenerProtocol {
+final class WakeUpListener: BaseListenerProtocol {
     
     //MARK: - Dependency injection
     

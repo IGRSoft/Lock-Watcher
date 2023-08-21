@@ -11,11 +11,13 @@ import CoreLocation
 
 protocol NotificationManagerProtocol {
     func send(_ thiefDto: ThiefDto) -> Bool
+    
+    func completeDropboxAuthWith(url: URL, completionHandler handler: @escaping Commons.StringClosure)
 }
 
 /// manage notifiers to send data to it
 /// 
-class NotificationManager: NotificationManagerProtocol {
+final class NotificationManager: NotificationManagerProtocol {
     
     //MARK: - Dependency injection
     
@@ -60,5 +62,13 @@ class NotificationManager: NotificationManagerProtocol {
         }
         
         return result
+    }
+    
+    func completeDropboxAuthWith(url: URL, completionHandler handler: @escaping Commons.StringClosure) {
+        guard let dropboxNotifier = dropboxNotifier as? DropboxNotifierProtocol else {
+            return
+        }
+        
+        dropboxNotifier.completeDropboxAuthWith(url: url, completionHandler: handler)
     }
 }

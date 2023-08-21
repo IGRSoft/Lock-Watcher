@@ -13,7 +13,7 @@ import CryptoKit
 protocol SecurityUtilProtocol {
 }
 
-class SecurityUtil: SecurityUtilProtocol {
+public class SecurityUtil: SecurityUtilProtocol {
     
     class func save(password: String) {
         let keychain = Keychain(service: Secrets.keychainId)

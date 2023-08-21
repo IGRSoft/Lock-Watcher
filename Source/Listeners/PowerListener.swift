@@ -9,7 +9,7 @@ import Foundation
 
 /// Listen power xpc service on power status changes
 /// 
-class PowerListener: BaseListenerProtocol {
+final class PowerListener: BaseListenerProtocol {
     
     //MARK: - Types
     

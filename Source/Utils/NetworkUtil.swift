@@ -16,7 +16,7 @@ protocol NetworkUtilProtocol {
     func getTraceRoute(host: String, complete: @escaping (String) -> ())
 }
 
-class NetworkUtil: NetworkUtilProtocol {
+public class NetworkUtil: NetworkUtilProtocol {
     
     //MARK: - Dependency injection
         

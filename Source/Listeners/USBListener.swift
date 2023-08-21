@@ -10,7 +10,7 @@ import Cocoa
 
 /// Listen usb mount to send trigger
 /// 
-class USBListener: BaseListenerProtocol {
+final class USBListener: BaseListenerProtocol {
     
     //MARK: - Dependency injection
     

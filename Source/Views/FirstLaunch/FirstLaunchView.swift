@@ -17,8 +17,9 @@ struct FirstLaunchView: View {
     }
     
     var body: some View {
+#if DEBUG
         let _ = Self._printChanges()
-        
+#endif
         VStack(alignment: .center, spacing: ViewConstants.spacing) {
             switch viewModel.state {
             case .idle:

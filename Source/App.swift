@@ -75,6 +75,10 @@ struct MainApp: App {
             process(localNotification: notification)
         }
         
+        func application(_ application: NSApplication, open urls: [URL]) {
+            guard checkDropboxAuth(urls: urls) == false else { return }
+        }
+        
         private func process(localNotification: Notification) {
             if let response = localNotification.userInfo?[NSApplication.launchUserNotificationUserInfoKey] as? UNNotificationResponse {
                 thiefManager.showSnapshot(identifier: response.notification.request.identifier)
@@ -83,6 +87,16 @@ struct MainApp: App {
         
         private func applyTheme() {
             NSApplication.setDockIcon(hidden: true)
+        }
+        
+        private func checkDropboxAuth(urls: [URL]) -> Bool {
+            if let url = urls.first(where: { $0.absoluteString.contains(Secrets.dropboxKey) }) {
+                thiefManager.completeDropboxAuthWith(url: url)
+                
+                return true
+            }
+            
+            return false
         }
     }
 }

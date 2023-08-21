@@ -1516,10 +1516,7 @@
 			baseConfigurationReference = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/Lock_Watcher-non-mas.entitlements";
-				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				OTHER_SWIFT_FLAGS = "-D NON_MAS_CONFIG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
@@ -1528,10 +1525,7 @@
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/Lock_Watcher-non-mas.entitlements";
-				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				OTHER_SWIFT_FLAGS = "-D NON_MAS_CONFIG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1547,9 +1541,6 @@
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements;
-				DEVELOPMENT_TEAM = DMP42GVPJ3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-non-mas";
 		};
@@ -1570,7 +1561,6 @@
 				INFOPLIST_FILE = "Lock-WatcherUITests/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-WatcherUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "Lock-Watcher";
 			};
 			name = "Release-non-mas";
 		};
@@ -1579,11 +1569,9 @@
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCPower-non-mas.entitlements";
-				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = XPCPower/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
 			};
 			name = "Release-non-mas";
@@ -1616,10 +1604,7 @@
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/Lock_Watcher-non-mas.entitlements";
-				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				OTHER_SWIFT_FLAGS = "-D NON_MAS_CONFIG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-non-mas";
 		};
@@ -1642,9 +1627,6 @@
 			baseConfigurationReference = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements;
-				DEVELOPMENT_TEAM = DMP42GVPJ3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
@@ -1653,9 +1635,6 @@
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements;
-				DEVELOPMENT_TEAM = DMP42GVPJ3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-Watcher";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1686,7 +1665,6 @@
 				INFOPLIST_FILE = "Lock-WatcherUITests/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-WatcherUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "Lock-Watcher";
 			};
 			name = Debug;
 		};
@@ -1697,7 +1675,6 @@
 				INFOPLIST_FILE = "Lock-WatcherUITests/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-WatcherUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "Lock-Watcher";
 			};
 			name = Release;
 		};
@@ -1706,11 +1683,9 @@
 			baseConfigurationReference = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCPower.entitlements;
-				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = XPCPower/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
 			};
 			name = Debug;
@@ -1720,11 +1695,9 @@
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCPower.entitlements;
-				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = XPCPower/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
 			};
 			name = Release;

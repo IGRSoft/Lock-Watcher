@@ -9,7 +9,7 @@
 import Foundation
 import Darwin.sys.sysctl
 
-class DeviceUtil {
+public class DeviceUtil {
     enum Devices {
         case laptop
         case nonLaptop

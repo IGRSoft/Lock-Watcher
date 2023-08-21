@@ -19,7 +19,7 @@ protocol DatabaseManagerProtocol: ObservableObject {
     var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { get }
 }
 
-class DatabaseManager: DatabaseManagerProtocol {
+final class DatabaseManager: DatabaseManagerProtocol {
     
     //MARK: - Dependency injection
     private var settings: any AppSettingsProtocol

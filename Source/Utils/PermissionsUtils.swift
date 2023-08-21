@@ -10,8 +10,8 @@ import AppKit
 import CoreLocation
 import AVFoundation
 
-class PermissionsUtils {
-    class func updateLocationPermissions(completionHandler handler: @escaping (Bool) -> Void) {
+public class PermissionsUtils {
+    class func updateLocationPermissions(completionHandler handler: @escaping Commons.BoolClosure) {
         let locationManager = CLLocationManager()
         switch locationManager.authorizationStatus {
         case .notDetermined:
@@ -26,7 +26,7 @@ class PermissionsUtils {
         }
     }
     
-    class func updateCameraPermissions(completionHandler handler: @escaping (Bool) -> Void) {
+    class func updateCameraPermissions(completionHandler handler: @escaping Commons.BoolClosure) {
         let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
         switch authorizationStatus {
         case .notDetermined:

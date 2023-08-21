@@ -8,7 +8,7 @@
 import AppKit
 import CoreLocation
 
-class iCloudNotifier: NotifierProtocol {
+final class iCloudNotifier: NotifierProtocol {
     
     //MARK: - Dependency injection
     

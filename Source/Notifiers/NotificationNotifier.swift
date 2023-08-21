@@ -11,7 +11,7 @@ import AppKit
 
 /// Send triggered object to UserNotificationCenter to display on sidebar
 ///
-class NotificationNotifier: NotifierProtocol {
+final class NotificationNotifier: NotifierProtocol {
     
     //MARK: - Dependency injection
         

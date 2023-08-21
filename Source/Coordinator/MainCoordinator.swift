@@ -10,7 +10,7 @@ import AppKit
 import SwiftUI
 import LocalAuthentication
 
-class MainCoordinator: BaseCoordinatorProtocol {
+final class MainCoordinator: BaseCoordinatorProtocol {
     
     //MARK: - dependency injection
     
@@ -110,7 +110,7 @@ class MainCoordinator: BaseCoordinatorProtocol {
     
     /// alert to ask password to grant access to application
     ///
-    private func showSecurityAccessAlert(completion: (Bool) -> Void) {
+    private func showSecurityAccessAlert(completion: Commons.BoolClosure) {
         var isValid = true
         if settings.options.isProtected && SecurityUtil.hasPassword() {
             let alert = NSAlert()
@@ -134,7 +134,7 @@ class MainCoordinator: BaseCoordinatorProtocol {
     /// Grant access by bio or watch unlock
     /// - Parameter action: callback on success
     ///
-    private func authenticate(action: @escaping (Bool) -> Void) {
+    private func authenticate(action: @escaping Commons.BoolClosure) {
         
         Timer.scheduledTimer(withTimeInterval: 900.0, repeats: false) { [weak self] _ in
             self?.isUnlocked = false

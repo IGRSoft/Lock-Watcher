@@ -16,10 +16,10 @@ struct LastThiefDetectionView: View {
     }
     
     var body: some View {
+#if DEBUG
         let _ = Self._printChanges()
-        
+#endif
         VStack(alignment: .center, spacing: ViewConstants.spacing) {
-            
             if let lastImage = viewModel.selectedItem, let image = NSImage(data: lastImage.data) {
                 Text("LastSnapshot")
                 

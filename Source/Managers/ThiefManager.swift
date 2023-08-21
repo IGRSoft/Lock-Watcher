@@ -13,7 +13,7 @@ import CoreLocation
 import UserNotifications
 
 protocol ThiefManagerProtocol {
-    func detectedTrigger(_ closure: @escaping (Bool) -> Void)
+    func detectedTrigger(_ closure: @escaping Commons.BoolClosure)
     
     func restartWatching()
     
@@ -22,6 +22,10 @@ protocol ThiefManagerProtocol {
     func setupLocationManager(enable: Bool)
     
     func showSnapshot(identifier: String)
+    
+    func completeDropboxAuthWith(url: URL)
+    
+    func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure)
 }
 
 final class ThiefManager: NSObject, ThiefManagerProtocol {
@@ -36,7 +40,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     private let notificationManager: NotificationManagerProtocol
     
-    private var watchBlock: WatchBlock = {_ in}
+    private var watchBlock: WatchBlock = { _ in }
     
     private(set) var settings: any AppSettingsProtocol
     
@@ -60,6 +64,9 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     ///
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
+    
+    /// update user name after login on DropBox
+    private var dropboxUserNameUpdateClosure: Commons.StringClosure?
     
     //MARK: - initialiser
     
@@ -107,7 +114,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         }
     }
     
-    public func detectedTrigger(_ closure: @escaping (Bool) -> Void = {_ in }) {
+    public func detectedTrigger(_ closure: @escaping Commons.BoolClosure = {_ in }) {
         logger.debug("Detected trigered action: \(self.lastThiefDetection.triggerType.rawValue)")
         
         let ps = PhotoSnap()
@@ -204,6 +211,16 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             self?.startWatching(watchBlock)
         }
     }
+    
+    func completeDropboxAuthWith(url: URL) {
+        notificationManager.completeDropboxAuthWith(url: url) { [weak self] name in
+            self?.dropboxUserNameUpdateClosure?(name)
+        }
+    }
+    
+    func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure) {
+        dropboxUserNameUpdateClosure = closure
+    }
 }
 
 extension ThiefManager: CLLocationManagerDelegate {
@@ -242,13 +259,20 @@ extension ThiefManager: UNUserNotificationCenterDelegate {
 }
 
 class ThiefManagerPreview: ThiefManagerProtocol {
+    func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure) {
+        closure("")
+    }
+    
+    func completeDropboxAuthWith(url: URL) {
+    }
+    
     func showSnapshot(identifier: String) {
     }
     
     func setupLocationManager(enable: Bool) {
     }
     
-    func detectedTrigger(_ closure: @escaping (Bool) -> Void) {
+    func detectedTrigger(_ closure: @escaping Commons.BoolClosure) {
         closure(true)
     }
     

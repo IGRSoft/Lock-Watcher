@@ -10,7 +10,7 @@ import Cocoa
 
 /// check Occlusion State changes to detect status of user
 ///
-class LoginListener: BaseListenerProtocol {
+final class LoginListener: BaseListenerProtocol {
     //MARK: - Dependency injection
     
     private let logger: Log
