@@ -30,7 +30,7 @@ class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     
     @Published var lastThiefDetectionViewModel: LastThiefDetectionViewModel
     
-    @Published var isInfoExtended: Bool = false
+    @Published var isInfoExtended: Bool = true
 
     @Published var isAccessGranted = true
     
@@ -38,7 +38,7 @@ class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     
     //MARK: - initialiser
     
-    init(thiefManager: any ThiefManagerProtocol, isInfoExtended: Bool = false) {
+    init(thiefManager: any ThiefManagerProtocol, isInfoExtended: Bool = true) {
         self.thiefManager = thiefManager
         self.databaseManager = thiefManager.databaseManager
         self.isInfoExtended = isInfoExtended

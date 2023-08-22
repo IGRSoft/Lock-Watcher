@@ -26,6 +26,7 @@ struct LastThiefDetectionView: View {
                 Image(nsImage: image)
                     .resizable()
                     .scaledToFit()
+                    .cornerRadius(6)
                     .frame(maxWidth: .infinity, minHeight: 240, maxHeight: 240, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
                         guard let filePath = lastImage.path else {
@@ -33,7 +34,7 @@ struct LastThiefDetectionView: View {
                         }
                         NSWorkspace.shared.open(filePath)
                     }
-                    .cornerRadius(4)
+                    
                 
                 Text("\(lastImage.date, formatter: Date.defaultFormat)")
                 
@@ -48,13 +49,13 @@ struct LastThiefDetectionView: View {
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                                                .cornerRadius(3)
+                                                .cornerRadius(4)
                                             
                                             Text("\(imageDto.date, formatter: Date.defaultFormat)")
                                                 .font(.callout)
                                                 .padding(4)
                                                 .background(lastImage == imageDto ? Color.accentColor : Color.gray)
-                                                .cornerRadius(3)
+                                                .cornerRadius(4)
                                         }
                                         
                                         Button(action: {
