@@ -45,6 +45,7 @@
 		A56F1A7E278A29630066CA78 /* DispatchQueue+Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56F1A7C278A29630066CA78 /* DispatchQueue+Debounce.swift */; };
 		A57905BC2A9534AA00647BF8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905BB2A9534AA00647BF8 /* Secrets.swift */; };
 		A57905BD2A9534AA00647BF8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905BB2A9534AA00647BF8 /* Secrets.swift */; };
+		A57905C42A960C8300647BF8 /* AppCommonsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905C02A960B9200647BF8 /* AppCommonsTest.swift */; };
 		A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C22A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C42A4C7C6E004DE972 /* NSApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */; };
@@ -178,8 +179,7 @@
 		A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */; };
 		A5C6DBF225796A90009DE750 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* App.swift */; };
 		A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
-		A5C6DC0525796A93009DE750 /* Lock_WatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0425796A93009DE750 /* Lock_WatcherTests.swift */; };
-		A5C6DC1025796A93009DE750 /* Lock_WatcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0F25796A93009DE750 /* Lock_WatcherUITests.swift */; };
+		A5C6DC1025796A93009DE750 /* ApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0F25796A93009DE750 /* ApplicationUITests.swift */; };
 		A5C6DC4625796CCB009DE750 /* PhotoSnap in Frameworks */ = {isa = PBXBuildFile; productRef = A5C6DC4525796CCB009DE750 /* PhotoSnap */; };
 		A5D23E3027A1DFAE001C0370 /* FirstLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D23E2F27A1DFAE001C0370 /* FirstLaunchView.swift */; };
 		A5D23E3127A1DFAE001C0370 /* FirstLaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D23E2F27A1DFAE001C0370 /* FirstLaunchView.swift */; };
@@ -340,6 +340,8 @@
 		A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+PropertyWrapper.swift"; sourceTree = "<group>"; };
 		A56F1A7C278A29630066CA78 /* DispatchQueue+Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Debounce.swift"; sourceTree = "<group>"; };
 		A57905BB2A9534AA00647BF8 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		A57905C02A960B9200647BF8 /* AppCommonsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCommonsTest.swift; sourceTree = "<group>"; };
+		A57905C32A960C3C00647BF8 /* Lock-WatcherTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Lock-WatcherTests.xctestplan"; sourceTree = "<group>"; };
 		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A57FDCB126DB99B800954ED7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A58C63C02A4C5AF6004DE972 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -397,10 +399,9 @@
 		A5C6DBF125796A90009DE750 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		A5C6DBF325796A90009DE750 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A5C6DC0025796A93009DE750 /* Lock-WatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lock-WatcherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5C6DC0425796A93009DE750 /* Lock_WatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherTests.swift; sourceTree = "<group>"; };
 		A5C6DC0625796A93009DE750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5C6DC0B25796A93009DE750 /* Lock-WatcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lock-WatcherUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5C6DC0F25796A93009DE750 /* Lock_WatcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock_WatcherUITests.swift; sourceTree = "<group>"; };
+		A5C6DC0F25796A93009DE750 /* ApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUITests.swift; sourceTree = "<group>"; };
 		A5C6DC1125796A93009DE750 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5D23E2F27A1DFAE001C0370 /* FirstLaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchView.swift; sourceTree = "<group>"; };
 		A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+OpenWindow.swift"; sourceTree = "<group>"; };
@@ -607,6 +608,14 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		A57905BF2A960B7600647BF8 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				A57905C02A960B9200647BF8 /* AppCommonsTest.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		A58C63C62A4CBCA0004DE972 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -769,6 +778,7 @@
 				A54E4A1826108E9600E7B1D4 /* XPCAuthentication */,
 				A533D82725AA11F40046B7C8 /* XPCMail */,
 				A5E6D75325A5BB6C00EEA7DD /* XPCPower */,
+				A57905C32A960C3C00647BF8 /* Lock-WatcherTests.xctestplan */,
 				A5C6DC0325796A93009DE750 /* Tests */,
 				A5C6DC0E25796A93009DE750 /* UITests */,
 				A5C6DBEF25796A90009DE750 /* Products */,
@@ -809,7 +819,7 @@
 		A5C6DC0325796A93009DE750 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				A5C6DC0425796A93009DE750 /* Lock_WatcherTests.swift */,
+				A57905BF2A960B7600647BF8 /* Application */,
 				A5C6DC0625796A93009DE750 /* Info.plist */,
 			);
 			path = Tests;
@@ -818,7 +828,7 @@
 		A5C6DC0E25796A93009DE750 /* UITests */ = {
 			isa = PBXGroup;
 			children = (
-				A5C6DC0F25796A93009DE750 /* Lock_WatcherUITests.swift */,
+				A5C6DC0F25796A93009DE750 /* ApplicationUITests.swift */,
 				A5C6DC1125796A93009DE750 /* Info.plist */,
 			);
 			path = UITests;
@@ -1402,7 +1412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C6DC0525796A93009DE750 /* Lock_WatcherTests.swift in Sources */,
+				A57905C42A960C8300647BF8 /* AppCommonsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1410,7 +1420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C6DC1025796A93009DE750 /* Lock_WatcherUITests.swift in Sources */,
+				A5C6DC1025796A93009DE750 /* ApplicationUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1489,7 +1499,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
 				INFOPLIST_FILE = XPCMail/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCMail/XPCMail-Bridging-Header.h";
 			};
 			name = Debug;
@@ -1501,7 +1510,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
 				INFOPLIST_FILE = XPCMail/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCMail/XPCMail-Bridging-Header.h";
 			};
 			name = Release;
@@ -1513,7 +1521,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
@@ -1524,7 +1531,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1565,9 +1571,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CC2A4CBCA0004DE972 /* test-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "Lock-WatcherTests/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-WatcherTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-non-mas";
 		};
@@ -1575,9 +1578,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D02A4CBCA0004DE972 /* uitest-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "Lock-WatcherUITests/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-WatcherUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-non-mas";
 		};
@@ -1588,7 +1588,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCPower-non-mas.entitlements";
 				INFOPLIST_FILE = XPCPower/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
 			};
 			name = "Release-non-mas";
@@ -1600,7 +1599,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
 				INFOPLIST_FILE = XPCMail/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCMail/XPCMail-Bridging-Header.h";
 			};
 			name = "Release-non-mas";
@@ -1612,7 +1610,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-non-mas";
 		};
@@ -1659,9 +1656,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D12A4CBCA0004DE972 /* test-debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "Lock-WatcherTests/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-WatcherTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
@@ -1669,9 +1663,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CC2A4CBCA0004DE972 /* test-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "Lock-WatcherTests/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-WatcherTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1679,9 +1670,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CD2A4CBCA0004DE972 /* uitest-debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "Lock-WatcherUITests/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-WatcherUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
@@ -1689,9 +1677,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D02A4CBCA0004DE972 /* uitest-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = "Lock-WatcherUITests/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.igrsoft.Lock-WatcherUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1702,7 +1687,6 @@
 				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCPower.entitlements;
 				INFOPLIST_FILE = XPCPower/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
 			};
 			name = Debug;
@@ -1714,7 +1698,6 @@
 				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCPower.entitlements;
 				INFOPLIST_FILE = XPCPower/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
 			};
 			name = Release;

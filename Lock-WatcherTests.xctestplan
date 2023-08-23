@@ -1,0 +1,35 @@
+{
+  "configurations" : [
+    {
+      "id" : "9D46223C-F6CC-4837-8AD3-5ABCCDC662DB",
+      "name" : "Configuration Main",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Lock-Watcher.xcodeproj",
+      "identifier" : "A5C6DBED25796A90009DE750",
+      "name" : "Lock-Watcher"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Lock-Watcher.xcodeproj",
+        "identifier" : "A5C6DBFF25796A93009DE750",
+        "name" : "Lock-WatcherTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Lock-Watcher.xcodeproj",
+        "identifier" : "A5C6DC0A25796A93009DE750",
+        "name" : "Lock-WatcherUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

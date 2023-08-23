@@ -10,13 +10,14 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 //Build Options
+PRODUCT_BUNDLE_IDENTIFIER = $(APP_DOMAIN).$(APP_NAME)UITest
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
 
 //Localization
 SWIFT_EMIT_LOC_STRINGS = NO
 
 //Packaging
-PRODUCT_BUNDLE_IDENTIFIER = $(APP_DOMAIN).$(APP_NAME)UITest
+INFOPLIST_FILE = UITests/Info.plist
 
-//User-Defined
+//Testing
 TEST_TARGET_NAME = $(APP_NAME)
