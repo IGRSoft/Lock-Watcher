@@ -12,6 +12,7 @@ import Combine
 import CoreLocation
 import UserNotifications
 
+/// A protocol that outlines the responsibilities of the `ThiefManager` class.
 protocol ThiefManagerProtocol {
     func detectedTrigger(_ closure: @escaping Commons.BoolClosure)
     
@@ -28,9 +29,10 @@ protocol ThiefManagerProtocol {
     func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure)
 }
 
+/// The main class responsible for managing and responding to various triggers indicating potential unauthorized access.
 final class ThiefManager: NSObject, ThiefManagerProtocol {
     
-    //MARK: - Types
+    //MARK: - Typealiases
     
     typealias WatchBlock = ((ThiefDto) -> Void)
     
@@ -93,6 +95,8 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     //MARK: - public
     
+    /// These methods define how the manager should behave when various events occur.
+    /// Sets up the location manager, either enabling or disabling location updates.
     public func setupLocationManager(enable: Bool) {
         if enable {
             locationManager.delegate = self
@@ -103,17 +107,20 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         }
     }
     
+    /// Stops watching for triggers.
     public func stopWatching() {
         logger.debug("Stop Watching")
         triggerManager.stop()
     }
     
+    /// Restarts the trigger watching mechanism
     public func restartWatching() {
         triggerManager.start(settings: settings) {[weak self] triggered in
             self?.watchBlock(triggered)
         }
     }
     
+    /// Detects and processes any triggers.
     public func detectedTrigger(_ closure: @escaping Commons.BoolClosure = {_ in }) {
         logger.debug("Detected trigered action: \(self.lastThiefDetection.triggerType.rawValue)")
         
@@ -144,6 +151,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         }
     }
     
+    ///Processes a given snapshot.
     func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {
         guard let filePath = fileSystemUtil.store(image: snapshot, forKey: filename) else {
             let msg = "wrong file path"
@@ -160,7 +168,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         let complete:(ThiefDto) -> () = { [weak self] dto in
             let _ = self?.notificationManager.send(dto)
             let _ = self?.databaseManager.send(dto)
-                        
+            
             self?.watchBlock(dto)
         }
         
@@ -185,6 +193,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         }
     }
     
+    /// Opens a snapshot based on the given identifier.
     func showSnapshot(identifier: String) {
         if let filePath = databaseManager.latestImages.first(where: { Date.defaultFormat.string(from: $0.date) == identifier })?.path {
             NSWorkspace.shared.open(filePath)
@@ -193,6 +202,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     //MARK: - private
     
+    /// Starts watching for triggers.
     private func startWatching(_ watchBlock: @escaping WatchBlock = { triggered in} ) {
         
         logger.debug("Start Watching")
@@ -212,17 +222,20 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         }
     }
     
+    /// Completes Dropbox authentication.
     func completeDropboxAuthWith(url: URL) {
         notificationManager.completeDropboxAuthWith(url: url) { [weak self] name in
             self?.dropboxUserNameUpdateClosure?(name)
         }
     }
     
+    /// Watches for Dropbox username updates.
     func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure) {
         dropboxUserNameUpdateClosure = closure
     }
 }
 
+/// Location Manager Delegate Methods
 extension ThiefManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.coordinate = locations.last?.coordinate
@@ -251,6 +264,7 @@ extension ThiefManager: CLLocationManagerDelegate {
     }
 }
 
+/// User Notification Center Delegate Methods:
 extension ThiefManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ centre: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let identifier = response.notification.request.identifier;

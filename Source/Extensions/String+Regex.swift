@@ -10,9 +10,16 @@ import Foundation
 
 extension String {
     
-    /// match regular expression in text
-    /// returns array of strings
-    /// 
+    /// Searches for all matches of a regular expression within the string.
+    ///
+    /// This method attempts to find all occurrences of the specified regular expression within the string. 
+    /// Each matched string is added to the result array.
+    ///
+    /// - Parameters:
+    ///   - regex: The regular expression pattern to search for.
+    ///
+    /// - Returns: An array of `String` that represent the matches. Returns `nil` if the regular expression is invalid or no match is found.
+    ///
     func matches(for regex: String) -> [String]? {
         do {
             let regex = try NSRegularExpression(pattern: regex)

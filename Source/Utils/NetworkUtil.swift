@@ -7,36 +7,48 @@
 //
 
 import Foundation
-import os
 import SimpleTracer
 
+/// `NetworkUtilProtocol` provides an interface for networking utilities such as fetching IP addresses and performing trace routes.
 protocol NetworkUtilProtocol {
+    /// Fetches the device's public IP address.
+    /// - Returns: The public IP address or an empty string if fetching fails.
     func getIFAddresses() -> String
     
+    /// Executes a trace route to the specified host.
+    /// - Parameters:
+    ///   - host: The IP or domain address to trace.
+    ///   - complete: A closure executed upon completion of the trace, returning the trace's result as a string.
     func getTraceRoute(host: String, complete: @escaping (String) -> ())
 }
 
+/// `NetworkUtil` provides utilities for network-related tasks, such as fetching the device's IP address and performing trace routes.
 public class NetworkUtil: NetworkUtilProtocol {
     
     //MARK: - Dependency injection
-        
+    
+    /// A logger instance for logging various events and errors.
     private var logger: Log
     
     //MARK: - Variables
     
+    /// An instance of `SimpleTracer` to handle trace routing.
     private var simpleTracer: SimpleTracer?
     
-    //MARK: - initialiser
+    //MARK: - Initialiser
     
+    /// Initializes a new `NetworkUtil`.
+    ///
+    /// - Parameter logger: A logger instance. Defaults to a logger with the category `.networkUtil`.
     init(logger: Log = .init(category: .networkUtil)) {
         self.logger = logger
     }
     
-    //MARK: - public
+    //MARK: - Public methods
     
-    /// Fetch current ip address from ipify.org
-    /// - Returns: ip address or empty string
+    /// Fetch the device's public IP address from ipify.org.
     ///
+    /// - Returns: The public IP address or an empty string if fetching fails.
     func getIFAddresses() -> String {
         var publicIP = ""
         do {
@@ -50,11 +62,11 @@ public class NetworkUtil: NetworkUtilProtocol {
         return publicIP
     }
     
-    /// Get trace route to your site
-    /// - Parameters:
-    ///   - host: ip or domain adress
-    ///   - complete: list of trace
+    /// Executes a trace route to the specified host and returns the result.
     ///
+    /// - Parameters:
+    ///   - host: The IP or domain address to trace.
+    ///   - complete: A closure executed upon completion of the trace, returning the trace's result as a string.
     func getTraceRoute(host: String, complete: @escaping (String) -> ()) {
         var traceRoute = ""
         

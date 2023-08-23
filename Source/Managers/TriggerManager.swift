@@ -7,11 +7,14 @@
 
 import Foundation
 
+// Defines a protocol for trigger management.
 protocol TriggerManagerProtocol {
     typealias TriggerBlock = ((ThiefDto) -> Void)
     
+    /// Starts the trigger manager with given settings and an optional trigger block.
     func start(settings: (any AppSettingsProtocol)?, triggerBlock: @escaping TriggerBlock)
     
+    /// Stops all running triggers.
     func stop()
 }
 
@@ -19,18 +22,23 @@ final class TriggerManager: TriggerManagerProtocol {
     
     //MARK: - Dependency injection
     
+    /// Holds the application settings.
     private var settings: (any AppSettingsProtocol)?
     
+    /// Logger for module
     private var logger: Log
     
+    /// A closure that takes a listener and a boolean flag to determine if the listener should run or not.
     var runListener: ((BaseListenerProtocol, Bool) -> ())?
     
+    /// Holds a set of listeners that are configured based on certain conditions.
     private lazy var listeners: [ListenerName : BaseListenerProtocol] = {
         var listeners: [ListenerName : BaseListenerProtocol] = [.onWakeUpListener : WakeUpListener(),
                                                                 .onBatteryPowerListener : PowerListener(),
                                                                 .onUSBConnectionListener : USBListener(),
                                                                 .onLoginListener : LoginListener()]
         
+        // If the build isn't a Mac App Store build, exclude WrongPasswordListener
         if AppSettings.isMASBuild == false {
             listeners[.onWrongPassword] = WrongPasswordListener()
         }
@@ -38,12 +46,14 @@ final class TriggerManager: TriggerManagerProtocol {
         return listeners
     }()
     
+    /// Initializer that configures the logger.
     init(logger: Log = .init(category: .triggerManager)) {
         self.logger = logger
     }
     
     //MARK: - public
     
+    /// Starts all listeners based on provided settings.
     public func start(settings: (any AppSettingsProtocol)?, triggerBlock: @escaping TriggerBlock = { triggered in }) {
         
         logger.debug("Starting all triggers")
@@ -65,6 +75,7 @@ final class TriggerManager: TriggerManagerProtocol {
         
         self.runListener = runListener
         
+        // Starts/stops individual listeners based on provided settings.
         let isUseSnapshotOnWakeUp = settings?.triggers.isUseSnapshotOnWakeUp == true
         if let wakeUpListener = listeners[.onWakeUpListener] {
             runListener(wakeUpListener, isUseSnapshotOnWakeUp)
@@ -93,9 +104,10 @@ final class TriggerManager: TriggerManagerProtocol {
         self.settings = settings
     }
     
+    /// Stops all active listeners.
     public func stop() {
         logger.debug("Stop all triggers")
-                
+        
         for listener in self.listeners.values {
             listener.stop()
         }
@@ -103,11 +115,13 @@ final class TriggerManager: TriggerManagerProtocol {
     
     //MARK: - private
     
+    /// Restarts a listener based on its type.
     private func restartListener(type: ListenerName) {
         if let l = self.listeners[type] {
             l.stop()
         }
         
+        // Recreates the listener based on its type.
         var listener: BaseListenerProtocol!
         switch type {
         case .onWakeUpListener:

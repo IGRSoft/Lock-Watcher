@@ -9,11 +9,17 @@ import Foundation
 
 extension Date {
     
-    /// Default formatter for date in application
-    /// 
+    /// A custom date formatter tailored for the application's specific needs.
+    /// This formatter provides both a short date and time representation.
+    ///
+    /// - Returns: A `DateFormatter` instance with the application's default date and time styles.
     static let defaultFormat: DateFormatter = {
         let formatter = DateFormatter()
+        
+        // Configures the formatter to represent dates in a short style.
         formatter.dateStyle = .short
+        
+        // Configures the formatter to represent times in a short style.
         formatter.timeStyle = .short
         
         return formatter
