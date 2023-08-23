@@ -9,30 +9,46 @@
 import SwiftUI
 import Combine
 
+/// ViewModel for handling the settings and configuration of the app.
 class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     
     //MARK: - DomainViewConstantProtocol
     
+    /// Represents the constants related to the view settings.
     typealias DomainViewConstant = SettingsDomain
+    
+    /// Contains the view settings for the domain.
     var viewSettings: SettingsDomain = .init()
     
     //MARK: - Types
     
+    /// A closure type to handle trigger events.
     typealias SettingsTriggerWatchBlock = ((TriggerType) -> Void)
     
     //MARK: - Dependency injection
     
+    /// A manager responsible for handling thief related functionalities.
     private var thiefManager: any ThiefManagerProtocol
     
+    /// Represents the app's settings.
     private var settings: any AppSettingsProtocol
     
     //MARK: - Variables
     
+    /// Indicates if the information is hidden or shown.
     @Published var isInfoHidden = true
+    
+    /// Indicates if access is granted to some resources.
     @Published var isAccessGranted = true
     
+    /// Notifies views to refresh whenever underlying data changes.
     internal let objectWillChange = PassthroughSubject<Void, Never>()
     
+    // Following bindings allow the views to read and modify the underlying settings' values.
+    
+    //MARK: - Bindings for UI settings
+    
+    // Binding for expanding or collapsing security info section.
     var isSecurityInfoExpand: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.ui.isSecurityInfoExpand
@@ -42,6 +58,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    // Binding for toggling app protection.
     var isProtected: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.options.isProtected
@@ -51,6 +68,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    // Binding for expanding or collapsing snapshot info section.
     var isSnapshotInfoExpand: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.ui.isSnapshotInfoExpand
@@ -60,6 +78,9 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    //MARK: - Bindings for Trigger settings
+    
+    // Each of these bindings represents a trigger for taking snapshots based on different events.
     var isUseSnapshotOnWakeUp: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.triggers.isUseSnapshotOnWakeUp
@@ -105,6 +126,9 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    //MARK: - Bindings for Options settings
+    
+    // Binding for expanding or collapsing options info section.
     var isOptionsInfoExpand: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.ui.isOptionsInfoExpand
@@ -114,6 +138,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    // Number of actions to keep in history.
     var keepLastActionsCount: Binding<Int> {
         Binding<Int>(get: {
             self.settings.options.keepLastActionsCount
@@ -123,6 +148,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    // Bindings for adding additional information to snapshots.
     var addLocationToSnapshot: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.options.addLocationToSnapshot
@@ -150,6 +176,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    // Server for performing trace route.
     var traceRouteServer: Binding<String> {
         Binding<String>(get: {
             self.settings.options.traceRouteServer
@@ -159,6 +186,9 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    //MARK: - Bindings for Sync settings
+    
+    // Binding for saving snapshots to disk.
     var isSaveSnapshotToDisk: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.sync.isSaveSnapshotToDisk
@@ -168,6 +198,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    // Binding for expanding or collapsing sync info section.
     var isSyncInfoExpand: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.ui.isSyncInfoExpand
@@ -177,6 +208,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    // Binding for sending notifications to mail.
     var isSendNotificationToMail: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.sync.isSendNotificationToMail
@@ -195,6 +227,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    // Bindings related to different sync options.
     var isICloudSyncEnable: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.sync.isICloudSyncEnable
@@ -231,10 +264,12 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    /// Closure to be executed when access is granted.
     var accessGrantedBlock: Commons.EmptyClosure?
     
     //MARK: - initialiser
     
+    /// Initializer for the SettingsViewModel.
     init(settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol) {
         self.settings = settings
         self.thiefManager = thiefManager
@@ -242,17 +277,17 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         watchDropboxUserNameUpdate()
     }
     
-    /// restart Watchers in the ThiefManager on triggers settings update
+    /// Requests the thief manager to restart watchers based on updated settings.
     func restartWatching() {
         thiefManager.restartWatching()
     }
     
-    ///toggle Location Manager state for ThiefManager
+    /// Enables or disables the location manager in the thief manager.
     func setupLocationManager(enable: Bool) {
         thiefManager.setupLocationManager(enable: enable)
     }
     
-    /// Starting watch a dropbox user update to change name on Settings view
+    /// Observes any updates to the Dropbox user's name and updates the setting accordingly.
     private func watchDropboxUserNameUpdate() {
         thiefManager.watchDropboxUserNameUpdate { [weak self] name in
             self?.settings.sync.dropboxName = name
@@ -261,6 +296,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     }
 }
 
+/// Extension to provide preview instance for the SettingsViewModel.
 extension SettingsViewModel {
     static var preview: SettingsViewModel = SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview())
 }

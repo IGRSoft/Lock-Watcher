@@ -596,6 +596,17 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		A57905BE2A95FA3800647BF8 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */,
+				A5A565842A549B7700D7E030 /* LaunchAtLoginView.swift */,
+				A599EB3027AB1259003A69B5 /* ProtectionView.swift */,
+				A5AA31E12778D64400A064B6 /* SaveSnapshotViews.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		A58C63C62A4CBCA0004DE972 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -679,10 +690,7 @@
 		A5A2521F2A52DC8500889F5C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */,
-				A5A565842A549B7700D7E030 /* LaunchAtLoginView.swift */,
-				A599EB3027AB1259003A69B5 /* ProtectionView.swift */,
-				A5AA31E12778D64400A064B6 /* SaveSnapshotViews.swift */,
+				A57905BE2A95FA3800647BF8 /* Subviews */,
 				A5E49CC42A52EDE300C3740B /* SettingsDomain.swift */,
 				A5C6DBF325796A90009DE750 /* SettingsView.swift */,
 				A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */,

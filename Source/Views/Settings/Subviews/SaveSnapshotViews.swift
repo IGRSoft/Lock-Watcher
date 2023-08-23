@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A view component that allows the user to determine the number of last actions to keep.
 struct KeepLastCountView: View {
     @Binding var keepLastActionsCount : Int
     
@@ -17,6 +18,8 @@ struct KeepLastCountView: View {
     }
 }
 
+/// A view component that allows the user to toggle whether to send notifications via email,
+/// and to specify the recipient email.
 struct SendNotificationToMailView: View {
     @Binding var isSendNotificationToMail : Bool
     @Binding var mailRecipient : String
@@ -32,6 +35,7 @@ struct SendNotificationToMailView: View {
     }
 }
 
+/// A view component that allows the user to toggle whether to add location information to the snapshot.
 struct AddLocationToSnapshotView: View {
     @Binding var addLocationToSnapshot: Bool
     
@@ -60,6 +64,7 @@ struct AddLocationToSnapshotView: View {
     }
 }
 
+/// A view component that allows the user to toggle whether to add IP address information to the snapshot.
 struct AddIPAddressToSnapshotView: View {
     @Binding var addIPAddressToSnapshot : Bool
     
@@ -70,6 +75,8 @@ struct AddIPAddressToSnapshotView: View {
     }
 }
 
+/// A view component that allows the user to toggle whether to add a traceroute to the snapshot,
+/// and to specify the traceroute server.
 struct TraceRouteToSnapshotView: View {
     @Binding var isAddTraceRouteToSnapshot : Bool
     @Binding var traceRouteServer : String
@@ -85,6 +92,7 @@ struct TraceRouteToSnapshotView: View {
     }
 }
 
+/// A view component that allows the user to toggle whether to save the snapshot to disk.
 struct SaveSnapshotToDiskView: View {
     @Binding var isSaveSnapshotToDisk : Bool
     
@@ -95,6 +103,7 @@ struct SaveSnapshotToDiskView: View {
     }
 }
 
+/// A view component that allows the user to toggle iCloud synchronization.
 struct ICloudSyncView: View {
     @Binding var isICloudSyncEnable : Bool
     
@@ -105,6 +114,8 @@ struct ICloudSyncView: View {
     }
 }
 
+/// A view component that provides options for synchronizing with Dropbox.
+/// It shows different options based on whether the user is already authenticated with Dropbox.
 struct DropboxView: View {
     @Binding var isDropboxEnable : Bool
     @Binding var dropboxName : String
@@ -135,6 +146,7 @@ struct DropboxView: View {
     }
 }
 
+/// A view component that allows the user to toggle local notifications.
 struct LocalNotificationView: View {
     @Binding var isLocalNotificationEnable : Bool
     

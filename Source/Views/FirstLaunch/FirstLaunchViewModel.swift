@@ -9,44 +9,61 @@
 import SwiftUI
 import Combine
 
+/// The view model for the first launch view.
 final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
     
     //MARK: - DomainViewConstantProtocol
     
+    /// The view's domain-specific constants.
     var viewSettings: FirstLaunchDomain = .init()
     
+    /// The type of domain-specific constants associated with this view.
     typealias DomainViewConstant = FirstLaunchDomain
     
     //MARK: - Dependency injection
     
+    /// The application's settings.
     @Published private var settings: any AppSettingsProtocol
+    
+    /// The manager responsible for handling "thief" related operations.
     @Published private var thiefManager: any ThiefManagerProtocol
     
+    /// The closure to close the view.
     private var closeClosure: Commons.EmptyClosure
     
     //MARK: - Variables
     
+    /// The current state of the view.
     @Published private(set) var state: StateMode = .idle
+    
+    /// Countdown after success before closing the window.
     @Published private(set) var successCountDown = AppSettings.firstLaunchSuccessCount
     
+    /// The safe area for the view.
     lazy var safeArea = CGSize(width: viewSettings.window.width - ViewConstants.padding, height: viewSettings.window.height - ViewConstants.padding)
     
+    /// Indicates if a restart is needed.
     @Published var isNeedRestart: Bool = false
     
+    /// Indicates if an alert should be shown.
     @Published var showingAlert = false
     
+    /// A timer for tracking time-based operations.
     private var timer: Timer?
-
+    
+    /// View model for the first launch options.
     lazy var firstLaunchOptionsViewModel: FirstLaunchOptionsViewModel = {
         FirstLaunchOptionsViewModel(settings: settings)
     }()
     
     //MARK: - Combine
     
+    /// Collection of cancellable publishers to clean up when done.
     private var cancellables = Set<AnyCancellable>()
     
-    //MARK: - initialiser
+    //MARK: - Initializer
     
+    /// Initializes the view model with dependencies.
     init(settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol, closeClosure: @escaping Commons.EmptyClosure) {
         self.settings = settings
         self.thiefManager = thiefManager
@@ -55,45 +72,54 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
         setupPublishers()
     }
     
+    /// Deinit cleans up any active timers.
     deinit {
         stopTimer()
     }
     
+    /// Stops any active timers.
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
     }
     
-    //MARK: - ViewBuilder
+    //MARK: - ViewBuilder Methods
     
+    /// Provides the text for taking a snapshot.
     @ViewBuilder
     public func takeSnapshotTitle() -> Text {
         Text("TakeSnapshotAndStart")
     }
     
+    /// Simulates taking a snapshot and starts a process.
     public func takeSnapshot() {
         state = .progress
     }
     
+    /// Provides the title for the alert to open settings.
     @ViewBuilder
     public func openSettingsAlertTitle() -> Text {
         Text("OpenSettings")
     }
     
+    /// Provides the button title to open settings.
     @ViewBuilder
     public func openSettingsTitle() -> Text {
         Text("ButtonSettings")
     }
     
+    /// Opens the settings for the application.
     public func openSettings() {
         NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Camera")!)
     }
     
+    /// Provides the cancel button title for the settings alert.
     @ViewBuilder
     public func cancelSettingsTitle() -> Text {
         Text("ButtonCancel")
     }
     
+    /// Restarts the view to its initial state.
     @ViewBuilder
     public func restartView() -> some View {
         Text("")
@@ -102,10 +128,10 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
             }
     }
     
-    //MARK: - private
+    //MARK: - Private Methods
     
+    /// Sets up publishers for state changes.
     private func setupPublishers() {
-        // listen when new image has been added to database
         $state.sink { [weak self] state in
             switch state {
             case .idle:
@@ -123,6 +149,7 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
         .store(in: &cancellables)
     }
     
+    /// Simulates a trigger for permissions and state changes.
     private func simulateTrigger() {
         Task {
             PermissionsUtils.updateCameraPermissions { [weak self] isGranted in
@@ -141,6 +168,7 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
         }
     }
     
+    /// Starts a timer to close the window after the success countdown is completed.
     private func startTimerToCloseWindow() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [unowned self] timer in
             if successCountDown == .zero {
@@ -153,6 +181,7 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
     }
 }
 
+/// Provides a preview version of the `FirstLaunchViewModel`.
 extension FirstLaunchViewModel {
     static var preview: FirstLaunchViewModel = FirstLaunchViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview(), closeClosure: {})
 }

@@ -33,8 +33,7 @@
 
 @end
 
-int main(int argc, const char *argv[])
-{
+int main(int argc, const char *argv[]) {
     // Create the delegate for the service.
     ServiceDelegate *delegate = [ServiceDelegate new];
     

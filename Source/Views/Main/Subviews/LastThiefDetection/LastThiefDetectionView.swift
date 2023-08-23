@@ -8,39 +8,51 @@
 
 import SwiftUI
 
+/// A SwiftUI View that displays the last detected thief's image and a list of related images.
 struct LastThiefDetectionView: View {
     @StateObject private var viewModel: LastThiefDetectionViewModel
     
+    /// Initializes the view with a given view model.
+    ///
+    /// - Parameter viewModel: The view model to associate with this view.
     init(viewModel: LastThiefDetectionViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
 #if DEBUG
+        // Prints changes for debug purposes.
         let _ = Self._printChanges()
 #endif
         VStack(alignment: .center, spacing: ViewConstants.spacing) {
+            // If there's a selected item and we can create an image from its data.
             if let lastImage = viewModel.selectedItem, let image = NSImage(data: lastImage.data) {
+                // Display the text "LastSnapshot" on top.
                 Text("LastSnapshot")
                 
+                // Display the last captured image.
                 Image(nsImage: image)
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(6)
-                    .frame(maxWidth: .infinity, minHeight: 240, maxHeight: 240, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(maxWidth: .infinity, minHeight: 240, maxHeight: 240, alignment: .center)
+                // When tapped, open the file associated with the last image.
                     .onTapGesture {
                         guard let filePath = lastImage.path else {
                             return
                         }
                         NSWorkspace.shared.open(filePath)
                     }
-                    
                 
+                // Display the date of the last captured image.
                 Text("\(lastImage.date, formatter: Date.defaultFormat)")
                 
+                // If there are more than one images.
                 if viewModel.latestImages.count > 1 {
+                    // Display them in a horizontal scroll view.
                     ScrollView(.horizontal) {
                         LazyHStack(spacing: 0) {
+                            // Display each image from the list of latest images.
                             ForEach (viewModel.latestImages) { imageDto in
                                 if let image = NSImage(data: imageDto.data) {
                                     ZStack (alignment: .topTrailing) {
@@ -51,6 +63,7 @@ struct LastThiefDetectionView: View {
                                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                                 .cornerRadius(4)
                                             
+                                            // Display the date for each image in the horizontal scroll view.
                                             Text("\(imageDto.date, formatter: Date.defaultFormat)")
                                                 .font(.callout)
                                                 .padding(4)
@@ -58,6 +71,7 @@ struct LastThiefDetectionView: View {
                                                 .cornerRadius(4)
                                         }
                                         
+                                        // A button to remove the image.
                                         Button(action: {
                                             viewModel.remove(imageDto)
                                         }) {
@@ -66,11 +80,12 @@ struct LastThiefDetectionView: View {
                                                 .padding(4)
                                                 .foregroundColor(.red)
                                                 .cornerRadius(3)
-                                                
+                                            
                                         }
                                         .buttonStyle(BorderlessButtonStyle())
                                     }
                                     .padding()
+                                    // When an image in the horizontal scroll view is tapped, set it as the selected item.
                                     .onTapGesture {
                                         viewModel.selectedItem = imageDto
                                     }
@@ -84,6 +99,7 @@ struct LastThiefDetectionView: View {
                     )
                 }
             } else {
+                // If there's no selected item or image data, display a message indicating that there's nothing to show.
                 Text("Nothing to show")
                     .font(.title2)
                     .padding()
