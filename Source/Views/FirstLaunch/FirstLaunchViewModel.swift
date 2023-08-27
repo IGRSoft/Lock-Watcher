@@ -23,10 +23,10 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
     //MARK: - Dependency injection
     
     /// The application's settings.
-    @Published private var settings: any AppSettingsProtocol
+    @Published private var settings: AppSettingsProtocol
     
     /// The manager responsible for handling "thief" related operations.
-    @Published private var thiefManager: any ThiefManagerProtocol
+    @Published private var thiefManager: ThiefManagerProtocol
     
     /// The closure to close the view.
     private var closeClosure: Commons.EmptyClosure
@@ -64,7 +64,7 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
     //MARK: - Initializer
     
     /// Initializes the view model with dependencies.
-    init(settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol, closeClosure: @escaping Commons.EmptyClosure) {
+    init(settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, closeClosure: @escaping Commons.EmptyClosure) {
         self.settings = settings
         self.thiefManager = thiefManager
         self.closeClosure = closeClosure

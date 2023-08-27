@@ -44,7 +44,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     private var watchBlock: WatchBlock = { _ in }
     
-    private(set) var settings: any AppSettingsProtocol
+    private(set) var settings: AppSettingsProtocol
     
     private var logger: Log
     
@@ -72,7 +72,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     //MARK: - initialiser
     
-    init(settings: any AppSettingsProtocol, triggerManager: TriggerManagerProtocol = TriggerManager(), logger: Log = .init(category: .thiefManager), watchBlock: @escaping WatchBlock = { _ in }) {
+    init(settings: AppSettingsProtocol, triggerManager: TriggerManagerProtocol = TriggerManager(), logger: Log = .init(category: .thiefManager), watchBlock: @escaping WatchBlock = { _ in }) {
         self.settings = settings
         self.triggerManager = triggerManager
         self.watchBlock = watchBlock
@@ -272,7 +272,7 @@ extension ThiefManager: UNUserNotificationCenterDelegate {
     }
 }
 
-class ThiefManagerPreview: ThiefManagerProtocol {
+final class ThiefManagerPreview: ThiefManagerProtocol {
     func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure) {
         closure("")
     }

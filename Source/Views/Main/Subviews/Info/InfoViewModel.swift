@@ -12,7 +12,7 @@ import SwiftUI
 class InfoViewModel: ObservableObject {
     
     /// The thief manager responsible for handling thief-related actions and data.
-    var thiefManager: any ThiefManagerProtocol
+    var thiefManager: ThiefManagerProtocol
     
     /// A binding indicating whether the info section should be extended.
     @Binding var isInfoExtended: Bool
@@ -22,7 +22,7 @@ class InfoViewModel: ObservableObject {
     /// - Parameters:
     ///   - thiefManager: The thief manager for this view model.
     ///   - isInfoExtended: A binding to control whether the info is extended.
-    init(thiefManager: any ThiefManagerProtocol, isInfoExtended: Binding<Bool>) {
+    init(thiefManager: ThiefManagerProtocol, isInfoExtended: Binding<Bool>) {
         self.thiefManager = thiefManager
         self._isInfoExtended = isInfoExtended
     }

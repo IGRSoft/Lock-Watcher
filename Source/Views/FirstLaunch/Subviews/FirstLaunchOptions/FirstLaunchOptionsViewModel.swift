@@ -12,9 +12,9 @@ import Combine
 final class FirstLaunchOptionsViewModel: ObservableObject {
     let objectWillChange = PassthroughSubject<Void, Never>()
     
-    @Published var settings: any AppSettingsProtocol
+    @Published var settings: AppSettingsProtocol
     
-    init(settings: any AppSettingsProtocol) {
+    init(settings: AppSettingsProtocol) {
         self.settings = settings
     }
     

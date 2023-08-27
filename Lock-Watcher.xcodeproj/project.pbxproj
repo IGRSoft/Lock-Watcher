@@ -50,6 +50,14 @@
 		A57905C92A9614C900647BF8 /* MockDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905C82A9614C900647BF8 /* MockDatabaseManager.swift */; };
 		A57905CB2A96159E00647BF8 /* MockCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905CA2A96159E00647BF8 /* MockCoordinator.swift */; };
 		A57905CD2A96163900647BF8 /* MainAppTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905CC2A96163900647BF8 /* MainAppTest.swift */; };
+		A57905CF2A9BCD0400647BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905CE2A9BCD0400647BF8 /* AppDelegate.swift */; };
+		A57905D02A9BCD0400647BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905CE2A9BCD0400647BF8 /* AppDelegate.swift */; };
+		A57905D22A9BCD6800647BF8 /* AppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D12A9BCD6800647BF8 /* AppDelegateModel.swift */; };
+		A57905D32A9BCD6800647BF8 /* AppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D12A9BCD6800647BF8 /* AppDelegateModel.swift */; };
+		A57905D52A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */; };
+		A57905D62A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */; };
+		A57905D92A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */; };
+		A57905DA2A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */; };
 		A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C22A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C42A4C7C6E004DE972 /* NSApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */; };
@@ -350,6 +358,10 @@
 		A57905C82A9614C900647BF8 /* MockDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabaseManager.swift; sourceTree = "<group>"; };
 		A57905CA2A96159E00647BF8 /* MockCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoordinator.swift; sourceTree = "<group>"; };
 		A57905CC2A96163900647BF8 /* MainAppTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppTest.swift; sourceTree = "<group>"; };
+		A57905CE2A9BCD0400647BF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A57905D12A9BCD6800647BF8 /* AppDelegateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateModel.swift; sourceTree = "<group>"; };
+		A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppDelegateModel.swift; sourceTree = "<group>"; };
+		A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorTest.swift; sourceTree = "<group>"; };
 		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A57FDCB126DB99B800954ED7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A58C63C02A4C5AF6004DE972 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -600,6 +612,8 @@
 			children = (
 				A5C6DBF125796A90009DE750 /* App.swift */,
 				A5A252202A52DDBE00889F5C /* AppCommons.swift */,
+				A57905CE2A9BCD0400647BF8 /* AppDelegate.swift */,
+				A57905D12A9BCD6800647BF8 /* AppDelegateModel.swift */,
 				A57905BB2A9534AA00647BF8 /* Secrets.swift */,
 			);
 			path = Application;
@@ -631,8 +645,17 @@
 				A57905C62A96145300647BF8 /* MockThiefManager.swift */,
 				A57905C82A9614C900647BF8 /* MockDatabaseManager.swift */,
 				A57905CA2A96159E00647BF8 /* MockCoordinator.swift */,
+				A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		A57905D72A9BD6B800647BF8 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		A58C63C62A4CBCA0004DE972 /* Configurations */ = {
@@ -838,6 +861,7 @@
 		A5C6DC0325796A93009DE750 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A57905D72A9BD6B800647BF8 /* Coordinator */,
 				A57905C52A96143700647BF8 /* Mocks */,
 				A57905BF2A960B7600647BF8 /* Application */,
 				A5C6DC0625796A93009DE750 /* Info.plist */,
@@ -1320,17 +1344,20 @@
 				A5A2521E2A4F516B00889F5C /* MainViewModel.swift in Sources */,
 				A58FC73826E2814E007674F6 /* AppSettings.swift in Sources */,
 				A58FC73926E2814E007674F6 /* App.swift in Sources */,
+				A57905D02A9BCD0400647BF8 /* AppDelegate.swift in Sources */,
 				A58FC73A26E2814E007674F6 /* iCloudNotifier.swift in Sources */,
 				A5ACC7C827835BF800999CF0 /* NetworkUtil.swift in Sources */,
 				A58C63F82A4CC65D004DE972 /* BaseCoordinatorProtocol.swift in Sources */,
 				A5EFE8B926E2B587001FC4EA /* Date+Formatter.swift in Sources */,
 				A58C63F52A4CC5E4004DE972 /* MainCoordinator.swift in Sources */,
+				A57905D62A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */,
 				A5942652283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
 				A58FC73C26E2814E007674F6 /* XPCAuthenticationProtocol.swift in Sources */,
 				A58C63C22A4C5AF6004DE972 /* MainView.swift in Sources */,
 				A58FC73D26E2814E007674F6 /* NotificationManager.swift in Sources */,
 				A57905BD2A9534AA00647BF8 /* Secrets.swift in Sources */,
 				A5A565722A53653000D7E030 /* MainDomain.swift in Sources */,
+				A57905D32A9BCD6800647BF8 /* AppDelegateModel.swift in Sources */,
 				A56CFFBC27A48D6A00CB137B /* String+Regex.swift in Sources */,
 				A5A2520A2A4E0ACE00889F5C /* NSImage+Data.swift in Sources */,
 				A58FC73E26E2814E007674F6 /* ThiefManager.swift in Sources */,
@@ -1340,6 +1367,7 @@
 				A58FC74026E2814E007674F6 /* XPCPowerProtocol.swift in Sources */,
 				A5A252172A4E247400889F5C /* LastThiefDetectionViewModel.swift in Sources */,
 				A5A2521A2A4F416600889F5C /* View+ApplyIf.swift in Sources */,
+				A57905DA2A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */,
 				A5AA31E02778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
 				A58FC74126E2814E007674F6 /* WakeUpListener.swift in Sources */,
 				A58FC76326E282C7007674F6 /* MailNotifier.swift in Sources */,
@@ -1397,17 +1425,20 @@
 				A5A2521D2A4F516B00889F5C /* MainViewModel.swift in Sources */,
 				A5E6D7A625A5D1EB00EEA7DD /* AppSettings.swift in Sources */,
 				A5C6DBF225796A90009DE750 /* App.swift in Sources */,
+				A57905CF2A9BCD0400647BF8 /* AppDelegate.swift in Sources */,
 				A5ACC7C727835BF800999CF0 /* NetworkUtil.swift in Sources */,
 				A58C63F72A4CC65D004DE972 /* BaseCoordinatorProtocol.swift in Sources */,
 				A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */,
 				A58C63F42A4CC5E4004DE972 /* MainCoordinator.swift in Sources */,
 				A5942651283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
+				A57905D52A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */,
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 				A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */,
 				A541188027649FB2007C6AB8 /* WrongPasswordListener.swift in Sources */,
 				A56CFFBB27A48D6A00CB137B /* String+Regex.swift in Sources */,
 				A57905BC2A9534AA00647BF8 /* Secrets.swift in Sources */,
 				A5A565712A53653000D7E030 /* MainDomain.swift in Sources */,
+				A57905D22A9BCD6800647BF8 /* AppDelegateModel.swift in Sources */,
 				A5A252092A4E0ACE00889F5C /* NSImage+Data.swift in Sources */,
 				A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */,
 				A54A1F7A2703769800176069 /* LoginListener.swift in Sources */,
@@ -1417,6 +1448,7 @@
 				A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */,
 				A5A252162A4E247400889F5C /* LastThiefDetectionViewModel.swift in Sources */,
 				A5A252192A4F416600889F5C /* View+ApplyIf.swift in Sources */,
+				A57905D92A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */,
 				A5AA31DF2778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 				A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */,

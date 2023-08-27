@@ -27,7 +27,7 @@ class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     // MARK: - Dependency injection
     
     /// The manager responsible for operations related to potential security threats.
-    @Published var thiefManager: any ThiefManagerProtocol
+    @Published var thiefManager: ThiefManagerProtocol
     
     /// The manager responsible for database operations.
     @Published var databaseManager: any DatabaseManagerProtocol
@@ -52,7 +52,7 @@ class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     /// - Parameters:
     ///   - thiefManager: An object conforming to `ThiefManagerProtocol` to manage potential security threats.
     ///   - isInfoExtended: A boolean value to indicate if the information should be extended. Default value is `true`.
-    init(thiefManager: any ThiefManagerProtocol, isInfoExtended: Bool = true) {
+    init(thiefManager: ThiefManagerProtocol, isInfoExtended: Bool = true) {
         self.thiefManager = thiefManager
         self.databaseManager = thiefManager.databaseManager
         self.isInfoExtended = isInfoExtended

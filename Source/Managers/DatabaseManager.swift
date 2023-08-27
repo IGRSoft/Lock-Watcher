@@ -22,7 +22,7 @@ final class DatabaseManager: DatabaseManagerProtocol {
     //MARK: - Dependency injection
     
     /// Holds the application settings.
-    private var settings: any AppSettingsProtocol
+    private var settings: AppSettingsProtocol
     
     //MARK: - Variables
     
@@ -43,7 +43,7 @@ final class DatabaseManager: DatabaseManagerProtocol {
     //MARK: - initialiser
     
     /// Initializes the database manager with app settings and configures storage options.
-    init(settings: any AppSettingsProtocol) {
+    init(settings: AppSettingsProtocol) {
         self.settings = settings
         
         var options: Options = Options()

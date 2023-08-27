@@ -16,10 +16,10 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     //MARK: - Dependency Injection
     
     /// Configuration settings for the application.
-    private var settings: any AppSettingsProtocol
+    private var settings: AppSettingsProtocol
     
     /// Likely manages data or tasks related to unauthorized access.
-    private var thiefManager: any ThiefManagerProtocol
+    private var thiefManager: ThiefManagerProtocol
     
     //MARK: - Variables
     
@@ -58,7 +58,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     ///     - settings: Application settings.
     ///     - thiefManager: Manager related to unauthorized access.
     ///     - statusBarButton: Status bar button to toggle the main window.
-    init(logger: Log = Log(category: .coordinator), settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol, statusBarButton: NSStatusBarButton) {
+    init(logger: Log = Log(category: .coordinator), settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, statusBarButton: NSStatusBarButton) {
         self.logger = logger
         self.settings = settings
         self.thiefManager = thiefManager

@@ -28,10 +28,10 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     //MARK: - Dependency injection
     
     /// A manager responsible for handling thief related functionalities.
-    private var thiefManager: any ThiefManagerProtocol
+    private var thiefManager: ThiefManagerProtocol
     
     /// Represents the app's settings.
-    private var settings: any AppSettingsProtocol
+    private var settings: AppSettingsProtocol
     
     //MARK: - Variables
     
@@ -270,7 +270,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     //MARK: - initialiser
     
     /// Initializer for the SettingsViewModel.
-    init(settings: any AppSettingsProtocol, thiefManager: any ThiefManagerProtocol) {
+    init(settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol) {
         self.settings = settings
         self.thiefManager = thiefManager
         

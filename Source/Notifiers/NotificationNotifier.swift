@@ -31,7 +31,7 @@ final class NotificationNotifier: NotifierProtocol {
     
     /// Registers the notifier with the provided settings.
     /// - Parameter settings: An instance conforming to `AppSettingsProtocol` containing app settings.
-    func register(with settings: any AppSettingsProtocol) {
+    func register(with settings: AppSettingsProtocol) {
         // This method is currently empty and can be populated as needed.
     }
     

@@ -12,7 +12,7 @@ protocol TriggerManagerProtocol {
     typealias TriggerBlock = ((ThiefDto) -> Void)
     
     /// Starts the trigger manager with given settings and an optional trigger block.
-    func start(settings: (any AppSettingsProtocol)?, triggerBlock: @escaping TriggerBlock)
+    func start(settings: AppSettingsProtocol?, triggerBlock: @escaping TriggerBlock)
     
     /// Stops all running triggers.
     func stop()
@@ -23,7 +23,7 @@ final class TriggerManager: TriggerManagerProtocol {
     //MARK: - Dependency injection
     
     /// Holds the application settings.
-    private var settings: (any AppSettingsProtocol)?
+    private var settings: AppSettingsProtocol?
     
     /// Logger for module
     private var logger: Log
@@ -54,7 +54,7 @@ final class TriggerManager: TriggerManagerProtocol {
     //MARK: - public
     
     /// Starts all listeners based on provided settings.
-    public func start(settings: (any AppSettingsProtocol)?, triggerBlock: @escaping TriggerBlock = { triggered in }) {
+    public func start(settings: AppSettingsProtocol?, triggerBlock: @escaping TriggerBlock = { triggered in }) {
         
         logger.debug("Starting all triggers")
         

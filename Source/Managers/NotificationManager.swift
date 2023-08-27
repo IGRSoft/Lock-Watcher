@@ -24,7 +24,7 @@ final class NotificationManager: NotificationManagerProtocol {
     //MARK: - Dependency injection
     
     /// The manager uses settings to configure its behavior.
-    private var settings: any AppSettingsProtocol
+    private var settings: AppSettingsProtocol
     
     //MARK: - Variables
     
@@ -37,7 +37,7 @@ final class NotificationManager: NotificationManagerProtocol {
     //MARK: - initialiser
     
     /// The manager is initialized with the given settings and registers some notifiers with these settings.
-    init(settings: any AppSettingsProtocol) {
+    init(settings: AppSettingsProtocol) {
         self.settings = settings
         
         mailNotifier.register(with: settings)

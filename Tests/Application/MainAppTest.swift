@@ -6,58 +6,52 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-/*@testable import Lock_Watcher
+@testable import Lock_Watcher
 import XCTest
 import UserNotifications
 
-final class MainAppTest: XCTestCase {
+class AppDelegateModelTests: XCTestCase {
     
-    private var appDelegate: MainApp.AppDelegate!
+    var model: MockAppDelegateModel!
     
     override func setUp() {
         super.setUp()
-        appDelegate = MainApp.AppDelegate()
+        model = MockAppDelegateModel()
     }
     
-    func testApplicationDidFinishLaunching() {
-        // Setup mock
-        let mockCoordinator = MockCoordinator()
-        //appDelegate.coordinator = mockCoordinator
+    func testSetupWithNotification_valid() {
+        // Given
+        let notification = Notification(name: Notification.Name("TestNotification"))
         
         // Execute
-        appDelegate.applicationDidFinishLaunching(Notification(name: Notification.Name("TestNotification")))
+        model.setup(with: notification)
         
-        // Assert
-        XCTAssertTrue(mockCoordinator.displayFirstLaunchWindowCalled, "Expected displayFirstLaunchWindowIfNeed() to be called.")
+        XCTAssertTrue(model.invokedSetup)
+        XCTAssertTrue(model.invokedSetupParameters?.localNotification == notification)
     }
     
-    func testApplicationOpenURLs() {
-        let mockThiefManager = MockThiefManager()
-        //appDelegate.thiefManager = mockThiefManager
-        let testURL = URL(string: "scheme://\(Secrets.dropboxKey)")!
+    func testCheckDropboxAuthWithURLs_valid() {
+        // Given
+        let validDropboxURL = URL(string: "scheme://dropboxKey")!
         
-        // Execute
-        appDelegate.application(NSApplication.shared, open: [testURL])
-        
-        // Assert
-        XCTAssertTrue(mockThiefManager.completeDropboxAuthCalled, "Expected completeDropboxAuthWith(url:) to be called.")
+        // Execute & Assert for valid Dropbox URL
+        let validDropboxURLs = [validDropboxURL]
+        model.stubbedCheckDropboxAuthResult = true
+        XCTAssertTrue(model.checkDropboxAuth(urls: validDropboxURLs) == true)
+        XCTAssertTrue(validDropboxURLs == model.invokedCheckDropboxAuthParameters?.urls, "Expected to recognize valid Dropbox URL.")
     }
     
-    func testProcessLocalNotification() {
-        let mockThiefManager = MockThiefManager()
-        //appDelegate.thiefManager = mockThiefManager
-        let testNotification = UNNotificationRequest(identifier: "testIdentifier", content: UNNotificationContent(), trigger: nil)
-        let userInfo: [AnyHashable: Any] = [
-            NSApplication.launchUserNotificationUserInfoKey: UNNotificationResponse.self
-        ]
-        let notification = Notification(name: Notification.Name("TestNotification"), object: nil, userInfo: userInfo)
+    func testCheckDropboxAuthWithURLs_invalid() {
+        // Given
+        let validDropboxURL = URL(string: "scheme://dropboxKey")!
+        let invalidDropboxURL = URL(string: "scheme://invalidKey")!
         
-        // Execute
-        //appDelegate.process(localNotification: notification)
-        
-        // Assert
-        XCTAssertTrue(mockThiefManager.showSnapshotCalled, "Expected showSnapshot(identifier:) to be called.")
+        // Execute & Assert for valid Dropbox URL
+        let validDropboxURLs = [validDropboxURL]
+        let invalidDropboxURLs = [invalidDropboxURL]
+        model.stubbedCheckDropboxAuthResult = false
+        XCTAssertTrue(model.checkDropboxAuth(urls: invalidDropboxURLs) == false)
+        XCTAssertTrue(validDropboxURLs != model.invokedCheckDropboxAuthParameters?.urls, "Expected to recognize valid Dropbox URL.")
     }
-    
 }
-*/
+

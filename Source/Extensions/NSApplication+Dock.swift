@@ -16,7 +16,7 @@ extension NSApplication {
     /// If `false`, the application's Dock icon is shown, and the application behaves like a regular application.
     ///
     /// - Parameter hidden: A Boolean value that determines whether to hide or show the Dock icon.
-    static func setDockIcon(hidden: Bool) {
+    static func setDockIcon(hidden: Bool) {        
         // Determine the activation policy based on the hidden parameter.
         let policy: NSApplication.ActivationPolicy = hidden ? .accessory : .regular
         
