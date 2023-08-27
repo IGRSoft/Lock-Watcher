@@ -76,19 +76,19 @@
 "SnapshotAt" = "Snapshot at: %@";
 
 /* Description was not specified */
-"TrigerType_onWakeUp" = "On wake up";
+"TriggerType_onWakeUp" = "On wake up";
 
 /* Description was not specified */
-"TrigerType_onWrongPassword" = "On entered wrong password:";
+"TriggerType_onWrongPassword" = "On entered wrong password:";
 
 /* Description was not specified */
-"TrigerType_onBatteryPower" = "On removed power supply";
+"TriggerType_onBatteryPower" = "On removed power supply";
 
 /* Description was not specified */
-"TrigerType_usbConnected" = "On connected usb device";
+"TriggerType_usbConnected" = "On connected usb device";
 
 /* Description was not specified */
-"TrigerType_logedIn" = "On login";
+"TriggerType_logedIn" = "On login";
 
 /* Description was not specified */
 "AuthInfo" = "unlock access to database data";

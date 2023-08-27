@@ -122,7 +122,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     /// Detects and processes any triggers.
     public func detectedTrigger(_ closure: @escaping Commons.BoolClosure = {_ in }) {
-        logger.debug("Detected trigered action: \(self.lastThiefDetection.triggerType.rawValue)")
+        logger.debug("Detected triggered action: \(self.lastThiefDetection.triggerType.rawValue)")
         
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings.sync.isSaveSnapshotToDisk

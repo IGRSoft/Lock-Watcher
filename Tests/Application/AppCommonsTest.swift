@@ -9,7 +9,7 @@
 @testable import Lock_Watcher
 import XCTest
 
-class CommonTests: XCTestCase {
+final class CommonTests: XCTestCase {
 
     // MARK: - Commons Tests
     

@@ -31,7 +31,7 @@
     
     dateString = [formatter stringFromDate:[NSDate date]];
     
-    NSString *_messageContent = @"Someone trigered action for Lock Watcher\n\n";
+    NSString *_messageContent = @"Someone triggered action for Lock Watcher\n\n";
     _messageContent = [_messageContent stringByAppendingFormat:@"Time: %@\n\n", dateString];
     
     if (CLLocationCoordinate2DIsValid(coordinates)) {

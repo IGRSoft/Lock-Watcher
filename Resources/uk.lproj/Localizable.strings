@@ -76,19 +76,19 @@
 "SnapshotAt" = "Знімок о: %@";
 
 /* Description was not specified */
-"TrigerType_onWakeUp" = "на пробудження";
+"TriggerType_onWakeUp" = "на пробудження";
 
 /* Description was not specified */
-"TrigerType_onWrongPassword" = "на введення невірного пароля";
+"TriggerType_onWrongPassword" = "на введення невірного пароля";
 
 /* Description was not specified */
-"TrigerType_onBatteryPower" = "на отключение источника питания";
+"TriggerType_onBatteryPower" = "на отключение источника питания";
 
 /* Description was not specified */
-"TrigerType_usbConnected" = "на відключення джерела живлення";
+"TriggerType_usbConnected" = "на відключення джерела живлення";
 
 /* Description was not specified */
-"TrigerType_logedIn" = "на вхід";
+"TriggerType_logedIn" = "на вхід";
 
 /* Description was not specified */
 "AuthInfo" = "розблокувати доступ до даних бази даних";

@@ -25,7 +25,7 @@ extension TriggerType {
     
     /// Provides a localized name for each trigger type.
     var name: String {
-        return NSLocalizedString("TrigerType_\(self.rawValue)", comment: "")
+        return NSLocalizedString("TriggerType_\(self.rawValue)", comment: "")
     }
 }
 
