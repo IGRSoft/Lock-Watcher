@@ -1,5 +1,5 @@
 //
-//  DispatchQueue+IGRExtension.swift
+//  DispatchQueue+Debounce
 //  IGR Software
 //
 //  Created by Vitalii Parovishnyk on 08.01.2022.
@@ -19,18 +19,20 @@ extension DispatchQueue {
     ///
     /// - Returns: A function that can be invoked to trigger the debounce behavior.
     func debounce(interval: DispatchTimeInterval, action: @escaping (() -> Void)) -> () -> Void {
-        {
-            let dispatchIn = DispatchTime.now() + interval
+        var lastTask: DispatchWorkItem? // Keep track of the last scheduled task
+        
+        return {
+            // Cancel the previous task if it exists
+            lastTask?.cancel()
             
-            self.asyncAfter(deadline: dispatchIn) {
-                // Ensure that the current time is greater than or equal to the specified interval.
-                // This check ensures that the action is only executed once after the interval.
-                if DispatchTime.now() >= dispatchIn {
-                    action()
-                }
-            }
+            // Create a new task
+            let task = DispatchWorkItem(block: action)
+            
+            // Schedule the new task
+            self.asyncAfter(deadline: DispatchTime.now() + interval, execute: task)
+            
+            // Update the reference to the last task
+            lastTask = task
         }
     }
 }
-
-

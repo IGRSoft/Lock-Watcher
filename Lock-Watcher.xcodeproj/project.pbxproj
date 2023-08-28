@@ -58,6 +58,15 @@
 		A57905D62A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */; };
 		A57905D92A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */; };
 		A57905DA2A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */; };
+		A57905DD2A9D15CA00647BF8 /* DateFormatterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905DC2A9D15CA00647BF8 /* DateFormatterTest.swift */; };
+		A57905DF2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905DE2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift */; };
+		A57905E12A9D1C9200647BF8 /* NSImageDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905E02A9D1C9200647BF8 /* NSImageDataTest.swift */; };
+		A57905E32A9D263700647BF8 /* NSImageSatusBarTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905E22A9D263700647BF8 /* NSImageSatusBarTest.swift */; };
+		A57905E52A9D281700647BF8 /* NSImageTextTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905E42A9D281700647BF8 /* NSImageTextTest.swift */; };
+		A57905E72A9D28CC00647BF8 /* StringRegexTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905E62A9D28CC00647BF8 /* StringRegexTest.swift */; };
+		A57905E92A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905E82A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift */; };
+		A57905EB2A9D309000647BF8 /* MockListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905EA2A9D309000647BF8 /* MockListener.swift */; };
+		A57905ED2A9D30FC00647BF8 /* ListenerProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905EC2A9D30FC00647BF8 /* ListenerProtocolTest.swift */; };
 		A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C22A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C42A4C7C6E004DE972 /* NSApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */; };
@@ -362,6 +371,15 @@
 		A57905D12A9BCD6800647BF8 /* AppDelegateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateModel.swift; sourceTree = "<group>"; };
 		A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAppDelegateModel.swift; sourceTree = "<group>"; };
 		A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorTest.swift; sourceTree = "<group>"; };
+		A57905DC2A9D15CA00647BF8 /* DateFormatterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterTest.swift; sourceTree = "<group>"; };
+		A57905DE2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueDebounceTest.swift; sourceTree = "<group>"; };
+		A57905E02A9D1C9200647BF8 /* NSImageDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageDataTest.swift; sourceTree = "<group>"; };
+		A57905E22A9D263700647BF8 /* NSImageSatusBarTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageSatusBarTest.swift; sourceTree = "<group>"; };
+		A57905E42A9D281700647BF8 /* NSImageTextTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageTextTest.swift; sourceTree = "<group>"; };
+		A57905E62A9D28CC00647BF8 /* StringRegexTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringRegexTest.swift; sourceTree = "<group>"; };
+		A57905E82A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultPropertyWrapperTest.swift; sourceTree = "<group>"; };
+		A57905EA2A9D309000647BF8 /* MockListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockListener.swift; sourceTree = "<group>"; };
+		A57905EC2A9D30FC00647BF8 /* ListenerProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerProtocolTest.swift; sourceTree = "<group>"; };
 		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A57FDCB126DB99B800954ED7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A58C63C02A4C5AF6004DE972 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -646,6 +664,7 @@
 				A57905C82A9614C900647BF8 /* MockDatabaseManager.swift */,
 				A57905CA2A96159E00647BF8 /* MockCoordinator.swift */,
 				A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */,
+				A57905EA2A9D309000647BF8 /* MockListener.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -656,6 +675,28 @@
 				A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		A57905DB2A9D154D00647BF8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A57905DC2A9D15CA00647BF8 /* DateFormatterTest.swift */,
+				A57905DE2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift */,
+				A57905E02A9D1C9200647BF8 /* NSImageDataTest.swift */,
+				A57905E22A9D263700647BF8 /* NSImageSatusBarTest.swift */,
+				A57905E42A9D281700647BF8 /* NSImageTextTest.swift */,
+				A57905E62A9D28CC00647BF8 /* StringRegexTest.swift */,
+				A57905E82A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A57905EE2A9D310600647BF8 /* Listeners */ = {
+			isa = PBXGroup;
+			children = (
+				A57905EC2A9D30FC00647BF8 /* ListenerProtocolTest.swift */,
+			);
+			path = Listeners;
 			sourceTree = "<group>";
 		};
 		A58C63C62A4CBCA0004DE972 /* Configurations */ = {
@@ -861,6 +902,8 @@
 		A5C6DC0325796A93009DE750 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A57905EE2A9D310600647BF8 /* Listeners */,
+				A57905DB2A9D154D00647BF8 /* Extensions */,
 				A57905D72A9BD6B800647BF8 /* Coordinator */,
 				A57905C52A96143700647BF8 /* Mocks */,
 				A57905BF2A960B7600647BF8 /* Application */,
@@ -1464,9 +1507,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A57905DF2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift in Sources */,
+				A57905E52A9D281700647BF8 /* NSImageTextTest.swift in Sources */,
+				A57905E72A9D28CC00647BF8 /* StringRegexTest.swift in Sources */,
+				A57905E32A9D263700647BF8 /* NSImageSatusBarTest.swift in Sources */,
 				A57905C72A96145300647BF8 /* MockThiefManager.swift in Sources */,
 				A57905C42A960C8300647BF8 /* AppCommonsTest.swift in Sources */,
+				A57905DD2A9D15CA00647BF8 /* DateFormatterTest.swift in Sources */,
+				A57905ED2A9D30FC00647BF8 /* ListenerProtocolTest.swift in Sources */,
+				A57905EB2A9D309000647BF8 /* MockListener.swift in Sources */,
+				A57905E12A9D1C9200647BF8 /* NSImageDataTest.swift in Sources */,
 				A57905CB2A96159E00647BF8 /* MockCoordinator.swift in Sources */,
+				A57905E92A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift in Sources */,
 				A57905C92A9614C900647BF8 /* MockDatabaseManager.swift in Sources */,
 				A57905CD2A96163900647BF8 /* MainAppTest.swift in Sources */,
 			);

@@ -18,8 +18,7 @@ extension NSImage {
     /// - Returns: Data representation of the image in JPEG format. If the conversion fails, it returns an empty Data instance.
     var jpegData: Data {
         // Convert the NSImage into TIFF representation.
-        guard let tiffData = self.tiffRepresentation,
-              let bitmap: NSBitmapImageRep = NSBitmapImageRep(data: tiffData) else {
+        guard let tiffData = tiffRepresentation, let bitmap: NSBitmapImageRep = NSBitmapImageRep(data: tiffData) else {
             // Return empty data if conversion to TIFF representation fails.
             return Data()
         }

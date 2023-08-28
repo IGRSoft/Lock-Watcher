@@ -38,7 +38,7 @@ class AppDelegateModelTests: XCTestCase {
         let validDropboxURLs = [validDropboxURL]
         model.stubbedCheckDropboxAuthResult = true
         XCTAssertTrue(model.checkDropboxAuth(urls: validDropboxURLs) == true)
-        XCTAssertTrue(validDropboxURLs == model.invokedCheckDropboxAuthParameters?.urls, "Expected to recognize valid Dropbox URL.")
+        XCTAssertTrue(validDropboxURLs == model.invokedCheckDropboxAuthParameters?.urls, "Expected to recognise valid Dropbox URL.")
     }
     
     func testCheckDropboxAuthWithURLs_invalid() {
@@ -51,7 +51,7 @@ class AppDelegateModelTests: XCTestCase {
         let invalidDropboxURLs = [invalidDropboxURL]
         model.stubbedCheckDropboxAuthResult = false
         XCTAssertTrue(model.checkDropboxAuth(urls: invalidDropboxURLs) == false)
-        XCTAssertTrue(validDropboxURLs != model.invokedCheckDropboxAuthParameters?.urls, "Expected to recognize valid Dropbox URL.")
+        XCTAssertTrue(validDropboxURLs != model.invokedCheckDropboxAuthParameters?.urls, "Expected to recognise valid Dropbox URL.")
     }
 }
 

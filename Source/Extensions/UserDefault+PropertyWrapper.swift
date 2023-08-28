@@ -1,5 +1,5 @@
 //
-//  PropertyWrapper.swift
+//  UserDefault+PropertyWrapper.swift
 //  IGR Software
 //
 //  Created by Vitalii Parovishnyk on 29.08.2021.
@@ -38,11 +38,11 @@ struct UserDefault<T: Codable> {
     ///   - key: The key under which the value is stored in UserDefaults.
     ///   - defaultValue: The default value to use if UserDefaults doesn't have a value for the specified key.
     ///
-    init(_ key: String, defaultValue: T) {
+    init(_ key: String, defaultValue: T, userDefaults: UserDefaults = UserDefaults.init(suiteName: Secrets.userDefaultsId)!) {
         self.key = key
         self.defaultValue = defaultValue
         
-        self.userDefaults = UserDefaults.init(suiteName: Secrets.userDefaultsId)!
+        self.userDefaults = userDefaults
     }
     
     /// The current value of the property.
