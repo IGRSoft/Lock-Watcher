@@ -20,7 +20,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
     //MARK: - Dependency injection
     
     /// Logger instance responsible for capturing and logging events or errors.
-    private var logger: Log
+    private var logger: LogProtocol
     
     //MARK: - Types
     
@@ -39,7 +39,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
     /// Initializes a new instance of the `DropboxNotifier`.
     ///
     /// - Parameter logger: An optional logger instance for capturing and logging events.
-    init(logger: Log = .init(category: .dropboxNotifier)) {
+    init(logger: LogProtocol = Log(category: .dropboxNotifier)) {
         self.logger = logger
     }
     

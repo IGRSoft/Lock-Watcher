@@ -24,14 +24,14 @@ public class FileSystemUtil: FileSystemUtilProtocol {
     //MARK: - Dependency Injection
     
     /// A logger instance for logging various events and errors.
-    private var logger: Log
+    private var logger: LogProtocol
     
     //MARK: - Initialiser
     
     /// Initializes a new `FileSystemUtil`.
     ///
     /// - Parameter logger: A logger instance. Defaults to a logger with the category `.fileSystem`.
-    init(logger: Log = Log(category: .fileSystem)) {
+    init(logger: LogProtocol = Log(category: .fileSystem)) {
         self.logger = logger
     }
     

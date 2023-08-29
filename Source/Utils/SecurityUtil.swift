@@ -26,8 +26,10 @@ public class SecurityUtil: SecurityUtilProtocol {
         let keychain = Keychain(service: Secrets.keychainId)
         let hashString = hashString(for: password)
         
-#warning("need call not in main thread")
-        keychain[Secrets.appKey] = hashString
+        //need call not in main thread
+        Task {
+            keychain[Secrets.appKey] = hashString
+        }
     }
     
     /// Validates if the given password matches the saved password hash in the keychain.

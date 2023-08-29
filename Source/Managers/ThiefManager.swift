@@ -46,7 +46,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     private(set) var settings: AppSettingsProtocol
     
-    private var logger: Log
+    private var logger: LogProtocol
     
     //MARK: - Variables
     
@@ -72,7 +72,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     //MARK: - initialiser
     
-    init(settings: AppSettingsProtocol, triggerManager: TriggerManagerProtocol = TriggerManager(), logger: Log = .init(category: .thiefManager), watchBlock: @escaping WatchBlock = { _ in }) {
+    init(settings: AppSettingsProtocol, triggerManager: TriggerManagerProtocol = TriggerManager(), logger: LogProtocol = Log(category: .thiefManager), watchBlock: @escaping WatchBlock = { _ in }) {
         self.settings = settings
         self.triggerManager = triggerManager
         self.watchBlock = watchBlock

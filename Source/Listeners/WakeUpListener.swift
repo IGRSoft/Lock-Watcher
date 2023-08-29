@@ -14,7 +14,7 @@ final class WakeUpListener: BaseListenerProtocol {
     //MARK: - Dependency injection
     
     /// Logger instance used for recording and debugging purposes.
-    private let logger: Log
+    private let logger: LogProtocol
     
     //MARK: - Variables
     
@@ -31,7 +31,7 @@ final class WakeUpListener: BaseListenerProtocol {
     
     /// Initializes a `WakeUpListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.wakeUpListener` category.
-    init(logger: Log = Log(category: .wakeUpListener)) {
+    init(logger:LogProtocol  = Log(category: .wakeUpListener)) {
         self.logger = logger
     }
     

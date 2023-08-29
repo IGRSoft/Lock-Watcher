@@ -16,14 +16,14 @@ final class NotificationNotifier: NotifierProtocol {
     //MARK: - Dependency injection
     
     /// A logger instance for logging various events and errors.
-    private var logger: Log
+    private var logger: LogProtocol
     
     //MARK: - Initialiser
     
     /// Initializes a new `NotificationNotifier`.
     ///
     /// - Parameter logger: A logger instance. Defaults to a logger with the category `.notificationNotifier`.
-    init(logger: Log = .init(category: .notificationNotifier)) {
+    init(logger: LogProtocol = Log(category: .notificationNotifier)) {
         self.logger = logger
     }
     

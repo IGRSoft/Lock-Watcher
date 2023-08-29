@@ -53,21 +53,18 @@ struct Log {
     init(category: Category) {
         logger = Logger(subsystem: Log.subsystem, category: category.rawValue)
     }
+}
+
+extension Log: LogProtocol {
     
-    /// Logs a debug message.
-    /// - Parameter message: The message to be logged.
     func debug(_ message: String) {
         logger.debug("\(message)")
     }
     
-    /// Logs an informational message.
-    /// - Parameter message: The message to be logged.
     func info(_ message: String) {
         logger.info("\(message)")
     }
     
-    /// Logs an error message.
-    /// - Parameter message: The message to be logged.
     func error(_ message: String) {
         logger.error("\(message)")
     }

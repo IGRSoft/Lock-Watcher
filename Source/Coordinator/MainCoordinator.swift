@@ -30,7 +30,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     private var isUnlocked = false
     
     /// Logger instance for this module.
-    private let logger: Log
+    private let logger: LogProtocol
     
     /// Popover displayed from the status bar icon.
     private lazy var mainPopover: NSPopover = {
@@ -58,7 +58,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     ///     - settings: Application settings.
     ///     - thiefManager: Manager related to unauthorized access.
     ///     - statusBarButton: Status bar button to toggle the main window.
-    init(logger: Log = Log(category: .coordinator), settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, statusBarButton: NSStatusBarButton) {
+    init(logger: LogProtocol = Log(category: .coordinator), settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, statusBarButton: NSStatusBarButton) {
         self.logger = logger
         self.settings = settings
         self.thiefManager = thiefManager

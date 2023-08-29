@@ -28,7 +28,7 @@ public class NetworkUtil: NetworkUtilProtocol {
     //MARK: - Dependency injection
     
     /// A logger instance for logging various events and errors.
-    private var logger: Log
+    private var logger: LogProtocol
     
     //MARK: - Variables
     
@@ -40,7 +40,7 @@ public class NetworkUtil: NetworkUtilProtocol {
     /// Initializes a new `NetworkUtil`.
     ///
     /// - Parameter logger: A logger instance. Defaults to a logger with the category `.networkUtil`.
-    init(logger: Log = .init(category: .networkUtil)) {
+    init(logger: LogProtocol = Log(category: .networkUtil)) {
         self.logger = logger
     }
     

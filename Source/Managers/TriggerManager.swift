@@ -26,7 +26,7 @@ final class TriggerManager: TriggerManagerProtocol {
     private var settings: AppSettingsProtocol?
     
     /// Logger for module
-    private var logger: Log
+    private var logger: LogProtocol
     
     /// A closure that takes a listener and a boolean flag to determine if the listener should run or not.
     var runListener: ((BaseListenerProtocol, Bool) -> ())?
@@ -47,7 +47,7 @@ final class TriggerManager: TriggerManagerProtocol {
     }()
     
     /// Initializer that configures the logger.
-    init(logger: Log = .init(category: .triggerManager)) {
+    init(logger: LogProtocol = Log(category: .triggerManager)) {
         self.logger = logger
     }
     

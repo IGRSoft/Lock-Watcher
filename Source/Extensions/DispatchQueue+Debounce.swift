@@ -17,7 +17,7 @@ extension DispatchQueue {
     ///   - interval: The duration to wait before executing the action. Can be in seconds, milliseconds, microseconds, or nanoseconds.
     ///   - action: The action/closure to execute after the debounce interval.
     ///
-    /// - Returns: A function that can be invoked to trigger the debounce behavior.
+    /// - Returns: A function that can be invoked to trigger the debounce behaviour.
     func debounce(interval: DispatchTimeInterval, action: @escaping (() -> Void)) -> () -> Void {
         var lastTask: DispatchWorkItem? // Keep track of the last scheduled task
         

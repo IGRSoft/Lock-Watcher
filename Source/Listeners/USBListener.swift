@@ -14,7 +14,7 @@ final class USBListener: BaseListenerProtocol {
     //MARK: - Dependency injection
     
     /// Logger instance used for recording and debugging.
-    private let logger: Log
+    private let logger: LogProtocol
     
     //MARK: - Variables
     
@@ -31,7 +31,7 @@ final class USBListener: BaseListenerProtocol {
     
     /// Initializes a `USBListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.usbListener` category.
-    init(logger: Log = Log(category: .usbListener)) {
+    init(logger: LogProtocol = Log(category: .usbListener)) {
         self.logger = logger
     }
     

@@ -67,6 +67,9 @@
 		A57905E92A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905E82A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift */; };
 		A57905EB2A9D309000647BF8 /* MockListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905EA2A9D309000647BF8 /* MockListener.swift */; };
 		A57905ED2A9D30FC00647BF8 /* ListenerProtocolTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905EC2A9D30FC00647BF8 /* ListenerProtocolTest.swift */; };
+		A57905F02A9E52AE00647BF8 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905EF2A9E52AE00647BF8 /* LoggerProtocol.swift */; };
+		A57905F12A9E52AE00647BF8 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905EF2A9E52AE00647BF8 /* LoggerProtocol.swift */; };
+		A57905F42A9E791D00647BF8 /* LoggerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F32A9E791D00647BF8 /* LoggerTest.swift */; };
 		A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C22A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C42A4C7C6E004DE972 /* NSApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */; };
@@ -380,6 +383,8 @@
 		A57905E82A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultPropertyWrapperTest.swift; sourceTree = "<group>"; };
 		A57905EA2A9D309000647BF8 /* MockListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockListener.swift; sourceTree = "<group>"; };
 		A57905EC2A9D30FC00647BF8 /* ListenerProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerProtocolTest.swift; sourceTree = "<group>"; };
+		A57905EF2A9E52AE00647BF8 /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
+		A57905F32A9E791D00647BF8 /* LoggerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTest.swift; sourceTree = "<group>"; };
 		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A57FDCB126DB99B800954ED7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A58C63C02A4C5AF6004DE972 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -699,6 +704,14 @@
 			path = Listeners;
 			sourceTree = "<group>";
 		};
+		A57905F22A9E790B00647BF8 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				A57905F32A9E791D00647BF8 /* LoggerTest.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
 		A58C63C62A4CBCA0004DE972 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -755,6 +768,7 @@
 			isa = PBXGroup;
 			children = (
 				A58C63FA2A4D5B8B004DE972 /* Logger.swift */,
+				A57905EF2A9E52AE00647BF8 /* LoggerProtocol.swift */,
 			);
 			path = Logger;
 			sourceTree = "<group>";
@@ -902,6 +916,7 @@
 		A5C6DC0325796A93009DE750 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A57905F22A9E790B00647BF8 /* Logger */,
 				A57905EE2A9D310600647BF8 /* Listeners */,
 				A57905DB2A9D154D00647BF8 /* Extensions */,
 				A57905D72A9BD6B800647BF8 /* Coordinator */,
@@ -1381,6 +1396,7 @@
 				A5A252132A4E18FD00889F5C /* NSApplication+Dock.swift in Sources */,
 				A5F4B5432836C0D1001A2413 /* ExtendedDivider.swift in Sources */,
 				A5A2520D2A4E0B6900889F5C /* NSImage+SatusBar.swift in Sources */,
+				A57905F12A9E52AE00647BF8 /* LoggerProtocol.swift in Sources */,
 				A58FC73526E2814E007674F6 /* PowerListener.swift in Sources */,
 				A58FC73626E2814E007674F6 /* TriggerManager.swift in Sources */,
 				A58FC73726E2814E007674F6 /* NSImage+Text.swift in Sources */,
@@ -1462,6 +1478,7 @@
 				A5A252122A4E18FD00889F5C /* NSApplication+Dock.swift in Sources */,
 				A5F4B5422836C0D1001A2413 /* ExtendedDivider.swift in Sources */,
 				A5A2520C2A4E0B6900889F5C /* NSImage+SatusBar.swift in Sources */,
+				A57905F02A9E52AE00647BF8 /* LoggerProtocol.swift in Sources */,
 				A5EFE8B826E2B587001FC4EA /* Date+Formatter.swift in Sources */,
 				A541188127649FC4007C6AB8 /* MailNotifier.swift in Sources */,
 				A5457A8C26C1FB1400386738 /* NSImage+Text.swift in Sources */,
@@ -1510,6 +1527,7 @@
 				A57905DF2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift in Sources */,
 				A57905E52A9D281700647BF8 /* NSImageTextTest.swift in Sources */,
 				A57905E72A9D28CC00647BF8 /* StringRegexTest.swift in Sources */,
+				A57905F42A9E791D00647BF8 /* LoggerTest.swift in Sources */,
 				A57905E32A9D263700647BF8 /* NSImageSatusBarTest.swift in Sources */,
 				A57905C72A96145300647BF8 /* MockThiefManager.swift in Sources */,
 				A57905C42A960C8300647BF8 /* AppCommonsTest.swift in Sources */,

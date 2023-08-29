@@ -18,7 +18,7 @@ final class MailNotifier: NotifierProtocol {
     //MARK: - Dependency injection
     
     /// Logger instance responsible for capturing and logging events or errors.
-    private var logger: Log
+    private var logger: LogProtocol
     
     //MARK: - Variables
     
@@ -59,7 +59,7 @@ final class MailNotifier: NotifierProtocol {
     /// Initializes a new instance of the `MailNotifier` with the provided logger or a default logger.
     ///
     /// - Parameter logger: An optional logger instance for capturing and logging events.
-    init(logger: Log = .init(category: .mailNotifier)) {
+    init(logger: LogProtocol = Log(category: .mailNotifier)) {
         self.logger = logger
     }
     

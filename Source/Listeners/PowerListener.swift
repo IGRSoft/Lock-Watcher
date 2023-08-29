@@ -22,7 +22,7 @@ final class PowerListener: BaseListenerProtocol {
     //MARK: - Dependency injection
     
     /// Logger used for recording and debugging.
-    private let logger: Log
+    private let logger: LogProtocol
     
     //MARK: - Variables
     
@@ -67,7 +67,7 @@ final class PowerListener: BaseListenerProtocol {
     
     /// Initializes a `PowerListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.powerListener` category.
-    init(logger: Log = Log(category: .powerListener)) {
+    init(logger: LogProtocol = Log(category: .powerListener)) {
         self.logger = logger
     }
     

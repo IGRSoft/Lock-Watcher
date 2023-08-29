@@ -17,7 +17,7 @@ final class iCloudNotifier: NotifierProtocol {
     //MARK: - Dependency injection
     
     /// Logger instance responsible for capturing and logging events or errors.
-    private var logger: Log
+    private var logger: LogProtocol
     
     //MARK: - Variables
     
@@ -30,7 +30,7 @@ final class iCloudNotifier: NotifierProtocol {
     /// Initializes a new instance of the `iCloudNotifier` with the provided logger or a default logger.
     ///
     /// - Parameter logger: An optional logger instance for capturing and logging events.
-    init(logger: Log = .init(category: .iCloudNotifier)) {
+    init(logger: LogProtocol = Log(category: .iCloudNotifier)) {
         self.logger = logger
     }
     

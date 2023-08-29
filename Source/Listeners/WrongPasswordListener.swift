@@ -15,7 +15,7 @@ final class WrongPasswordListener: BaseListenerProtocol {
     //MARK: - Dependency injection
     
     /// Logger instance for recording and debugging.
-    private let logger: Log
+    private let logger: LogProtocol
     
     //MARK: - Variables
     
@@ -67,7 +67,7 @@ final class WrongPasswordListener: BaseListenerProtocol {
     
     /// Initializes a `WrongPasswordListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.wrongPasswordListener` category.
-    init(logger: Log = Log(category: .wrongPasswordListener)) {
+    init(logger: LogProtocol = Log(category: .wrongPasswordListener)) {
         self.logger = logger
     }
     

@@ -15,7 +15,7 @@ final class LoginListener: BaseListenerProtocol {
     //MARK: - Dependency injection
     
     /// Logger used to record information related to the Login Listener's behavior.
-    private let logger: Log
+    private let logger: LogProtocol
     
     //MARK: - Variables
     
@@ -43,7 +43,7 @@ final class LoginListener: BaseListenerProtocol {
     
     /// Initializes a new Login Listener with an optional logger.
     /// - Parameter logger: An instance of `Log`, defaults to `.loginListener`.
-    init(logger: Log = Log(category: .loginListener)) {
+    init(logger: LogProtocol = Log(category: .loginListener)) {
         self.logger = logger
     }
     
