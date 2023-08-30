@@ -39,7 +39,7 @@ final class AppDelegateModel: AppDelegateModelProtocol {
             fatalError("Impossible to construct main coordinator, status bar button is missing.")
         }
         
-        return MainCoordinator(settings: settings, thiefManager: thiefManager, statusBarButton: button)
+        return MainCoordinator(settings: settings, thiefManager: thiefManager, statusBarButton: button, securityUtil: SecurityUtil())
     }()
     
     /// Represents the view model for application settings.

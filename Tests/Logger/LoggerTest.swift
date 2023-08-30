@@ -9,24 +9,6 @@
 import XCTest
 @testable import Lock_Watcher
 
-class LogMock: LogProtocol {
-    var debugMessage: String?
-    var infoMessage: String?
-    var errorMessage: String?
-    
-    func debug(_ message: String) {
-        debugMessage = message
-    }
-    
-    func info(_ message: String) {
-        infoMessage = message
-    }
-    
-    func error(_ message: String) {
-        errorMessage = message
-    }
-}
-
 class SomeClassThatUsesLog {
     let log: LogProtocol
     

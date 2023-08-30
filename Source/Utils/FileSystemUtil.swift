@@ -24,14 +24,18 @@ public class FileSystemUtil: FileSystemUtilProtocol {
     //MARK: - Dependency Injection
     
     /// A logger instance for logging various events and errors.
-    private var logger: LogProtocol
+    private let logger: LogProtocol
+    
+    /// A name of folder in Documents directory
+    private let dirName: String
     
     //MARK: - Initialiser
     
     /// Initializes a new `FileSystemUtil`.
     ///
     /// - Parameter logger: A logger instance. Defaults to a logger with the category `.fileSystem`.
-    init(logger: LogProtocol = Log(category: .fileSystem)) {
+    init(dirName: String = "Lock-Watcher", logger: LogProtocol = Log(category: .fileSystem)) {
+        self.dirName = dirName
         self.logger = logger
     }
     
@@ -44,13 +48,19 @@ public class FileSystemUtil: FileSystemUtilProtocol {
     ///   - key: A unique identifier for the image. This is used to name the jpeg file.
     /// - Returns: The URL where the image is stored, or nil if there was an error.
     func store(image: NSImage, forKey key: String) -> URL? {
+        let data = image.jpegData
+        
+        guard !data.isEmpty else {
+            logger.debug("error saving empty data for key: \(key)")
+            return nil
+        }
+        
         if let filePath = filePath(forKey: key) {
             do {
-                let data = image.jpegData
                 try data.write(to: filePath)
             }
             catch {
-                logger.debug("error saving: \(error.localizedDescription)")
+                logger.debug("error saving: \(error.localizedDescription)\n for key: \(key)")
                 return nil
             }
             
@@ -68,15 +78,16 @@ public class FileSystemUtil: FileSystemUtilProtocol {
     /// - Returns: The URL for the jpeg file, or nil if there was an error.
     private func filePath(forKey key: String) -> URL? {
         let fileManager = FileManager.default
-        guard var documentURL = fileManager.urls(for: .documentDirectory,
-                                                 in: FileManager.SearchPathDomainMask.userDomainMask).first else { return nil }
+        guard let documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
         
-        documentURL = documentURL.appendingPathComponent("Lock-Watcher")
+        let dirURL = documentURL.appendingPathComponent(dirName)
         
         // Create the "Lock-Watcher" directory if it doesn't exist.
-        if fileManager.fileExists(atPath: documentURL.path) == false {
+        if fileManager.fileExists(atPath: dirURL.path) == false {
             do {
-                try fileManager.createDirectory(at: documentURL, withIntermediateDirectories: true)
+                try fileManager.createDirectory(at: dirURL, withIntermediateDirectories: true)
             }
             catch {
                 logger.debug("error saving: \(error.localizedDescription)")
@@ -85,6 +96,6 @@ public class FileSystemUtil: FileSystemUtilProtocol {
         }
         
         // Return the full file path for the jpeg image.
-        return documentURL.appendingPathComponent(key, conformingTo: .jpeg)
+        return dirURL.appendingPathComponent(key, conformingTo: .jpeg)
     }
 }

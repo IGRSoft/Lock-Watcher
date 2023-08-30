@@ -18,6 +18,8 @@ struct ProtectionView: View {
     /// A state to manage the value of the password entered by the user.
     @State var password : String = ""
     
+    var securityUtil: SecurityUtilProtocol
+    
     /// The body of the view, containing a toggle to enable/disable protection, a secure field for password input, and a button to set the password.
     var body: some View {
         HStack(spacing: ViewConstants.spacing, content: {
@@ -33,7 +35,7 @@ struct ProtectionView: View {
             
             // A button that allows the user to set the entered password.
             Button("ButtonSet") {
-                SecurityUtil.save(password: password)
+                securityUtil.save(password: password)
                 password = "" // Clear the password field after saving.
             }
             // Disable the set button if protection is turned off or password field is empty.
@@ -46,9 +48,9 @@ struct ProtectionView: View {
 struct ProtectionView_Previews: PreviewProvider {
     static var previews: some View {
         // Preview with protection enabled.
-        ProtectionView(isProtectionEnable: .constant(true))
+        ProtectionView(isProtectionEnable: .constant(true), securityUtil: SecurityUtil.preview)
         
         // Preview with protection disabled.
-        ProtectionView(isProtectionEnable: .constant(false))
+        ProtectionView(isProtectionEnable: .constant(false), securityUtil: SecurityUtil.preview)
     }
 }

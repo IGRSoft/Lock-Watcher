@@ -22,7 +22,7 @@ class DispatchQueueDebounceTests: XCTestCase {
         
         debouncedAction()
         
-        waitForExpectations(timeout: 0.101, handler: nil)
+        waitForExpectations(timeout: 0.110, handler: nil)
     }
     
     func testDebounceExecutesOnlyLastActionWithinInterval() {

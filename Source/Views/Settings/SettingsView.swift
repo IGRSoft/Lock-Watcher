@@ -24,8 +24,8 @@ struct SettingsView: View {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading, spacing: ViewConstants.spacing) {
                         LaunchAtLoginView()
-                        
-                        ProtectionView(isProtectionEnable: viewModel.isProtected)
+                        #warning("replace to read from viewmodel")
+                        ProtectionView(isProtectionEnable: viewModel.isProtected, securityUtil: SecurityUtil())
                     }.extended(viewModel.isSecurityInfoExpand, titleKey: "SettingsMenuSecurity")
                 }
                 
@@ -44,7 +44,7 @@ struct SettingsView: View {
                                 viewModel.restartWatching()
                             })
                     }
-                    if DeviceUtil.device() == .laptop {
+                    if DeviceUtil().device() == .laptop {
                         UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: viewModel.isUseSnapshotOnSwitchToBatteryPower)
                             .onChange(of: viewModel.isUseSnapshotOnSwitchToBatteryPower.wrappedValue, perform: { value in
                                 viewModel.restartWatching()

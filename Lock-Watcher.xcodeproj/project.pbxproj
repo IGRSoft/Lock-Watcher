@@ -70,6 +70,10 @@
 		A57905F02A9E52AE00647BF8 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905EF2A9E52AE00647BF8 /* LoggerProtocol.swift */; };
 		A57905F12A9E52AE00647BF8 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905EF2A9E52AE00647BF8 /* LoggerProtocol.swift */; };
 		A57905F42A9E791D00647BF8 /* LoggerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F32A9E791D00647BF8 /* LoggerTest.swift */; };
+		A57905F72A9FAB3E00647BF8 /* FileSystemTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F62A9FAB3E00647BF8 /* FileSystemTest.swift */; };
+		A57905F92A9FAB9E00647BF8 /* MockLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F82A9FAB9E00647BF8 /* MockLog.swift */; };
+		A57905FB2A9FB0A300647BF8 /* NetworkUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905FA2A9FB0A300647BF8 /* NetworkUtilTests.swift */; };
+		A57905FD2A9FBF5400647BF8 /* SecurityUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905FC2A9FBF5300647BF8 /* SecurityUtilTest.swift */; };
 		A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C22A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C42A4C7C6E004DE972 /* NSApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */; };
@@ -198,6 +202,8 @@
 		A5AA31E92778D6E600A064B6 /* InfoViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AA31E72778D6E600A064B6 /* InfoViews.swift */; };
 		A5ACC7C727835BF800999CF0 /* NetworkUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */; };
 		A5ACC7C827835BF800999CF0 /* NetworkUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */; };
+		A5BAB76A2A9FCAA6005A0C88 /* DeviceUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BAB7692A9FCAA6005A0C88 /* DeviceUtilTests.swift */; };
+		A5BAB76C2A9FCB06005A0C88 /* MockDeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BAB76B2A9FCB06005A0C88 /* MockDeviceUtil.swift */; };
 		A5BC810C2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
 		A5BC810D2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
 		A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */; };
@@ -385,6 +391,10 @@
 		A57905EC2A9D30FC00647BF8 /* ListenerProtocolTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerProtocolTest.swift; sourceTree = "<group>"; };
 		A57905EF2A9E52AE00647BF8 /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
 		A57905F32A9E791D00647BF8 /* LoggerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTest.swift; sourceTree = "<group>"; };
+		A57905F62A9FAB3E00647BF8 /* FileSystemTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemTest.swift; sourceTree = "<group>"; };
+		A57905F82A9FAB9E00647BF8 /* MockLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLog.swift; sourceTree = "<group>"; };
+		A57905FA2A9FB0A300647BF8 /* NetworkUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtilTests.swift; sourceTree = "<group>"; };
+		A57905FC2A9FBF5300647BF8 /* SecurityUtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityUtilTest.swift; sourceTree = "<group>"; };
 		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A57FDCB126DB99B800954ED7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A58C63C02A4C5AF6004DE972 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -436,6 +446,8 @@
 		A5AA31E12778D64400A064B6 /* SaveSnapshotViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveSnapshotViews.swift; sourceTree = "<group>"; };
 		A5AA31E72778D6E600A064B6 /* InfoViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViews.swift; sourceTree = "<group>"; };
 		A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtil.swift; sourceTree = "<group>"; };
+		A5BAB7692A9FCAA6005A0C88 /* DeviceUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceUtilTests.swift; sourceTree = "<group>"; };
+		A5BAB76B2A9FCB06005A0C88 /* MockDeviceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeviceUtil.swift; sourceTree = "<group>"; };
 		A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudNotifier.swift; sourceTree = "<group>"; };
 		A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -670,6 +682,8 @@
 				A57905CA2A96159E00647BF8 /* MockCoordinator.swift */,
 				A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */,
 				A57905EA2A9D309000647BF8 /* MockListener.swift */,
+				A57905F82A9FAB9E00647BF8 /* MockLog.swift */,
+				A5BAB76B2A9FCB06005A0C88 /* MockDeviceUtil.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -710,6 +724,17 @@
 				A57905F32A9E791D00647BF8 /* LoggerTest.swift */,
 			);
 			path = Logger;
+			sourceTree = "<group>";
+		};
+		A57905F52A9FAB2D00647BF8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A57905F62A9FAB3E00647BF8 /* FileSystemTest.swift */,
+				A57905FA2A9FB0A300647BF8 /* NetworkUtilTests.swift */,
+				A57905FC2A9FBF5300647BF8 /* SecurityUtilTest.swift */,
+				A5BAB7692A9FCAA6005A0C88 /* DeviceUtilTests.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		A58C63C62A4CBCA0004DE972 /* Configurations */ = {
@@ -916,6 +941,7 @@
 		A5C6DC0325796A93009DE750 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				A57905F52A9FAB2D00647BF8 /* Utils */,
 				A57905F22A9E790B00647BF8 /* Logger */,
 				A57905EE2A9D310600647BF8 /* Listeners */,
 				A57905DB2A9D154D00647BF8 /* Extensions */,
@@ -1526,10 +1552,15 @@
 			files = (
 				A57905DF2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift in Sources */,
 				A57905E52A9D281700647BF8 /* NSImageTextTest.swift in Sources */,
+				A57905FB2A9FB0A300647BF8 /* NetworkUtilTests.swift in Sources */,
 				A57905E72A9D28CC00647BF8 /* StringRegexTest.swift in Sources */,
 				A57905F42A9E791D00647BF8 /* LoggerTest.swift in Sources */,
+				A5BAB76A2A9FCAA6005A0C88 /* DeviceUtilTests.swift in Sources */,
 				A57905E32A9D263700647BF8 /* NSImageSatusBarTest.swift in Sources */,
+				A57905F92A9FAB9E00647BF8 /* MockLog.swift in Sources */,
 				A57905C72A96145300647BF8 /* MockThiefManager.swift in Sources */,
+				A57905F72A9FAB3E00647BF8 /* FileSystemTest.swift in Sources */,
+				A5BAB76C2A9FCB06005A0C88 /* MockDeviceUtil.swift in Sources */,
 				A57905C42A960C8300647BF8 /* AppCommonsTest.swift in Sources */,
 				A57905DD2A9D15CA00647BF8 /* DateFormatterTest.swift in Sources */,
 				A57905ED2A9D30FC00647BF8 /* ListenerProtocolTest.swift in Sources */,
@@ -1539,6 +1570,7 @@
 				A57905E92A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift in Sources */,
 				A57905C92A9614C900647BF8 /* MockDatabaseManager.swift in Sources */,
 				A57905CD2A96163900647BF8 /* MainAppTest.swift in Sources */,
+				A57905FD2A9FBF5400647BF8 /* SecurityUtilTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

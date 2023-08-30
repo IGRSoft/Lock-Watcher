@@ -9,21 +9,26 @@
 import Foundation
 import Darwin.sys.sysctl
 
+/// Enumeration of supported device types.
+enum Devices {
+    /// Represents macOS laptop devices (like MacBook, MacBook Pro, and MacBook Air).
+    case laptop
+    /// Represents non-laptop macOS devices (like iMac, Mac Mini, etc.).
+    case nonLaptop
+}
+
+protocol DeviceUtilProtocol {
+    
+    /// Fetches the device type based on the hardware model.
+    func device() -> Devices
+}
+
 /// `DeviceUtil` is a utility class that helps identify the type of macOS device.
-public class DeviceUtil {
-    
-    /// Enumeration of supported device types.
-    enum Devices {
-        /// Represents macOS laptop devices (like MacBook, MacBook Pro, and MacBook Air).
-        case laptop
-        /// Represents non-laptop macOS devices (like iMac, Mac Mini, etc.).
-        case nonLaptop
-    }
-    
+public class DeviceUtil: DeviceUtilProtocol {
     /// Fetches the device type based on the hardware model.
     ///
     /// - Returns: A `Devices` enumeration value representing the type of the device.
-    static func device() -> Devices {
+    func device() -> Devices {
         var size: size_t = 0
         let name = "hw.model"
         

@@ -52,7 +52,7 @@ class UserDefaultTests: XCTestCase {
     // 3. Test if the getter correctly retrieves and decodes a value.
     func testGetter() {
         let userDefaults = MockUserDefaults(suiteName: Secrets.userDefaultsId)!
-        var wrapper = UserDefault<Int>("testKey", defaultValue: 5, userDefaults: userDefaults)
+        let wrapper = UserDefault<Int>("testKey", defaultValue: 5, userDefaults: userDefaults)
         
         let data = try! JSONEncoder().encode(20)
         userDefaults.set(data, forKey: "testKey")
@@ -63,7 +63,7 @@ class UserDefaultTests: XCTestCase {
     // 4. Test for non-encodable/decodable values.
     func testNonEncodableValue() {
         let userDefaults = MockUserDefaults(suiteName: Secrets.userDefaultsId)!
-        var wrapper = UserDefault<String>("testKey", defaultValue: "default", userDefaults: userDefaults)
+        let wrapper = UserDefault<String>("testKey", defaultValue: "default", userDefaults: userDefaults)
         
         userDefaults.set(10, forKey: "testKey")
         

@@ -18,6 +18,9 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     /// Configuration settings for the application.
     private var settings: AppSettingsProtocol
     
+    /// securityUtil to manage user password
+    private var securityUtil: SecurityUtilProtocol
+    
     /// Likely manages data or tasks related to unauthorized access.
     private var thiefManager: ThiefManagerProtocol
     
@@ -58,11 +61,12 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     ///     - settings: Application settings.
     ///     - thiefManager: Manager related to unauthorized access.
     ///     - statusBarButton: Status bar button to toggle the main window.
-    init(logger: LogProtocol = Log(category: .coordinator), settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, statusBarButton: NSStatusBarButton) {
+    init(logger: LogProtocol = Log(category: .coordinator), settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, statusBarButton: NSStatusBarButton, securityUtil: SecurityUtilProtocol) {
         self.logger = logger
         self.settings = settings
         self.thiefManager = thiefManager
         self.statusBarButton = statusBarButton
+        self.securityUtil = securityUtil
     }
     
     //MARK: - Public Functions
@@ -131,7 +135,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     /// - Parameter completion: A closure that receives a boolean indicating if the user is authenticated.
     private func showSecurityAccessAlert(completion: Commons.BoolClosure) {
         var isValid = true
-        if settings.options.isProtected && SecurityUtil.hasPassword() {
+        if settings.options.isProtected && securityUtil.hasPassword() {
             let alert = NSAlert()
             alert.messageText = NSLocalizedString("EnterPassword", comment: "")
             alert.addButton(withTitle: NSLocalizedString("ButtonOk", comment: ""))
@@ -141,7 +145,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
             let inputTextField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
             alert.accessoryView = inputTextField
             if alert.runModal() == .OK {
-                isValid = SecurityUtil.isValid(password: inputTextField.stringValue)
+                isValid = securityUtil.isValid(password: inputTextField.stringValue)
             }
         }
         
