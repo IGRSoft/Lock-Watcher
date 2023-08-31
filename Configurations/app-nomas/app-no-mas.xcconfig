@@ -14,7 +14,7 @@ INFOPLIST_FILE = Resources/Info.plist
 PRODUCT_BUNDLE_IDENTIFIER = $(APP_DOMAIN).$(APP_NAME)
 
 //Signing
-CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements
+CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher-non-mas.entitlements
 ENABLE_HARDENED_RUNTIME = YES
 
 //Deployment
@@ -27,3 +27,6 @@ ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
 
 //Localization
 SWIFT_EMIT_LOC_STRINGS = YES
+
+//Swift Compiler - Custom Flags
+OTHER_SWIFT_FLAGS = -DNON_MAS_CONFIG

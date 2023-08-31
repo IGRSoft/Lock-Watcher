@@ -204,6 +204,12 @@
 		A5ACC7C827835BF800999CF0 /* NetworkUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */; };
 		A5BAB76A2A9FCAA6005A0C88 /* DeviceUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BAB7692A9FCAA6005A0C88 /* DeviceUtilTests.swift */; };
 		A5BAB76C2A9FCB06005A0C88 /* MockDeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BAB76B2A9FCB06005A0C88 /* MockDeviceUtil.swift */; };
+		A5BAB7712AA089E2005A0C88 /* app-no-mas-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */; };
+		A5BAB7722AA089E2005A0C88 /* app-no-mas.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB76E2AA089D6005A0C88 /* app-no-mas.xcconfig */; };
+		A5BAB7732AA089E2005A0C88 /* app-no-mas-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */; };
+		A5BAB7742AA089E3005A0C88 /* app-no-mas-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */; };
+		A5BAB7752AA089E3005A0C88 /* app-no-mas.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB76E2AA089D6005A0C88 /* app-no-mas.xcconfig */; };
+		A5BAB7762AA089E3005A0C88 /* app-no-mas-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */; };
 		A5BC810C2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
 		A5BC810D2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
 		A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */; };
@@ -448,6 +454,9 @@
 		A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtil.swift; sourceTree = "<group>"; };
 		A5BAB7692A9FCAA6005A0C88 /* DeviceUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceUtilTests.swift; sourceTree = "<group>"; };
 		A5BAB76B2A9FCB06005A0C88 /* MockDeviceUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDeviceUtil.swift; sourceTree = "<group>"; };
+		A5BAB76E2AA089D6005A0C88 /* app-no-mas.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "app-no-mas.xcconfig"; sourceTree = "<group>"; };
+		A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "app-no-mas-debug.xcconfig"; sourceTree = "<group>"; };
+		A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "app-no-mas-release.xcconfig"; sourceTree = "<group>"; };
 		A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudNotifier.swift; sourceTree = "<group>"; };
 		A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -740,6 +749,7 @@
 		A58C63C62A4CBCA0004DE972 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				A5BAB76D2AA089D6005A0C88 /* app-nomas */,
 				A58C63C72A4CBCA0004DE972 /* app */,
 				A58C63CB2A4CBCA0004DE972 /* tests */,
 				A58C63D22A4CBCA0004DE972 /* debug.xcconfig */,
@@ -889,6 +899,16 @@
 				A5E49CC72A52FA1100C3740B /* ViewProtocols.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A5BAB76D2AA089D6005A0C88 /* app-nomas */ = {
+			isa = PBXGroup;
+			children = (
+				A5BAB76E2AA089D6005A0C88 /* app-no-mas.xcconfig */,
+				A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */,
+				A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */,
+			);
+			path = "app-nomas";
 			sourceTree = "<group>";
 		};
 		A5C6DBE525796A90009DE750 = {
@@ -1260,6 +1280,7 @@
 			files = (
 				A58C63ED2A4CBCA0004DE972 /* base.xcconfig in Resources */,
 				A58C63E32A4CBCA0004DE972 /* test.xcconfig in Resources */,
+				A5BAB7762AA089E3005A0C88 /* app-no-mas-debug.xcconfig in Resources */,
 				A58C63E12A4CBCA0004DE972 /* uitest.xcconfig in Resources */,
 				A58C63EB2A4CBCA0004DE972 /* release.xcconfig in Resources */,
 				A58C63E72A4CBCA0004DE972 /* test-debug.xcconfig in Resources */,
@@ -1270,9 +1291,11 @@
 				A58C63D92A4CBCA0004DE972 /* app-debug.xcconfig in Resources */,
 				A58C63E52A4CBCA0004DE972 /* uitest-release.xcconfig in Resources */,
 				A58C63DB2A4CBCA0004DE972 /* app-release.xcconfig in Resources */,
+				A5BAB7752AA089E3005A0C88 /* app-no-mas.xcconfig in Resources */,
 				A58C63E92A4CBCA0004DE972 /* debug.xcconfig in Resources */,
 				A58C63DD2A4CBCA0004DE972 /* test-release.xcconfig in Resources */,
 				A58C63DF2A4CBCA0004DE972 /* uitest-debug.xcconfig in Resources */,
+				A5BAB7742AA089E3005A0C88 /* app-no-mas-release.xcconfig in Resources */,
 				A599EB3527AB1BF0003A69B5 /* policy.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1283,6 +1306,7 @@
 			files = (
 				A58C63EC2A4CBCA0004DE972 /* base.xcconfig in Resources */,
 				A58C63E22A4CBCA0004DE972 /* test.xcconfig in Resources */,
+				A5BAB7732AA089E2005A0C88 /* app-no-mas-debug.xcconfig in Resources */,
 				A58C63E02A4CBCA0004DE972 /* uitest.xcconfig in Resources */,
 				A58C63EA2A4CBCA0004DE972 /* release.xcconfig in Resources */,
 				A58C63E62A4CBCA0004DE972 /* test-debug.xcconfig in Resources */,
@@ -1293,9 +1317,11 @@
 				A58C63D82A4CBCA0004DE972 /* app-debug.xcconfig in Resources */,
 				A58C63E42A4CBCA0004DE972 /* uitest-release.xcconfig in Resources */,
 				A58C63DA2A4CBCA0004DE972 /* app-release.xcconfig in Resources */,
+				A5BAB7722AA089E2005A0C88 /* app-no-mas.xcconfig in Resources */,
 				A58C63E82A4CBCA0004DE972 /* debug.xcconfig in Resources */,
 				A58C63DC2A4CBCA0004DE972 /* test-release.xcconfig in Resources */,
 				A58C63DE2A4CBCA0004DE972 /* uitest-debug.xcconfig in Resources */,
+				A5BAB7712AA089E2005A0C88 /* app-no-mas-release.xcconfig in Resources */,
 				A599EB3427AB1BF0003A69B5 /* policy.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1694,19 +1720,15 @@
 		};
 		A58FC75126E2814E007674F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */;
+			baseConfigurationReference = A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/Lock_Watcher-non-mas.entitlements";
-				OTHER_SWIFT_FLAGS = "-D NON_MAS_CONFIG";
 			};
 			name = Debug;
 		};
 		A58FC75226E2814E007674F6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
+			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/Lock_Watcher-non-mas.entitlements";
-				OTHER_SWIFT_FLAGS = "-D NON_MAS_CONFIG";
 			};
 			name = Release;
 		};
@@ -1721,7 +1743,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements;
 			};
 			name = "Release-non-mas";
 		};
@@ -1773,10 +1794,8 @@
 		};
 		A58FC76226E2826D007674F6 /* Release-non-mas */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
+			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/Lock_Watcher-non-mas.entitlements";
-				OTHER_SWIFT_FLAGS = "-D NON_MAS_CONFIG";
 			};
 			name = "Release-non-mas";
 		};
@@ -1798,7 +1817,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements;
 			};
 			name = Debug;
 		};
@@ -1806,7 +1824,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/Lock_Watcher.entitlements;
 			};
 			name = Release;
 		};
