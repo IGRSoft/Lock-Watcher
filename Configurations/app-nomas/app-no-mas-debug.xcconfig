@@ -10,4 +10,4 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 #include "../debug.xcconfig"
-#include "app.xcconfig"
+#include "app-no-mas.xcconfig"
