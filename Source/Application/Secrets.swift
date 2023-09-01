@@ -9,7 +9,7 @@
 import Foundation
 
 enum Secrets {
-    #error("setup secrets")
+    //#error("setup secrets")
     
     static let soul = ""
     static let keychainId = ""
