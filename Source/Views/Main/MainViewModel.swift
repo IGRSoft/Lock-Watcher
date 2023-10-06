@@ -22,7 +22,7 @@ class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     // MARK: - Types
     
     /// A typealias to represent a callback block which is triggered based on some event.
-    typealias SettingsTriggerWatchBlock = ((TriggerType) -> Void)
+    typealias SettingsTriggerWatchBlock = Commons.TriggerClosure
     
     // MARK: - Dependency injection
     

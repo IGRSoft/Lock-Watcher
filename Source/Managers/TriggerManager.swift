@@ -9,7 +9,7 @@ import Foundation
 
 // Defines a protocol for trigger management.
 protocol TriggerManagerProtocol {
-    typealias TriggerBlock = ((ThiefDto) -> Void)
+    typealias TriggerBlock = Commons.ThiefClosure
     
     /// Starts the trigger manager with given settings and an optional trigger block.
     func start(settings: AppSettingsProtocol?, triggerBlock: @escaping TriggerBlock)

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -78,30 +78,6 @@
 		A58C63C22A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
 		A58C63C42A4C7C6E004DE972 /* NSApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */; };
 		A58C63C52A4C7C6E004DE972 /* NSApplication+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */; };
-		A58C63D62A4CBCA0004DE972 /* app.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63C82A4CBCA0004DE972 /* app.xcconfig */; };
-		A58C63D72A4CBCA0004DE972 /* app.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63C82A4CBCA0004DE972 /* app.xcconfig */; };
-		A58C63D82A4CBCA0004DE972 /* app-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */; };
-		A58C63D92A4CBCA0004DE972 /* app-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */; };
-		A58C63DA2A4CBCA0004DE972 /* app-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */; };
-		A58C63DB2A4CBCA0004DE972 /* app-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */; };
-		A58C63DC2A4CBCA0004DE972 /* test-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CC2A4CBCA0004DE972 /* test-release.xcconfig */; };
-		A58C63DD2A4CBCA0004DE972 /* test-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CC2A4CBCA0004DE972 /* test-release.xcconfig */; };
-		A58C63DE2A4CBCA0004DE972 /* uitest-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CD2A4CBCA0004DE972 /* uitest-debug.xcconfig */; };
-		A58C63DF2A4CBCA0004DE972 /* uitest-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CD2A4CBCA0004DE972 /* uitest-debug.xcconfig */; };
-		A58C63E02A4CBCA0004DE972 /* uitest.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CE2A4CBCA0004DE972 /* uitest.xcconfig */; };
-		A58C63E12A4CBCA0004DE972 /* uitest.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CE2A4CBCA0004DE972 /* uitest.xcconfig */; };
-		A58C63E22A4CBCA0004DE972 /* test.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CF2A4CBCA0004DE972 /* test.xcconfig */; };
-		A58C63E32A4CBCA0004DE972 /* test.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63CF2A4CBCA0004DE972 /* test.xcconfig */; };
-		A58C63E42A4CBCA0004DE972 /* uitest-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D02A4CBCA0004DE972 /* uitest-release.xcconfig */; };
-		A58C63E52A4CBCA0004DE972 /* uitest-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D02A4CBCA0004DE972 /* uitest-release.xcconfig */; };
-		A58C63E62A4CBCA0004DE972 /* test-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D12A4CBCA0004DE972 /* test-debug.xcconfig */; };
-		A58C63E72A4CBCA0004DE972 /* test-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D12A4CBCA0004DE972 /* test-debug.xcconfig */; };
-		A58C63E82A4CBCA0004DE972 /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */; };
-		A58C63E92A4CBCA0004DE972 /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */; };
-		A58C63EA2A4CBCA0004DE972 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D32A4CBCA0004DE972 /* release.xcconfig */; };
-		A58C63EB2A4CBCA0004DE972 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D32A4CBCA0004DE972 /* release.xcconfig */; };
-		A58C63EC2A4CBCA0004DE972 /* base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D52A4CBCA0004DE972 /* base.xcconfig */; };
-		A58C63ED2A4CBCA0004DE972 /* base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A58C63D52A4CBCA0004DE972 /* base.xcconfig */; };
 		A58C63F02A4CC2EC004DE972 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A58C63EF2A4CC2EC004DE972 /* Preview Assets.xcassets */; };
 		A58C63F12A4CC2EC004DE972 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A58C63EF2A4CC2EC004DE972 /* Preview Assets.xcassets */; };
 		A58C63F42A4CC5E4004DE972 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63F32A4CC5E4004DE972 /* MainCoordinator.swift */; };
@@ -204,12 +180,6 @@
 		A5ACC7C827835BF800999CF0 /* NetworkUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */; };
 		A5BAB76A2A9FCAA6005A0C88 /* DeviceUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BAB7692A9FCAA6005A0C88 /* DeviceUtilTests.swift */; };
 		A5BAB76C2A9FCB06005A0C88 /* MockDeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BAB76B2A9FCB06005A0C88 /* MockDeviceUtil.swift */; };
-		A5BAB7712AA089E2005A0C88 /* app-no-mas-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */; };
-		A5BAB7722AA089E2005A0C88 /* app-no-mas.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB76E2AA089D6005A0C88 /* app-no-mas.xcconfig */; };
-		A5BAB7732AA089E2005A0C88 /* app-no-mas-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */; };
-		A5BAB7742AA089E3005A0C88 /* app-no-mas-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */; };
-		A5BAB7752AA089E3005A0C88 /* app-no-mas.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB76E2AA089D6005A0C88 /* app-no-mas.xcconfig */; };
-		A5BAB7762AA089E3005A0C88 /* app-no-mas-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */; };
 		A5BC810C2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
 		A5BC810D2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
 		A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */; };
@@ -1116,7 +1086,7 @@
 				A5C6DBEB25796A90009DE750 /* Frameworks */,
 				A5C6DBEC25796A90009DE750 /* Resources */,
 				A5E6D76125A5BB6C00EEA7DD /* Embed XPC Services */,
-				A533D7C125A8FCD10046B7C8 /* ShellScript */,
+				A533D7C125A8FCD10046B7C8 /* Setup Launch At Login */,
 			);
 			buildRules = (
 			);
@@ -1197,7 +1167,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "IGR Soft";
 				TargetAttributes = {
 					A533D82525AA11F40046B7C8 = {
@@ -1226,7 +1196,7 @@
 				};
 			};
 			buildConfigurationList = A5C6DBE925796A90009DE750 /* Build configuration list for PBXProject "Lock-Watcher" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1278,24 +1248,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A58C63ED2A4CBCA0004DE972 /* base.xcconfig in Resources */,
-				A58C63E32A4CBCA0004DE972 /* test.xcconfig in Resources */,
-				A5BAB7762AA089E3005A0C88 /* app-no-mas-debug.xcconfig in Resources */,
-				A58C63E12A4CBCA0004DE972 /* uitest.xcconfig in Resources */,
-				A58C63EB2A4CBCA0004DE972 /* release.xcconfig in Resources */,
-				A58C63E72A4CBCA0004DE972 /* test-debug.xcconfig in Resources */,
-				A58C63D72A4CBCA0004DE972 /* app.xcconfig in Resources */,
 				A58FC74A26E2814E007674F6 /* Assets.xcassets in Resources */,
 				A58FC74B26E2814E007674F6 /* Localizable.strings in Resources */,
 				A58C63F12A4CC2EC004DE972 /* Preview Assets.xcassets in Resources */,
-				A58C63D92A4CBCA0004DE972 /* app-debug.xcconfig in Resources */,
-				A58C63E52A4CBCA0004DE972 /* uitest-release.xcconfig in Resources */,
-				A58C63DB2A4CBCA0004DE972 /* app-release.xcconfig in Resources */,
-				A5BAB7752AA089E3005A0C88 /* app-no-mas.xcconfig in Resources */,
-				A58C63E92A4CBCA0004DE972 /* debug.xcconfig in Resources */,
-				A58C63DD2A4CBCA0004DE972 /* test-release.xcconfig in Resources */,
-				A58C63DF2A4CBCA0004DE972 /* uitest-debug.xcconfig in Resources */,
-				A5BAB7742AA089E3005A0C88 /* app-no-mas-release.xcconfig in Resources */,
 				A599EB3527AB1BF0003A69B5 /* policy.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1304,24 +1259,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A58C63EC2A4CBCA0004DE972 /* base.xcconfig in Resources */,
-				A58C63E22A4CBCA0004DE972 /* test.xcconfig in Resources */,
-				A5BAB7732AA089E2005A0C88 /* app-no-mas-debug.xcconfig in Resources */,
-				A58C63E02A4CBCA0004DE972 /* uitest.xcconfig in Resources */,
-				A58C63EA2A4CBCA0004DE972 /* release.xcconfig in Resources */,
-				A58C63E62A4CBCA0004DE972 /* test-debug.xcconfig in Resources */,
-				A58C63D62A4CBCA0004DE972 /* app.xcconfig in Resources */,
 				A51999A326DA764A00F482BC /* Assets.xcassets in Resources */,
 				A51999A226DA764A00F482BC /* Localizable.strings in Resources */,
 				A58C63F02A4CC2EC004DE972 /* Preview Assets.xcassets in Resources */,
-				A58C63D82A4CBCA0004DE972 /* app-debug.xcconfig in Resources */,
-				A58C63E42A4CBCA0004DE972 /* uitest-release.xcconfig in Resources */,
-				A58C63DA2A4CBCA0004DE972 /* app-release.xcconfig in Resources */,
-				A5BAB7722AA089E2005A0C88 /* app-no-mas.xcconfig in Resources */,
-				A58C63E82A4CBCA0004DE972 /* debug.xcconfig in Resources */,
-				A58C63DC2A4CBCA0004DE972 /* test-release.xcconfig in Resources */,
-				A58C63DE2A4CBCA0004DE972 /* uitest-debug.xcconfig in Resources */,
-				A5BAB7712AA089E2005A0C88 /* app-no-mas-release.xcconfig in Resources */,
 				A599EB3427AB1BF0003A69B5 /* policy.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1350,7 +1290,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A533D7C125A8FCD10046B7C8 /* ShellScript */ = {
+		A533D7C125A8FCD10046B7C8 /* Setup Launch At Login */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -1359,14 +1299,18 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
+				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper.zip",
+				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper-with-runtime.zip",
 			);
+			name = "Setup Launch At Login";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+			shellScript = "${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\n";
 		};
 		A58FC74F26E2814E007674F6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1681,6 +1625,7 @@
 			baseConfigurationReference = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCMail/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCMail/XPCMail-Bridging-Header.h";
@@ -1692,6 +1637,7 @@
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCMail/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCMail/XPCMail-Bridging-Header.h";
@@ -1703,6 +1649,7 @@
 			baseConfigurationReference = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
 			};
@@ -1713,6 +1660,7 @@
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
 			};
@@ -1765,6 +1713,7 @@
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCPower-non-mas.entitlements";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCPower/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
@@ -1776,6 +1725,7 @@
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCMail/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCMail/XPCMail-Bridging-Header.h";
@@ -1787,6 +1737,7 @@
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
 			};
@@ -1860,6 +1811,7 @@
 			baseConfigurationReference = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCPower.entitlements;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCPower/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
@@ -1871,6 +1823,7 @@
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Resources/entitlements/XPCPower.entitlements;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCPower/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCPower;
 				SWIFT_OBJC_BRIDGING_HEADER = "XPCPower/XPCPower-Bridging-Header.h";
@@ -1968,7 +1921,7 @@
 			repositoryURL = "https://github.com/dropbox/SwiftyDropbox.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.1.0;
+				minimumVersion = 9.2.0;
 			};
 		};
 		A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */ = {
@@ -2040,7 +1993,7 @@
 			repositoryURL = "https://github.com/IGRSoft/PhotoSnap.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.2.1;
+				minimumVersion = 0.2.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

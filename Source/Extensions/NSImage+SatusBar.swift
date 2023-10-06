@@ -20,6 +20,10 @@ extension NSImage {
     ///
     /// - Returns: An `NSImage` instance representing the appropriate icon for the status bar. Returns `nil` if the named image resource is not found.
     static func statusBarIcon(triggered: Bool = false) -> NSImage? {
-        return triggered ? .init(named: "MenuIconAlert") : .init(named: "MenuIcon")
+        if triggered {
+            NSImage(named: "MenuIconAlert")
+        } else {
+            NSImage(named: "MenuIcon")
+        }
     }
 }

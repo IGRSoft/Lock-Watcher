@@ -19,7 +19,7 @@ protocol NetworkUtilProtocol {
     /// - Parameters:
     ///   - host: The IP or domain address to trace.
     ///   - complete: A closure executed upon completion of the trace, returning the trace's result as a string.
-    func getTraceRoute(host: String, complete: @escaping (String) -> ())
+    func getTraceRoute(host: String, complete: @escaping Commons.StringClosure)
 }
 
 /// `NetworkUtil` provides utilities for network-related tasks, such as fetching the device's IP address and performing trace routes.
@@ -67,7 +67,7 @@ public class NetworkUtil: NetworkUtilProtocol {
     /// - Parameters:
     ///   - host: The IP or domain address to trace.
     ///   - complete: A closure executed upon completion of the trace, returning the trace's result as a string.
-    func getTraceRoute(host: String, complete: @escaping (String) -> ()) {
+    func getTraceRoute(host: String, complete: @escaping Commons.StringClosure) {
         var traceRoute = ""
         
         simpleTracer = SimpleTracer.trace(host: host, maxTraceTTL: 16) { result in

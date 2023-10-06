@@ -33,7 +33,11 @@ struct InfoView: View {
                 }
                 
                 // Button to open the application's settings.
-                Button(action: viewModel.openSettings, label: viewModel.openSettingsTitle)
+                if #available(macOS 14.0, *) {
+                    SettingsLink(label: viewModel.openSettingsTitle)
+                } else {
+                    Button(action: viewModel.openSettings, label: viewModel.openSettingsTitle)
+                }
                 
                 // Button to quit the application.
                 Button(action: viewModel.quitApp, label: viewModel.quitAppTitle)

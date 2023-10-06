@@ -34,7 +34,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     //MARK: - Typealiases
     
-    typealias WatchBlock = ((ThiefDto) -> Void)
+    typealias WatchBlock = Commons.ThiefClosure
     
     //MARK: - Dependency injection
     
@@ -165,7 +165,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         lastThiefDetection.coordinate = coordinate
         lastThiefDetection.filePath = filePath
         
-        let complete:(ThiefDto) -> () = { [weak self] dto in
+        let complete: Commons.ThiefClosure = { [weak self] dto in
             let _ = self?.notificationManager.send(dto)
             let _ = self?.databaseManager.send(dto)
             

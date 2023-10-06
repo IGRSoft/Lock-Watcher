@@ -42,7 +42,7 @@ extension NSImage {
         bitmapRep.size = imageRect.size
         
         // Create a new image and draw the original image and the text onto it.
-        let image: NSImage = NSImage(size: imageRect.size)
+        let image = NSImage(size: imageRect.size)
         image.addRepresentation(bitmapRep)
         
         image.lockFocus()

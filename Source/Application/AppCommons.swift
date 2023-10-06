@@ -19,6 +19,12 @@ struct Commons {
     
     /// Represents a closure that takes a string parameter and returns no value.
     typealias StringClosure = (String) -> Void
+    
+    /// Represents a closure that takes a thief dto parameter and returns no value.
+    typealias ThiefClosure = (ThiefDto) -> Void
+    
+    /// Represents a closure that takes a trigger parameter and returns no value.
+    typealias TriggerClosure = (TriggerType) -> Void
 }
 
 /// Describes the different states a SwiftUI View can be in.

@@ -23,7 +23,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
     //MARK: - Types
     
     /// A closure type to handle trigger events.
-    typealias SettingsTriggerWatchBlock = ((TriggerType) -> Void)
+    typealias SettingsTriggerWatchBlock = Commons.TriggerClosure
     
     //MARK: - Dependency injection
     

@@ -26,7 +26,7 @@ final class LoginListener: BaseListenerProtocol {
     var isRunning: Bool = false
     
     /// A debounced function that gets triggered 500 milliseconds after `sessionDidBecomeActiveNotification` is called.
-    private lazy var debouncedThief: () -> Void = {
+    private lazy var debouncedThief: Commons.EmptyClosure = {
         let debouncedFunction = DispatchQueue.main.debounce(interval: .milliseconds(500)) { [weak self] in
             let thief = ThiefDto()
             thief.triggerType = .logedIn
