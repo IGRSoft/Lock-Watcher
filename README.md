@@ -14,12 +14,14 @@ Available on the [Mac App Store](https://apps.apple.com/app/lock-watcher/id15834
   - On Login
   - On Battery Power Switch (for laptops)
   - On USB Mount
+  - On wrong password (Non-MAS)
 * Snapshot information includes your device's location, network IP address, and network traceroute.
 * Flexible storage options:
   - Database
   - Local folder
   - iCloud
   - Dropbox
+  - Mail (Non-MAS)
 * Organized files with a date format for easy retrieval.
 * Customizable Menubar icon indicator and local notifications on triggers.
 * Password-protected access to snapshots and app settings.
