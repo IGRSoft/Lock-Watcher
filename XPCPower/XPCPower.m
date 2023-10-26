@@ -52,26 +52,30 @@ void IGRPowerMonitorCallback(void *context) {
     XPCPower *xpcPower = (__bridge XPCPower *)(context);
     
     CFTypeRef powerSource = IOPSCopyPowerSourcesInfo();
-    CFStringRef source = IOPSGetProvidingPowerSourceType(powerSource);
-    if (source) {
-        NSString *sSource = (__bridge NSString *)(source);
+    if (powerSource != nil) {
+        CFStringRef source = IOPSGetProvidingPowerSourceType(powerSource);
+        if (source != nil) {
+            NSString *sSource = (__bridge NSString *)(source);
+            
+            BOOL isBatteryPower = [@kIOPMBatteryPowerKey isEqualToString:sSource];
+            BOOL isACPower = [@kIOPMACPowerKey isEqualToString:sSource];
+            
+            if (xpcPower.powerMode == IGRPowerModeUnknown) {
+                xpcPower.powerMode = isBatteryPower ? IGRPowerModeBattery : IGRPowerModeACPower;
+            }
+            else if (isBatteryPower && xpcPower.powerMode == IGRPowerModeACPower) {
+                xpcPower.powerMode = IGRPowerModeBattery;
+                void(^foundChangesInPowerBlock)(NSInteger) = [xpcPower.foundChangesInPowerBlock copy];
+                foundChangesInPowerBlock(xpcPower.powerMode);
+            }
+            else if (isACPower && xpcPower.powerMode == IGRPowerModeBattery) {
+                xpcPower.powerMode = IGRPowerModeACPower;
+                void(^foundChangesInPowerBlock)(NSInteger) = [xpcPower.foundChangesInPowerBlock copy];
+                foundChangesInPowerBlock(xpcPower.powerMode);
+            }
+        }
         
-        BOOL isBatteryPower = [@kIOPMBatteryPowerKey isEqualToString:sSource];
-        BOOL isACPower = [@kIOPMACPowerKey isEqualToString:sSource];
-        
-        if (xpcPower.powerMode == IGRPowerModeUnknown) {
-            xpcPower.powerMode = isBatteryPower ? IGRPowerModeBattery : IGRPowerModeACPower;
-        }
-        else if (isBatteryPower && xpcPower.powerMode == IGRPowerModeACPower) {
-            xpcPower.powerMode = IGRPowerModeBattery;
-            void(^foundChangesInPowerBlock)(NSInteger) = [xpcPower.foundChangesInPowerBlock copy];
-            foundChangesInPowerBlock(xpcPower.powerMode);
-        }
-        else if (isACPower && xpcPower.powerMode == IGRPowerModeBattery) {
-            xpcPower.powerMode = IGRPowerModeACPower;
-            void(^foundChangesInPowerBlock)(NSInteger) = [xpcPower.foundChangesInPowerBlock copy];
-            foundChangesInPowerBlock(xpcPower.powerMode);
-        }
+        CFRelease(powerSource);
     }
 }
 

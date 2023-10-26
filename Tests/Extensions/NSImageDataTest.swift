@@ -10,6 +10,7 @@
 import XCTest
 
 class NSImageDataTest: XCTestCase {
+    
     // Test that valid NSImage converts to non-empty JPEG data
     func testValidImageToJpeg() {
         // Assuming you have a valid image named "Sample" in your test bundle.
