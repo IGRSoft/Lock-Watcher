@@ -48,6 +48,6 @@ class DateExtensionTests: XCTestCase {
 
         // Check the formatted string
         // This expected value assumes the US locale. Adjust based on the default locale or explicitly set the locale of the defaultFormat.
-        XCTAssertEqual(formattedDate, "1/1/08, 12:34 PM")
+        XCTAssertEqual(formattedDate, "1/1/08, 12:34 PM")
     }
 }

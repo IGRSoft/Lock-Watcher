@@ -457,6 +457,7 @@
 		A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerListener.swift; sourceTree = "<group>"; };
 		A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		A5EFE8B726E2B587001FC4EA /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
+		A5F45E882AEAC96800E8B286 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedDivider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -884,6 +885,7 @@
 		A5C6DBE525796A90009DE750 = {
 			isa = PBXGroup;
 			children = (
+				A5F45E882AEAC96800E8B286 /* README.md */,
 				A58C63C62A4CBCA0004DE972 /* Configurations */,
 				A5C6DBF025796A90009DE750 /* Source */,
 				A519999926DA764A00F482BC /* Resources */,

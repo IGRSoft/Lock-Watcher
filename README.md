@@ -1,2 +1,37 @@
 # Lock-Watcher
-Capture photo on wrong user credentials for macOS
+Turn your OS into a powerful surveillance system with Lock Watcher. Detect and capture activity on your OS discreetly. Lock Watcher transforms your Mac into a stealthy guardian, receiving high-quality photos from your built-in or external camera and securely storing them on your hard disk or cloud storage.
+
+## Download
+Available on the [Mac App Store](https://apps.apple.com/app/lock-watcher/id1583462846)
+
+## Lock Watcher's Features:
+
+* Choose between your built-in or an external camera for surveillance.
+* High-quality photo capture on alert detection with optimal compression to save storage space.
+* Easy-to-use configuration for taking snapshots and selecting storage locations.
+* Triggers for enhanced security:
+  - On WakeUp
+  - On Login
+  - On Battery Power Switch (for laptops)
+  - On USB Mount
+* Snapshot information includes your device's location, network IP address, and network traceroute.
+* Flexible storage options:
+  - Database
+  - Local folder
+  - iCloud
+  - Dropbox
+* Organized files with a date format for easy retrieval.
+* Customizable Menubar icon indicator and local notifications on triggers.
+* Password-protected access to snapshots and app settings.
+* Enhanced security if connected to an Apple Watch or a keyboard with Touch ID.
+
+
+## IMPORTANT NOTES:
+Lock Watcher prioritizes your privacy and security:
+
+No information is sent to third-party services.
+Elevate your OS security with Lock Watcher. Download now and keep a watchful eye on your system.
+
+## Requirments
+* macOS 14 or up.
+* mac device with camera.
