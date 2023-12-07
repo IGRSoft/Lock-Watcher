@@ -2,7 +2,7 @@
 //  AppCommonsTest.swift
 //  Lock-Watcher
 //
-//  Created by Vitalii P on 23.08.2023.
+//  Created by Vitalii Parovishnyk on 23.08.2023.
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 

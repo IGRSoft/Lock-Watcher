@@ -2,7 +2,7 @@
 //  SecurityUtilTest.swift
 //  Lock-WatcherTests
 //
-//  Created by Vitalii P on 30.08.2023.
+//  Created by Vitalii Parovishnyk on 30.08.2023.
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 

@@ -30,7 +30,7 @@ final class NotificationManager: NotificationManagerProtocol {
     
     /// Different notifiers to send notifications through various channels.
     private lazy var mailNotifier: NotifierProtocol = MailNotifier()
-    private lazy var icloudNotifier: NotifierProtocol = iCloudNotifier()
+    private lazy var iCloudNotifier: NotifierProtocol = ICloudNotifier()
     private lazy var dropboxNotifier: NotifierProtocol = DropboxNotifier()
     private lazy var notificationNotifier: NotifierProtocol = NotificationNotifier()
     
@@ -60,7 +60,7 @@ final class NotificationManager: NotificationManagerProtocol {
         
         // If iCloud sync is enabled:
         if settings.sync.isICloudSyncEnable {
-            result = icloudNotifier.send(thiefDto)
+            result = iCloudNotifier.send(thiefDto)
         }
         
         // If Dropbox sync is enabled:

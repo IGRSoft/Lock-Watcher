@@ -2,7 +2,7 @@
 //  DateFormatterTest.swift
 //  Lock-WatcherTests
 //
-//  Created by Vitalii P on 28.08.2023.
+//  Created by Vitalii Parovishnyk on 28.08.2023.
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 

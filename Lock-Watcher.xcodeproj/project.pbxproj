@@ -101,7 +101,7 @@
 		A58FC73726E2814E007674F6 /* NSImage+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5457A8B26C1FB1400386738 /* NSImage+Text.swift */; };
 		A58FC73826E2814E007674F6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */; };
 		A58FC73926E2814E007674F6 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* App.swift */; };
-		A58FC73A26E2814E007674F6 /* iCloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */; };
+		A58FC73A26E2814E007674F6 /* ICloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* ICloudNotifier.swift */; };
 		A58FC73C26E2814E007674F6 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
 		A58FC73D26E2814E007674F6 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */; };
 		A58FC73E26E2814E007674F6 /* ThiefManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */; };
@@ -182,7 +182,7 @@
 		A5BAB76C2A9FCB06005A0C88 /* MockDeviceUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BAB76B2A9FCB06005A0C88 /* MockDeviceUtil.swift */; };
 		A5BC810C2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
 		A5BC810D2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
-		A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */; };
+		A5C3E73626C1EA7B003D0BF5 /* ICloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* ICloudNotifier.swift */; };
 		A5C6DBF225796A90009DE750 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* App.swift */; };
 		A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
 		A5C6DC1025796A93009DE750 /* ApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0F25796A93009DE750 /* ApplicationUITests.swift */; };
@@ -428,7 +428,7 @@
 		A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "app-no-mas-debug.xcconfig"; sourceTree = "<group>"; };
 		A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "app-no-mas-release.xcconfig"; sourceTree = "<group>"; };
 		A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudNotifier.swift; sourceTree = "<group>"; };
+		A5C3E73526C1EA7B003D0BF5 /* ICloudNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudNotifier.swift; sourceTree = "<group>"; };
 		A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DBF125796A90009DE750 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		A5C6DBF325796A90009DE750 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -571,7 +571,7 @@
 			isa = PBXGroup;
 			children = (
 				A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */,
-				A5C3E73526C1EA7B003D0BF5 /* iCloudNotifier.swift */,
+				A5C3E73526C1EA7B003D0BF5 /* ICloudNotifier.swift */,
 				A519997B26D92E6100F482BC /* DropboxNotifier.swift */,
 				A5AA31D62778961400A064B6 /* NotificationNotifier.swift */,
 				A5A565932A5588D800D7E030 /* NotifierProtocol.swift */,
@@ -1402,7 +1402,7 @@
 				A58FC73826E2814E007674F6 /* AppSettings.swift in Sources */,
 				A58FC73926E2814E007674F6 /* App.swift in Sources */,
 				A57905D02A9BCD0400647BF8 /* AppDelegate.swift in Sources */,
-				A58FC73A26E2814E007674F6 /* iCloudNotifier.swift in Sources */,
+				A58FC73A26E2814E007674F6 /* ICloudNotifier.swift in Sources */,
 				A5ACC7C827835BF800999CF0 /* NetworkUtil.swift in Sources */,
 				A58C63F82A4CC65D004DE972 /* BaseCoordinatorProtocol.swift in Sources */,
 				A5EFE8B926E2B587001FC4EA /* Date+Formatter.swift in Sources */,
@@ -1486,7 +1486,7 @@
 				A57905CF2A9BCD0400647BF8 /* AppDelegate.swift in Sources */,
 				A5ACC7C727835BF800999CF0 /* NetworkUtil.swift in Sources */,
 				A58C63F72A4CC65D004DE972 /* BaseCoordinatorProtocol.swift in Sources */,
-				A5C3E73626C1EA7B003D0BF5 /* iCloudNotifier.swift in Sources */,
+				A5C3E73626C1EA7B003D0BF5 /* ICloudNotifier.swift in Sources */,
 				A58C63F42A4CC5E4004DE972 /* MainCoordinator.swift in Sources */,
 				A5942651283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
 				A57905D52A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */,

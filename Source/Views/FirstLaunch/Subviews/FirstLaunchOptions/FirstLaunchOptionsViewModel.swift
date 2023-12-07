@@ -2,7 +2,7 @@
 //  FirstLaunchOptionsViewModel.swift
 //  Lock-Watcher
 //
-//  Created by Vitalii P on 04.07.2023.
+//  Created by Vitalii Parovishnyk on 04.07.2023.
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 

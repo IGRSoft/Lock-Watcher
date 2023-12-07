@@ -1,8 +1,8 @@
 //
 //  base.xcconfig
-//  ppapp
+//  Lock-Watcher
 //
-//  Created by dev on 30.05.2023.
+//  Created by Vitalii Parovishnyk on 30.05.2023.
 //  Copyright © 2023. All rights reserved.
 //
 
@@ -23,7 +23,7 @@ MACOSX_DEPLOYMENT_TARGET = 12.4
 //Build Options
 ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES
 ENABLE_PREVIEWS = YES
-ENABLE_USER_SCRIPT_SANDBOXING = NO //YES
+ENABLE_USER_SCRIPT_SANDBOXING = NO //YES //bug in LaunchAtLogin lib
 
 //Deployment
 COPY_PHASE_STRIP = NO
@@ -49,8 +49,8 @@ DEVELOPMENT_TEAM = DMP42GVPJ3
 CODE_SIGN_IDENTITY = Apple Development
 
 //Versioning
-CURRENT_PROJECT_VERSION = 1105
-MARKETING_VERSION = 1.1.4
+CURRENT_PROJECT_VERSION = 1106
+MARKETING_VERSION = 1.1.5
 
 //Apple Clang - Code Generation
 GCC_NO_COMMON_BLOCKS = YES

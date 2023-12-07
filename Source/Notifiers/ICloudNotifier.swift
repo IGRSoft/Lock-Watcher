@@ -1,5 +1,5 @@
 //
-//  iCloudNotifier.swift
+//  ICloudNotifier.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 10.08.2021.
@@ -12,7 +12,7 @@ import CoreLocation
 ///
 /// The `iCloudNotifier` interacts with the iCloud and sends an image captured from the `ThiefDto`
 /// data object to the user's iCloud Documents folder.
-final class iCloudNotifier: NotifierProtocol {
+final class ICloudNotifier: NotifierProtocol {
     
     //MARK: - Dependency injection
     
@@ -27,7 +27,7 @@ final class iCloudNotifier: NotifierProtocol {
     
     //MARK: - Initializer
     
-    /// Initializes a new instance of the `iCloudNotifier` with the provided logger or a default logger.
+    /// Initializes a new instance of the `ICloudNotifier` with the provided logger or a default logger.
     ///
     /// - Parameter logger: An optional logger instance for capturing and logging events.
     init(logger: LogProtocol = Log(category: .iCloudNotifier)) {
