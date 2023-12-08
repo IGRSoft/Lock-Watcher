@@ -15,25 +15,25 @@ Available on the [Mac App Store](https://apps.apple.com/app/lock-watcher/id15834
   - On Battery Power Switch (for laptops)
   - On USB Mount
   - On wrong password (Non-MAS)
-* Snapshot information includes your device's location, network IP address, and network traceroute.
+* Snapshot information includes your device's location, network IP address, and network trace-route.
 * Flexible storage options:
   - Database
   - Local folder
   - iCloud
   - Dropbox
   - Mail (Non-MAS)
-* Organized files with a date format for easy retrieval.
-* Customizable Menubar icon indicator and local notifications on triggers.
+* Organised files with a date format for easy retrieval.
+* Customisable Menubar icon indicator and local notifications on triggers.
 * Password-protected access to snapshots and app settings.
 * Enhanced security if connected to an Apple Watch or a keyboard with Touch ID.
 
 
 ## IMPORTANT NOTES:
-Lock Watcher prioritizes your privacy and security:
+Lock Watcher prioritises your privacy and security:
 
 No information is sent to third-party services.
 Elevate your OS security with Lock Watcher. Download now and keep a watchful eye on your system.
 
-## Requirments
-* macOS 14 or up.
+## Requirements:
+* macOS 12.4 or up.
 * mac device with camera.
