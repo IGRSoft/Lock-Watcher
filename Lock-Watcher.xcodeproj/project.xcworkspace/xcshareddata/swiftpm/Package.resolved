@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onmyway133/EasyStash",
       "state" : {
-        "revision" : "c7230d65d4c2c143ac395e870a7b2bd8cf0c139e",
-        "version" : "1.1.8"
+        "revision" : "53c895b453c5476b673d2498d8edbe349ced72e7",
+        "version" : "1.1.9"
       }
     },
     {
