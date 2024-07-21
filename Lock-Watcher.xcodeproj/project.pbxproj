@@ -1058,7 +1058,7 @@
 				A58FC74426E2814E007674F6 /* Frameworks */,
 				A58FC74926E2814E007674F6 /* Resources */,
 				A58FC74C26E2814E007674F6 /* Embed XPC Services */,
-				A58FC74F26E2814E007674F6 /* ShellScript */,
+				A58FC74F26E2814E007674F6 /* Setup Launch At Login */,
 			);
 			buildRules = (
 			);
@@ -1314,22 +1314,27 @@
 			shellPath = /bin/sh;
 			shellScript = "${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\n";
 		};
-		A58FC74F26E2814E007674F6 /* ShellScript */ = {
+		A58FC74F26E2814E007674F6 /* Setup Launch At Login */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
+				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper.zip",
+				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper-with-runtime.zip",
 			);
+			name = "Setup Launch At Login";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+			shellScript = "${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
