@@ -1,12 +1,13 @@
 {
+  "originHash" : "ea045ba0ee4816b909b79814b0a22dfe61193aa569a5e1c67dd24d47b0ddede9",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
-        "version" : "5.8.1"
+        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
+        "version" : "5.9.1"
       }
     },
     {
@@ -59,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/IGRSoft/SimpleTracer",
       "state" : {
-        "revision" : "bd22b504ca4f72510105af519f55d73c64093f98",
-        "version" : "0.1.1"
+        "revision" : "eab469555e0f54526f0a8b9f3e62e9e60e64979c",
+        "version" : "0.1.2"
       }
     },
     {
@@ -73,5 +74,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
