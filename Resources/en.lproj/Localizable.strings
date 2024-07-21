@@ -92,6 +92,8 @@
 
 /* Description was not specified */
 "AuthInfo" = "unlock access to database data";
+"Auth_deviceAuthentificationFailed" = "User authentication with biometry or Apple Watch failed.";
+"Auth_passwordAuthentificationFailed" = "Passwod is wrong.";
 
 /* Description was not specified */
 "TakeSnapshotAndStart" = "Take snapshot and start use";

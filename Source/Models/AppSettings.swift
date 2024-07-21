@@ -53,7 +53,22 @@ struct OptionsSettings: Codable {
     
     /// Flag to indicate if the application settings/data is protected.
     var isProtected: Bool = false
+    var authSettings: AuthSettings = .init()
+    
 }
+
+struct AuthSettings: Codable {
+     
+    var biometrics = false
+    var watch = false
+    var devicePassword = false
+    
+    static var biometricsOrWatch: Self {
+        .init(biometrics: true, watch: true, devicePassword: false)
+    }
+    
+}
+
 
 /// Represents the triggers for capturing snapshots based on various events.
 ///

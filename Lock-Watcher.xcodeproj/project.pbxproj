@@ -213,6 +213,8 @@
 		A5EFE8B926E2B587001FC4EA /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EFE8B726E2B587001FC4EA /* Date+Formatter.swift */; };
 		A5F4B5422836C0D1001A2413 /* ExtendedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */; };
 		A5F4B5432836C0D1001A2413 /* ExtendedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */; };
+		F2ECF8742C4D4E2400B3518E /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */; };
+		F2ECF8752C4D4E2400B3518E /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -459,6 +461,7 @@
 		A5EFE8B726E2B587001FC4EA /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		A5F45E882AEAC96800E8B286 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedDivider.swift; sourceTree = "<group>"; };
+		F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -984,6 +987,7 @@
 				A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */,
 				A5E6D78D25A5CD2E00EEA7DD /* TriggerManager.swift */,
 				A519998026DA41C700F482BC /* DatabaseManager.swift */,
+				F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1433,6 +1437,7 @@
 				A5AA31E02778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
 				A58FC74126E2814E007674F6 /* WakeUpListener.swift in Sources */,
 				A58FC76326E282C7007674F6 /* MailNotifier.swift in Sources */,
+				F2ECF8752C4D4E2400B3518E /* AuthentificationManager.swift in Sources */,
 				A5A565862A549B7700D7E030 /* LaunchAtLoginView.swift in Sources */,
 				A5A5658C2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */,
 				A58FC74226E2814E007674F6 /* DropboxNotifier.swift in Sources */,
@@ -1515,6 +1520,7 @@
 				A5AA31DF2778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
 				A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */,
+				F2ECF8742C4D4E2400B3518E /* AuthentificationManager.swift in Sources */,
 				A5A565852A549B7700D7E030 /* LaunchAtLoginView.swift in Sources */,
 				A5A5658B2A54A3EB00D7E030 /* FirstLaunchSuccessView.swift in Sources */,
 				A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */,

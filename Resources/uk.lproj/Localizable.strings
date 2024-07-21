@@ -92,6 +92,8 @@
 
 /* Description was not specified */
 "AuthInfo" = "розблокувати доступ до даних бази даних";
+"Auth_deviceAuthentificationFailed" = "Помилка автентифікації користувача за допомогою біометрії або Apple Watch";
+"Auth_passwordAuthentificationFailed" = "Невірний пароль.";
 
 /* Description was not specified */
 "TakeSnapshotAndStart" = "Зробити знімок та почати користуватися";
