@@ -1677,6 +1677,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = Debug;
 		};
@@ -1684,6 +1685,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = Release;
 		};
@@ -1698,6 +1700,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = "Release-non-mas";
 		};
@@ -1754,6 +1757,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = "Release-non-mas";
 		};
@@ -1775,6 +1779,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = Debug;
 		};
@@ -1782,6 +1787,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = Release;
 		};
