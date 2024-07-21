@@ -103,6 +103,7 @@
 
 /* Description was not specified */
 "ProtectAccess" = "Захистити доступ";
+"BiometryAllowed" = "Автентифікація за допомогою біометрії або Apple Watch";
 
 /* Description was not specified */
 "ProtectPassword" = "пароль";

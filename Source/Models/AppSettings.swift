@@ -57,7 +57,7 @@ struct OptionsSettings: Codable {
     
 }
 
-struct AuthSettings: Codable {
+struct AuthSettings: Equatable, Codable {
      
     var biometrics = false
     var watch = false
@@ -65,6 +65,10 @@ struct AuthSettings: Codable {
     
     static var biometricsOrWatch: Self {
         .init(biometrics: true, watch: true, devicePassword: false)
+    }
+    
+    static var empty: Self {
+        .init()
     }
     
 }
