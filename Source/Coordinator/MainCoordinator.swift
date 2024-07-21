@@ -144,8 +144,11 @@ final class MainCoordinator: BaseCoordinatorProtocol {
             
             let inputTextField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
             alert.accessoryView = inputTextField
-            if alert.runModal() == .OK {
+            if alert.runModal() == .alertFirstButtonReturn {
                 isValid = securityUtil.isValid(password: inputTextField.stringValue)
+            }
+            else {
+                isValid = false
             }
         }
         
@@ -180,4 +183,5 @@ final class MainCoordinator: BaseCoordinatorProtocol {
             action(true)
         }
     }
+    
 }
