@@ -68,6 +68,18 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
         })
     }
     
+    var authSettings: Binding<AuthSettings> {
+        .init(
+            get: { [self] in
+                settings.options.authSettings
+            },
+            set: { [self] in
+                settings.options.authSettings = $0
+                objectWillChange.send()
+            }
+        )
+    }
+    
     // Binding for expanding or collapsing snapshot info section.
     var isSnapshotInfoExpand: Binding<Bool> {
         Binding<Bool>(get: {

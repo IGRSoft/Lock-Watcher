@@ -8,7 +8,6 @@
 
 import AppKit
 import SwiftUI
-import LocalAuthentication
 
 /// `MainCoordinator` manages and coordinates the main window of the application, especially its display and authentication.
 final class MainCoordinator: BaseCoordinatorProtocol {
@@ -18,8 +17,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     /// Configuration settings for the application.
     private var settings: AppSettingsProtocol
     
-    /// securityUtil to manage user password
-    private var securityUtil: SecurityUtilProtocol
+    private let authManager: AuthentificationManager
     
     /// Likely manages data or tasks related to unauthorized access.
     private var thiefManager: ThiefManagerProtocol
@@ -28,9 +26,6 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     
     /// ViewModel for the main view.
     private lazy var mainViewModel = MainViewModel(thiefManager: thiefManager)
-    
-    /// Indicates if the application is currently unlocked.
-    private var isUnlocked = false
     
     /// Logger instance for this module.
     private let logger: LogProtocol
@@ -66,17 +61,32 @@ final class MainCoordinator: BaseCoordinatorProtocol {
         self.settings = settings
         self.thiefManager = thiefManager
         self.statusBarButton = statusBarButton
-        self.securityUtil = securityUtil
+        self.authManager = .init(logger: logger, securityUtil: securityUtil)
     }
     
     //MARK: - Public Functions
     
     /// Displays the main window after showing a security access alert.
     func displayMainWindow() {
-        showSecurityAccessAlert { [unowned self] granted in
-            if granted {
+        Task { @MainActor in
+            if await authentificateIfNeeded() {
                 statusBarButton.image = .statusBarIcon()
                 showPopover(for: statusBarButton)
+            }
+        }
+    }
+    
+    private func authentificateIfNeeded() async -> Bool {
+        if !settings.options.isProtected {
+            return true
+        }
+        else {
+            do {
+                return try await authManager.authenticate(with: settings.options.authSettings)
+            }
+            catch {
+                await NSApp.presentError(error)
+                return false
             }
         }
     }
@@ -130,54 +140,4 @@ final class MainCoordinator: BaseCoordinatorProtocol {
         mainPopover.performClose(sender)
     }
     
-    /// Displays an alert to ask for a password to grant access to the application.
-    ///
-    /// - Parameter completion: A closure that receives a boolean indicating if the user is authenticated.
-    private func showSecurityAccessAlert(completion: Commons.BoolClosure) {
-        var isValid = true
-        if settings.options.isProtected && securityUtil.hasPassword() {
-            let alert = NSAlert()
-            alert.messageText = NSLocalizedString("EnterPassword", comment: "")
-            alert.addButton(withTitle: NSLocalizedString("ButtonOk", comment: ""))
-            alert.addButton(withTitle: NSLocalizedString("ButtonCancel", comment: ""))
-            alert.alertStyle = .warning
-            
-            let inputTextField = NSSecureTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-            alert.accessoryView = inputTextField
-            if alert.runModal() == .OK {
-                isValid = securityUtil.isValid(password: inputTextField.stringValue)
-            }
-        }
-        
-        completion(isValid)
-    }
-    
-#warning("Add next release")
-    
-    /// Authenticates using biometrics or watch unlock.
-    ///
-    /// - Parameter action: Callback executed after authentication.
-    private func authenticate(action: @escaping Commons.BoolClosure) {
-        
-        Timer.scheduledTimer(withTimeInterval: 900.0, repeats: false) { [weak self] _ in
-            self?.isUnlocked = false
-        }
-        
-        if isUnlocked == false {
-            let context = LAContext()
-            var error: NSError?
-            
-            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, error: &error) {
-                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometricsOrWatch, localizedReason: NSLocalizedString("AuthInfo", comment: "")) { [weak self] success, authenticationError in
-                    self?.isUnlocked = success
-                    action(success == true)
-                }
-            } else {
-                isUnlocked = true
-                action(true)
-            }
-        } else {
-            action(true)
-        }
-    }
 }
