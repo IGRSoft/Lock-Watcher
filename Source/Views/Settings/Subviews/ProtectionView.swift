@@ -34,7 +34,7 @@ struct ProtectionView: View {
                 SecureField("ProtectPassword", text: $password)
                     .textFieldStyle(.roundedBorder)
                 // Disable password input if protection is turned off.
-                    .disabled(isProtectionEnable == false)
+                    .disabled(isProtectionEnable == false || authSettings == .biometricsOrWatch)
                 
                 // A button that allows the user to set the entered password.
                 Button("ButtonSet") {
@@ -42,7 +42,7 @@ struct ProtectionView: View {
                     password = "" // Clear the password field after saving.
                 }
                 // Disable the set button if protection is turned off or password field is empty.
-                .disabled(isProtectionEnable == false || password.isEmpty)
+                .disabled(isProtectionEnable == false || password.isEmpty || authSettings == .biometricsOrWatch)
             })
             Toggle(isOn: biometryToggle) {
                 Text("BiometryAllowed")
