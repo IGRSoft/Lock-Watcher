@@ -108,7 +108,7 @@ struct SyncSettings: Codable {
     var mailRecipient: String = ""
     
     /// Flag to enable/disable iCloud sync.
-    var isICloudSyncEnable: Bool = true
+    var isICloudSyncEnable: Bool = false
     
     /// Flag to enable/disable Dropbox sync.
     var isDropboxEnable: Bool = false

@@ -55,7 +55,6 @@ final class ICloudNotifier: NotifierProtocol {
         guard let localURL = thiefDto.filePath else {
             let msg = "wrong file path"
             logger.error(msg)
-            assert(false, msg)
             
             return false
         }
@@ -63,7 +62,6 @@ final class ICloudNotifier: NotifierProtocol {
         guard var iCloudURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent(documentsFolderName) else {
             let msg = "wrong iCloud url"
             logger.error(msg)
-            assert(false, msg)
             
             return false
         }

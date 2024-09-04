@@ -49,6 +49,9 @@
 "SyncWithiCloud" = "Синхронізувати з iCloud";
 
 /* Description was not specified */
+"SyncWithiCloudHelp" = "Треба увійти до iCloud, щоб увімкнути цю опцію";
+
+/* Description was not specified */
 "SyncWithDropbox" = "Синхронізувати з Dropbox";
 
 /* Description was not specified */

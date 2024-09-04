@@ -111,6 +111,8 @@ struct ICloudSyncView: View {
         Toggle(isOn: $isICloudSyncEnable) {
             Text("SyncWithiCloud")
         }
+        .disabled(FileManager.default.ubiquityIdentityToken == nil)
+        .help("SyncWithiCloudHelp")
     }
 }
 

@@ -49,6 +49,9 @@
 "SyncWithiCloud" = "Sync with iCloud";
 
 /* Description was not specified */
+"SyncWithiCloudHelp" = "Need to login to iCloud to enable that option";
+
+/* Description was not specified */
 "SyncWithDropbox" = "Sync with Dropbox";
 
 /* Description was not specified */

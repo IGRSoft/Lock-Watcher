@@ -2,4 +2,4 @@
 
 CFBundleDisplayName = "Lock Watcher";
 NSCameraUsageDescription = "Зробити знімок людини, яка намагається отримати доступ до вашого користувача";
-NSLocationWhenInUseUsageDescription = "Додати геопозіцію вашого пристрою до фотографії";
+NSLocationUsageDescription = "Додати геопозіцію вашого пристрою до фотографії";
