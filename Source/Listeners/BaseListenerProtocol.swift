@@ -12,7 +12,7 @@ import Foundation
 /// This enum identifies each listener that can be installed to monitor
 /// specific system events, such as waking up from sleep or detecting
 /// a USB connection.
-public enum ListenerName: Int {
+public enum ListenerName: Int, Sendable {
     case onWakeUpListener           // Triggered when the system wakes up.
     case onWrongPassword            // Triggered when a wrong password is entered.
     case onBatteryPowerListener     // Triggered when the system switches to battery power.
@@ -31,7 +31,7 @@ public protocol BaseListenerProtocol {
     ///   - ListenerName: The name of the triggered listener.
     ///   - ThiefDto: A data transfer object containing details about the event or the  state
     ///     when the listener was triggered. This object's definition is not provided in the code snippet.
-    typealias ListenerAction = ((ListenerName, ThiefDto) -> Void)
+    typealias ListenerAction = ((ListenerName, TriggerType) -> Void)
     
     /// A callback that will be called when the listener detects its corresponding trigger.
     ///

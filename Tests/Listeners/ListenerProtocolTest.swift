@@ -9,7 +9,7 @@
 @testable import Lock_Watcher
 import XCTest
 
-class ListenerTests: XCTestCase {
+final class ListenerTests: XCTestCase {
 
     var listener: MockListener!
     var dummyDTO: ThiefDto!

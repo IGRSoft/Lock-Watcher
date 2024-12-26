@@ -9,7 +9,7 @@
 @testable import Lock_Watcher
 import XCTest
 
-class StringExtensionTests: XCTestCase {
+final class StringExtensionTests: XCTestCase {
 
     // Test if the function returns correct matches.
     func testValidRegexWithoutMatches() {

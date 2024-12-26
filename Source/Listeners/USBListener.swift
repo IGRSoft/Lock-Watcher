@@ -9,7 +9,7 @@ import Foundation
 import Cocoa
 
 /// `USBListener` observes USB mount events on the system and triggers an action when a USB device is mounted.
-final class USBListener: BaseListenerProtocol {
+final class USBListener: BaseListenerProtocol, @unchecked Sendable {
     
     //MARK: - Dependency injection
     
@@ -66,11 +66,11 @@ final class USBListener: BaseListenerProtocol {
     /// Handles the USB mount event notification.
     /// When called, prepares the data and triggers the action set by the `listenerAction`.
     @objc private func receiveUSBNotification() {
-        let thief = ThiefDto()
-        thief.triggerType = .usbConnected
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.listenerAction?(.onUSBConnectionListener, thief)
-        }
+        DispatchQueue.main.async(execute: fireAction)
+    }
+    
+    @Sendable
+    private func fireAction() {
+        listenerAction?(.onUSBConnectionListener, .usbConnected)
     }
 }

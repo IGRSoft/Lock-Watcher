@@ -9,7 +9,7 @@ import Foundation
 import Cocoa
 
 /// `WakeUpListener` observes the system for screen wake up events and triggers a specified action when such events are detected.
-final class WakeUpListener: BaseListenerProtocol {
+final class WakeUpListener: BaseListenerProtocol, @unchecked Sendable {
     
     //MARK: - Dependency injection
     
@@ -68,11 +68,11 @@ final class WakeUpListener: BaseListenerProtocol {
     /// Handles the screen wake up event notification.
     /// When called, prepares the data and triggers the action set by the `listenerAction`.
     @objc private func receiveWakeNotification() {
-        let thief = ThiefDto()
-        thief.triggerType = .onWakeUp
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.listenerAction?(.onWakeUpListener, thief)
-        }
+        DispatchQueue.main.async(execute: fireAction)
+    }
+    
+    @Sendable
+    private func fireAction() {
+        listenerAction?(.onWakeUpListener, .onWakeUp)
     }
 }

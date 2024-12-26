@@ -10,7 +10,7 @@ import LocalAuthentication
 
 /// `WrongPasswordListener` monitors attempts to unlock the screen. When an unauthorized login attempt is detected,
 /// a specified action is triggered.
-final class WrongPasswordListener: BaseListenerProtocol {
+final class WrongPasswordListener: BaseListenerProtocol, @unchecked Sendable {
     
     //MARK: - Dependency injection
     
@@ -113,23 +113,20 @@ final class WrongPasswordListener: BaseListenerProtocol {
         logger.debug("WrongPasswordListener detecting AuthenticationFailed from \(self.lastScreenLockDate)")
         
         // Ask the XPC service if any unauthorized login attempts were detected.
-        service.detectedAuthenticationFailedFromDate(lastScreenLockDate) { [weak self] detectedFailed in
-            let thief = ThiefDto()
-            
-            if detectedFailed {
-                self?.lastScreenLockDate = Date()
-                self?.logger.debug("Detected Authentication Failed")
-                thief.triggerType = .onWrongPassword
-            }
-            
+        service.detectedAuthenticationFailedFromDate(lastScreenLockDate, processAuthonticatedFailed(status:))
+    }
+    
+    private func processAuthonticatedFailed(status: Bool) {
+        if status {
+            lastScreenLockDate = Date()
+            logger.debug("Detected Authentication Failed")
             // Trigger the action on the main queue.
-            DispatchQueue.main.async {
-                self?.listenerAction?(.onWrongPassword, thief)
-            }
+            DispatchQueue.main.async(execute: fireAction)
         }
     }
     
     /// Listens to the occlusion state changes to determine screen lock/unlock events.
+    @MainActor
     @objc private func occlusionStateChanged() {
         if NSApp.occlusionState.contains(.visible) {
             logger.debug("screen unlocked")
@@ -143,5 +140,10 @@ final class WrongPasswordListener: BaseListenerProtocol {
             // Check for unauthorized login attempts.
             readDate()
         }
+    }
+    
+    @Sendable
+    private func fireAction() {
+        listenerAction?(.onWrongPassword, .onWrongPassword)
     }
 }

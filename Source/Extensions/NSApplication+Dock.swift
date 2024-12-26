@@ -15,6 +15,7 @@ protocol ApplicationPolicyProtocol {
     ///
     /// - Parameter policy: The activation policy to set.
     /// - Returns: The activation policy that was set.
+    @MainActor
     @discardableResult
     func setActivation(policy: NSApplication.ActivationPolicy) -> NSApplication.ActivationPolicy
 }
@@ -25,6 +26,7 @@ extension NSApplication: ApplicationPolicyProtocol {
     ///
     /// - Parameter policy: The activation policy to set.
     /// - Returns: The activation policy that was set, or `.regular` if the policy could not be set.
+    @MainActor
     @objc
     @discardableResult
     func setActivation(policy: ActivationPolicy) -> ActivationPolicy {

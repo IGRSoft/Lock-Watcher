@@ -11,7 +11,7 @@ import AppKit
 
 /// An enumeration that defines all the trigger types available in the application.
 ///
-enum TriggerType: String {
+public enum TriggerType: String, Sendable {
     case setup
     case onWakeUp
     case onWrongPassword
@@ -32,7 +32,7 @@ extension TriggerType {
 /// Represents a data object that captures information during a trigger action.
 /// This object might be used when there's suspicion of unauthorized access or other security breaches.
 ///
-public class ThiefDto: Equatable {
+public final class ThiefDto: Equatable, Sendable {
     
     /// Equatability implementation for the ThiefDto class.
     public static func == (lhs: ThiefDto, rhs: ThiefDto) -> Bool {
@@ -40,26 +40,36 @@ public class ThiefDto: Equatable {
     }
     
     /// The current coordinate of the device when the trigger action occurred.
-    var coordinate: CLLocationCoordinate2D?
+    let coordinate: CLLocationCoordinate2D?
     
     /// The IP address of the session when the trigger action occurred.
-    var ipAddress: String?
+    let ipAddress: String?
     
     /// The trace route of the session during the trigger action.
     /// Trace route provides a sequence of routes that network packets take when moving between source and destination.
-    var traceRoute: String?
+    let traceRoute: String?
     
     /// The type of trigger that caused the action.
-    var triggerType: TriggerType = .setup
+    let triggerType: TriggerType
     
     /// An image taken from the device's camera during the trigger action.
-    var snapshot: NSImage?
+    let snapshot: NSImage?
     
     /// The file location where the image is stored.
-    var filePath: URL?
+    let filePath: URL?
     
     /// The date and time when the trigger action occurred.
-    var date: Date = Date()
+    let date: Date
+    
+    init(triggerType: TriggerType, coordinate: CLLocationCoordinate2D? = nil, ipAddress: String? = nil, traceRoute: String? = nil, snapshot: NSImage? = nil, filePath: URL? = nil, date: Date = .init()) {
+        self.coordinate = coordinate
+        self.ipAddress = ipAddress
+        self.traceRoute = traceRoute
+        self.triggerType = triggerType
+        self.snapshot = snapshot
+        self.filePath = filePath
+        self.date = date
+    }
     
     /// Provides a textual description of the ThiefDto object.
     /// It's useful for logging or presenting the data to the user in a readable format.

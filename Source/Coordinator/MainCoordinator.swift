@@ -10,7 +10,8 @@ import AppKit
 import SwiftUI
 
 /// `MainCoordinator` manages and coordinates the main window of the application, especially its display and authentication.
-final class MainCoordinator: BaseCoordinatorProtocol {
+@MainActor
+final class MainCoordinator: @preconcurrency BaseCoordinatorProtocol {
     
     //MARK: - Dependency Injection
     
@@ -31,6 +32,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     private let logger: LogProtocol
     
     /// Popover displayed from the status bar icon.
+    @MainActor
     private lazy var mainPopover: NSPopover = {
         let popover = NSPopover.init()
         popover.behavior = .transient
@@ -76,16 +78,16 @@ final class MainCoordinator: BaseCoordinatorProtocol {
         }
     }
     
+    @MainActor
     private func authentificateIfNeeded() async -> Bool {
         if !settings.options.isProtected {
             return true
-        }
-        else {
+        } else {
             do {
                 return try await authManager.authenticate(with: settings.options.authSettings)
             }
             catch {
-                await NSApp.presentError(error)
+                NSApp.presentError(error)
                 return false
             }
         }
@@ -97,6 +99,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     }
     
     /// Toggles the visibility of the main window.
+    @MainActor
     func toggleMainWindow() {
         if mainPopover.isShown {
             closeMainWindow()

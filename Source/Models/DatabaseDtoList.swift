@@ -11,7 +11,7 @@ import Foundation
 /// Represents a list of `DatabaseDto` objects and provides functionalities for
 /// managing and encoding/decoding this list for database storage purposes.
 ///
-class DatabaseDtoList: Codable, ObservableObject {
+final class DatabaseDtoList: Codable, ObservableObject {
     
     /// Enumerates the keys used in the encoding and decoding processes.
     ///

@@ -9,7 +9,7 @@
 import AppKit
 
 /// Acts as the main delegate for the application, handling app lifecycle events and configurations.
-class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
     
     /// Represents general settings for the application.
     let viewModel: AppDelegateModelProtocol

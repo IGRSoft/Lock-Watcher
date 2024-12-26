@@ -9,7 +9,7 @@ import Foundation
 
 /// `PowerListener` observes power status changes by communicating with an XPC service.
 /// This listener can detect when the system switches between battery power and AC power.
-final class PowerListener: BaseListenerProtocol {
+final class PowerListener: BaseListenerProtocol, @unchecked Sendable {
     
     //MARK: - Types
     
@@ -86,19 +86,7 @@ final class PowerListener: BaseListenerProtocol {
         self.listenerAction = action
         
         // Start monitoring power mode through the XPC service.
-        service.startCheckPower { [weak self] mode in
-            let powerMode = PowerMode.init(rawValue: mode)
-            self?.logger.debug("Power switched to \(powerMode == .battery ? "Battery" : "AC Power")")
-            
-            let thief = ThiefDto()
-            if powerMode == .battery {
-                thief.triggerType = .onBatteryPower
-            }
-            
-            DispatchQueue.main.async {
-                self?.listenerAction?(.onBatteryPowerListener, thief)
-            }
-        }
+        service.startCheckPower(process(mode:))
         
         isRunning = true
     }
@@ -111,5 +99,19 @@ final class PowerListener: BaseListenerProtocol {
         logger.debug("stopped")
         
         isRunning = false
+    }
+    
+    private func process(mode: NSInteger) {
+        let powerMode = PowerMode.init(rawValue: mode)
+        logger.debug("Power switched to \(powerMode == .battery ? "Battery" : "AC Power")")
+        
+        if powerMode == .battery {
+            DispatchQueue.main.async(execute: fireAction)
+        }
+    }
+    
+    @Sendable
+    private func fireAction() {
+        listenerAction?(.onBatteryPowerListener, .onBatteryPower)
     }
 }

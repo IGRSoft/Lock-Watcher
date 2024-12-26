@@ -9,7 +9,7 @@
 @testable import Lock_Watcher
 import XCTest
 
-class NSImageDataTest: XCTestCase {
+final class NSImageDataTest: XCTestCase {
     
     // Test that valid NSImage converts to non-empty JPEG data
     func testValidImageToJpeg() {

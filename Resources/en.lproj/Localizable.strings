@@ -127,7 +127,7 @@
 "ButtonSettings" = "Settings";
 
 /* Description was not specified */
-"OpenSettings" = "Please, update application permissions to full usage.\n Open Privacy Settings?";
+"OpenSettings" = "Please, update application permissions to use that option.\n\nOpen Privacy Settings?";
 
 /* Description was not specified */
 "AddTraceRoute" = "Add Trace Route info";

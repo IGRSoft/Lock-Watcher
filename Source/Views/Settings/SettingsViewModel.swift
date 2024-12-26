@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 /// ViewModel for handling the settings and configuration of the app.
-class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
+final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @unchecked Sendable {
     
     //MARK: - DomainViewConstantProtocol
     
@@ -310,5 +310,7 @@ class SettingsViewModel: ObservableObject, DomainViewConstantProtocol {
 
 /// Extension to provide preview instance for the SettingsViewModel.
 extension SettingsViewModel {
-    static var preview: SettingsViewModel = SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview())
+    static var preview: SettingsViewModel {
+        SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview())
+    }
 }

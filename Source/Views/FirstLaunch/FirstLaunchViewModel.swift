@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 /// The view model for the first launch view.
-final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
+final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol, @unchecked Sendable {
     
     //MARK: - DomainViewConstantProtocol
     
@@ -183,5 +183,7 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
 
 /// Provides a preview version of the `FirstLaunchViewModel`.
 extension FirstLaunchViewModel {
-    static var preview: FirstLaunchViewModel = FirstLaunchViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview(), closeClosure: {})
+    static var preview: FirstLaunchViewModel {
+        FirstLaunchViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview(), closeClosure: {})
+    }
 }

@@ -9,7 +9,7 @@
 import XCTest
 @testable import Lock_Watcher
 
-class SecurityUtilTests: XCTestCase {
+final class SecurityUtilTests: XCTestCase {
     
     var securityUtil: SecurityUtilProtocol!
     

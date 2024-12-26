@@ -9,7 +9,7 @@
 import XCTest
 @testable import Lock_Watcher
 
-class DeviceUtilTests: XCTestCase {
+final class DeviceUtilTests: XCTestCase {
     
     // Test for when the device is a laptop
     func testDeviceIsLaptop() {

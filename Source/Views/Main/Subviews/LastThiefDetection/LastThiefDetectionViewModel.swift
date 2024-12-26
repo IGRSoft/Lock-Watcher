@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 /// A view model that manages the data related to the last detected thief and associated images.
-class LastThiefDetectionViewModel: ObservableObject {
+final class LastThiefDetectionViewModel: ObservableObject {
     
     // MARK: - Dependency Injection
     

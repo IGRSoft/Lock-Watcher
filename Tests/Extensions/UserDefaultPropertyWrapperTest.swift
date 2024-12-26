@@ -10,7 +10,7 @@
 import XCTest
 
 // Define a mock UserDefaults to avoid changing the actual UserDefaults
-class MockUserDefaults: UserDefaults {
+final class MockUserDefaults: UserDefaults {
     var storage: [String: Any] = [:]
     
     override func set(_ value: Any?, forKey defaultName: String) {
@@ -27,7 +27,7 @@ struct Secrets {
     static let userDefaultsId = "com.test.UserDefaultsId"
 }
 
-class UserDefaultTests: XCTestCase {
+final class UserDefaultTests: XCTestCase {
 
     // 1. Test if the default value is returned when UserDefaults doesn't have the specified key.
     func testDefaultValue() {

@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// A view model designed to manage the data and behaviors for the information section.
-class InfoViewModel: ObservableObject {
+final class InfoViewModel: ObservableObject {
     
     /// The thief manager responsible for handling thief-related actions and data.
     var thiefManager: ThiefManagerProtocol
@@ -45,6 +45,7 @@ class InfoViewModel: ObservableObject {
     }
     
     /// Opens the application's settings window.
+    @MainActor
     func openSettings() {
         NSApplication.displaySettingsWindow()
     }

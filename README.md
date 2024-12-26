@@ -37,3 +37,7 @@ Elevate your OS security with Lock Watcher. Download now and keep a watchful eye
 ## Requirements:
 * macOS 12.4 or up.
 * mac device with camera.
+
+## Development:
+### Reset app permissions:
+`tccutil reset All com.igrsoft.Lock-Watcher`

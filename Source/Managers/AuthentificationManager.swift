@@ -9,7 +9,7 @@
 import AppKit
 import LocalAuthentication
 
-class AuthentificationManager {
+final class AuthentificationManager: @unchecked Sendable {
     
     private let securityUtil: SecurityUtilProtocol
     private let logger: LogProtocol
@@ -49,6 +49,7 @@ class AuthentificationManager {
         guard securityUtil.hasPassword() else {
             return true
         }
+        
         return try await MainActor.run {
             let alert = NSAlert()
             alert.messageText = NSLocalizedString("EnterPassword", comment: "")
@@ -102,9 +103,12 @@ class AuthentificationManager {
     }
     
     private func lockAfter(_ interval: TimeInterval) {
-        Timer.scheduledTimer(withTimeInterval: autolockInterval, repeats: false) { [weak self] _ in
-            self?.isUnlocked = false
-        }
+        Timer.scheduledTimer(withTimeInterval: autolockInterval, repeats: false, block: resetUnlock)
+    }
+    
+    @Sendable
+    private func resetUnlock(_ timer: Timer) {
+        isUnlocked = false
     }
     
     private var authentificationReason: String {

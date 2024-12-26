@@ -9,7 +9,7 @@
 import XCTest
 @testable import Lock_Watcher
 
-class FileSystemUtilTests: XCTestCase {
+final class FileSystemUtilTests: XCTestCase {
     
     var fileSystemUtil: FileSystemUtilProtocol!
     var mockLogger: LogMock!

@@ -30,7 +30,7 @@ protocol ThiefManagerProtocol {
 }
 
 /// The main class responsible for managing and responding to various triggers indicating potential unauthorized access.
-final class ThiefManager: NSObject, ThiefManagerProtocol {
+final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
     
     //MARK: - Typealiases
     
@@ -50,7 +50,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     //MARK: - Variables
     
-    private var lastThiefDetection = ThiefDto()
+    private var lastThiefDetection: TriggerType = .setup
     
     /// store ThiefDto in database
     ///
@@ -115,21 +115,24 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     /// Restarts the trigger watching mechanism
     public func restartWatching() {
-        triggerManager.start(settings: settings) {[weak self] triggered in
-            self?.watchBlock(triggered)
-        }
+        startWatching(watchBlock)
+    }
+    
+    @Sendable
+    private func justDetectedTrigger() {
+        detectedTrigger()
     }
     
     /// Detects and processes any triggers.
     public func detectedTrigger(_ closure: @escaping Commons.BoolClosure = {_ in }) {
-        logger.debug("Detected triggered action: \(self.lastThiefDetection.triggerType.rawValue)")
+        logger.debug("Detected triggered action: \(self.lastThiefDetection.rawValue)")
         
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings.sync.isSaveSnapshotToDisk
         guard !AppSettings.isImageCaptureDebug else {
             let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
             let date = Date()
-            lastThiefDetection.triggerType = .debug
+            lastThiefDetection = .debug
             processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
             DispatchQueue.main.debounce(interval: .seconds(1)) {
                 closure(true)
@@ -160,20 +163,25 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             return
         }
         
-        lastThiefDetection.snapshot = snapshot
+        /*lastThiefDetection.snapshot = snapshot
         lastThiefDetection.date = date
         lastThiefDetection.coordinate = coordinate
-        lastThiefDetection.filePath = filePath
+        lastThiefDetection.filePath = filePath*/
         
-        let complete: Commons.ThiefClosure = { [weak self] dto in
+        let complete: (TriggerType, NSImage, URL, Date, CLLocationCoordinate2D?, String?, String?) -> Void = { [weak self] type, snapshot, filePath, date, coordinate, ipAddress, traceRoute in
+            
+            let dto = ThiefDto(triggerType: type, coordinate: coordinate, ipAddress: ipAddress, traceRoute: traceRoute, snapshot: snapshot, filePath: filePath, date: date)
+            
             let _ = self?.notificationManager.send(dto)
             let _ = self?.databaseManager.send(dto)
             
             self?.watchBlock(dto)
         }
         
-        if settings.options.addIPAddressToSnapshot {
-            lastThiefDetection.ipAddress = networkUtil.getIFAddresses()
+        let ipAddress: String? = if settings.options.addIPAddressToSnapshot {
+            networkUtil.getIFAddresses()
+        } else {
+            nil
         }
         
         if settings.options.addTraceRouteToSnapshot {
@@ -185,11 +193,10 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
                     return
                 }
                 
-                lastThiefDetection.traceRoute = traceRouteLog
-                complete(lastThiefDetection)
+                complete(lastThiefDetection, snapshot, filePath, date, self?.coordinate, ipAddress, traceRouteLog)
             }
         } else {
-            complete(lastThiefDetection)
+            complete(lastThiefDetection, snapshot, filePath, date, coordinate, ipAddress, nil)
         }
     }
     
@@ -208,18 +215,14 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         logger.debug("Start Watching")
         
         self.watchBlock = watchBlock
-        triggerManager.start(settings: settings) {[weak self] triggered in
-            watchBlock(triggered)
-            
-            if triggered.triggerType != .setup {
-                DispatchQueue.main.async {
-                    self?.lastThiefDetection.triggerType = triggered.triggerType
-                    self?.detectedTrigger()
-                }
-            }
-            
-            self?.startWatching(watchBlock)
-        }
+        triggerManager.start(settings: settings, triggerBlock: triggered)
+    }
+    
+    private func triggered(_ type: TriggerType) {
+        guard type != .setup else { return }
+        
+        lastThiefDetection = type
+        DispatchQueue.main.async(execute: justDetectedTrigger)
     }
     
     /// Completes Dropbox authentication.

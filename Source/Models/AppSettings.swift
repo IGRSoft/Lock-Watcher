@@ -149,16 +149,16 @@ protocol AppSettingsProtocol {
 final class AppSettings: AppSettingsProtocol {
     
 #if NON_MAS_CONFIG
-    static var isMASBuild: Bool = false
+    static let isMASBuild: Bool = false
 #else
-    static var isMASBuild: Bool = true
+    static let isMASBuild: Bool = true
 #endif
     
     /// Debug flag to check image capturing functionality.
-    static var isImageCaptureDebug: Bool = false
+    static let isImageCaptureDebug: Bool = false
     
     /// The default count for successful launches.
-    static var firstLaunchSuccessCount = 15
+    static let firstLaunchSuccessCount = 15
     
     /// Application's behavior settings.
     @UserDefault("OptionsSettings", defaultValue: OptionsSettings())
@@ -181,11 +181,11 @@ final class AppSettings: AppSettingsProtocol {
 /// class for Preview
 /// 
 final class AppSettingsPreview: AppSettingsProtocol {
-    static var isMASBuild: Bool = true
+    static let isMASBuild: Bool = true
     
-    static var isImageCaptureDebug: Bool = true
+    static let isImageCaptureDebug: Bool = true
     
-    static var firstLaunchSuccessCount: Int = 15
+    static let firstLaunchSuccessCount: Int = 15
     
     var options: OptionsSettings = .init()
     

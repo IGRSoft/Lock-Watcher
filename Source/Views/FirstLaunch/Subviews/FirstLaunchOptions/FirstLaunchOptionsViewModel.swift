@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 
-final class FirstLaunchOptionsViewModel: ObservableObject {
+final class FirstLaunchOptionsViewModel: ObservableObject, @unchecked Sendable {
     let objectWillChange = PassthroughSubject<Void, Never>()
     
     @Published var settings: AppSettingsProtocol
@@ -56,5 +56,7 @@ final class FirstLaunchOptionsViewModel: ObservableObject {
 }
 
 extension FirstLaunchOptionsViewModel {
-    static var preview = FirstLaunchOptionsViewModel(settings: AppSettingsPreview())
+    static var preview: FirstLaunchOptionsViewModel {
+        FirstLaunchOptionsViewModel(settings: AppSettingsPreview())
+    }
 }

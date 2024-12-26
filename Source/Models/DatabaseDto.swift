@@ -10,7 +10,7 @@ import Foundation
 /// Represents a data object that is suitable for database storage.
 /// This is created by transforming the `ThiefDto` into a storable format.
 ///
-public class DatabaseDto: Codable, Identifiable {
+public final class DatabaseDto: Codable, Identifiable {
     
     /// Enumerates the keys used in the encoding and decoding processes.
     ///

@@ -21,7 +21,7 @@ protocol AppDelegateModelProtocol {
     func checkDropboxAuth(urls: [URL]) -> Bool
 }
 
-final class AppDelegateModel: AppDelegateModelProtocol {
+final class AppDelegateModel: @preconcurrency AppDelegateModelProtocol, @unchecked Sendable {
     
     /// Represents general settings for the application.
     private lazy var settings = AppSettings()
@@ -34,6 +34,7 @@ final class AppDelegateModel: AppDelegateModelProtocol {
     }
     
     /// Coordinates the manipulation and display of application windows.
+    @MainActor
     private lazy var coordinator: any BaseCoordinatorProtocol = { [unowned self] in
         guard let button = statusBarItem.button else {
             fatalError("Impossible to construct main coordinator, status bar button is missing.")
@@ -46,9 +47,11 @@ final class AppDelegateModel: AppDelegateModelProtocol {
     private lazy var settingsViewModel: SettingsViewModel = SettingsViewModel(settings: settings, thiefManager: thiefManager)
     
     /// Represents the main view for application settings.
+    @MainActor
     private(set) lazy var settingsView = SettingsView(viewModel: settingsViewModel)
     
     /// Represents the status bar item used in the application.
+    @MainActor
     private lazy var statusBarItem: NSStatusItem = {
         let statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         statusBarItem.button?.imageScaling = .scaleProportionallyDown
@@ -61,6 +64,7 @@ final class AppDelegateModel: AppDelegateModelProtocol {
     }()
     
     /// Setup and processes local notifications.
+    @MainActor
     func setup(with localNotification: Notification) {
         applyTheme()
         
@@ -72,11 +76,13 @@ final class AppDelegateModel: AppDelegateModelProtocol {
     }
     
     /// Applies the application theme (hides the dock icon in this case).
+    @MainActor
     private func applyTheme() {
         NSApplication.setDockIcon(hidden: true)
     }
     
     /// Toggles the main application window visibility.
+    @MainActor
     @objc
     private func toggleMainWindow() {
         coordinator.toggleMainWindow()

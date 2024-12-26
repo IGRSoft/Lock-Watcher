@@ -38,7 +38,9 @@ struct ProtectionView: View {
                 
                 // A button that allows the user to set the entered password.
                 Button("ButtonSet") {
-                    securityUtil.save(password: password)
+                    Task { [securityUtil, psw = password] in
+                        await securityUtil.save(password: psw)
+                    }
                     password = "" // Clear the password field after saving.
                 }
                 // Disable the set button if protection is turned off or password field is empty.

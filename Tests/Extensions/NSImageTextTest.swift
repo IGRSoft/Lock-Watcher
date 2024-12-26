@@ -9,7 +9,7 @@
 @testable import Lock_Watcher
 import XCTest
 
-class NSImageExtensionTests: XCTestCase {
+final class NSImageExtensionTests: XCTestCase {
 
     var sampleImage: NSImage!
     

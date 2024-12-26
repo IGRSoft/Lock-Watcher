@@ -32,7 +32,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
     //MARK: - Variables
     
     /// A client to interact with the Dropbox API.
-    lazy var client = DropboxClientsManager.authorizedClient
+    private var client: DropboxClient?
     
     //MARK: - Initializer
     
@@ -41,6 +41,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
     /// - Parameter logger: An optional logger instance for capturing and logging events.
     init(logger: LogProtocol = Log(category: .dropboxNotifier)) {
         self.logger = logger
+        client = DropboxClientsManager.authorizedClient
     }
     
     //MARK: - Public methods
@@ -107,6 +108,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
     /// Initiates the Dropbox authentication flow.
     ///
     /// - Parameter controller: The view controller from which the authentication flow is started.
+    @MainActor
     static func authorize(on controller: NSViewController) {
         let scopeRequest = ScopeRequest(scopeType: .user, scopes: ["account_info.read", "files.content.write"], includeGrantedScopes: false)
         DropboxClientsManager.authorizeFromControllerV2(sharedApplication: NSApplication.shared,
@@ -128,10 +130,12 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
     ///   - handler: The callback that handles the result of the authentication.
     func completeDropboxAuthWith(url: URL, completionHandler handler: @escaping Commons.StringClosure) {
         // this brings your application back the foreground on redirect
-        NSApp.activate(ignoringOtherApps: true)
+        Task { @MainActor in
+            NSApp.activate(ignoringOtherApps: true)
+        }
         
         // Handle the authentication result from Dropbox.
-        DropboxClientsManager.handleRedirectURL(url) { [weak self] authResult in
+        DropboxClientsManager.handleRedirectURL(url, includeBackgroundClient: false) { [weak self] authResult in
             switch authResult {
             case .success:
                 let currentAccount = self?.client?.users.getCurrentAccount()

@@ -9,7 +9,7 @@
 import XCTest
 @testable import Lock_Watcher
 
-class SomeClassThatUsesLog {
+final class SomeClassThatUsesLog {
     let log: LogProtocol
     
     init(log: LogProtocol) {
@@ -29,7 +29,7 @@ class SomeClassThatUsesLog {
     }
 }
 
-class SomeClassThatUsesLogTests: XCTestCase {
+final class SomeClassThatUsesLogTests: XCTestCase {
     
     func testLogging() {
         let logMock = LogMock()

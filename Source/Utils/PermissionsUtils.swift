@@ -11,7 +11,7 @@ import CoreLocation
 import AVFoundation
 
 /// `PermissionsUtils` is a utility class that facilitates the management of permissions for location and camera services.
-public class PermissionsUtils {
+public final class PermissionsUtils {
     
     /// Updates the location services permissions.
     ///

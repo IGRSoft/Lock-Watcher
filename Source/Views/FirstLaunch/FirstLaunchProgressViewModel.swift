@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// A view model responsible for managing the progression of animation states during the first launch of the app.
-class FirstLaunchProgressViewModel: ObservableObject {
+final class FirstLaunchProgressViewModel: ObservableObject, @unchecked Sendable {
     /// Enumeration of the positions for the animation.
     ///
     /// Each case represents a different stage in the animation and is associated with a sun icon from SF Symbols.
@@ -42,15 +42,18 @@ class FirstLaunchProgressViewModel: ObservableObject {
     ///
     /// The animation will loop indefinitely, cycling through the positions at a quarter-second interval.
     func startAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] timer in
-            self?.pos += 1
-            var pos = self?.pos ?? 0
-            if pos == Positions.allValues.count {
-                pos = 0
-                self?.pos = pos
-            }
-            self?.position = .allValues[pos]
+        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true, block: animate)
+    }
+    
+    @Sendable
+    private func animate(_ timaer: Timer) {
+        self.pos += 1
+        var pos = self.pos
+        if pos == Positions.allValues.count {
+            pos = 0
+            self.pos = pos
         }
+        self.position = .allValues[pos]
     }
 }
 
@@ -58,5 +61,7 @@ extension FirstLaunchProgressViewModel {
     /// A preview instance of the view model with a default frame size.
     ///
     /// This is useful for design-time previewing in SwiftUI.
-    static var preview = FirstLaunchProgressViewModel(frameSize: CGSize(width: 300, height: 300))
+    static var preview: FirstLaunchProgressViewModel {
+        .init(frameSize: CGSize(width: 300, height: 300))
+    }
 }

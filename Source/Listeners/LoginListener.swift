@@ -5,83 +5,97 @@
 //  Created by Vitalii Parovishnyk on 28.09.2021.
 //
 
-import Foundation
 import Cocoa
+import Combine
 
-/// `LoginListener` checks Occlusion State changes to detect the status of the user.
-/// It observes the occlusion state of the app, providing insights into the login status.
-final class LoginListener: BaseListenerProtocol {
+/// `LoginListener` monitors macOS occlusion state changes to detect user login status.
+/// It leverages a lock detector to identify transitions between locked and active states.
+final class LoginListener: BaseListenerProtocol, @unchecked Sendable {
     
-    //MARK: - Dependency injection
+    // MARK: - Dependency Injection
     
-    /// Logger used to record information related to the Login Listener's behavior.
+    /// Logger for recording events and behavior of the login listener.
     private let logger: LogProtocol
     
-    //MARK: - Variables
+    /// Lock detector for monitoring macOS lock state changes.
+    private let lockDetector: MacOSLockDetectorProtocol
     
-    /// Callback action to be triggered when the login is detected.
+    // MARK: - Public Properties
+    
+    /// A closure to be executed when login is detected.
     var listenerAction: ListenerAction?
     
-    /// A Boolean value indicating whether the listener is currently running.
-    var isRunning: Bool = false
+    /// Indicates whether the listener is currently running.
+    private(set) var isRunning: Bool = false
     
-    /// A debounced function that gets triggered 500 milliseconds after `sessionDidBecomeActiveNotification` is called.
+    // MARK: - Private Properties
+    
+    /// Tracks whether the system was previously in a locked state.
+    private var wasLocked = false
+    
+    /// Set of Combine cancellables to manage subscriptions.
+    private var cancellables: Set<AnyCancellable> = .init()
+    
+    /// A debounced function triggered 500 milliseconds after detecting an active session.
     private lazy var debouncedThief: Commons.EmptyClosure = {
-        let debouncedFunction = DispatchQueue.main.debounce(interval: .milliseconds(500)) { [weak self] in
-            let thief = ThiefDto()
-            thief.triggerType = .logedIn
-            
-            DispatchQueue.main.async {
-                self?.listenerAction?(.onLoginListener, thief)
-            }
-        }
-        
+        let debouncedFunction = DispatchQueue.main.debounce(interval: .milliseconds(500), action: trigger)
         return debouncedFunction
     }()
     
-    //MARK: - Initializer
+    // MARK: - Initializer
     
-    /// Initializes a new Login Listener with an optional logger.
-    /// - Parameter logger: An instance of `Log`, defaults to `.loginListener`.
-    init(logger: LogProtocol = Log(category: .loginListener)) {
+    /// Creates an instance of `LoginListener`.
+    /// - Parameters:
+    ///   - logger: Logger instance for event logging. Defaults to `Log` with `.loginListener` category.
+    ///   - lockDetector: A protocol instance for detecting lock state changes.
+    init(logger: LogProtocol = Log(category: .loginListener), lockDetector: MacOSLockDetectorProtocol) {
         self.logger = logger
+        self.lockDetector = lockDetector
     }
     
-    //MARK: - Public
+    // MARK: - Public Methods
     
-    /// Starts the listener with the given action as a callback.
-    /// - Parameter action: A closure that gets called when login is detected.
+    /// Starts monitoring the login state with a specified callback action.
+    /// - Parameter action: A closure executed when login is detected.
     func start(_ action: @escaping ListenerAction) {
         logger.debug("started")
         
         isRunning = true
         listenerAction = action
         
-        // Start after 1s to ignore the first notification.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(self.sessionDidBecomeActiveNotification),
-                                                   name: NSApplication.didChangeOcclusionStateNotification,
-                                                   object: nil)
+        lockDetector.isLockedPublisher
+            .sink(receiveValue: handleLockState)
+            .store(in: &cancellables)
+    }
+    
+    /// Stops monitoring login state and clears all active subscriptions.
+    func stop() {
+        logger.debug("stopped")
+        isRunning = false
+        listenerAction = nil
+        cancellables.removeAll()
+    }
+    
+    // MARK: - Private Methods
+    
+    /// Handles changes in the lock state provided by the `lockDetector`.
+    /// - Parameter isLocked: A Boolean indicating whether the system is locked.
+    private func handleLockState(_ isLocked: Bool) {
+        if isLocked {
+            wasLocked = true
+        } else if wasLocked {
+            debouncedThief()
         }
     }
     
-    /// Stops the listener, terminating any ongoing monitoring of login status.
-    func stop() {
-        logger.debug("stoped")
-        isRunning = false
-        listenerAction = nil
-        
-        NotificationCenter.default.removeObserver(self, name: NSApplication.didChangeOcclusionStateNotification, object: nil)
+    /// Debounced function to trigger the login listener action on the main queue.
+    private func trigger() {
+        DispatchQueue.main.async(execute: fireAction)
     }
     
-    //MARK: - Private
-    
-    /// Private method to handle `didChangeOcclusionStateNotification`, which indicates a possible login event.
-    /// This method triggers the `debouncedThief` action.
-    @objc private func sessionDidBecomeActiveNotification() {
-        logger.debug("didChangeOcclusionStateNotification")
-        
-        debouncedThief()
+    /// Executes the listener action with predefined parameters.
+    @Sendable
+    private func fireAction() {
+        listenerAction?(.onLoginListener, .logedIn)
     }
 }

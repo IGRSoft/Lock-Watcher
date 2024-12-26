@@ -20,7 +20,7 @@ protocol FileSystemUtilProtocol {
 }
 
 /// `FileSystemUtil` provides utilities for interacting with the local file system, specifically for storing images.
-public class FileSystemUtil: FileSystemUtilProtocol {
+public final class FileSystemUtil: FileSystemUtilProtocol {
     //MARK: - Dependency Injection
     
     /// A logger instance for logging various events and errors.

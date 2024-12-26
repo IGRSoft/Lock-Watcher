@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// A view model for the main screen, handling business logic and data retrieval for its corresponding view.
-class MainViewModel: ObservableObject, DomainViewConstantProtocol {
+final class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     
     // MARK: - DomainViewConstantProtocol
     
@@ -62,5 +62,7 @@ class MainViewModel: ObservableObject, DomainViewConstantProtocol {
 
 /// An extension providing a preview instance of `MainViewModel` for design and testing purposes.
 extension MainViewModel {
-    static var preview: MainViewModel = MainViewModel(thiefManager: ThiefManagerPreview())
+    static var preview: MainViewModel {
+        .init(thiefManager: ThiefManagerPreview())
+    }
 }

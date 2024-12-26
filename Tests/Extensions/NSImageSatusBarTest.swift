@@ -9,7 +9,7 @@
 @testable import Lock_Watcher
 import XCTest
 
-class NSImageTests: XCTestCase {
+final class NSImageTests: XCTestCase {
     
     // Test that when the status is triggered, the alert icon is returned.
     func testStatusBarIconTriggered() {

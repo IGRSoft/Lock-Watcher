@@ -122,7 +122,7 @@ final class DatabaseManager: DatabaseManagerProtocol {
 }
 
 /// A mock version of `DatabaseManager` mainly for previewing or testing purposes.
-class DatabaseManagerPreview: DatabaseManagerProtocol {
+final class DatabaseManagerPreview: DatabaseManagerProtocol {
     func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
         .empty
     }

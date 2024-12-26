@@ -23,7 +23,7 @@ protocol NetworkUtilProtocol {
 }
 
 /// `NetworkUtil` provides utilities for network-related tasks, such as fetching the device's IP address and performing trace routes.
-public class NetworkUtil: NetworkUtilProtocol {
+public final class NetworkUtil: NetworkUtilProtocol {
     
     //MARK: - Dependency injection
     

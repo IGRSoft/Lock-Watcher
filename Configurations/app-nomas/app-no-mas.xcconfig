@@ -30,3 +30,7 @@ SWIFT_EMIT_LOC_STRINGS = YES
 
 //Swift Compiler - Custom Flags
 OTHER_SWIFT_FLAGS = -DNON_MAS_CONFIG
+
+INFOPLIST_KEY_NSFaceIDUsageDescription = To unlock access to database data
+INFOPLIST_KEY_NSCameraUsageDescription = Detect persone who is trying get access to your user
+INFOPLIST_KEY_NSLocationUsageDescription = Add location information to the snapshot to know where it was taken

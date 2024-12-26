@@ -9,7 +9,7 @@
 import XCTest
 @testable import Lock_Watcher
 
-class NetworkUtilTests: XCTestCase {
+final class NetworkUtilTests: XCTestCase {
     
     var networkUtil: NetworkUtilProtocol!
     var mockLogger: LogMock!

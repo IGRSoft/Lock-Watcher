@@ -30,7 +30,7 @@ protocol BaseCoordinatorProtocol {
 }
 
 /// A preview implementation of the BaseCoordinatorProtocol used for testing or design purposes.
-class MainCoordinatorPreview: BaseCoordinatorProtocol {
+final class MainCoordinatorPreview: BaseCoordinatorProtocol {
     
     /// Displays the main application window (no-op in preview).
     func displayMainWindow() {}

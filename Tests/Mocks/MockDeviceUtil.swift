@@ -10,7 +10,7 @@ import Foundation
 @testable import Lock_Watcher
 
 // MockDeviceUtil is a subclass of DeviceUtil used to override the behavior of `sysctlbyname`
-class MockDeviceUtil: DeviceUtil {
+final class MockDeviceUtil: DeviceUtil {
     
     let mockDevice: String?
     

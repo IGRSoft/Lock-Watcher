@@ -9,7 +9,7 @@
 import XCTest
 @testable import Lock_Watcher
 
-class LogMock: LogProtocol {
+final class LogMock: LogProtocol {
     var debugMessage: String?
     var infoMessage: String?
     var errorMessage: String?

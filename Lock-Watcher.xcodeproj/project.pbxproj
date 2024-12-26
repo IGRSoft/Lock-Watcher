@@ -25,19 +25,25 @@
 		A533D82B25AA11F40046B7C8 /* XPCMail.m in Sources */ = {isa = PBXBuildFile; fileRef = A533D82A25AA11F40046B7C8 /* XPCMail.m */; };
 		A533D82D25AA11F40046B7C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A533D82C25AA11F40046B7C8 /* main.m */; };
 		A533D83C25AA12110046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
-		A533D84325AA126B0046B7C8 /* Mail.app in Resources */ = {isa = PBXBuildFile; fileRef = A533D84225AA126B0046B7C8 /* Mail.app */; };
 		A533D85425AA1BB60046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
 		A535F5D227B9165F0096D0C3 /* SimpleTracer in Frameworks */ = {isa = PBXBuildFile; productRef = A535F5D127B9165F0096D0C3 /* SimpleTracer */; };
 		A535F5D427B9166E0096D0C3 /* SimpleTracer in Frameworks */ = {isa = PBXBuildFile; productRef = A535F5D327B9166E0096D0C3 /* SimpleTracer */; };
 		A541188027649FB2007C6AB8 /* WrongPasswordListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */; };
 		A541188127649FC4007C6AB8 /* MailNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */; };
 		A5457A8C26C1FB1400386738 /* NSImage+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5457A8B26C1FB1400386738 /* NSImage+Text.swift */; };
+		A5477B922D11E60500FA176B /* Mail.app in Resources */ = {isa = PBXBuildFile; fileRef = A5477B912D11E60500FA176B /* Mail.app */; };
 		A54A1F7A2703769800176069 /* LoginListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A1F792703769800176069 /* LoginListener.swift */; };
 		A54A1F7B2703769800176069 /* LoginListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A1F792703769800176069 /* LoginListener.swift */; };
 		A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
 		A54E4A2F26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
 		A54E4A582610AA3D00E7B1D4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A562610AA3C00E7B1D4 /* main.swift */; };
 		A54E4A592610AA3D00E7B1D4 /* XPCAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */; };
+		A54F78192D119AFD00AA5592 /* MacOSLockDetectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F78182D119AFD00AA5592 /* MacOSLockDetectManager.swift */; };
+		A54F781A2D119AFD00AA5592 /* MacOSLockDetectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F78182D119AFD00AA5592 /* MacOSLockDetectManager.swift */; };
+		A54F781C2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F781B2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift */; };
+		A54F781D2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F781B2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift */; };
+		A54F781F2D11A73D00AA5592 /* NSImage+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F781E2D11A73D00AA5592 /* NSImage+Sendable.swift */; };
+		A54F78202D11A73D00AA5592 /* NSImage+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F781E2D11A73D00AA5592 /* NSImage+Sendable.swift */; };
 		A56CFFBB27A48D6A00CB137B /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CFFBA27A48D6A00CB137B /* String+Regex.swift */; };
 		A56CFFBC27A48D6A00CB137B /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CFFBA27A48D6A00CB137B /* String+Regex.swift */; };
 		A56D11E126DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */; };
@@ -336,14 +342,17 @@
 		A533D82E25AA11F40046B7C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A533D83A25AA12110046B7C8 /* XPCMail-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XPCMail-Bridging-Header.h"; sourceTree = "<group>"; };
 		A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCMailProtocol.swift; sourceTree = "<group>"; };
-		A533D84225AA126B0046B7C8 /* Mail.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Mail.app; path = ../../../../../System/Applications/Mail.app; sourceTree = "<group>"; };
 		A5457A8B26C1FB1400386738 /* NSImage+Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Text.swift"; sourceTree = "<group>"; };
+		A5477B912D11E60500FA176B /* Mail.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Mail.app; path = ../../../../../../System/Applications/Mail.app; sourceTree = "<group>"; };
 		A54A1F792703769800176069 /* LoginListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginListener.swift; sourceTree = "<group>"; };
 		A54E4A1726108E9600E7B1D4 /* XPCAuthentication.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCAuthentication.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54E4A1F26108E9600E7B1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCAuthenticationProtocol.swift; sourceTree = "<group>"; };
 		A54E4A562610AA3C00E7B1D4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCAuthentication.swift; sourceTree = "<group>"; };
+		A54F78182D119AFD00AA5592 /* MacOSLockDetectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSLockDetectManager.swift; sourceTree = "<group>"; };
+		A54F781B2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Sendable.swift"; sourceTree = "<group>"; };
+		A54F781E2D11A73D00AA5592 /* NSImage+Sendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Sendable.swift"; sourceTree = "<group>"; };
 		A56CFFBA27A48D6A00CB137B /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+PropertyWrapper.swift"; sourceTree = "<group>"; };
 		A56F1A7C278A29630066CA78 /* DispatchQueue+Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Debounce.swift"; sourceTree = "<group>"; };
@@ -585,7 +594,7 @@
 		A533D82725AA11F40046B7C8 /* XPCMail */ = {
 			isa = PBXGroup;
 			children = (
-				A533D84225AA126B0046B7C8 /* Mail.app */,
+				A5477B912D11E60500FA176B /* Mail.app */,
 				A533D82925AA11F40046B7C8 /* XPCMail.h */,
 				A533D82A25AA11F40046B7C8 /* XPCMail.m */,
 				A533D82C25AA11F40046B7C8 /* main.m */,
@@ -610,6 +619,8 @@
 				A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */,
 				A5A252182A4F416600889F5C /* View+ApplyIf.swift */,
 				A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */,
+				A54F781B2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift */,
+				A54F781E2D11A73D00AA5592 /* NSImage+Sendable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -988,6 +999,7 @@
 				A5E6D78D25A5CD2E00EEA7DD /* TriggerManager.swift */,
 				A519998026DA41C700F482BC /* DatabaseManager.swift */,
 				F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */,
+				A54F78182D119AFD00AA5592 /* MacOSLockDetectManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1239,7 +1251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A533D84325AA126B0046B7C8 /* Mail.app in Resources */,
+				A5477B922D11E60500FA176B /* Mail.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1419,6 +1431,7 @@
 				A57905D62A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */,
 				A5942652283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
 				A58FC73C26E2814E007674F6 /* XPCAuthenticationProtocol.swift in Sources */,
+				A54F781A2D119AFD00AA5592 /* MacOSLockDetectManager.swift in Sources */,
 				A58C63C22A4C5AF6004DE972 /* MainView.swift in Sources */,
 				A58FC73D26E2814E007674F6 /* NotificationManager.swift in Sources */,
 				A57905BD2A9534AA00647BF8 /* Secrets.swift in Sources */,
@@ -1433,6 +1446,8 @@
 				A58FC74026E2814E007674F6 /* XPCPowerProtocol.swift in Sources */,
 				A5A252172A4E247400889F5C /* LastThiefDetectionViewModel.swift in Sources */,
 				A5A2521A2A4F416600889F5C /* View+ApplyIf.swift in Sources */,
+				A54F78202D11A73D00AA5592 /* NSImage+Sendable.swift in Sources */,
+				A54F781D2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift in Sources */,
 				A57905DA2A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */,
 				A5AA31E02778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
 				A58FC74126E2814E007674F6 /* WakeUpListener.swift in Sources */,
@@ -1502,6 +1517,7 @@
 				A57905D52A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */,
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 				A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */,
+				A54F78192D119AFD00AA5592 /* MacOSLockDetectManager.swift in Sources */,
 				A541188027649FB2007C6AB8 /* WrongPasswordListener.swift in Sources */,
 				A56CFFBB27A48D6A00CB137B /* String+Regex.swift in Sources */,
 				A57905BC2A9534AA00647BF8 /* Secrets.swift in Sources */,
@@ -1516,6 +1532,8 @@
 				A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */,
 				A5A252162A4E247400889F5C /* LastThiefDetectionViewModel.swift in Sources */,
 				A5A252192A4F416600889F5C /* View+ApplyIf.swift in Sources */,
+				A54F781F2D11A73D00AA5592 /* NSImage+Sendable.swift in Sources */,
+				A54F781C2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift in Sources */,
 				A57905D92A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */,
 				A5AA31DF2778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
 				A58D768925A5DDBF00EC3792 /* XPCPowerProtocol.swift in Sources */,
@@ -1683,7 +1701,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = Debug;
 		};
@@ -1691,7 +1708,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = Release;
 		};
@@ -1706,7 +1722,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = "Release-non-mas";
 		};
@@ -1763,7 +1778,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = "Release-non-mas";
 		};
@@ -1785,7 +1799,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = Debug;
 		};
@@ -1793,7 +1806,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
 			};
 			name = Release;
 		};
@@ -1940,7 +1952,7 @@
 			repositoryURL = "https://github.com/dropbox/SwiftyDropbox.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.2.0;
+				minimumVersion = 10.2.0;
 			};
 		};
 		A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */ = {

@@ -9,7 +9,7 @@ import Foundation
 
 // Defines a protocol for trigger management.
 protocol TriggerManagerProtocol {
-    typealias TriggerBlock = Commons.ThiefClosure
+    typealias TriggerBlock = Commons.TriggerClosure
     
     /// Starts the trigger manager with given settings and an optional trigger block.
     func start(settings: AppSettingsProtocol?, triggerBlock: @escaping TriggerBlock)
@@ -31,12 +31,14 @@ final class TriggerManager: TriggerManagerProtocol {
     /// A closure that takes a listener and a boolean flag to determine if the listener should run or not.
     var runListener: ((BaseListenerProtocol, Bool) -> ())?
     
+    private var lockDetector: MacOSLockDetectorProtocol = MacOSLockDetector()
+    
     /// Holds a set of listeners that are configured based on certain conditions.
     private lazy var listeners: [ListenerName : BaseListenerProtocol] = {
         var listeners: [ListenerName : BaseListenerProtocol] = [.onWakeUpListener : WakeUpListener(),
                                                                 .onBatteryPowerListener : PowerListener(),
                                                                 .onUSBConnectionListener : USBListener(),
-                                                                .onLoginListener : LoginListener()]
+                                                                .onLoginListener : LoginListener(lockDetector: lockDetector)]
         
         // If the build isn't a Mac App Store build, exclude WrongPasswordListener
         if AppSettings.isMASBuild == false {
@@ -133,7 +135,7 @@ final class TriggerManager: TriggerManagerProtocol {
         case .onUSBConnectionListener:
             listener = USBListener()
         case .onLoginListener:
-            listener = LoginListener()
+            listener = LoginListener(lockDetector: lockDetector)
         }
         
         self.listeners[type] = listener

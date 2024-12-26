@@ -2,15 +2,6 @@
   "originHash" : "ea045ba0ee4816b909b79814b0a22dfe61193aa569a5e1c67dd24d47b0ddede9",
   "pins" : [
     {
-      "identity" : "alamofire",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Alamofire/Alamofire.git",
-      "state" : {
-        "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
-        "version" : "5.10.2"
-      }
-    },
-    {
       "identity" : "easystash",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onmyway133/EasyStash",
@@ -69,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dropbox/SwiftyDropbox.git",
       "state" : {
-        "revision" : "5bda01b02a87568801a5b2af07e3fdb075dce69c",
-        "version" : "9.2.0"
+        "revision" : "8e3133d48241e865c7e9de0dc66ac908eb8e02ef",
+        "version" : "10.2.0"
       }
     }
   ],

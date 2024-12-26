@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockAppDelegateModel: AppDelegateModelProtocol {
+final class MockAppDelegateModel: AppDelegateModelProtocol {
 
     var invokedSettingsViewGetter = false
     var invokedSettingsViewGetterCount = 0
