@@ -8,9 +8,9 @@
 |---------|-------|
 | Platform | macOS |
 | Framework | SwiftUI with AppKit integration |
-| Language | Swift 5.10 (Swift 6 ready) |
+| Language | Swift 6.2 |
 | Architecture | MVVM + Coordinator pattern |
-| Concurrency | Swift strict concurrency (complete) |
+| Concurrency | Swift 6 strict concurrency |
 
 ## Key Project Documents
 

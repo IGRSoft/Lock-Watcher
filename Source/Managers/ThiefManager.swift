@@ -167,12 +167,12 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
         lastThiefDetection.coordinate = coordinate
         lastThiefDetection.filePath = filePath */
         
-        let complete: (TriggerType, NSImage, URL, Date, CLLocationCoordinate2D?, String?, String?) -> Void = { [weak self] type, snapshot, filePath, date, coordinate, ipAddress, traceRoute in
+        let complete: @Sendable (TriggerType, NSImage, URL, Date, CLLocationCoordinate2D?, String?, String?) -> Void = { [weak self] type, snapshot, filePath, date, coordinate, ipAddress, traceRoute in
             let dto = ThiefDto(triggerType: type, coordinate: coordinate, ipAddress: ipAddress, traceRoute: traceRoute, snapshot: snapshot, filePath: filePath, date: date)
-            
+
             _ = self?.notificationManager.send(dto)
             _ = self?.databaseManager.send(dto)
-            
+
             self?.watchBlock(dto)
         }
         

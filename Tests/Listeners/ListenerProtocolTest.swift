@@ -15,7 +15,7 @@ final class ListenerTests: XCTestCase {
 
     override func setUpWithError() throws {
         listener = MockListener()
-        dummyDTO = ThiefDto() // You would initialize this with valid data for testing.
+        dummyDTO = ThiefDto(triggerType: .setup) // You would initialize this with valid data for testing.
     }
 
     override func tearDownWithError() throws {
@@ -67,17 +67,17 @@ final class ListenerTests: XCTestCase {
     
     func testListenerAction() {
         var triggered = false
-        listener.stubbedStartActionResult = (.onWakeUpListener, ThiefDto())
+        listener.stubbedStartActionResult = (.onWakeUpListener, .onWakeUp)
         listener.start { _, _ in
             triggered = true
         }
-                
+
         XCTAssertTrue(triggered)
     }
-    
+
     func testListenerReceivesCorrectEvent() {
         var receivedEvent: ListenerName?
-        listener.stubbedStartActionResult = (.onWakeUpListener, ThiefDto())
+        listener.stubbedStartActionResult = (.onWakeUpListener, .onWakeUp)
         listener.start { name, _ in
             receivedEvent = name
         }

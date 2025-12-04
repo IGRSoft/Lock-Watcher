@@ -7,11 +7,11 @@
 
 import AppKit
 import Foundation
-import UserNotifications
+@preconcurrency import UserNotifications
 
 /// `NotificationNotifier` is responsible for sending local notifications using the User Notifications framework.
 /// These notifications alert the user when certain events (like detecting a potential threat) occur.
-final class NotificationNotifier: NotifierProtocol {
+final class NotificationNotifier: NotifierProtocol, @unchecked Sendable {
     // MARK: - Dependency injection
     
     /// A logger instance for logging various events and errors.

@@ -8,11 +8,11 @@ Lock-Watcher is a macOS application that transforms a Mac into a security monito
 
 ## Technology Stack
 
-- **Language**: Swift 5.10 (Swift 6 strict concurrency ready)
+- **Language**: Swift 6.2
 - **UI Framework**: SwiftUI with AppKit integration
-- **Minimum Platform**: macOS 12.4+
+- **Minimum Platform**: macOS 13.5+
 - **Architecture**: MVVM + Coordinator pattern
-- **Concurrency**: Swift strict concurrency (complete)
+- **Concurrency**: Swift 6 strict concurrency
 - **State Management**: @Published, Combine
 - **Storage**: EasyStash (encrypted local storage)
 - **Cloud Integration**: iCloud (CloudKit), Dropbox SDK

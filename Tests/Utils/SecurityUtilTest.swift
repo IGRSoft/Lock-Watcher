@@ -26,32 +26,32 @@ final class SecurityUtilTests: XCTestCase {
     }
     
     // Success: Test Saving Password
-    func testSavePassword_Success() {
-        securityUtil.save(password: "testPassword")
+    func testSavePassword_Success() async {
+        await securityUtil.save(password: "testPassword")
         XCTAssertTrue(securityUtil.hasPassword(), "The password should be saved successfully.")
     }
-    
+
     // Failure: Test Saving Empty Password
-    func testSavePassword_Failure() {
-        securityUtil.save(password: "")
+    func testSavePassword_Failure() async {
+        await securityUtil.save(password: "")
         XCTAssertFalse(securityUtil.hasPassword(), "Empty password should not be saved.")
     }
-    
+
     // Success: Test Valid Password
-    func testIsValidPassword_Success() {
-        securityUtil.save(password: "testPassword")
+    func testIsValidPassword_Success() async {
+        await securityUtil.save(password: "testPassword")
         XCTAssertTrue(securityUtil.isValid(password: "testPassword"), "The password should be valid.")
     }
-    
+
     // Failure: Test Invalid Password
-    func testIsValidPassword_Failure() {
-        securityUtil.save(password: "testPassword")
+    func testIsValidPassword_Failure() async {
+        await securityUtil.save(password: "testPassword")
         XCTAssertFalse(securityUtil.isValid(password: "wrongPassword"), "The password should be invalid.")
-        
-        securityUtil.save(password: "")
+
+        await securityUtil.save(password: "")
         XCTAssertFalse(securityUtil.isValid(password: "wrongPassword"), "The password should be invalid.")
-        
-        securityUtil.save(password: "testPassword")
+
+        await securityUtil.save(password: "testPassword")
         XCTAssertFalse(securityUtil.isValid(password: ""), "The password should be invalid.")
     }
 }

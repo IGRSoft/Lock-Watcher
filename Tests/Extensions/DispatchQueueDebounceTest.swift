@@ -9,6 +9,7 @@
 import XCTest
 @testable import Lock_Watcher
 
+@MainActor
 final class DispatchQueueDebounceTests: XCTestCase {
     func testDebounceExecutesActionAfterInterval() {
         // Create an expectation for a background download task to complete.

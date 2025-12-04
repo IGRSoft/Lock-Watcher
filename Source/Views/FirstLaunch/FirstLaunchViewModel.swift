@@ -150,16 +150,18 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol, 
     
     /// Simulates a trigger for permissions and state changes.
     private func simulateTrigger() {
-        Task {
+        Task { @MainActor [weak self] in
+            guard let self else { return }
             PermissionsUtils.updateCameraPermissions { [weak self] isGranted in
+                guard let self else { return }
                 if isGranted {
-                    self?.thiefManager.detectedTrigger { success in
-                        DispatchQueue.main.async { [weak self] in
+                    self.thiefManager.detectedTrigger { [weak self] success in
+                        Task { @MainActor [weak self] in
                             self?.state = success ? .success : .fault
                         }
                     }
                 } else {
-                    DispatchQueue.main.async { [weak self] in
+                    Task { @MainActor [weak self] in
                         self?.state = .fault
                     }
                 }

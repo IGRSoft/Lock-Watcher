@@ -44,7 +44,7 @@ final class MockListener: BaseListenerProtocol {
 
     var invokedStart = false
     var invokedStartCount = 0
-    var stubbedStartActionResult: (ListenerName, ThiefDto)?
+    var stubbedStartActionResult: (ListenerName, TriggerType)?
 
     func start(_ action: @escaping ListenerAction) {
         invokedStart = true

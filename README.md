@@ -62,11 +62,11 @@ Each capture includes:
 
 ## Technology Stack
 
-- **Language**: Swift 5.10 (Swift 6 ready)
+- **Language**: Swift 6.2
 - **UI Framework**: SwiftUI with AppKit integration
-- **Minimum Platform**: macOS 12.4+
+- **Minimum Platform**: macOS 13.5+
 - **Architecture**: MVVM + Coordinator pattern
-- **Concurrency**: Swift strict concurrency (complete)
+- **Concurrency**: Swift 6 strict concurrency
 - **Storage**: EasyStash (encrypted local storage)
 - **Cloud**: iCloud (CloudKit), Dropbox SDK
 - **Camera**: PhotoSnap library
@@ -74,10 +74,10 @@ Each capture includes:
 
 ## Requirements
 
-- **macOS**: 12.4 or later
+- **macOS**: 13.5 or later
 - **Hardware**: Mac with built-in or external camera
-- **Xcode**: 15.0+ (for development)
-- **Swift**: 5.10
+- **Xcode**: 16.3+ (for development)
+- **Swift**: 6.2
 
 ## Architecture
 
