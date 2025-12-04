@@ -10,7 +10,6 @@ import AppKit
 import LocalAuthentication
 
 final class AuthentificationManager: @unchecked Sendable {
-    
     private let securityUtil: SecurityUtilProtocol
     private let logger: LogProtocol
     
@@ -30,12 +29,10 @@ final class AuthentificationManager: @unchecked Sendable {
         if let policy = localAuthPolicy(for: settings) {
             do {
                 isUnlocked = try await authenticate(with: policy)
-            }
-            catch let error as LAError where error.code == .userFallback {
+            } catch let error as LAError where error.code == .userFallback {
                 isUnlocked = try await authenticateWithPassword()
             }
-        }
-        else {
+        } else {
             isUnlocked = try await authenticateWithPassword()
         }
         if isUnlocked {
@@ -61,12 +58,10 @@ final class AuthentificationManager: @unchecked Sendable {
             if alert.runModal() == .alertFirstButtonReturn {
                 if securityUtil.isValid(password: inputTextField.stringValue) {
                     return true
-                }
-                else {
+                } else {
                     throw Failure.passwordAuthentificationFailed
                 }
-            }
-            else {
+            } else {
                 return false
             }
         }
@@ -81,8 +76,7 @@ final class AuthentificationManager: @unchecked Sendable {
             if let error {
                 logger.error(String(describing: error))
                 throw error
-            }
-            else {
+            } else {
                 logger.error(String(describing: Failure.localAuthentificationFailed.description))
                 throw Failure.localAuthentificationFailed
             }
@@ -91,11 +85,9 @@ final class AuthentificationManager: @unchecked Sendable {
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: authentificationReason) { success, authenticationError in
                 if success {
                     continuation.resume(returning: true)
-                }
-                else if let error = authenticationError as? LAError, error.code == LAError.userCancel {
+                } else if let error = authenticationError as? LAError, error.code == LAError.userCancel {
                     continuation.resume(returning: false)
-                }
-                else {
+                } else {
                     continuation.resume(throwing: authenticationError ?? Failure.localAuthentificationFailed)
                 }
             }
@@ -116,34 +108,25 @@ final class AuthentificationManager: @unchecked Sendable {
     }
     
     private func localAuthPolicy(for settings: AuthSettings) -> LAPolicy? {
-        let policy: LAPolicy?
-        if settings.devicePassword {
-            policy = .deviceOwnerAuthentication
-        }
-        else {
-            if settings.biometrics && settings.watch {
-                policy = .deviceOwnerAuthenticationWithBiometricsOrWatch
-            }
-            else if settings.biometrics {
-                policy = .deviceOwnerAuthenticationWithBiometrics
-            }
-            else if settings.watch {
-                policy = .deviceOwnerAuthenticationWithWatch
-            }
-            else {
-                policy = nil
+        let policy: LAPolicy? = if settings.devicePassword {
+            .deviceOwnerAuthentication
+        } else {
+            if settings.biometrics, settings.watch {
+                .deviceOwnerAuthenticationWithBiometricsOrWatch
+            } else if settings.biometrics {
+                .deviceOwnerAuthenticationWithBiometrics
+            } else if settings.watch {
+                .deviceOwnerAuthenticationWithWatch
+            } else {
+                nil
             }
         }
         return policy
     }
-    
-}
-
+    }
 
 extension AuthentificationManager {
-    
     enum Failure: Error, CustomStringConvertible {
-        
         case localAuthentificationFailed
         case passwordAuthentificationFailed
         
@@ -155,7 +138,5 @@ extension AuthentificationManager {
                 NSLocalizedString("Auth_passwordAuthentificationFailed", comment: "")
             }
         }
-        
+            }
     }
-    
-}

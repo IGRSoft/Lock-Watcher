@@ -10,7 +10,6 @@ import os
 
 /// `XPCAuthentication` manages the detection of authentication failure messages in the system log.
 public final class XPCAuthentication: NSObject, XPCAuthenticationProtocol {
-    
     private var outputPipe = Pipe()
     private var buildTask = Process()
     
@@ -26,16 +25,16 @@ public final class XPCAuthentication: NSObject, XPCAuthenticationProtocol {
         dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
         
         // Configure the process to run the `log` command with necessary arguments.
-        self.buildTask.launchPath = "/usr/bin/log"
-        self.buildTask.arguments = ["show",
-                                    "--predicate", "(eventMessage CONTAINS \"console domain: invalid credentials\") and (subsystem == \"com.apple.opendirectoryd\")",
-                                    "--style", "syslog",
-                                    "--start", "\(dateFormatter.string(from: date))"]
+        buildTask.launchPath = "/usr/bin/log"
+        buildTask.arguments = ["show",
+                               "--predicate", "(eventMessage CONTAINS \"console domain: invalid credentials\") and (subsystem == \"com.apple.opendirectoryd\")",
+                               "--style", "syslog",
+                               "--start", "\(dateFormatter.string(from: date))"]
         
         os_log(.debug, "XPCAuthentication start listen from \(dateFormatter.string(from: date))")
         
         // Set the process's output to `outputPipe`.
-        self.buildTask.standardOutput = outputPipe
+        buildTask.standardOutput = outputPipe
         
         // Asynchronously wait for data to become available in the pipe.
         outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
@@ -43,8 +42,8 @@ public final class XPCAuthentication: NSObject, XPCAuthenticationProtocol {
         // Observe for new data available in the pipe.
         NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable,
                                                object: outputPipe.fileHandleForReading,
-                                               queue: nil) { [weak self] notification in
-            
+                                               queue: nil)
+        { [weak self] _ in
             if let output = self?.outputPipe.fileHandleForReading.availableData {
                 // Convert the output data to a string and split it into lines.
                 let outputString = String(data: output, encoding: String.Encoding.utf8) ?? ""
@@ -60,9 +59,9 @@ public final class XPCAuthentication: NSObject, XPCAuthenticationProtocol {
         }
         
         // Launch the process.
-        self.buildTask.launch()
+        buildTask.launch()
         
         // Wait until the process exits.
-        self.buildTask.waitUntilExit()
+        buildTask.waitUntilExit()
     }
 }

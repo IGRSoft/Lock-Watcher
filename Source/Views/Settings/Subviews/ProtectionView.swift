@@ -11,7 +11,6 @@ import SwiftUI
 /// A view component that provides a user interface for enabling protection access to the application.
 /// The user can toggle the protection on or off and set a password to protect the access.
 struct ProtectionView: View {
-    
     /// A binding that determines if protection is enabled or not.
     @Binding var isProtectionEnable : Bool
     
@@ -63,8 +62,7 @@ struct ProtectionView: View {
             }
         )
     }
-    
-}
+    }
 
 /// A preview provider for the `ProtectionView`, useful for visualizing the component in design tools and SwiftUI previews.
 struct ProtectionView_Previews: PreviewProvider {

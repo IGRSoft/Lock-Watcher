@@ -10,7 +10,6 @@ import SwiftUI
 
 /// A view that presents the user with different states during the first launch of the application.
 struct FirstLaunchView: View {
-    
     /// An observable object that manages the state and behavior for this view.
     @StateObject private var viewModel: FirstLaunchViewModel
     
@@ -33,7 +32,7 @@ struct FirstLaunchView: View {
                 Button(action: viewModel.takeSnapshot, label: viewModel.takeSnapshotTitle)
                     .alert(viewModel.openSettingsAlertTitle(), isPresented: $viewModel.showingAlert) {
                         Button(action: viewModel.openSettings, label: viewModel.openSettingsTitle)
-                        Button(role: .cancel, action: { }, label: viewModel.cancelSettingsTitle)
+                        Button(role: .cancel, action: {}, label: viewModel.cancelSettingsTitle)
                     }
             case .progress:
                 // Shows the progress state using a progress view.

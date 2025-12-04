@@ -7,19 +7,17 @@
 //
 
 import AppKit
-import CoreLocation
 import AVFoundation
+import CoreLocation
 
 /// `PermissionsUtils` is a utility class that facilitates the management of permissions for location and camera services.
 public final class PermissionsUtils {
-    
     /// Updates the location services permissions.
     ///
     /// This method checks the current authorization status for location services and if it's undetermined, it sends a request for authorization.
     ///
     /// - Parameter handler: A closure that gets called with a boolean indicating whether access is granted.
     class func updateLocationPermissions(completionHandler handler: @escaping Commons.BoolClosure) {
-        
         // Instantiating the CLLocationManager to get location permissions.
         let locationManager = CLLocationManager()
         
@@ -45,7 +43,6 @@ public final class PermissionsUtils {
     ///
     /// - Parameter handler: A closure that gets called with a boolean indicating whether access is granted.
     class func updateCameraPermissions(completionHandler handler: @escaping Commons.BoolClosure) {
-        
         let authorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
         
         switch authorizationStatus {

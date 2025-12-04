@@ -9,8 +9,7 @@
 import Foundation
 
 /// Contains commonly used closure types to promote consistency throughout the code.
-struct Commons {
-    
+enum Commons {
     /// Represents a closure that takes no parameters and returns no value.
     typealias EmptyClosure = () -> Void
     
@@ -29,7 +28,6 @@ struct Commons {
 
 /// Describes the different states a SwiftUI View can be in.
 enum StateMode: Int, CaseIterable {
-    
     /// The view is in its default state.
     case idle
     

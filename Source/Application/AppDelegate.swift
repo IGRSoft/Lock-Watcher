@@ -10,7 +10,6 @@ import AppKit
 
 /// Acts as the main delegate for the application, handling app lifecycle events and configurations.
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    
     /// Represents general settings for the application.
     let viewModel: AppDelegateModelProtocol
     
@@ -19,7 +18,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     override convenience init() {
-        self.init(viewModel: AppDelegateModel.init())
+        self.init(viewModel: AppDelegateModel())
     }
     
     /// Called after the application finishes launching. Sets up theme and displays relevant windows.

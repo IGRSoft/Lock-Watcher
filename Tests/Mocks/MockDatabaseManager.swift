@@ -6,11 +6,10 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
 import Foundation
+@testable import Lock_Watcher
 
 final class MockDatabaseManager: DatabaseManagerProtocol {
-
     var invokedLatestImagesGetter = false
     var invokedLatestImagesGetterCount = 0
     @Published var stubbedLatestImages: [DatabaseDto] = []

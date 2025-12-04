@@ -48,12 +48,12 @@ final class FirstLaunchProgressViewModel: ObservableObject, @unchecked Sendable 
     @Sendable
     private func animate(_ timaer: Timer) {
         self.pos += 1
-        var pos = self.pos
+        var pos = pos
         if pos == Positions.allValues.count {
             pos = 0
             self.pos = pos
         }
-        self.position = .allValues[pos]
+        position = .allValues[pos]
     }
 }
 

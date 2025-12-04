@@ -10,7 +10,6 @@ import SwiftUI
 
 /// A SwiftUI view that presents a fault message and action to guide the user when there's a setup fault on first launch.
 struct FirstLaunchFaultViews: View {
-    
     /// A binding that informs if this fault view should be hidden.
     @Binding var isHidden: Bool
     

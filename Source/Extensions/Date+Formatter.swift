@@ -1,5 +1,5 @@
 //
-//  Date+IGRExtension.swift
+//  Date+Formatter.swift
 //  IGR Software
 //
 //  Created by Vitalii Parovishnyk on 03.09.2021.
@@ -8,7 +8,6 @@
 import Foundation
 
 extension Date {
-    
     /// A custom date formatter tailored for the application's specific needs.
     /// This formatter provides both a short date and time representation.
     ///

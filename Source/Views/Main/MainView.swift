@@ -10,7 +10,6 @@ import SwiftUI
 
 /// A SwiftUI view that represents the main content of the application.
 struct MainView: View {
-    
     /// An observed view model that provides the necessary data and functionality for this view.
     @StateObject private var viewModel: MainViewModel
     
@@ -36,7 +35,7 @@ struct MainView: View {
             .frame(width: viewModel.viewSettings.window.width)
         } else { // If access isn't granted, execute the access granted block when the view appears.
             Text("")
-                .onAppear() {
+                .onAppear {
                     viewModel.accessGrantedBlock?()
                 }
         }
@@ -49,7 +48,7 @@ struct PopoverView_Previews: PreviewProvider {
         // Uncomment below if you want to preview the view in different languages.
         // ForEach(["en", "ru", "uk"], id: \.self) { id in
         MainView(viewModel: MainViewModel.preview)
-        //.environment(\.locale, .init(identifier: id))
-        //}
+        // .environment(\.locale, .init(identifier: id))
+        // }
     }
 }

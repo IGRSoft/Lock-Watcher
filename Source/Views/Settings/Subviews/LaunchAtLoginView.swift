@@ -6,12 +6,11 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-import SwiftUI
 import LaunchAtLogin
+import SwiftUI
 
 /// A view component that provides a toggle for the user to enable or disable launching the app at system login.
 struct LaunchAtLoginView: View {
-    
     /// Initializes the view and performs necessary migrations for the `LaunchAtLogin` library, if needed.
     init() {
         LaunchAtLogin.migrateIfNeeded()

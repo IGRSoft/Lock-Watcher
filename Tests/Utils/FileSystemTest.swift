@@ -10,7 +10,6 @@ import XCTest
 @testable import Lock_Watcher
 
 final class FileSystemUtilTests: XCTestCase {
-    
     var fileSystemUtil: FileSystemUtilProtocol!
     var mockLogger: LogMock!
     
@@ -49,7 +48,7 @@ final class FileSystemUtilTests: XCTestCase {
         XCTAssertNotNil(mockLogger.debugMessage, "A debug log should be generated when storing an image fails.")
     }
     
-    /*func testFilePathGeneration() {
+    /* func testFilePathGeneration() {
         // This would be a private function normally, but for the purpose of this test example
         // you might want to make it internal or use other techniques to test it.
         
@@ -58,7 +57,7 @@ final class FileSystemUtilTests: XCTestCase {
         
         XCTAssertNotNil(url, "The URL should not be nil when generating a file path successfully.")
         XCTAssert(url?.lastPathComponent == "\(key).jpeg", "The last path component should match the key.")
-    }*/
+    } */
 }
 
 // Your LogMock from the previous example would also be needed here.

@@ -10,7 +10,6 @@ import XCTest
 @testable import Lock_Watcher
 
 final class NetworkUtilTests: XCTestCase {
-    
     var networkUtil: NetworkUtilProtocol!
     var mockLogger: LogMock!
     
@@ -39,7 +38,7 @@ final class NetworkUtilTests: XCTestCase {
         let host = "8.8.8.8"
         let expectedTraceRoute = "Your mocked or expected trace route result"
         
-        let expectation = self.expectation(description: "Expecting trace route to complete")
+        let expectation = expectation(description: "Expecting trace route to complete")
         
         networkUtil.getTraceRoute(host: host) { traceRoute in
             XCTAssertTrue(traceRoute.contains(host), "Trace route result should contains \(expectedTraceRoute)")
@@ -53,7 +52,7 @@ final class NetworkUtilTests: XCTestCase {
         let host = "8.8.8.8.8"
         let expectedTraceRoute = "Your mocked or expected trace route result"
         
-        let expectation = self.expectation(description: "Expecting trace route to complete")
+        let expectation = expectation(description: "Expecting trace route to complete")
         
         networkUtil.getTraceRoute(host: host) { traceRoute in
             XCTAssertFalse(traceRoute.contains(host), "Trace route result should contains \(expectedTraceRoute)")

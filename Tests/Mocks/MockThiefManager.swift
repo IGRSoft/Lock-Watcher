@@ -6,11 +6,10 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
 import Foundation
+@testable import Lock_Watcher
 
 final class MockThiefManager: ThiefManagerProtocol {
-
     var invokedDatabaseManagerSetter = false
     var invokedDatabaseManagerSetterCount = 0
     var invokedDatabaseManager: (any DatabaseManagerProtocol)?

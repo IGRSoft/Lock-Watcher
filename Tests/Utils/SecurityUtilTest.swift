@@ -10,7 +10,6 @@ import XCTest
 @testable import Lock_Watcher
 
 final class SecurityUtilTests: XCTestCase {
-    
     var securityUtil: SecurityUtilProtocol!
     
     override func setUp() {

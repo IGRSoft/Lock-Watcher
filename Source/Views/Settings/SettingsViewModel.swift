@@ -6,13 +6,12 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 /// ViewModel for handling the settings and configuration of the app.
 final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @unchecked Sendable {
-    
-    //MARK: - DomainViewConstantProtocol
+    // MARK: - DomainViewConstantProtocol
     
     /// Represents the constants related to the view settings.
     typealias DomainViewConstant = SettingsDomain
@@ -20,12 +19,12 @@ final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @un
     /// Contains the view settings for the domain.
     var viewSettings: SettingsDomain = .init()
     
-    //MARK: - Types
+    // MARK: - Types
     
     /// A closure type to handle trigger events.
     typealias SettingsTriggerWatchBlock = Commons.TriggerClosure
     
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// A manager responsible for handling thief related functionalities.
     private var thiefManager: ThiefManagerProtocol
@@ -33,7 +32,7 @@ final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @un
     /// Represents the app's settings.
     private var settings: AppSettingsProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// Indicates if the information is hidden or shown.
     @Published var isInfoHidden = true
@@ -42,11 +41,11 @@ final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @un
     @Published var isAccessGranted = true
     
     /// Notifies views to refresh whenever underlying data changes.
-    internal let objectWillChange = PassthroughSubject<Void, Never>()
+    let objectWillChange = PassthroughSubject<Void, Never>()
     
     // Following bindings allow the views to read and modify the underlying settings' values.
     
-    //MARK: - Bindings for UI settings
+    // MARK: - Bindings for UI settings
     
     // Binding for expanding or collapsing security info section.
     var isSecurityInfoExpand: Binding<Bool> {
@@ -90,7 +89,7 @@ final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @un
         })
     }
     
-    //MARK: - Bindings for Trigger settings
+    // MARK: - Bindings for Trigger settings
     
     // Each of these bindings represents a trigger for taking snapshots based on different events.
     var isUseSnapshotOnWakeUp: Binding<Bool> {
@@ -138,7 +137,7 @@ final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @un
         })
     }
     
-    //MARK: - Bindings for Options settings
+    // MARK: - Bindings for Options settings
     
     // Binding for expanding or collapsing options info section.
     var isOptionsInfoExpand: Binding<Bool> {
@@ -198,7 +197,7 @@ final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @un
         })
     }
     
-    //MARK: - Bindings for Sync settings
+    // MARK: - Bindings for Sync settings
     
     // Binding for saving snapshots to disk.
     var isSaveSnapshotToDisk: Binding<Bool> {
@@ -279,7 +278,7 @@ final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @un
     /// Closure to be executed when access is granted.
     var accessGrantedBlock: Commons.EmptyClosure?
     
-    //MARK: - initialiser
+    // MARK: - initialiser
     
     /// Initializer for the SettingsViewModel.
     init(settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol) {

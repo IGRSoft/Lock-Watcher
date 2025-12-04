@@ -10,8 +10,7 @@ import Foundation
 /// `PowerListener` observes power status changes by communicating with an XPC service.
 /// This listener can detect when the system switches between battery power and AC power.
 final class PowerListener: BaseListenerProtocol, @unchecked Sendable {
-    
-    //MARK: - Types
+    // MARK: - Types
     
     /// Enumeration representing power modes: Battery or AC.
     private enum PowerMode: Int {
@@ -19,12 +18,12 @@ final class PowerListener: BaseListenerProtocol, @unchecked Sendable {
         case ac = 1
     }
     
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// Logger used for recording and debugging.
     private let logger: LogProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// The name of the XPC service used to monitor power status.
     private let kServiceName = "com.igrsoft.XPCPower"
@@ -63,7 +62,7 @@ final class PowerListener: BaseListenerProtocol, @unchecked Sendable {
         return service
     }()
     
-    //MARK: - Initializer
+    // MARK: - Initializer
     
     /// Initializes a `PowerListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.powerListener` category.
@@ -76,14 +75,14 @@ final class PowerListener: BaseListenerProtocol, @unchecked Sendable {
         connection.invalidate()
     }
     
-    //MARK: - Public Methods
+    // MARK: - Public Methods
     
     /// Starts monitoring power mode changes.
     /// - Parameter action: A closure that is called when a power mode change is detected.
     func start(_ action: @escaping ListenerAction) {
         logger.debug("started")
         
-        self.listenerAction = action
+        listenerAction = action
         
         // Start monitoring power mode through the XPC service.
         service.startCheckPower(process(mode:))
@@ -93,7 +92,7 @@ final class PowerListener: BaseListenerProtocol, @unchecked Sendable {
     
     /// Stops the listener from monitoring power mode changes.
     func stop() {
-        self.listenerAction = nil
+        listenerAction = nil
         (connection.remoteObjectProxy as? XPCPowerProtocol)?.stopCheckPower()
         
         logger.debug("stopped")
@@ -102,7 +101,7 @@ final class PowerListener: BaseListenerProtocol, @unchecked Sendable {
     }
     
     private func process(mode: NSInteger) {
-        let powerMode = PowerMode.init(rawValue: mode)
+        let powerMode = PowerMode(rawValue: mode)
         logger.debug("Power switched to \(powerMode == .battery ? "Battery" : "AC Power")")
         
         if powerMode == .battery {

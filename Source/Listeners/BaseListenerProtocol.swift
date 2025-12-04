@@ -1,5 +1,5 @@
 //
-//  BaseListener.swift
+//  BaseListenerProtocol.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 06.01.2021.
@@ -31,7 +31,7 @@ public protocol BaseListenerProtocol {
     ///   - ListenerName: The name of the triggered listener.
     ///   - ThiefDto: A data transfer object containing details about the event or the  state
     ///     when the listener was triggered. This object's definition is not provided in the code snippet.
-    typealias ListenerAction = ((ListenerName, TriggerType) -> Void)
+    typealias ListenerAction = (ListenerName, TriggerType) -> Void
     
     /// A callback that will be called when the listener detects its corresponding trigger.
     ///

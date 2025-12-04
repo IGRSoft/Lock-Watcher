@@ -9,7 +9,6 @@
 import SwiftUI
 
 extension View {
-    
     /// A SwiftUI View extension to conditionally apply modifications to a view.
     ///
     /// This method takes a Boolean condition and two closures, and depending on the evaluation of the condition,
@@ -28,7 +27,8 @@ extension View {
     /// ```
     /// In the example above, if `isBold` is true, the text will be bold; otherwise, it will be italic.
     ///
-    @ViewBuilder func applyIf<T: View>(_ condition: @autoclosure () -> Bool, apply: (Self) -> T, else: (Self) -> T) -> some View {
+    @ViewBuilder
+    func applyIf<T: View>(_ condition: @autoclosure () -> Bool, apply: (Self) -> T, else: (Self) -> T) -> some View {
         if condition() {
             apply(self)
         } else {
@@ -36,4 +36,3 @@ extension View {
         }
     }
 }
-

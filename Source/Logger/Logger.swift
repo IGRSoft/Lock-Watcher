@@ -12,7 +12,6 @@ import os
 /// `Log` provides structured logging capabilities across different categories of the application.
 /// This structure aids in categorizing and filtering logs based on their types.
 struct Log {
-    
     /// `Category` enumerates various log types.
     /// Each case represents a specific category, making it easy to segregate and filter logs.
     enum Category: String {
@@ -56,7 +55,6 @@ struct Log {
 }
 
 extension Log: LogProtocol {
-    
     func debug(_ message: String) {
         logger.debug("\(message)")
     }

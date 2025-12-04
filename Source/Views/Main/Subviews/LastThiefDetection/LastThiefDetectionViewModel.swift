@@ -6,12 +6,11 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 /// A view model that manages the data related to the last detected thief and associated images.
 final class LastThiefDetectionViewModel: ObservableObject {
-    
     // MARK: - Dependency Injection
     
     /// An object that conforms to `DatabaseManagerProtocol`, responsible for database interactions.

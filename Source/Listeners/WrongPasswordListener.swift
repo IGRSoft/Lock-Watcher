@@ -11,13 +11,12 @@ import LocalAuthentication
 /// `WrongPasswordListener` monitors attempts to unlock the screen. When an unauthorized login attempt is detected,
 /// a specified action is triggered.
 final class WrongPasswordListener: BaseListenerProtocol, @unchecked Sendable {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// Logger instance for recording and debugging.
     private let logger: LogProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// XPC Service name responsible for authentication.
     private let kServiceName = "com.igrsoft.XPCAuthentication"
@@ -63,7 +62,7 @@ final class WrongPasswordListener: BaseListenerProtocol, @unchecked Sendable {
         return service
     }()
     
-    //MARK: - Initializer
+    // MARK: - Initializer
     
     /// Initializes a `WrongPasswordListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.wrongPasswordListener` category.
@@ -76,14 +75,14 @@ final class WrongPasswordListener: BaseListenerProtocol, @unchecked Sendable {
         connection.invalidate()
     }
     
-    //MARK: - Public Methods
+    // MARK: - Public Methods
     
     /// Starts the listener to monitor unauthorized login attempts.
     /// - Parameter action: A closure that is called when an unauthorized login attempt is detected.
     func start(_ action: @escaping ListenerAction) {
         logger.debug("started")
         
-        self.listenerAction = action
+        listenerAction = action
         
         // Register to observe occlusion state changes.
         notificationCenter.addObserver(self,
@@ -96,7 +95,7 @@ final class WrongPasswordListener: BaseListenerProtocol, @unchecked Sendable {
     
     /// Stops the listener from monitoring unauthorized login attempts.
     func stop() {
-        self.listenerAction = nil
+        listenerAction = nil
         
         // Remove the observer for occlusion state changes.
         notificationCenter.removeObserver(self, name: NSApplication.didChangeOcclusionStateNotification, object: nil)
@@ -106,11 +105,11 @@ final class WrongPasswordListener: BaseListenerProtocol, @unchecked Sendable {
         isRunning = false
     }
     
-    //MARK: - Private Methods
+    // MARK: - Private Methods
     
     /// Checks for unauthorized login attempts since the last known screen lock date.
     private func readDate() {
-        logger.debug("WrongPasswordListener detecting AuthenticationFailed from \(self.lastScreenLockDate)")
+        logger.debug("WrongPasswordListener detecting AuthenticationFailed from \(lastScreenLockDate)")
         
         // Ask the XPC service if any unauthorized login attempts were detected.
         service.detectedAuthenticationFailedFromDate(lastScreenLockDate, processAuthonticatedFailed(status:))
@@ -127,7 +126,8 @@ final class WrongPasswordListener: BaseListenerProtocol, @unchecked Sendable {
     
     /// Listens to the occlusion state changes to determine screen lock/unlock events.
     @MainActor
-    @objc private func occlusionStateChanged() {
+    @objc
+    private func occlusionStateChanged() {
         if NSApp.occlusionState.contains(.visible) {
             logger.debug("screen unlocked")
             isScreenLocked = false

@@ -1,5 +1,5 @@
 //
-//  Lock_WatcherApp.swift
+//  App.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 03.12.2020.
@@ -11,7 +11,6 @@ import SwiftUI
 /// Represents the main entry point of the application.
 @main
 struct MainApp: App {
-    
     /// The application delegate to handle system-level events.
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     

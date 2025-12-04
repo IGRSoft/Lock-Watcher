@@ -1,0 +1,88 @@
+# Claude Ignore File
+# Exclude files and directories from Claude AI context
+# This reduces token usage and improves performance
+
+# Build Artifacts
+*.build/
+.build/
+DerivedData/
+build/
+*.xcarchive
+
+# Swift Package Manager
+.swiftpm/
+Packages/
+Package.resolved
+
+# Xcode User Data
+xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Large Binary Assets
+*.tiff
+*.dmg
+Resources/DMG Artwork/
+
+# Image Asset Contents (too many files)
+**/*.xcassets/Contents.json
+**/*.xcassets/**/*.json
+
+# Specific Large Asset Directories
+Resources/Assets.xcassets/images/
+Resources/Assets.xcassets/icons/
+tmp/
+
+# Test Results
+*.xcresult/
+
+# Temporary Files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Generated Files
+*.generated.swift
+
+# SwiftFormat Backups
+*.swift.bak
+
+# Dependency Lock Files (too verbose)
+Podfile.lock
+Cartfile.resolved
+
+# Documentation Build
+.docbuild/
+
+# Coverage Reports
+*.profdata
+*.gcda
+*.gcno
+
+# Backup Files
+*.backup
+*.orig
+
+# Log Files
+*.log
+
+# Binary Output
+*.app
+*.framework
+*.dylib
+*.a
+*.o
+
+# Preview Content (often contains generated previews)
+**/Preview Content/
+
+# Large Documentation
+# Keep essential docs, exclude massive auto-generated content
+docs/SwiftUI\ Documentation.md
+docs/AppKit\ Documentation.md
+docs/UIKit\ Documentation.md
+docs/SwiftData\ Documentation.md
+
+# Cursor Configuration (not needed for Claude)
+.cursor/
+.cursorignore

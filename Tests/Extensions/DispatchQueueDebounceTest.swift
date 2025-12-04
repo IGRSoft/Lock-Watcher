@@ -6,14 +6,13 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
 import XCTest
+@testable import Lock_Watcher
 
 final class DispatchQueueDebounceTests: XCTestCase {
-    
     func testDebounceExecutesActionAfterInterval() {
         // Create an expectation for a background download task to complete.
-        let expectation = self.expectation(description: "Action should be executed after interval.")
+        let expectation = expectation(description: "Action should be executed after interval.")
         
         let queue = DispatchQueue(label: "test.queue")
         let debouncedAction = queue.debounce(interval: .milliseconds(100)) {
@@ -27,7 +26,7 @@ final class DispatchQueueDebounceTests: XCTestCase {
     
     func testDebounceExecutesOnlyLastActionWithinInterval() {
         // Create an expectation for a background download task to complete.
-        let expectation = self.expectation(description: "Only last action should be executed.")
+        let expectation = expectation(description: "Only last action should be executed.")
         expectation.expectedFulfillmentCount = 1  // Only expect one call
         
         let queue = DispatchQueue(label: "test.queue")
@@ -44,7 +43,7 @@ final class DispatchQueueDebounceTests: XCTestCase {
     
     func testDebounceExecutesAllActionsIfCalledAfterInterval() {
         // Create an expectation for a background download task to complete.
-        let expectation = self.expectation(description: "All actions should be executed.")
+        let expectation = expectation(description: "All actions should be executed.")
         expectation.expectedFulfillmentCount = 3  // Expect three calls
         
         let queue = DispatchQueue(label: "test.queue")

@@ -11,11 +11,12 @@ import Foundation
 /// This is created by transforming the `ThiefDto` into a storable format.
 ///
 public final class DatabaseDto: Codable, Identifiable {
-    
     /// Enumerates the keys used in the encoding and decoding processes.
     ///
     enum CodingKeys: String, CodingKey {
-        case date, data, path
+        case date
+        case data
+        case path
     }
     
     /// The date the object was created or the event was captured.
@@ -37,7 +38,7 @@ public final class DatabaseDto: Codable, Identifiable {
     }
     
     /// Initializes the object by decoding from the provided decoder.
-    required public init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         date = try container.decode(Date.self, forKey: .date)
@@ -58,14 +59,14 @@ public final class DatabaseDto: Codable, Identifiable {
 extension DatabaseDto: Equatable, Hashable {
     /// Checks the equality between two `DatabaseDto` objects.
     public static func == (lhs: DatabaseDto, rhs: DatabaseDto) -> Bool {
-        return lhs.date == rhs.date &&
+        lhs.date == rhs.date &&
         lhs.data == rhs.data &&
         lhs.path == rhs.path
     }
     
     /// Checks if one `DatabaseDto` is older than the other based on the date.
     public static func < (lhs: DatabaseDto, rhs: DatabaseDto) -> Bool {
-        return lhs.date < rhs.date
+        lhs.date < rhs.date
     }
     
     /// Generates a hash value for the object.

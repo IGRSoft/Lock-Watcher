@@ -13,7 +13,6 @@ import SwiftUI
 /// This struct conforms to the `DomainViewConstant` protocol (which presumably provides a structure for domain-specific UI constants).
 /// The constants defined here pertain to the appearance and layout of the first launch screen.
 struct FirstLaunchDomain: DomainViewConstant {
-    
     /// A unique identifier for the domain.
     var name: String = "FirstLaunchDomain"
     

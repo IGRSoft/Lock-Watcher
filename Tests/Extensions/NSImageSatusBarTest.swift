@@ -6,11 +6,10 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
 import XCTest
+@testable import Lock_Watcher
 
 final class NSImageTests: XCTestCase {
-    
     // Test that when the status is triggered, the alert icon is returned.
     func testStatusBarIconTriggered() {
         guard let icon = NSImage.statusBarIcon(triggered: true) else {

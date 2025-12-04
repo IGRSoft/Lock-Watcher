@@ -6,9 +6,9 @@
 //  Copyright © 2022 IGR Soft. All rights reserved.
 //
 
+import CryptoKit
 import Foundation
 import KeychainAccess
-import CryptoKit
 
 /// `SecurityUtilProtocol` provides an interface for security-related utilities.
 protocol SecurityUtilProtocol {
@@ -24,7 +24,6 @@ protocol SecurityUtilProtocol {
 
 /// `SecurityUtil` provides utilities for handling password-based functionalities, such as saving, validation, and checking existence in the keychain.
 public final class SecurityUtil: SecurityUtilProtocol {
-    
     /// id to construct keychain
     private let keychainId: String
     
@@ -42,7 +41,7 @@ public final class SecurityUtil: SecurityUtilProtocol {
         self.soul = soul
         self.appKey = appKey
         
-        self.keychain = Keychain(service: keychainId)
+        keychain = Keychain(service: keychainId)
     }
     
     /// Save the hashed version of the password to the keychain.

@@ -24,18 +24,17 @@ protocol NetworkUtilProtocol {
 
 /// `NetworkUtil` provides utilities for network-related tasks, such as fetching the device's IP address and performing trace routes.
 public final class NetworkUtil: NetworkUtilProtocol {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// A logger instance for logging various events and errors.
     private var logger: LogProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// An instance of `SimpleTracer` to handle trace routing.
     private var simpleTracer: SimpleTracer?
     
-    //MARK: - Initialiser
+    // MARK: - Initialiser
     
     /// Initializes a new `NetworkUtil`.
     ///
@@ -44,7 +43,7 @@ public final class NetworkUtil: NetworkUtilProtocol {
         self.logger = logger
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     /// Fetch the device's public IP address from ipify.org.
     ///
@@ -54,8 +53,7 @@ public final class NetworkUtil: NetworkUtilProtocol {
         do {
             try publicIP = String(contentsOf: URL(string: "https://api.ipify.org")!, encoding: .utf8)
             publicIP = publicIP.trimmingCharacters(in: CharacterSet.whitespaces)
-        }
-        catch {
+        } catch {
             logger.error("Network Error: \(error.localizedDescription)")
         }
         

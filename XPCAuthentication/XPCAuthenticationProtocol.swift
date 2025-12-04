@@ -10,7 +10,6 @@ import Foundation
 /// A protocol defining the contract for detecting authentication failure messages in system logs.
 @objc
 public protocol XPCAuthenticationProtocol {
-    
     /// Detect authentication failure messages in the system log from a given date.
     ///
     /// - Parameters:

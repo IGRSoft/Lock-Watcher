@@ -9,7 +9,6 @@ import AppKit
 import CoreGraphics
 
 extension NSImage {
-    
     /// Adds text to the top left corner of the image.
     ///
     /// This method overlays a given text on the top left corner of the image. Customizations include the font size and color of the text.
@@ -21,7 +20,7 @@ extension NSImage {
     ///
     /// - Returns: An `NSImage` with the overlaid text. Returns the original image if there's an error in processing.
     func imageWithText(text: String, fontSize: CGFloat = 12, color: NSColor = .red.withAlphaComponent(0.8)) -> NSImage? {
-        let imageSize = self.size
+        let imageSize = size
         let imageRect = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
         
         // Adjust font size based on the screen's scale factor (Retina support).
@@ -34,7 +33,7 @@ extension NSImage {
         let textFontAttributes: [NSAttributedString.Key : Any] = [.font: font, .foregroundColor: color, .paragraphStyle: textStyle]
         
         // Convert NSImage to CGImage
-        guard let cgImage = self.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
+        guard let cgImage = cgImage(forProposedRect: nil, context: nil, hints: nil) else {
             return self
         }
         
@@ -46,7 +45,7 @@ extension NSImage {
         image.addRepresentation(bitmapRep)
         
         image.lockFocus()
-        self.draw(in: imageRect)
+        draw(in: imageRect)
         text.draw(in: textRect, withAttributes: textFontAttributes)
         image.unlockFocus()
         

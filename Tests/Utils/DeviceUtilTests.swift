@@ -10,7 +10,6 @@ import XCTest
 @testable import Lock_Watcher
 
 final class DeviceUtilTests: XCTestCase {
-    
     // Test for when the device is a laptop
     func testDeviceIsLaptop() {
         let deviceUtil = MockDeviceUtil(mockDevice: "MacBookPro")

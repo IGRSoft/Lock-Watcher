@@ -10,7 +10,6 @@ import SwiftUI
 
 /// A view model designed to manage the data and behaviors for the information section.
 final class InfoViewModel: ObservableObject {
-    
     /// The thief manager responsible for handling thief-related actions and data.
     var thiefManager: ThiefManagerProtocol
     
@@ -24,7 +23,7 @@ final class InfoViewModel: ObservableObject {
     ///   - isInfoExtended: A binding to control whether the info is extended.
     init(thiefManager: ThiefManagerProtocol, isInfoExtended: Binding<Bool>) {
         self.thiefManager = thiefManager
-        self._isInfoExtended = isInfoExtended
+        _isInfoExtended = isInfoExtended
     }
     
     /// Provides the title for the debug section.
@@ -65,5 +64,5 @@ final class InfoViewModel: ObservableObject {
     let linkText: String = "© IGR Software 2008 - 2023"
     
     /// The URL corresponding to the link text.
-    let linkUrl: URL = URL(string: "https://igrsoft.com")!
+    let linkUrl: URL = .init(string: "https://igrsoft.com")!
 }

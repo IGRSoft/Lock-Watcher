@@ -6,10 +6,11 @@
 //
 
 import AppKit
-import Foundation
 import CoreLocation
+import Foundation
 
 @objc
 public protocol XPCMailProtocol {
-    @objc func sendMail(_ to: String, coordinates: CLLocationCoordinate2D, attachment: String)
+    @objc
+    func sendMail(_ to: String, coordinates: CLLocationCoordinate2D, attachment: String)
 }

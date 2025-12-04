@@ -12,7 +12,6 @@ import Foundation
 /// managing and encoding/decoding this list for database storage purposes.
 ///
 final class DatabaseDtoList: Codable, ObservableObject {
-    
     /// Enumerates the keys used in the encoding and decoding processes.
     ///
     enum CodingKeys: String, CodingKey {
@@ -56,7 +55,6 @@ final class DatabaseDtoList: Codable, ObservableObject {
 }
 
 extension DatabaseDtoList {
-    
     /// Provides an empty `DatabaseDtoList` object.
     static var empty: DatabaseDtoList {
         DatabaseDtoList(dtos: [])

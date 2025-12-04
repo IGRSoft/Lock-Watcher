@@ -10,7 +10,6 @@ import SwiftUI
 
 /// Defines the protocol for coordinating the display and control of windows within the app.
 protocol BaseCoordinatorProtocol {
-    
     /// Displays the main application window.
     func displayMainWindow()
     
@@ -31,7 +30,6 @@ protocol BaseCoordinatorProtocol {
 
 /// A preview implementation of the BaseCoordinatorProtocol used for testing or design purposes.
 final class MainCoordinatorPreview: BaseCoordinatorProtocol {
-    
     /// Displays the main application window (no-op in preview).
     func displayMainWindow() {}
     
@@ -43,7 +41,7 @@ final class MainCoordinatorPreview: BaseCoordinatorProtocol {
     
     /// Displays the first launch window if needed (no-op in preview).
     /// - Parameter closeClosure: A closure that is called when the window is closed.
-    func displayFirstLaunchWindowIfNeed(closeClosure: @escaping Commons.EmptyClosure = { } ) {}
+    func displayFirstLaunchWindowIfNeed(closeClosure: @escaping Commons.EmptyClosure = {}) {}
     
     /// Displays the settings window (no-op in preview).
     func displaySettingsWindow() {}

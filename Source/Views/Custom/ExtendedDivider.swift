@@ -1,5 +1,5 @@
 //
-//  ExtendedDevider.swift
+//  ExtendedDivider.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 19.05.2022.
@@ -10,16 +10,15 @@ import SwiftUI
 
 /// View modifier for creating an extended divider with an associated title.
 struct ExtendedDividerModifier: ViewModifier {
-    
     var isExtended: Binding<Bool>
     
     var titleKey: String = ""       // Key for localizing the title text.
     var font: Font = .headline      // Font used for the title.
     var lineWidth: CGFloat = 1      // Width of the divider line.
-    var lineColor: Color = Color("divider") // Color of the divider line.
+    var lineColor: Color = .init("divider") // Color of the divider line.
     
     /// Modifies the provided content by adding an extended divider to it.
-    public func body(content: Content) -> some View {
+    func body(content: Content) -> some View {
         ExtendedDivider(isExtended: isExtended, titleKey: titleKey, font: font, lineWidth: lineWidth, lineColor: lineColor)
         if isExtended.wrappedValue {
             content
@@ -36,7 +35,6 @@ extension View {
 
 /// Represents a visual divider that can be extended with an associated title.
 struct ExtendedDivider: View {
-    
     /// Represents a single line (either horizontal or vertical) used within the extended divider.
     private struct ExtendedDividerLine: View {
         @State var width: CGFloat = 1

@@ -10,7 +10,6 @@ import AppKit
 
 /// Protocol to abstract the behavior related to setting the activation policy of an application.
 protocol ApplicationPolicyProtocol {
-    
     /// Sets the application's activation policy.
     ///
     /// - Parameter policy: The activation policy to set.
@@ -21,7 +20,6 @@ protocol ApplicationPolicyProtocol {
 }
 
 extension NSApplication: ApplicationPolicyProtocol {
-    
     /// Implementation of `setActivation(policy:)` for `NSApplication`.
     ///
     /// - Parameter policy: The activation policy to set.
@@ -30,12 +28,11 @@ extension NSApplication: ApplicationPolicyProtocol {
     @objc
     @discardableResult
     func setActivation(policy: ActivationPolicy) -> ActivationPolicy {
-        return NSApp.setActivationPolicy(policy) ? policy : .regular
+        NSApp.setActivationPolicy(policy) ? policy : .regular
     }
 }
 
 extension NSApplication {
-    
     /// Toggles the visibility of the application's icon on the Dock.
     ///
     /// If the `hidden` parameter is `true`, the application's Dock icon is hidden, and the application behaves like an accessory application.

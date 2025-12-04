@@ -10,7 +10,6 @@ import AppKit
 import UserNotifications
 
 protocol AppDelegateModelProtocol {
-    
     /// Represents the view model for application settings.
     var settingsView: SettingsView { get }
     
@@ -22,7 +21,6 @@ protocol AppDelegateModelProtocol {
 }
 
 final class AppDelegateModel: @preconcurrency AppDelegateModelProtocol, @unchecked Sendable {
-    
     /// Represents general settings for the application.
     private lazy var settings = AppSettings()
     
@@ -44,7 +42,7 @@ final class AppDelegateModel: @preconcurrency AppDelegateModelProtocol, @uncheck
     }()
     
     /// Represents the view model for application settings.
-    private lazy var settingsViewModel: SettingsViewModel = SettingsViewModel(settings: settings, thiefManager: thiefManager)
+    private lazy var settingsViewModel: SettingsViewModel = .init(settings: settings, thiefManager: thiefManager)
     
     /// Represents the main view for application settings.
     @MainActor

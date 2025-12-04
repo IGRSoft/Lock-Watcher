@@ -6,11 +6,10 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
 import Foundation
+@testable import Lock_Watcher
 
 final class MockListener: BaseListenerProtocol {
-
     var invokedListenerActionSetter = false
     var invokedListenerActionSetterCount = 0
     var invokedListenerAction: ListenerAction?

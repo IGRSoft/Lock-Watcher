@@ -53,10 +53,10 @@ struct LastThiefDetectionView: View {
                     ScrollView(.horizontal) {
                         LazyHStack(spacing: 0) {
                             // Display each image from the list of latest images.
-                            ForEach (viewModel.latestImages) { imageDto in
+                            ForEach(viewModel.latestImages) { imageDto in
                                 if let image = NSImage(data: imageDto.data) {
-                                    ZStack (alignment: .topTrailing) {
-                                        ZStack (alignment: .bottom) {
+                                    ZStack(alignment: .topTrailing) {
+                                        ZStack(alignment: .bottom) {
                                             Image(nsImage: image)
                                                 .resizable()
                                                 .scaledToFit()
@@ -80,8 +80,7 @@ struct LastThiefDetectionView: View {
                                                 .padding(4)
                                                 .foregroundColor(.red)
                                                 .cornerRadius(3)
-                                            
-                                        }
+                                                                                    }
                                         .buttonStyle(BorderlessButtonStyle())
                                     }
                                     .padding()

@@ -8,16 +8,15 @@
 
 import Foundation
 
-import Foundation
-import CoreGraphics
 import Combine
+import CoreGraphics
+import Foundation
 
 protocol MacOSLockDetectorProtocol {
     var isLockedPublisher: PassthroughSubject<Bool, Never> { get }
 }
 
 final class MacOSLockDetector: MacOSLockDetectorProtocol, @unchecked Sendable {
-    
     let isLockedPublisher = PassthroughSubject<Bool, Never>()
     
     private var timer: Timer?

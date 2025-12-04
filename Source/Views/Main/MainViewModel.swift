@@ -10,7 +10,6 @@ import SwiftUI
 
 /// A view model for the main screen, handling business logic and data retrieval for its corresponding view.
 final class MainViewModel: ObservableObject, DomainViewConstantProtocol {
-    
     // MARK: - DomainViewConstantProtocol
     
     /// Configuration settings specific to the main view.
@@ -54,9 +53,9 @@ final class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     ///   - isInfoExtended: A boolean value to indicate if the information should be extended. Default value is `true`.
     init(thiefManager: ThiefManagerProtocol, isInfoExtended: Bool = true) {
         self.thiefManager = thiefManager
-        self.databaseManager = thiefManager.databaseManager
+        databaseManager = thiefManager.databaseManager
         self.isInfoExtended = isInfoExtended
-        self.lastThiefDetectionViewModel = LastThiefDetectionViewModel(databaseManager: thiefManager.databaseManager)
+        lastThiefDetectionViewModel = LastThiefDetectionViewModel(databaseManager: thiefManager.databaseManager)
     }
 }
 

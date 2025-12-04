@@ -6,8 +6,8 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 final class FirstLaunchOptionsViewModel: ObservableObject, @unchecked Sendable {
     let objectWillChange = PassthroughSubject<Void, Never>()

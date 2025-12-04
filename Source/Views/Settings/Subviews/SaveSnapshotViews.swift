@@ -124,7 +124,6 @@ struct DropboxView: View {
     
     var body: some View {
         HStack(spacing: ViewConstants.spacing, content: {
-            
             if dropboxName.isEmpty == false {
                 Toggle(isOn: $isDropboxEnable) {
                     Text(String(format: NSLocalizedString("SyncedWithDropbox %@", comment: ""), dropboxName))
