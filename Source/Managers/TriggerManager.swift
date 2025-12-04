@@ -19,8 +19,7 @@ protocol TriggerManagerProtocol {
 }
 
 final class TriggerManager: TriggerManagerProtocol {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// Holds the application settings.
     private var settings: AppSettingsProtocol?
@@ -29,7 +28,7 @@ final class TriggerManager: TriggerManagerProtocol {
     private var logger: LogProtocol
     
     /// A closure that takes a listener and a boolean flag to determine if the listener should run or not.
-    var runListener: ((BaseListenerProtocol, Bool) -> ())?
+    var runListener: ((BaseListenerProtocol, Bool) -> Void)?
     
     private var lockDetector: MacOSLockDetectorProtocol = MacOSLockDetector()
     
@@ -53,24 +52,22 @@ final class TriggerManager: TriggerManagerProtocol {
         self.logger = logger
     }
     
-    //MARK: - public
+    // MARK: - public
     
     /// Starts all listeners based on provided settings.
-    public func start(settings: AppSettingsProtocol?, triggerBlock: @escaping TriggerBlock = { triggered in }) {
-        
+    func start(settings: AppSettingsProtocol?, triggerBlock: @escaping TriggerBlock = { _ in }) {
         logger.debug("Starting all triggers")
         
-        let runListener:(BaseListenerProtocol, Bool) -> () = { listener, isEnabled in
+        let runListener:(BaseListenerProtocol, Bool) -> Void = { listener, isEnabled in
             if isEnabled == true {
                 if listener.isRunning == false {
-                    listener.start() { [weak self] type, triggered in
+                    listener.start { [weak self] type, triggered in
                         triggerBlock(triggered)
                         
                         self?.restartListener(type: type)
                     }
                 }
-            }
-            else if listener.isRunning == true {
+            } else if listener.isRunning == true {
                 listener.stop()
             }
         }
@@ -107,38 +104,32 @@ final class TriggerManager: TriggerManagerProtocol {
     }
     
     /// Stops all active listeners.
-    public func stop() {
+    func stop() {
         logger.debug("Stop all triggers")
         
-        for listener in self.listeners.values {
+        for listener in listeners.values {
             listener.stop()
         }
     }
     
-    //MARK: - private
+    // MARK: - private
     
     /// Restarts a listener based on its type.
     private func restartListener(type: ListenerName) {
-        if let l = self.listeners[type] {
+        if let l = listeners[type] {
             l.stop()
         }
         
         // Recreates the listener based on its type.
-        var listener: BaseListenerProtocol!
-        switch type {
-        case .onWakeUpListener:
-            listener = WakeUpListener()
-        case .onWrongPassword:
-            listener = WrongPasswordListener()
-        case .onBatteryPowerListener:
-            listener = PowerListener()
-        case .onUSBConnectionListener:
-            listener = USBListener()
-        case .onLoginListener:
-            listener = LoginListener(lockDetector: lockDetector)
+        let listener: BaseListenerProtocol! = switch type {
+        case .onWakeUpListener: WakeUpListener()
+        case .onWrongPassword: WrongPasswordListener()
+        case .onBatteryPowerListener: PowerListener()
+        case .onUSBConnectionListener: USBListener()
+        case .onLoginListener: LoginListener(lockDetector: lockDetector)
         }
         
-        self.listeners[type] = listener
-        self.runListener?(listener, true)
+        listeners[type] = listener
+        runListener?(listener, true)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FirstLaunchOptionsViews.swift
+//  FirstLaunchOptionsView.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 04.07.2023.

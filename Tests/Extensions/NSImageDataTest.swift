@@ -6,11 +6,10 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
 import XCTest
+@testable import Lock_Watcher
 
 final class NSImageDataTest: XCTestCase {
-    
     // Test that valid NSImage converts to non-empty JPEG data
     func testValidImageToJpeg() {
         // Assuming you have a valid image named "Sample" in your test bundle.

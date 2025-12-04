@@ -6,8 +6,8 @@
 //  Copyright © 2022 IGR Soft. All rights reserved.
 //
 
-import Foundation
 import Darwin.sys.sysctl
+import Foundation
 
 /// Enumeration of supported device types.
 enum Devices {
@@ -18,7 +18,6 @@ enum Devices {
 }
 
 protocol DeviceUtilProtocol {
-    
     /// Fetches the device type based on the hardware model.
     func device() -> Devices
 }
@@ -41,7 +40,7 @@ public class DeviceUtil: DeviceUtilProtocol {
         }
         
         // Preparing the array to store the device name.
-        var ret = [CChar].init(repeating: 0, count: size + 1)
+        var ret = [CChar](repeating: 0, count: size + 1)
         
         // Querying for the device name.
         res = sysctlbyname(name, &ret, &size, nil, 0)

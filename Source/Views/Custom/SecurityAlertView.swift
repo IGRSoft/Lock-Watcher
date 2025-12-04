@@ -6,8 +6,8 @@
 //  Copyright © 2022 IGR Soft. All rights reserved.
 //
 
-import SwiftUI
 import AppKit
+import SwiftUI
 
 /// Represents a view for obtaining secure input, typically a password.
 ///
@@ -18,7 +18,6 @@ struct SecurityAlertView: View {
     @Binding var isPresented: Bool       // Determines if the alert view is presented or not.
     
     var body: some View {
-        
         VStack {
             // Displaying the prompt for the password.
             Text("EnterPassword")
@@ -58,8 +57,7 @@ struct SecurityAlertView: View {
                 Spacer()
             }
             .padding(.zero)
-            
-        }
+                    }
         .background(Color(white: 0.9)) // Setting a light gray background.
     }
 }

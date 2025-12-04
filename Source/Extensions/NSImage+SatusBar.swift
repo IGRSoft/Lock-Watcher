@@ -9,7 +9,6 @@
 import AppKit
 
 extension NSImage {
-    
     /// Provides an appropriate icon for the status bar based on the triggered status.
     ///
     /// This method returns one of two possible icons based on the triggered status:

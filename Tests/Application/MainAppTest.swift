@@ -6,12 +6,11 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
-import XCTest
 import UserNotifications
+import XCTest
+@testable import Lock_Watcher
 
 class AppDelegateModelTests: XCTestCase {
-    
     var model: MockAppDelegateModel!
     
     override func setUp() {
@@ -54,4 +53,3 @@ class AppDelegateModelTests: XCTestCase {
         XCTAssertTrue(validDropboxURLs != model.invokedCheckDropboxAuthParameters?.urls, "Expected to recognise valid Dropbox URL.")
     }
 }
-

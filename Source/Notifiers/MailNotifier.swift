@@ -5,8 +5,8 @@
 //  Created by Vitalii Parovishnyk on 09.01.2021.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 
 /// A service responsible for handling and sending mail notifications.
 ///
@@ -14,13 +14,12 @@ import CoreLocation
 /// and sends notifications or alerts based on the information provided in the `ThiefDto` data object.
 /// The mails are sent using the default mail account configured in the Mail app.
 final class MailNotifier: NotifierProtocol {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// Logger instance responsible for capturing and logging events or errors.
     private var logger: LogProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// The application settings used to configure the mail notifier.
     private var settings: AppSettingsProtocol!
@@ -54,7 +53,7 @@ final class MailNotifier: NotifierProtocol {
         return service
     }()
     
-    //MARK: - Initializer
+    // MARK: - Initializer
     
     /// Initializes a new instance of the `MailNotifier` with the provided logger or a default logger.
     ///
@@ -63,7 +62,7 @@ final class MailNotifier: NotifierProtocol {
         self.logger = logger
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     /// Registers the notifier with the provided application settings.
     ///
@@ -84,7 +83,7 @@ final class MailNotifier: NotifierProtocol {
         guard let filePath = thiefDto.filePath?.path else {
             let msg = "wrong file path"
             logger.error(msg)
-            assert(false, msg)
+            assertionFailure(msg)
             
             return false
         }
@@ -93,7 +92,7 @@ final class MailNotifier: NotifierProtocol {
         guard !mail.isEmpty else {
             let msg = "missed mail address"
             logger.error(msg)
-            assert(false, msg)
+            assertionFailure(msg)
             
             return false
         }

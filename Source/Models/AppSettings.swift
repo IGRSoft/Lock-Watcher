@@ -5,14 +5,13 @@
 //  Created by Vitalii Parovishnyk on 06.01.2021.
 //
 
-import Foundation
 import Combine
+import Foundation
 import SwiftUI
 
 /// Represents UI settings to manage and store the state of user interface elements.
 ///
 struct UISettings: Codable {
-    
     /// Determines if the security information section is expanded.
     var isSecurityInfoExpand: Bool = true
     
@@ -29,7 +28,6 @@ struct UISettings: Codable {
 /// Represents the options/settings related to the application's behavior.
 ///
 struct OptionsSettings: Codable {
-    
     /// Indicates whether the application is being launched for the first time.
     var isFirstLaunch: Bool = true
     
@@ -54,11 +52,9 @@ struct OptionsSettings: Codable {
     /// Flag to indicate if the application settings/data is protected.
     var isProtected: Bool = false
     var authSettings: AuthSettings = .init()
-    
-}
+    }
 
 struct AuthSettings: Equatable, Codable {
-     
     var biometrics = false
     var watch = false
     var devicePassword = false
@@ -70,14 +66,11 @@ struct AuthSettings: Equatable, Codable {
     static var empty: Self {
         .init()
     }
-    
-}
-
+    }
 
 /// Represents the triggers for capturing snapshots based on various events.
 ///
 struct TriggerSettings: Codable {
-    
     /// Capture a snapshot when the device wakes up.
     var isUseSnapshotOnWakeUp: Bool = true
     
@@ -97,7 +90,6 @@ struct TriggerSettings: Codable {
 /// Represents settings related to synchronization and storage of snapshots.
 ///
 struct SyncSettings: Codable {
-    
     /// Determines if snapshots should be saved to disk.
     var isSaveSnapshotToDisk: Bool = false
     
@@ -122,7 +114,6 @@ struct SyncSettings: Codable {
 
 /// Protocol that outlines the properties and methods that app settings should conform to.
 protocol AppSettingsProtocol {
-    
     /// Flag to indicate if the app is built for Mac App Store.
     static var isMASBuild: Bool { get }
     
@@ -147,7 +138,6 @@ protocol AppSettingsProtocol {
 
 /// Class responsible for managing all settings of the application and storing them in UserDefaults.
 final class AppSettings: AppSettingsProtocol {
-    
 #if NON_MAS_CONFIG
     static let isMASBuild: Bool = false
 #else
@@ -177,9 +167,8 @@ final class AppSettings: AppSettingsProtocol {
     var ui: UISettings
 }
 
-
 /// class for Preview
-/// 
+///
 final class AppSettingsPreview: AppSettingsProtocol {
     static let isMASBuild: Bool = true
     

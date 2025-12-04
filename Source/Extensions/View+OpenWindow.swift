@@ -9,7 +9,6 @@
 import SwiftUI
 
 extension View {
-    
     /// Presents the current SwiftUI view inside a new `NSWindow`.
     ///
     /// This method creates a new `NSWindow`, sets the provided view as its root content, and then displays it.

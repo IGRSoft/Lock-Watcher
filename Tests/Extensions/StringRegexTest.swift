@@ -6,11 +6,10 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
 import XCTest
+@testable import Lock_Watcher
 
 final class StringExtensionTests: XCTestCase {
-
     // Test if the function returns correct matches.
     func testValidRegexWithoutMatches() {
         let testString = "CLLocationCoordinate2D(latitude: 51.50998, longitude: -0.1337)"

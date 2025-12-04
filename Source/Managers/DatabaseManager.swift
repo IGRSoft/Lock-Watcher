@@ -1,13 +1,13 @@
 //
-//  DatabaseNotifier.swift
+//  DatabaseManager.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 28.08.2021.
 //
 
-import Foundation
-import EasyStash
 import Combine
+import EasyStash
+import Foundation
 
 /// Defines the contract for a database manager with observable latest images.
 protocol DatabaseManagerProtocol: ObservableObject {
@@ -18,35 +18,34 @@ protocol DatabaseManagerProtocol: ObservableObject {
 }
 
 final class DatabaseManager: DatabaseManagerProtocol {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// Holds the application settings.
     private var settings: AppSettingsProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// Key used for storing and retrieving images in the storage.
     private let kImagesKey = "images"
     
     /// Instance of the storage for saving and retrieving data.
-    private var storage: Storage? = nil
+    private var storage: Storage?
     
     /// Observable property that stores the latest images.
     @Published private(set) var latestImages: [DatabaseDto] = .init()
     
-    //MARK: - Combine
+    // MARK: - Combine
     
     /// Publisher for `latestImages` property to allow observing its changes.
     var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { $latestImages }
     
-    //MARK: - initialiser
+    // MARK: - initialiser
     
     /// Initializes the database manager with app settings and configures storage options.
     init(settings: AppSettingsProtocol) {
         self.settings = settings
         
-        var options: Options = Options()
+        var options = Options()
         options.folder = "Thiefs"
         
         storage = try? Storage(options: options)
@@ -55,7 +54,7 @@ final class DatabaseManager: DatabaseManagerProtocol {
         latestImages.append(contentsOf: readImages().dtos)
     }
     
-    //MARK: - public
+    // MARK: - public
     
     /// Stores the thief incident information in the storage and updates the `latestImages`.
     func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
@@ -88,7 +87,7 @@ final class DatabaseManager: DatabaseManagerProtocol {
         let images = readImages()
         
         // Remove the specific incident based on the date
-        images.dtos.removeAll {$0.date == dto.date}
+        images.dtos.removeAll { $0.date == dto.date }
         
         // Save the updated data to the storage
         do {
@@ -103,11 +102,11 @@ final class DatabaseManager: DatabaseManagerProtocol {
         return images
     }
     
-    //MARK: - private
+    // MARK: - private
     
     /// Fetches and returns the images from the storage.
     private func readImages() -> DatabaseDtoList {
-        var images: DatabaseDtoList = DatabaseDtoList(dtos: .init())
+        var images = DatabaseDtoList(dtos: .init())
         do {
             // Try to load images from the storage
             if let imgs = try storage?.load(forKey: kImagesKey, as: DatabaseDtoList.self) {

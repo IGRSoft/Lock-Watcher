@@ -10,7 +10,6 @@ import SwiftUI
 
 /// Represents the main domain's configuration settings for the view.
 struct MainDomain: DomainViewConstant {
-    
     /// The name identifier for this domain.
     var name: String = "MainDomain"
     

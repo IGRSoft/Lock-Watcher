@@ -9,7 +9,6 @@
 import Foundation
 
 final class MockAppDelegateModel: AppDelegateModelProtocol {
-
     var invokedSettingsViewGetter = false
     var invokedSettingsViewGetterCount = 0
     var stubbedSettingsView: SettingsView!
@@ -46,4 +45,3 @@ final class MockAppDelegateModel: AppDelegateModelProtocol {
         return stubbedCheckDropboxAuthResult
     }
 }
-

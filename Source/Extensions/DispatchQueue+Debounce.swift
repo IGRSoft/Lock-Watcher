@@ -9,7 +9,6 @@
 import Foundation
 
 extension DispatchQueue {
-    
     /// Debounces a given action by waiting for a specified time interval before executing.
     /// If called multiple times within the interval, only the last call will trigger the action.
     ///

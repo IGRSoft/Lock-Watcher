@@ -9,7 +9,6 @@
 import AppKit
 
 extension NSImage {
-    
     /// Represents the `NSImage` as JPEG data.
     ///
     /// This computed property attempts to convert the `NSImage` instance into JPEG data format.
@@ -18,7 +17,7 @@ extension NSImage {
     /// - Returns: Data representation of the image in JPEG format. If the conversion fails, it returns an empty Data instance.
     var jpegData: Data {
         // Convert the NSImage into TIFF representation.
-        guard let tiffData = tiffRepresentation, let bitmap: NSBitmapImageRep = NSBitmapImageRep(data: tiffData) else {
+        guard let tiffData = tiffRepresentation, let bitmap = NSBitmapImageRep(data: tiffData) else {
             // Return empty data if conversion to TIFF representation fails.
             return Data()
         }

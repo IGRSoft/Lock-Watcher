@@ -1,5 +1,5 @@
 //
-//  Lock_WatcherUITests.swift
+//  ApplicationUITests.swift
 //  Lock-WatcherUITests
 //
 //  Created by Vitalii Parovishnyk on 03.12.2020.
@@ -8,7 +8,6 @@
 import XCTest
 
 final class Lock_WatcherUITests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -32,9 +31,9 @@ final class Lock_WatcherUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
-    /*func testLaunchPerformance() throws {
+    /* func testLaunchPerformance() throws {
         measure(metrics: [XCTApplicationLaunchMetric()]) {
             XCUIApplication().launch()
         }
-    }*/
+    } */
 }

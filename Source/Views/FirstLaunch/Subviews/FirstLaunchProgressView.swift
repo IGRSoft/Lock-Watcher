@@ -10,7 +10,6 @@ import SwiftUI
 
 /// A SwiftUI view that presents an animated progress indicator for the first launch experience.
 struct FirstLaunchProgressView: View {
-    
     /// The view model that supplies data and behavior to the view.
     private var viewModel: FirstLaunchProgressViewModel
     
@@ -36,7 +35,6 @@ struct FirstLaunchProgressView: View {
 
 /// A preview provider that assists developers in designing and testing `FirstLaunchProgressView` within Xcode's canvas without running the full app.
 struct FirstLaunchProgressViews_Previews: PreviewProvider {
-    
     /// A computed property that returns a preview instance of `FirstLaunchProgressView`.
     static var previews: some View {
         FirstLaunchProgressView(viewModel: FirstLaunchProgressViewModel.preview)

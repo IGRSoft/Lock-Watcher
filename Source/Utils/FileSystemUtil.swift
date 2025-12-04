@@ -5,8 +5,8 @@
 //  Created by Vitalii Parovishnyk on 09.01.2021.
 //
 
-import Foundation
 import AppKit
+import Foundation
 
 /// `FileSystemUtilProtocol` provides an interface for storing images on the local file system.
 protocol FileSystemUtilProtocol {
@@ -21,7 +21,7 @@ protocol FileSystemUtilProtocol {
 
 /// `FileSystemUtil` provides utilities for interacting with the local file system, specifically for storing images.
 public final class FileSystemUtil: FileSystemUtilProtocol {
-    //MARK: - Dependency Injection
+    // MARK: - Dependency Injection
     
     /// A logger instance for logging various events and errors.
     private let logger: LogProtocol
@@ -29,7 +29,7 @@ public final class FileSystemUtil: FileSystemUtilProtocol {
     /// A name of folder in Documents directory
     private let dirName: String
     
-    //MARK: - Initialiser
+    // MARK: - Initialiser
     
     /// Initializes a new `FileSystemUtil`.
     ///
@@ -39,7 +39,7 @@ public final class FileSystemUtil: FileSystemUtilProtocol {
         self.logger = logger
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     /// Save an image to the User's Document directory under a specified subdirectory named "Lock-Watcher" as a jpeg file.
     ///
@@ -58,8 +58,7 @@ public final class FileSystemUtil: FileSystemUtilProtocol {
         if let filePath = filePath(forKey: key) {
             do {
                 try data.write(to: filePath)
-            }
-            catch {
+            } catch {
                 logger.debug("error saving: \(error.localizedDescription)\n for key: \(key)")
                 return nil
             }
@@ -70,7 +69,7 @@ public final class FileSystemUtil: FileSystemUtilProtocol {
         return nil
     }
     
-    //MARK: - Private helper methods
+    // MARK: - Private helper methods
     
     /// Generate a file path based on a given trigger key. This file path points to a jpeg file under the "Lock-Watcher" directory in the user's documents.
     ///
@@ -88,8 +87,7 @@ public final class FileSystemUtil: FileSystemUtilProtocol {
         if fileManager.fileExists(atPath: dirURL.path) == false {
             do {
                 try fileManager.createDirectory(at: dirURL, withIntermediateDirectories: true)
-            }
-            catch {
+            } catch {
                 logger.debug("error saving: \(error.localizedDescription)")
                 return nil
             }

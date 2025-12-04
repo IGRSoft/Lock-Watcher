@@ -5,9 +5,9 @@
 //  Created by Vitalii Parovishnyk on 09.01.2021.
 //
 
-import Foundation
-import CoreLocation
 import AppKit
+import CoreLocation
+import Foundation
 
 /// An enumeration that defines all the trigger types available in the application.
 ///
@@ -22,10 +22,9 @@ public enum TriggerType: String, Sendable {
 }
 
 extension TriggerType {
-    
     /// Provides a localized name for each trigger type.
     var name: String {
-        return NSLocalizedString("TriggerType_\(self.rawValue)", comment: "")
+        NSLocalizedString("TriggerType_\(rawValue)", comment: "")
     }
 }
 
@@ -33,10 +32,9 @@ extension TriggerType {
 /// This object might be used when there's suspicion of unauthorized access or other security breaches.
 ///
 public final class ThiefDto: Equatable, Sendable {
-    
     /// Equatability implementation for the ThiefDto class.
     public static func == (lhs: ThiefDto, rhs: ThiefDto) -> Bool {
-        return lhs.date == rhs.date
+        lhs.date == rhs.date
     }
     
     /// The current coordinate of the device when the trigger action occurred.
@@ -78,7 +76,7 @@ public final class ThiefDto: Equatable, Sendable {
         var objects = [String]()
         
         // Format the coordinate into a string representation.
-        if let coordinate = coordinate {
+        if let coordinate {
             var info = String(describing: coordinate)
             
             // Extracts coordinate details from the description string.
@@ -89,12 +87,12 @@ public final class ThiefDto: Equatable, Sendable {
         }
         
         // Adds the IP address to the description if available.
-        if let ipAddress = ipAddress {
+        if let ipAddress {
             objects.append("ip: \(ipAddress)")
         }
         
         // Adds the trace route to the description if available.
-        if let traceRoute = traceRoute {
+        if let traceRoute {
             objects.append(traceRoute)
         }
         

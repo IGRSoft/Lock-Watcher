@@ -10,7 +10,6 @@ import SwiftUI
 
 /// Represents the configuration and constants for the Settings domain.
 struct SettingsDomain: DomainViewConstant {
-    
     /// The name associated with the Settings domain.
     var name: String = "SettingsDomain"
     

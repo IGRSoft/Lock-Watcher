@@ -5,13 +5,13 @@
 //  Created by Vitalii Parovishnyk on 29.08.2021.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 /// A property wrapper that enables seamless storage and retrieval of Codable objects in UserDefaults.
 ///
 /// When wrapped around a property, this property wrapper will automatically store the property's value in UserDefaults
-/// whenever it's set, and retrieve it whenever it's accessed. The property will behave like a normal property to external 
+/// whenever it's set, and retrieve it whenever it's accessed. The property will behave like a normal property to external
 /// code.
 ///
 /// - Example:
@@ -38,7 +38,7 @@ struct UserDefault<T: Codable> {
     ///   - key: The key under which the value is stored in UserDefaults.
     ///   - defaultValue: The default value to use if UserDefaults doesn't have a value for the specified key.
     ///
-    init(_ key: String, defaultValue: T, userDefaults: UserDefaults = UserDefaults.init(suiteName: Secrets.userDefaultsId)!) {
+    init(_ key: String, defaultValue: T, userDefaults: UserDefaults = UserDefaults(suiteName: Secrets.userDefaultsId)!) {
         self.key = key
         self.defaultValue = defaultValue
         
@@ -49,7 +49,7 @@ struct UserDefault<T: Codable> {
     ///
     /// When this value is accessed, it's retrieved from UserDefaults, and when it's set, it's stored in UserDefaults.
     var wrappedValue: T {
-        get {            
+        get {
             if let data = userDefaults.object(forKey: key) as? Data {
                 do {
                     let object = try JSONDecoder().decode(T.self, from: data)

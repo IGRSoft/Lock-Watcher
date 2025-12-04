@@ -5,18 +5,17 @@
 //  Created by Vitalii Parovishnyk on 09.01.2021.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 
 /// `WakeUpListener` observes the system for screen wake up events and triggers a specified action when such events are detected.
 final class WakeUpListener: BaseListenerProtocol, @unchecked Sendable {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// Logger instance used for recording and debugging purposes.
     private let logger: LogProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// Action to be triggered upon detecting a screen wake up event.
     var listenerAction: ListenerAction?
@@ -27,7 +26,7 @@ final class WakeUpListener: BaseListenerProtocol, @unchecked Sendable {
     /// NotificationCenter to monitoring screen wake up events.
     private lazy var notificationCenter = NSWorkspace.shared.notificationCenter
     
-    //MARK: - Initializer
+    // MARK: - Initializer
     
     /// Initializes a `WakeUpListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.wakeUpListener` category.
@@ -35,7 +34,7 @@ final class WakeUpListener: BaseListenerProtocol, @unchecked Sendable {
         self.logger = logger
     }
     
-    //MARK: - Public Methods
+    // MARK: - Public Methods
     
     /// Starts monitoring for screen wake up events.
     /// - Parameter action: A closure that is called when a screen wake up event is detected.
@@ -63,11 +62,12 @@ final class WakeUpListener: BaseListenerProtocol, @unchecked Sendable {
         notificationCenter.removeObserver(self, name: NSWorkspace.screensDidWakeNotification, object: nil)
     }
     
-    //MARK: - Private Methods
+    // MARK: - Private Methods
     
     /// Handles the screen wake up event notification.
     /// When called, prepares the data and triggers the action set by the `listenerAction`.
-    @objc private func receiveWakeNotification() {
+    @objc
+    private func receiveWakeNotification() {
         DispatchQueue.main.async(execute: fireAction)
     }
     

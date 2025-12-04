@@ -5,9 +5,9 @@
 //  Created by Vitalii Parovishnyk on 06.01.2021.
 //
 
-import Foundation
 import AppKit
 import CoreLocation
+import Foundation
 
 /// This protocol outlines the responsibilities and interface of the `NotificationManager` class.
 protocol NotificationManagerProtocol {
@@ -20,13 +20,12 @@ protocol NotificationManagerProtocol {
 
 /// The main class that orchestrates the sending of notifications through various channels.
 final class NotificationManager: NotificationManagerProtocol {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// The manager uses settings to configure its behavior.
     private var settings: AppSettingsProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// Different notifiers to send notifications through various channels.
     private lazy var mailNotifier: NotifierProtocol = MailNotifier()
@@ -34,7 +33,7 @@ final class NotificationManager: NotificationManagerProtocol {
     private lazy var dropboxNotifier: NotifierProtocol = DropboxNotifier()
     private lazy var notificationNotifier: NotifierProtocol = NotificationNotifier()
     
-    //MARK: - initialiser
+    // MARK: - initialiser
     
     /// The manager is initialized with the given settings and registers some notifiers with these settings.
     init(settings: AppSettingsProtocol) {
@@ -44,7 +43,7 @@ final class NotificationManager: NotificationManagerProtocol {
         dropboxNotifier.register(with: settings)
     }
     
-    //MARK: - public
+    // MARK: - public
     
     /// Sends a notification through one or more channels based on the provided `ThiefDto` object.
     func send(_ thiefDto: ThiefDto) -> Bool {

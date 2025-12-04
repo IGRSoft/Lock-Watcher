@@ -16,25 +16,24 @@ protocol DropboxNotifierProtocol {
 
 /// A service responsible for handling and sending image notifications to Dropbox.
 final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// Logger instance responsible for capturing and logging events or errors.
     private var logger: LogProtocol
     
-    //MARK: - Types
+    // MARK: - Types
     
     /// Errors specific to `DropboxNotifier`.
     enum DropboxNotifierError: Error {
         case emptyData
     }
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// A client to interact with the Dropbox API.
     private var client: DropboxClient?
     
-    //MARK: - Initializer
+    // MARK: - Initializer
     
     /// Initializes a new instance of the `DropboxNotifier`.
     ///
@@ -44,7 +43,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
         client = DropboxClientsManager.authorizedClient
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     /// Registers the notifier with the provided application settings.
     ///
@@ -68,7 +67,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
         guard let filePath = thiefDto.filePath else {
             let msg = "wrong file path"
             logger.error(msg)
-            assert(false, msg)
+            assertionFailure(msg)
             return false
         }
         
@@ -139,7 +138,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
             switch authResult {
             case .success:
                 let currentAccount = self?.client?.users.getCurrentAccount()
-                currentAccount?.response(completionHandler: { user, error in
+                currentAccount?.response(completionHandler: { user, _ in
                     if let displayName = user?.name.displayName {
                         handler(displayName)
                     }

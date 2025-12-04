@@ -9,7 +9,6 @@ import Foundation
 
 /// `XPCAuthenticationDelegate` is a delegate that manages new incoming XPC connections. It sets up the interface and object to be exposed over the connection.
 final class XPCAuthenticationDelegate: NSObject, NSXPCListenerDelegate {
-    
     /// Decides whether or not to accept a new XPC connection.
     ///
     /// When a new connection request is received, this method sets up the exported object and its interface.
@@ -21,7 +20,6 @@ final class XPCAuthenticationDelegate: NSObject, NSXPCListenerDelegate {
     ///
     /// - Returns: A boolean indicating whether the new connection should be accepted. Always returns true in this implementation.
     func listener(_ listener: NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool {
-        
         // Create an instance of the object that will handle the XPC requests.
         let exportedObject = XPCAuthentication()
         

@@ -12,8 +12,7 @@ import SwiftUI
 /// `MainCoordinator` manages and coordinates the main window of the application, especially its display and authentication.
 @MainActor
 final class MainCoordinator: @preconcurrency BaseCoordinatorProtocol {
-    
-    //MARK: - Dependency Injection
+    // MARK: - Dependency Injection
     
     /// Configuration settings for the application.
     private var settings: AppSettingsProtocol
@@ -23,7 +22,7 @@ final class MainCoordinator: @preconcurrency BaseCoordinatorProtocol {
     /// Likely manages data or tasks related to unauthorized access.
     private var thiefManager: ThiefManagerProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// ViewModel for the main view.
     private lazy var mainViewModel = MainViewModel(thiefManager: thiefManager)
@@ -34,7 +33,7 @@ final class MainCoordinator: @preconcurrency BaseCoordinatorProtocol {
     /// Popover displayed from the status bar icon.
     @MainActor
     private lazy var mainPopover: NSPopover = {
-        let popover = NSPopover.init()
+        let popover = NSPopover()
         popover.behavior = .transient
         popover.animates = false
         popover.contentViewController = NSViewController()
@@ -49,7 +48,7 @@ final class MainCoordinator: @preconcurrency BaseCoordinatorProtocol {
     /// Window displayed during the application's first launch.
     private var firstLaunchWindow: NSWindow?
     
-    //MARK: - Initialiser
+    // MARK: - Initialiser
     
     /// Initializes a new `MainCoordinator`.
     ///
@@ -63,10 +62,10 @@ final class MainCoordinator: @preconcurrency BaseCoordinatorProtocol {
         self.settings = settings
         self.thiefManager = thiefManager
         self.statusBarButton = statusBarButton
-        self.authManager = .init(logger: logger, securityUtil: securityUtil)
+        authManager = .init(logger: logger, securityUtil: securityUtil)
     }
     
-    //MARK: - Public Functions
+    // MARK: - Public Functions
     
     /// Displays the main window after showing a security access alert.
     func displayMainWindow() {
@@ -85,8 +84,7 @@ final class MainCoordinator: @preconcurrency BaseCoordinatorProtocol {
         } else {
             do {
                 return try await authManager.authenticate(with: settings.options.authSettings)
-            }
-            catch {
+            } catch {
                 NSApp.presentError(error)
                 return false
             }
@@ -127,7 +125,7 @@ final class MainCoordinator: @preconcurrency BaseCoordinatorProtocol {
         NSApplication.displaySettingsWindow()
     }
     
-    //MARK: - Private Functions
+    // MARK: - Private Functions
     
     /// Displays the popover below the provided status bar button.
     ///
@@ -142,5 +140,4 @@ final class MainCoordinator: @preconcurrency BaseCoordinatorProtocol {
     private func closePopover(_ sender: NSStatusBarButton?) {
         mainPopover.performClose(sender)
     }
-    
-}
+    }

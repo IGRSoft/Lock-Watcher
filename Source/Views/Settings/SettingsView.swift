@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
     @ObservedObject private var viewModel: SettingsViewModel
     
     init(viewModel: SettingsViewModel) {
@@ -31,27 +30,27 @@ struct SettingsView: View {
                 
                 VStack(alignment: .leading) {
                     UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: viewModel.isUseSnapshotOnWakeUp)
-                        .onChange(of: viewModel.isUseSnapshotOnWakeUp.wrappedValue, perform: { value in
+                        .onChange(of: viewModel.isUseSnapshotOnWakeUp.wrappedValue, perform: { _ in
                             viewModel.restartWatching()
                         })
                     UseSnapshotOnLoginView(isUseSnapshotOnLogin: viewModel.isUseSnapshotOnLogin)
-                        .onChange(of: viewModel.isUseSnapshotOnLogin.wrappedValue, perform: { value in
+                        .onChange(of: viewModel.isUseSnapshotOnLogin.wrappedValue, perform: { _ in
                             viewModel.restartWatching()
                         })
                     if AppSettings.isMASBuild == false {
                         UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: viewModel.isUseSnapshotOnWrongPassword)
-                            .onChange(of: viewModel.isUseSnapshotOnWrongPassword.wrappedValue, perform: { value in
+                            .onChange(of: viewModel.isUseSnapshotOnWrongPassword.wrappedValue, perform: { _ in
                                 viewModel.restartWatching()
                             })
                     }
                     if DeviceUtil().device() == .laptop {
                         UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: viewModel.isUseSnapshotOnSwitchToBatteryPower)
-                            .onChange(of: viewModel.isUseSnapshotOnSwitchToBatteryPower.wrappedValue, perform: { value in
+                            .onChange(of: viewModel.isUseSnapshotOnSwitchToBatteryPower.wrappedValue, perform: { _ in
                                 viewModel.restartWatching()
                             })
                     }
                     UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: viewModel.isUseSnapshotOnUSBMount)
-                        .onChange(of: viewModel.isUseSnapshotOnUSBMount.wrappedValue, perform: { value in
+                        .onChange(of: viewModel.isUseSnapshotOnUSBMount.wrappedValue, perform: { _ in
                             viewModel.restartWatching()
                         })
                 }
@@ -77,7 +76,7 @@ struct SettingsView: View {
                     VStack(alignment: .leading, spacing: ViewConstants.spacing) {
                         if AppSettings.isMASBuild == false {
                             SendNotificationToMailView(isSendNotificationToMail: viewModel.isSendNotificationToMail, mailRecipient: viewModel.mailRecipient)
-                                .onChange(of: viewModel.isSendNotificationToMail.wrappedValue, perform: {_ in })
+                                .onChange(of: viewModel.isSendNotificationToMail.wrappedValue, perform: { _ in })
                         }
                         ICloudSyncView(isICloudSyncEnable: viewModel.isICloudSyncEnable)
                         
@@ -92,7 +91,7 @@ struct SettingsView: View {
             .frame(width: viewModel.viewSettings.window.width)
         } else {
             Text("")
-                .onAppear() {
+                .onAppear {
                     viewModel.accessGrantedBlock?()
                 }
         }
@@ -101,9 +100,9 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        //ForEach(["en", "ru", "uk"], id: \.self) { id in
+        // ForEach(["en", "ru", "uk"], id: \.self) { id in
         SettingsView(viewModel: SettingsViewModel.preview)
-        //.environment(\.locale, .init(identifier: id))
-        //}
+        // .environment(\.locale, .init(identifier: id))
+        // }
     }
 }

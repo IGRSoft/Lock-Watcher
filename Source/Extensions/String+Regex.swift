@@ -9,10 +9,9 @@
 import Foundation
 
 extension String {
-    
     /// Searches for all matches of a regular expression within the string.
     ///
-    /// This method attempts to find all occurrences of the specified regular expression within the string. 
+    /// This method attempts to find all occurrences of the specified regular expression within the string.
     /// Each matched string is added to the result array.
     ///
     /// - Parameters:
@@ -26,8 +25,8 @@ extension String {
             let nsString = self as NSString
             let results = regex.matches(in: self, range: NSRange(location: 0, length: nsString.length))
             
-            return results.map { nsString.substring(with: $0.range(at: 1))}
-        } catch let error {
+            return results.map { nsString.substring(with: $0.range(at: 1)) }
+        } catch {
             print("invalid regex: \(error.localizedDescription)")
             
             return nil

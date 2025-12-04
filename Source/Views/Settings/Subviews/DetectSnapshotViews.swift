@@ -1,5 +1,5 @@
 //
-//  UseSnapshotViews.swift
+//  DetectSnapshotViews.swift
 //  Lock-Watcher
 //
 //  Created by Vitalii Parovishnyk on 26.12.2021.
@@ -9,7 +9,6 @@ import SwiftUI
 
 /// A view component that provides a toggle for the user to enable or disable snapshot functionality upon system wake up.
 struct UseSnapshotOnWakeUpView: View {
-    
     /// A binding to a boolean value that indicates whether the snapshot on wake up feature is enabled or disabled.
     @Binding var isUseSnapshotOnWakeUp: Bool
     
@@ -22,7 +21,6 @@ struct UseSnapshotOnWakeUpView: View {
 
 /// A view component that provides a toggle for the user to enable or disable snapshot functionality upon system login.
 struct UseSnapshotOnLoginView: View {
-    
     /// A binding to a boolean value that indicates whether the snapshot on login feature is enabled or disabled.
     @Binding var isUseSnapshotOnLogin: Bool
     
@@ -35,7 +33,6 @@ struct UseSnapshotOnLoginView: View {
 
 /// A view component that provides a toggle for the user to enable or disable snapshot functionality when the wrong password is entered.
 struct UseSnapshotOnWrongPasswordView: View {
-    
     /// A binding to a boolean value that indicates whether the snapshot on wrong password feature is enabled or disabled.
     @Binding var isUseSnapshotOnWrongPassword: Bool
     
@@ -48,7 +45,6 @@ struct UseSnapshotOnWrongPasswordView: View {
 
 /// A view component that provides a toggle for the user to enable or disable snapshot functionality when the system switches to battery power.
 struct UseSnapshotOnSwitchToBatteryPowerView: View {
-    
     /// A binding to a boolean value that indicates whether the snapshot on switch to battery power feature is enabled or disabled.
     @Binding var isUseSnapshotOnSwitchToBatteryPower: Bool
     
@@ -61,7 +57,6 @@ struct UseSnapshotOnSwitchToBatteryPowerView: View {
 
 /// A view component that provides a toggle for the user to enable or disable snapshot functionality when a USB is mounted.
 struct UseSnapshotOnUSBMountView: View {
-    
     /// A binding to a boolean value that indicates whether the snapshot on USB mount feature is enabled or disabled.
     @Binding var isUseSnapshotOnUSBMount: Bool
     

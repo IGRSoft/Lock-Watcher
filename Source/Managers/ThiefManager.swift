@@ -5,11 +5,11 @@
 //  Created by Vitalii Parovishnyk on 06.01.2021.
 //
 
-import Foundation
 import AppKit
-import PhotoSnap
 import Combine
 import CoreLocation
+import Foundation
+import PhotoSnap
 import UserNotifications
 
 /// A protocol that outlines the responsibilities of the `ThiefManager` class.
@@ -31,12 +31,11 @@ protocol ThiefManagerProtocol {
 
 /// The main class responsible for managing and responding to various triggers indicating potential unauthorized access.
 final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
-    
-    //MARK: - Typealiases
+    // MARK: - Typealiases
     
     typealias WatchBlock = Commons.ThiefClosure
     
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     private var triggerManager: TriggerManagerProtocol
     
@@ -48,7 +47,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
     
     private var logger: LogProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     private var lastThiefDetection: TriggerType = .setup
     
@@ -70,7 +69,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
     /// update user name after login on DropBox
     private var dropboxUserNameUpdateClosure: Commons.StringClosure?
     
-    //MARK: - initialiser
+    // MARK: - initialiser
     
     init(settings: AppSettingsProtocol, triggerManager: TriggerManagerProtocol = TriggerManager(), logger: LogProtocol = Log(category: .thiefManager), watchBlock: @escaping WatchBlock = { _ in }) {
         self.settings = settings
@@ -84,7 +83,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
         
         super.init()
         
-        if (settings.options.addLocationToSnapshot) {
+        if settings.options.addLocationToSnapshot {
             setupLocationManager(enable: true)
         }
         
@@ -93,11 +92,11 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
         UNUserNotificationCenter.current().delegate = self
     }
     
-    //MARK: - public
+    // MARK: - public
     
     /// These methods define how the manager should behave when various events occur.
     /// Sets up the location manager, either enabling or disabling location updates.
-    public func setupLocationManager(enable: Bool) {
+    func setupLocationManager(enable: Bool) {
         if enable {
             locationManager.delegate = self
             locationManager.startUpdatingLocation()
@@ -108,13 +107,13 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
     }
     
     /// Stops watching for triggers.
-    public func stopWatching() {
+    func stopWatching() {
         logger.debug("Stop Watching")
         triggerManager.stop()
     }
     
     /// Restarts the trigger watching mechanism
-    public func restartWatching() {
+    func restartWatching() {
         startWatching(watchBlock)
     }
     
@@ -124,8 +123,8 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
     }
     
     /// Detects and processes any triggers.
-    public func detectedTrigger(_ closure: @escaping Commons.BoolClosure = {_ in }) {
-        logger.debug("Detected triggered action: \(self.lastThiefDetection.rawValue)")
+    func detectedTrigger(_ closure: @escaping Commons.BoolClosure = { _ in }) {
+        logger.debug("Detected triggered action: \(lastThiefDetection.rawValue)")
         
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings.sync.isSaveSnapshotToDisk
@@ -141,7 +140,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
             return
         }
         
-        ps.fetchSnapshot() { [weak self] photoModel in
+        ps.fetchSnapshot { [weak self] photoModel in
             if let img = photoModel.images.last {
                 self?.logger.debug("\(img)")
                 let date = Date()
@@ -154,26 +153,25 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
         }
     }
     
-    ///Processes a given snapshot.
+    /// Processes a given snapshot.
     func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {
         guard let filePath = fileSystemUtil.store(image: snapshot, forKey: filename) else {
             let msg = "wrong file path"
             logger.error(msg)
-            assert(false, msg)
+            assertionFailure(msg)
             return
         }
         
-        /*lastThiefDetection.snapshot = snapshot
+        /* lastThiefDetection.snapshot = snapshot
         lastThiefDetection.date = date
         lastThiefDetection.coordinate = coordinate
-        lastThiefDetection.filePath = filePath*/
+        lastThiefDetection.filePath = filePath */
         
         let complete: (TriggerType, NSImage, URL, Date, CLLocationCoordinate2D?, String?, String?) -> Void = { [weak self] type, snapshot, filePath, date, coordinate, ipAddress, traceRoute in
-            
             let dto = ThiefDto(triggerType: type, coordinate: coordinate, ipAddress: ipAddress, traceRoute: traceRoute, snapshot: snapshot, filePath: filePath, date: date)
             
-            let _ = self?.notificationManager.send(dto)
-            let _ = self?.databaseManager.send(dto)
+            _ = self?.notificationManager.send(dto)
+            _ = self?.databaseManager.send(dto)
             
             self?.watchBlock(dto)
         }
@@ -189,7 +187,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
                 guard let lastThiefDetection = self?.lastThiefDetection else {
                     let msg = "wrong DTO"
                     self?.logger.error(msg)
-                    assert(false, msg)
+                    assertionFailure(msg)
                     return
                 }
                 
@@ -207,11 +205,10 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
         }
     }
     
-    //MARK: - private
+    // MARK: - private
     
     /// Starts watching for triggers.
-    private func startWatching(_ watchBlock: @escaping WatchBlock = { triggered in} ) {
-        
+    private func startWatching(_ watchBlock: @escaping WatchBlock = { _ in }) {
         logger.debug("Start Watching")
         
         self.watchBlock = watchBlock
@@ -241,7 +238,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
 /// Location Manager Delegate Methods
 extension ThiefManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.coordinate = locations.last?.coordinate
+        coordinate = locations.last?.coordinate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -270,7 +267,7 @@ extension ThiefManager: CLLocationManagerDelegate {
 /// User Notification Center Delegate Methods:
 extension ThiefManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ centre: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
-        let identifier = response.notification.request.identifier;
+        let identifier = response.notification.request.identifier
         showSnapshot(identifier: identifier)
     }
 }
@@ -280,21 +277,17 @@ final class ThiefManagerPreview: ThiefManagerProtocol {
         closure("")
     }
     
-    func completeDropboxAuthWith(url: URL) {
-    }
+    func completeDropboxAuthWith(url: URL) {}
     
-    func showSnapshot(identifier: String) {
-    }
+    func showSnapshot(identifier: String) {}
     
-    func setupLocationManager(enable: Bool) {
-    }
+    func setupLocationManager(enable: Bool) {}
     
     func detectedTrigger(_ closure: @escaping Commons.BoolClosure) {
         closure(true)
     }
     
-    func restartWatching() {
-    }
+    func restartWatching() {}
     
     var databaseManager: any DatabaseManagerProtocol = DatabaseManager(settings: AppSettingsPreview())
 }

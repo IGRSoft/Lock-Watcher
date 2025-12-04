@@ -5,18 +5,17 @@
 //  Created by Vitalii Parovishnyk on 03.08.2021.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 
 /// `USBListener` observes USB mount events on the system and triggers an action when a USB device is mounted.
 final class USBListener: BaseListenerProtocol, @unchecked Sendable {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// Logger instance used for recording and debugging.
     private let logger: LogProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// Action to be triggered upon detecting a USB mount event.
     var listenerAction: ListenerAction?
@@ -27,7 +26,7 @@ final class USBListener: BaseListenerProtocol, @unchecked Sendable {
     /// NotificationCenter to listen usb events
     private lazy var notificationCenter = NSWorkspace.shared.notificationCenter
     
-    //MARK: - Initializer
+    // MARK: - Initializer
     
     /// Initializes a `USBListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.usbListener` category.
@@ -35,7 +34,7 @@ final class USBListener: BaseListenerProtocol, @unchecked Sendable {
         self.logger = logger
     }
     
-    //MARK: - Public Methods
+    // MARK: - Public Methods
     
     /// Starts monitoring for USB mount events.
     /// - Parameter action: A closure that is called when a USB mount event is detected.
@@ -61,11 +60,12 @@ final class USBListener: BaseListenerProtocol, @unchecked Sendable {
         notificationCenter.removeObserver(self, name: NSWorkspace.didMountNotification, object: nil)
     }
     
-    //MARK: - Private Methods
+    // MARK: - Private Methods
     
     /// Handles the USB mount event notification.
     /// When called, prepares the data and triggers the action set by the `listenerAction`.
-    @objc private func receiveUSBNotification() {
+    @objc
+    private func receiveUSBNotification() {
         DispatchQueue.main.async(execute: fireAction)
     }
     

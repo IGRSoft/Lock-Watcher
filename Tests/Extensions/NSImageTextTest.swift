@@ -6,11 +6,10 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
 import XCTest
+@testable import Lock_Watcher
 
 final class NSImageExtensionTests: XCTestCase {
-
     var sampleImage: NSImage!
     
     override func setUpWithError() throws {

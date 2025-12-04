@@ -10,7 +10,6 @@ import AppKit
 import SwiftUI
 
 extension NSApplication {
-    
     /// Displays the application settings or preferences window.
     ///
     /// Depending on the macOS version, it either opens the 'settings' or 'preferences' window.
@@ -21,8 +20,7 @@ extension NSApplication {
         // otherwise, trigger the 'showPreferencesWindow' selector.
         if #available(macOS 13.0, *) {
             NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-        }
-        else {
+        } else {
             NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
         }
         

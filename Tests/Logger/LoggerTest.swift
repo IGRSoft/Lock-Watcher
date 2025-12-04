@@ -30,7 +30,6 @@ final class SomeClassThatUsesLog {
 }
 
 final class SomeClassThatUsesLogTests: XCTestCase {
-    
     func testLogging() {
         let logMock = LogMock()
         let object = SomeClassThatUsesLog(log: logMock)
@@ -48,4 +47,3 @@ final class SomeClassThatUsesLogTests: XCTestCase {
         XCTAssertEqual(logMock.errorMessage, "This is a error message")
     }
 }
-

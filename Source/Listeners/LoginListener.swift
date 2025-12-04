@@ -11,7 +11,6 @@ import Combine
 /// `LoginListener` monitors macOS occlusion state changes to detect user login status.
 /// It leverages a lock detector to identify transitions between locked and active states.
 final class LoginListener: BaseListenerProtocol, @unchecked Sendable {
-    
     // MARK: - Dependency Injection
     
     /// Logger for recording events and behavior of the login listener.

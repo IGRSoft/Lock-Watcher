@@ -6,8 +6,8 @@
 //  Copyright © 2023 IGR Soft. All rights reserved.
 //
 
-@testable import Lock_Watcher
 import XCTest
+@testable import Lock_Watcher
 
 // Define a mock UserDefaults to avoid changing the actual UserDefaults
 final class MockUserDefaults: UserDefaults {
@@ -23,12 +23,11 @@ final class MockUserDefaults: UserDefaults {
 }
 
 // Mock the Secrets struct
-struct Secrets {
+enum Secrets {
     static let userDefaultsId = "com.test.UserDefaultsId"
 }
 
 final class UserDefaultTests: XCTestCase {
-
     // 1. Test if the default value is returned when UserDefaults doesn't have the specified key.
     func testDefaultValue() {
         let userDefaults = MockUserDefaults(suiteName: Secrets.userDefaultsId)!

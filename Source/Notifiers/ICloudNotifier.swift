@@ -13,19 +13,18 @@ import CoreLocation
 /// The `iCloudNotifier` interacts with the iCloud and sends an image captured from the `ThiefDto`
 /// data object to the user's iCloud Documents folder.
 final class ICloudNotifier: NotifierProtocol {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// Logger instance responsible for capturing and logging events or errors.
     private var logger: LogProtocol
     
-    //MARK: - Variables
+    // MARK: - Variables
     
     /// Name of the iCloud directory where images are saved.
     /// Default is "Documents".
     private var documentsFolderName = "Documents"
     
-    //MARK: - Initializer
+    // MARK: - Initializer
     
     /// Initializes a new instance of the `ICloudNotifier` with the provided logger or a default logger.
     ///
@@ -34,7 +33,7 @@ final class ICloudNotifier: NotifierProtocol {
         self.logger = logger
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     /// Registers the notifier with the provided application settings.
     ///

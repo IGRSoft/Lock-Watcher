@@ -11,7 +11,6 @@ import Foundation
 
 // MockDeviceUtil is a subclass of DeviceUtil used to override the behavior of `sysctlbyname`
 final class MockDeviceUtil: DeviceUtil {
-    
     let mockDevice: String?
     
     init(mockDevice: String?) {
@@ -19,6 +18,6 @@ final class MockDeviceUtil: DeviceUtil {
     }
     
     override func device() -> Devices {
-        return mockDevice?.contains("MacBook") == true ? .laptop : .nonLaptop
+        mockDevice?.contains("MacBook") == true ? .laptop : .nonLaptop
     }
 }

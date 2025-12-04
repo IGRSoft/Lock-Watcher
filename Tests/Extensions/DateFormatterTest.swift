@@ -10,7 +10,6 @@ import XCTest
 @testable import Lock_Watcher
 
 final class DateExtensionTests: XCTestCase {
-    
     func testDefaultFormatStyles() {
         // Assert the styles of the defaultFormat
         XCTAssertEqual(Date.defaultFormat.dateStyle, .short)

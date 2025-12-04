@@ -5,20 +5,19 @@
 //  Created by Vitalii Parovishnyk on 26.12.2021.
 //
 
+import AppKit
 import Foundation
 import UserNotifications
-import AppKit
 
 /// `NotificationNotifier` is responsible for sending local notifications using the User Notifications framework.
 /// These notifications alert the user when certain events (like detecting a potential threat) occur.
 final class NotificationNotifier: NotifierProtocol {
-    
-    //MARK: - Dependency injection
+    // MARK: - Dependency injection
     
     /// A logger instance for logging various events and errors.
     private var logger: LogProtocol
     
-    //MARK: - Initialiser
+    // MARK: - Initialiser
     
     /// Initializes a new `NotificationNotifier`.
     ///
@@ -27,7 +26,7 @@ final class NotificationNotifier: NotifierProtocol {
         self.logger = logger
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     /// Registers the notifier with the provided settings.
     /// - Parameter settings: An instance conforming to `AppSettingsProtocol` containing app settings.
@@ -43,13 +42,13 @@ final class NotificationNotifier: NotifierProtocol {
         guard let localURL = thiefDto.filePath else {
             let msg = "wrong file path"
             logger.error(msg)
-            assert(false, msg)
+            assertionFailure(msg)
             
             return false
         }
         
         // Request user's permission to show notifications.
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             guard granted else { return }
             
             let notificationCenter = UNUserNotificationCenter.current()
@@ -63,7 +62,7 @@ final class NotificationNotifier: NotifierProtocol {
         return true
     }
     
-    //MARK: - Private helper methods
+    // MARK: - Private helper methods
     
     /// Creates and sends a notification using the provided `ThiefDto` and `UNUserNotificationCenter`.
     ///
