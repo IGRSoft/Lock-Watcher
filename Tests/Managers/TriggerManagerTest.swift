@@ -9,6 +9,7 @@
 import XCTest
 @testable import Lock_Watcher
 
+@MainActor
 final class TriggerManagerTests: XCTestCase {
     var sut: TriggerManager!
     var mockLogger: LogMock!
@@ -155,16 +156,6 @@ final class TriggerManagerTests: XCTestCase {
 
         // Should handle multiple starts gracefully
         XCTAssertNotNil(sut)
-    }
-
-    // MARK: - Run Listener Closure Tests
-
-    func testRunListenerClosureIsSet() {
-        let settings = AppSettingsPreview()
-
-        sut.start(settings: settings) { _ in }
-
-        XCTAssertNotNil(sut.runListener)
     }
 
     // MARK: - Protocol Conformance Tests

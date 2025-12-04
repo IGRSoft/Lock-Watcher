@@ -8,7 +8,7 @@
 
 import CryptoKit
 import Foundation
-@preconcurrency import KeychainAccess
+import KeychainAccess
 
 /// `SecurityUtilProtocol` provides an interface for security-related utilities.
 protocol SecurityUtilProtocol {

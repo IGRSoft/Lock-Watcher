@@ -9,6 +9,7 @@
 import SwiftUI
 
 /// Defines the protocol for coordinating the display and control of windows within the app.
+@MainActor
 protocol BaseCoordinatorProtocol {
     /// Displays the main application window.
     func displayMainWindow()

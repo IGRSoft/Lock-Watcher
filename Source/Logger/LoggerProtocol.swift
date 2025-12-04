@@ -8,8 +8,10 @@
 
 import Foundation
 
-/// `LogProtocol` provides structure for logging
-protocol LogProtocol {
+/// `LogProtocol` provides structure for logging.
+///
+/// Conforming types must be `Sendable` to allow safe use across actor boundaries.
+protocol LogProtocol: Sendable {
     /// Logs a debug message.
     /// - Parameter message: The message to be logged.
     func debug(_ message: String)
