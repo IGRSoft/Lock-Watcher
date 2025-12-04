@@ -23,7 +23,6 @@ struct SettingsView: View {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading, spacing: ViewConstants.spacing) {
                         LaunchAtLoginView()
-                        #warning("replace to read from viewmodel")
                         ProtectionView(isProtectionEnable: viewModel.isProtected, authSettings: viewModel.authSettings, securityUtil: SecurityUtil())
                     }.extended(viewModel.isSecurityInfoExpand, titleKey: "SettingsMenuSecurity")
                 }

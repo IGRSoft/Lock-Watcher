@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -221,6 +221,10 @@
 		A5F4B5432836C0D1001A2413 /* ExtendedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */; };
 		F2ECF8742C4D4E2400B3518E /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */; };
 		F2ECF8752C4D4E2400B3518E /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */; };
+		F3A0000100000005000000C1 /* ThiefDtoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000001000000C1 /* ThiefDtoTest.swift */; };
+		F3A0000100000006000000C1 /* DatabaseDtoListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000002000000C1 /* DatabaseDtoListTest.swift */; };
+		F3A0000100000007000000C1 /* AppSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000003000000C1 /* AppSettingsTest.swift */; };
+		F3A0000100000008000000C1 /* TriggerManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000004000000C1 /* TriggerManagerTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -229,13 +233,14 @@
 			compilerSpec = com.apple.compilers.proxy.script;
 			filePatterns = "*.app";
 			fileType = pattern.proxy;
-			inputFiles = (
-			);
-			isEditable = 1;
 			outputFiles = (
 				"$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).h",
 			);
-			script = "sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`\n";
+			script = (
+				"sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`",
+				"",
+				"",
+			);
 		};
 /* End PBXBuildRule section */
 
@@ -287,27 +292,23 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		A58FC74C26E2814E007674F6 /* Embed XPC Services */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
-			dstSubfolderSpec = 16;
+			dstSubfolder = Product;
 			files = (
 				A58FC74D26E2814E007674F6 /* XPCAuthentication.xpc in Embed XPC Services */,
 				A58FC75526E281AE007674F6 /* XPCMail.xpc in Embed XPC Services */,
 				A58FC74E26E2814E007674F6 /* XPCPower.xpc in Embed XPC Services */,
 			);
 			name = "Embed XPC Services";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5E6D76125A5BB6C00EEA7DD /* Embed XPC Services */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
-			dstSubfolderSpec = 16;
+			dstSubfolder = Product;
 			files = (
 				A5E6D75D25A5BB6C00EEA7DD /* XPCPower.xpc in Embed XPC Services */,
 			);
 			name = "Embed XPC Services";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -471,26 +472,25 @@
 		A5F45E882AEAC96800E8B286 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedDivider.swift; sourceTree = "<group>"; };
 		F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
+		F3A0000100000001000000C1 /* ThiefDtoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefDtoTest.swift; sourceTree = "<group>"; };
+		F3A0000100000002000000C1 /* DatabaseDtoListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDtoListTest.swift; sourceTree = "<group>"; };
+		F3A0000100000003000000C1 /* AppSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTest.swift; sourceTree = "<group>"; };
+		F3A0000100000004000000C1 /* TriggerManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerManagerTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A533D82325AA11F40046B7C8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A54E4A1426108E9600E7B1D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A58FC74426E2814E007674F6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A58FC74526E2814E007674F6 /* LaunchAtLogin in Frameworks */,
 				A58FC74626E2814E007674F6 /* PhotoSnap in Frameworks */,
@@ -499,11 +499,9 @@
 				A599EB2F27AB0C09003A69B5 /* KeychainAccess in Frameworks */,
 				A535F5D427B9166E0096D0C3 /* SimpleTracer in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5C6DBEB25796A90009DE750 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A533D7BC25A8FCC20046B7C8 /* LaunchAtLogin in Frameworks */,
 				A5C6DC4625796CCB009DE750 /* PhotoSnap in Frameworks */,
@@ -512,28 +510,21 @@
 				A599EB2D27AB0BE1003A69B5 /* KeychainAccess in Frameworks */,
 				A535F5D227B9165F0096D0C3 /* SimpleTracer in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5C6DBFD25796A93009DE750 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5C6DC0825796A93009DE750 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5E6D74F25A5BB6B00EEA7DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -947,6 +938,8 @@
 		A5C6DC0325796A93009DE750 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				F3A0000100000009000000C1 /* Models */,
+				F3A000010000000A000000C1 /* Managers */,
 				A57905F52A9FAB2D00647BF8 /* Utils */,
 				A57905F22A9E790B00647BF8 /* Logger */,
 				A57905EE2A9D310600647BF8 /* Listeners */,
@@ -1028,6 +1021,24 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F3A0000100000009000000C1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F3A0000100000001000000C1 /* ThiefDtoTest.swift */,
+				F3A0000100000002000000C1 /* DatabaseDtoListTest.swift */,
+				F3A0000100000003000000C1 /* AppSettingsTest.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F3A000010000000A000000C1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F3A0000100000004000000C1 /* TriggerManagerTest.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1041,8 +1052,6 @@
 			);
 			buildRules = (
 				A533D84925AA12AF0046B7C8 /* PBXBuildRule */,
-			);
-			dependencies = (
 			);
 			name = XPCMail;
 			productName = XPCMail;
@@ -1058,8 +1067,6 @@
 				A54E4A1526108E9600E7B1D4 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			name = XPCAuthentication;
 			productName = XPCAuthentication;
@@ -1170,8 +1177,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = XPCPower;
 			productName = XPCPower;
 			productReference = A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */;
@@ -1185,7 +1190,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 2610;
 				ORGANIZATIONNAME = "IGR Soft";
 				TargetAttributes = {
 					A533D82525AA11F40046B7C8 = {
@@ -1214,7 +1219,6 @@
 				};
 			};
 			buildConfigurationList = A5C6DBE925796A90009DE750 /* Build configuration list for PBXProject "Lock-Watcher" */;
-			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1223,6 +1227,7 @@
 				uk,
 			);
 			mainGroup = A5C6DBE525796A90009DE750;
+			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A5C6DC4425796CCB009DE750 /* XCRemoteSwiftPackageReference "PhotoSnap" */,
 				A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
@@ -1231,6 +1236,7 @@
 				A599EB2B27AB0BE1003A69B5 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */,
 			);
+			preferredProjectObjectVersion = 90;
 			productRefGroup = A5C6DBEF25796A90009DE750 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1249,61 +1255,47 @@
 /* Begin PBXResourcesBuildPhase section */
 		A533D82425AA11F40046B7C8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A5477B922D11E60500FA176B /* Mail.app in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A54E4A1526108E9600E7B1D4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A58FC74926E2814E007674F6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A58FC74A26E2814E007674F6 /* Assets.xcassets in Resources */,
 				A58FC74B26E2814E007674F6 /* Localizable.strings in Resources */,
 				A58C63F12A4CC2EC004DE972 /* Preview Assets.xcassets in Resources */,
 				A599EB3527AB1BF0003A69B5 /* policy.html in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5C6DBEC25796A90009DE750 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A51999A326DA764A00F482BC /* Assets.xcassets in Resources */,
 				A51999A226DA764A00F482BC /* Localizable.strings in Resources */,
 				A58C63F02A4CC2EC004DE972 /* Preview Assets.xcassets in Resources */,
 				A599EB3427AB1BF0003A69B5 /* policy.html in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5C6DBFE25796A93009DE750 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5C6DC0925796A93009DE750 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5E6D75025A5BB6B00EEA7DD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
@@ -1311,73 +1303,56 @@
 		A533D7C125A8FCD10046B7C8 /* Setup Launch At Login */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
 				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper.zip",
 				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper-with-runtime.zip",
 			);
 			name = "Setup Launch At Login";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\n";
+			shellScript = (
+				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
+				"",
+				"",
+			);
 		};
 		A58FC74F26E2814E007674F6 /* Setup Launch At Login */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
 				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper.zip",
 				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper-with-runtime.zip",
 			);
 			name = "Setup Launch At Login";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\n";
+			shellScript = (
+				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
+				"",
+				"",
+			);
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A533D82225AA11F40046B7C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A533D82D25AA11F40046B7C8 /* main.m in Sources */,
 				A533D83C25AA12110046B7C8 /* XPCMailProtocol.swift in Sources */,
 				A533D82B25AA11F40046B7C8 /* XPCMail.m in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A54E4A1326108E9600E7B1D4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A54E4A582610AA3D00E7B1D4 /* main.swift in Sources */,
 				A54E4A592610AA3D00E7B1D4 /* XPCAuthentication.swift in Sources */,
 				A54E4A2F26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A58FC72B26E2814E007674F6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A58FC72C26E2814E007674F6 /* DatabaseDto.swift in Sources */,
 				A599EB2427AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */,
@@ -1459,11 +1434,9 @@
 				A5A565952A5588D800D7E030 /* NotifierProtocol.swift in Sources */,
 				A5BC810D2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5C6DBEA25796A90009DE750 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A519998626DA4BFB00F482BC /* DatabaseDto.swift in Sources */,
 				A599EB2327AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */,
@@ -1545,12 +1518,14 @@
 				A5A565942A5588D800D7E030 /* NotifierProtocol.swift in Sources */,
 				A5BC810C2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5C6DBFC25796A93009DE750 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
+				F3A0000100000005000000C1 /* ThiefDtoTest.swift in Sources */,
+				F3A0000100000006000000C1 /* DatabaseDtoListTest.swift in Sources */,
+				F3A0000100000007000000C1 /* AppSettingsTest.swift in Sources */,
+				F3A0000100000008000000C1 /* TriggerManagerTest.swift in Sources */,
 				A57905DF2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift in Sources */,
 				A57905E52A9D281700647BF8 /* NSImageTextTest.swift in Sources */,
 				A57905FB2A9FB0A300647BF8 /* NetworkUtilTests.swift in Sources */,
@@ -1573,25 +1548,20 @@
 				A57905CD2A96163900647BF8 /* MainAppTest.swift in Sources */,
 				A57905FD2A9FBF5400647BF8 /* SecurityUtilTest.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5C6DC0725796A93009DE750 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A5C6DC1025796A93009DE750 /* ApplicationUITests.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A5E6D74E25A5BB6B00EEA7DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				A5E6D75925A5BB6C00EEA7DD /* main.m in Sources */,
 				A5E6D75725A5BB6C00EEA7DD /* XPCPower.m in Sources */,
 				A5E6D76F25A5BC8B00EEA7DD /* XPCPowerProtocol.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -1651,11 +1621,13 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		A533D83325AA11F40046B7C8 /* Debug */ = {
+		A533D83325AA11F40046B7C8 /* Debug configuration for PBXNativeTarget "XPCMail" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */;
 			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCMail/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
@@ -1663,11 +1635,13 @@
 			};
 			name = Debug;
 		};
-		A533D83425AA11F40046B7C8 /* Release */ = {
+		A533D83425AA11F40046B7C8 /* Release configuration for PBXNativeTarget "XPCMail" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCMail/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
@@ -1675,71 +1649,75 @@
 			};
 			name = Release;
 		};
-		A54E4A2326108E9600E7B1D4 /* Debug */ = {
+		A54E4A2326108E9600E7B1D4 /* Debug configuration for PBXNativeTarget "XPCAuthentication" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
 			};
 			name = Debug;
 		};
-		A54E4A2426108E9600E7B1D4 /* Release */ = {
+		A54E4A2426108E9600E7B1D4 /* Release configuration for PBXNativeTarget "XPCAuthentication" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
 			};
 			name = Release;
 		};
-		A58FC75126E2814E007674F6 /* Debug */ = {
+		A58FC75126E2814E007674F6 /* Debug configuration for PBXNativeTarget "Lock-Watcher-non-mas" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		A58FC75226E2814E007674F6 /* Release */ = {
+		A58FC75226E2814E007674F6 /* Release configuration for PBXNativeTarget "Lock-Watcher-non-mas" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		A58FC75B26E2826D007674F6 /* Release-non-mas */ = {
+		A58FC75B26E2826D007674F6 /* Release-non-mas configuration for PBXProject "Lock-Watcher" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
 			};
 			name = "Release-non-mas";
 		};
-		A58FC75C26E2826D007674F6 /* Release-non-mas */ = {
+		A58FC75C26E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "Lock-Watcher" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
 			};
 			name = "Release-non-mas";
 		};
-		A58FC75D26E2826D007674F6 /* Release-non-mas */ = {
+		A58FC75D26E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "Lock-WatcherTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CC2A4CBCA0004DE972 /* test-release.xcconfig */;
 			buildSettings = {
 			};
 			name = "Release-non-mas";
 		};
-		A58FC75E26E2826D007674F6 /* Release-non-mas */ = {
+		A58FC75E26E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "Lock-WatcherUITests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D02A4CBCA0004DE972 /* uitest-release.xcconfig */;
 			buildSettings = {
 			};
 			name = "Release-non-mas";
 		};
-		A58FC75F26E2826D007674F6 /* Release-non-mas */ = {
+		A58FC75F26E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "XPCPower" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
@@ -1751,11 +1729,13 @@
 			};
 			name = "Release-non-mas";
 		};
-		A58FC76026E2826D007674F6 /* Release-non-mas */ = {
+		A58FC76026E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "XPCMail" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCMail-non-mas.entitlements";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = XPCMail/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCMail;
@@ -1763,81 +1743,83 @@
 			};
 			name = "Release-non-mas";
 		};
-		A58FC76126E2826D007674F6 /* Release-non-mas */ = {
+		A58FC76126E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "XPCAuthentication" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Resources/entitlements/XPCAuthentication-non-mas.entitlements";
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				INFOPLIST_FILE = XPCAuthentication/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.XPCAuthentication;
 			};
 			name = "Release-non-mas";
 		};
-		A58FC76226E2826D007674F6 /* Release-non-mas */ = {
+		A58FC76226E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "Lock-Watcher-non-mas" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
 			};
 			name = "Release-non-mas";
 		};
-		A5C6DC1225796A93009DE750 /* Debug */ = {
+		A5C6DC1225796A93009DE750 /* Debug configuration for PBXProject "Lock-Watcher" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		A5C6DC1325796A93009DE750 /* Release */ = {
+		A5C6DC1325796A93009DE750 /* Release configuration for PBXProject "Lock-Watcher" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		A5C6DC1525796A93009DE750 /* Debug */ = {
+		A5C6DC1525796A93009DE750 /* Debug configuration for PBXNativeTarget "Lock-Watcher" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		A5C6DC1625796A93009DE750 /* Release */ = {
+		A5C6DC1625796A93009DE750 /* Release configuration for PBXNativeTarget "Lock-Watcher" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		A5C6DC1825796A93009DE750 /* Debug */ = {
+		A5C6DC1825796A93009DE750 /* Debug configuration for PBXNativeTarget "Lock-WatcherTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D12A4CBCA0004DE972 /* test-debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		A5C6DC1925796A93009DE750 /* Release */ = {
+		A5C6DC1925796A93009DE750 /* Release configuration for PBXNativeTarget "Lock-WatcherTests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CC2A4CBCA0004DE972 /* test-release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		A5C6DC1B25796A93009DE750 /* Debug */ = {
+		A5C6DC1B25796A93009DE750 /* Debug configuration for PBXNativeTarget "Lock-WatcherUITests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CD2A4CBCA0004DE972 /* uitest-debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
-		A5C6DC1C25796A93009DE750 /* Release */ = {
+		A5C6DC1C25796A93009DE750 /* Release configuration for PBXNativeTarget "Lock-WatcherUITests" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D02A4CBCA0004DE972 /* uitest-release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
-		A5E6D75F25A5BB6C00EEA7DD /* Debug */ = {
+		A5E6D75F25A5BB6C00EEA7DD /* Debug configuration for PBXNativeTarget "XPCPower" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D22A4CBCA0004DE972 /* debug.xcconfig */;
 			buildSettings = {
@@ -1849,7 +1831,7 @@
 			};
 			name = Debug;
 		};
-		A5E6D76025A5BB6C00EEA7DD /* Release */ = {
+		A5E6D76025A5BB6C00EEA7DD /* Release configuration for PBXNativeTarget "XPCPower" */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D32A4CBCA0004DE972 /* release.xcconfig */;
 			buildSettings = {
@@ -1867,81 +1849,73 @@
 		A533D83225AA11F40046B7C8 /* Build configuration list for PBXNativeTarget "XPCMail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A533D83325AA11F40046B7C8 /* Debug */,
-				A533D83425AA11F40046B7C8 /* Release */,
-				A58FC76026E2826D007674F6 /* Release-non-mas */,
+				A533D83325AA11F40046B7C8 /* Debug configuration for PBXNativeTarget "XPCMail" */,
+				A533D83425AA11F40046B7C8 /* Release configuration for PBXNativeTarget "XPCMail" */,
+				A58FC76026E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "XPCMail" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A54E4A2526108E9600E7B1D4 /* Build configuration list for PBXNativeTarget "XPCAuthentication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A54E4A2326108E9600E7B1D4 /* Debug */,
-				A54E4A2426108E9600E7B1D4 /* Release */,
-				A58FC76126E2826D007674F6 /* Release-non-mas */,
+				A54E4A2326108E9600E7B1D4 /* Debug configuration for PBXNativeTarget "XPCAuthentication" */,
+				A54E4A2426108E9600E7B1D4 /* Release configuration for PBXNativeTarget "XPCAuthentication" */,
+				A58FC76126E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "XPCAuthentication" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A58FC75026E2814E007674F6 /* Build configuration list for PBXNativeTarget "Lock-Watcher-non-mas" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A58FC75126E2814E007674F6 /* Debug */,
-				A58FC75226E2814E007674F6 /* Release */,
-				A58FC76226E2826D007674F6 /* Release-non-mas */,
+				A58FC75126E2814E007674F6 /* Debug configuration for PBXNativeTarget "Lock-Watcher-non-mas" */,
+				A58FC75226E2814E007674F6 /* Release configuration for PBXNativeTarget "Lock-Watcher-non-mas" */,
+				A58FC76226E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "Lock-Watcher-non-mas" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5C6DBE925796A90009DE750 /* Build configuration list for PBXProject "Lock-Watcher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5C6DC1225796A93009DE750 /* Debug */,
-				A5C6DC1325796A93009DE750 /* Release */,
-				A58FC75B26E2826D007674F6 /* Release-non-mas */,
+				A5C6DC1225796A93009DE750 /* Debug configuration for PBXProject "Lock-Watcher" */,
+				A5C6DC1325796A93009DE750 /* Release configuration for PBXProject "Lock-Watcher" */,
+				A58FC75B26E2826D007674F6 /* Release-non-mas configuration for PBXProject "Lock-Watcher" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5C6DC1425796A93009DE750 /* Build configuration list for PBXNativeTarget "Lock-Watcher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5C6DC1525796A93009DE750 /* Debug */,
-				A5C6DC1625796A93009DE750 /* Release */,
-				A58FC75C26E2826D007674F6 /* Release-non-mas */,
+				A5C6DC1525796A93009DE750 /* Debug configuration for PBXNativeTarget "Lock-Watcher" */,
+				A5C6DC1625796A93009DE750 /* Release configuration for PBXNativeTarget "Lock-Watcher" */,
+				A58FC75C26E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "Lock-Watcher" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5C6DC1725796A93009DE750 /* Build configuration list for PBXNativeTarget "Lock-WatcherTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5C6DC1825796A93009DE750 /* Debug */,
-				A5C6DC1925796A93009DE750 /* Release */,
-				A58FC75D26E2826D007674F6 /* Release-non-mas */,
+				A5C6DC1825796A93009DE750 /* Debug configuration for PBXNativeTarget "Lock-WatcherTests" */,
+				A5C6DC1925796A93009DE750 /* Release configuration for PBXNativeTarget "Lock-WatcherTests" */,
+				A58FC75D26E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "Lock-WatcherTests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5C6DC1A25796A93009DE750 /* Build configuration list for PBXNativeTarget "Lock-WatcherUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5C6DC1B25796A93009DE750 /* Debug */,
-				A5C6DC1C25796A93009DE750 /* Release */,
-				A58FC75E26E2826D007674F6 /* Release-non-mas */,
+				A5C6DC1B25796A93009DE750 /* Debug configuration for PBXNativeTarget "Lock-WatcherUITests" */,
+				A5C6DC1C25796A93009DE750 /* Release configuration for PBXNativeTarget "Lock-WatcherUITests" */,
+				A58FC75E26E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "Lock-WatcherUITests" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		A5E6D75E25A5BB6C00EEA7DD /* Build configuration list for PBXNativeTarget "XPCPower" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5E6D75F25A5BB6C00EEA7DD /* Debug */,
-				A5E6D76025A5BB6C00EEA7DD /* Release */,
-				A58FC75F26E2826D007674F6 /* Release-non-mas */,
+				A5E6D75F25A5BB6C00EEA7DD /* Debug configuration for PBXNativeTarget "XPCPower" */,
+				A5E6D76025A5BB6C00EEA7DD /* Release configuration for PBXNativeTarget "XPCPower" */,
+				A58FC75F26E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "XPCPower" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

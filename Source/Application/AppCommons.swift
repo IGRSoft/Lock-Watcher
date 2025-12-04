@@ -14,16 +14,16 @@ enum Commons {
     typealias EmptyClosure = () -> Void
     
     /// Represents a closure that takes a boolean parameter and returns no value.
-    typealias BoolClosure = (Bool) -> Void
-    
+    typealias BoolClosure = @Sendable (Bool) -> Void
+
     /// Represents a closure that takes a string parameter and returns no value.
-    typealias StringClosure = (String) -> Void
-    
+    typealias StringClosure = @Sendable (String) -> Void
+
     /// Represents a closure that takes a thief dto parameter and returns no value.
-    typealias ThiefClosure = (ThiefDto) -> Void
-    
+    typealias ThiefClosure = @Sendable (ThiefDto) -> Void
+
     /// Represents a closure that takes a trigger parameter and returns no value.
-    typealias TriggerClosure = (TriggerType) -> Void
+    typealias TriggerClosure = @Sendable (TriggerType) -> Void
 }
 
 /// Describes the different states a SwiftUI View can be in.

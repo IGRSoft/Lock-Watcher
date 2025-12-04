@@ -7,7 +7,7 @@
 
 import AppKit
 import CoreLocation
-import SwiftyDropbox
+@preconcurrency import SwiftyDropbox
 
 /// An additional protocol to handle Dropbox authentication completion.
 protocol DropboxNotifierProtocol {

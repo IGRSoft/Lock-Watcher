@@ -46,7 +46,13 @@ public class DeviceUtil: DeviceUtilProtocol {
         res = sysctlbyname(name, &ret, &size, nil, 0)
         
         // If successfully retrieved the name, check if it contains "MacBook", indicating it's a laptop.
-        let device = res == 0 ? String(cString: ret) : nil
+        let device: String? = if res == 0 {
+            ret.withUnsafeBufferPointer { buffer in
+                buffer.baseAddress.map { String(cString: $0) }
+            }
+        } else {
+            nil
+        }
         return device?.contains("MacBook") == true ? .laptop : .nonLaptop
     }
 }
