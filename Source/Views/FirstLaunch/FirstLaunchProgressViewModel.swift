@@ -9,7 +9,10 @@
 import SwiftUI
 
 /// A view model responsible for managing the progression of animation states during the first launch of the app.
-final class FirstLaunchProgressViewModel: ObservableObject, @unchecked Sendable {
+///
+/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
+@MainActor
+final class FirstLaunchProgressViewModel: ObservableObject {
     /// Enumeration of the positions for the animation.
     ///
     /// Each case represents a different stage in the animation and is associated with a sun icon from SF Symbols.
@@ -38,15 +41,27 @@ final class FirstLaunchProgressViewModel: ObservableObject, @unchecked Sendable 
         self.frameSize = frameSize
     }
     
+    /// Timer for animation.
+    private var animationTimer: Timer?
+
     /// Starts the animation sequence, transitioning through each position in the `Positions` enum.
     ///
     /// The animation will loop indefinitely, cycling through the positions at a quarter-second interval.
     func startAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true, block: animate)
+        animationTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                self?.animate()
+            }
+        }
     }
-    
-    @Sendable
-    private func animate(_ timaer: Timer) {
+
+    /// Stops the animation.
+    func stopAnimation() {
+        animationTimer?.invalidate()
+        animationTimer = nil
+    }
+
+    private func animate() {
         self.pos += 1
         var pos = pos
         if pos == Positions.allValues.count {

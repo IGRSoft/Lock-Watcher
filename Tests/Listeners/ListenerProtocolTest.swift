@@ -9,29 +9,30 @@
 import XCTest
 @testable import Lock_Watcher
 
+@MainActor
 final class ListenerTests: XCTestCase {
     var listener: MockListener!
     var dummyDTO: ThiefDto!
 
     override func setUpWithError() throws {
         listener = MockListener()
-        dummyDTO = ThiefDto(triggerType: .setup) // You would initialize this with valid data for testing.
+        dummyDTO = ThiefDto(triggerType: .setup)
     }
 
     override func tearDownWithError() throws {
         listener = nil
         dummyDTO = nil
     }
-    
+
     func testListenerNameEnums() {
         XCTAssertEqual(ListenerName.onWakeUpListener.rawValue, 0)
         XCTAssertEqual(ListenerName.onWrongPassword.rawValue, 1)
         XCTAssertEqual(ListenerName.onBatteryPowerListener.rawValue, 2)
         XCTAssertEqual(ListenerName.onUSBConnectionListener.rawValue, 3)
         XCTAssertEqual(ListenerName.onLoginListener.rawValue, 4)
-        
+
         let names: [ListenerName] = [.onWakeUpListener, .onWrongPassword, .onBatteryPowerListener, .onUSBConnectionListener, .onLoginListener]
-        
+
         for name in names {
             switch name {
             case .onWakeUpListener:
@@ -47,43 +48,52 @@ final class ListenerTests: XCTestCase {
             }
         }
     }
-    
+
     func testStartListener() {
         XCTAssertFalse(listener.isRunning)
-        
-        listener.start { _, _ in }
-        
+
+        _ = listener.start()
+
         XCTAssertTrue(listener.isRunning)
     }
-    
+
     func testStopListener() {
-        listener.start { _, _ in }
+        _ = listener.start()
         XCTAssertTrue(listener.isRunning)
-        
+
         listener.stop()
-        
+
         XCTAssertFalse(listener.isRunning)
     }
-    
-    func testListenerAction() {
-        var triggered = false
-        listener.stubbedStartActionResult = (.onWakeUpListener, .onWakeUp)
-        listener.start { _, _ in
-            triggered = true
+
+    func testListenerAction() async {
+        listener.stubbedStartResult = (.onWakeUpListener, .onWakeUp)
+
+        let stream = listener.start()
+
+        // Directly await the first event from the stream
+        var eventReceived = false
+        for await _ in stream {
+            eventReceived = true
+            break
         }
 
-        XCTAssertTrue(triggered)
+        XCTAssertTrue(eventReceived)
     }
 
-    func testListenerReceivesCorrectEvent() {
+    func testListenerReceivesCorrectEvent() async {
+        listener.stubbedStartResult = (.onWakeUpListener, .onWakeUp)
+
+        let stream = listener.start()
+
+        // Directly await the first event from the stream
         var receivedEvent: ListenerName?
-        listener.stubbedStartActionResult = (.onWakeUpListener, .onWakeUp)
-        listener.start { name, _ in
+        for await (name, _) in stream {
             receivedEvent = name
+            break
         }
-        
+
         let expectedEvent = ListenerName.onWakeUpListener
-        
         XCTAssertEqual(receivedEvent, expectedEvent)
     }
 }

@@ -25,6 +25,7 @@ protocol DomainViewConstant {
 /// A protocol that bridges a concrete view to its associated `DomainViewConstant`.
 ///
 /// Conforming types will provide domain-specific constants via the `viewSettings` property.
+@MainActor
 protocol DomainViewConstantProtocol {
     /// The associated `DomainViewConstant` type that provides layout and appearance constants.
     associatedtype DomainViewConstant

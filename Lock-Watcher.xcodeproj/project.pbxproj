@@ -49,6 +49,7 @@
 		A56D11E126DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */; };
 		A56F1A7D278A29630066CA78 /* DispatchQueue+Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56F1A7C278A29630066CA78 /* DispatchQueue+Debounce.swift */; };
 		A56F1A7E278A29630066CA78 /* DispatchQueue+Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56F1A7C278A29630066CA78 /* DispatchQueue+Debounce.swift */; };
+		A57305612EE1DCE100C4D0F2 /* MockAppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */; };
 		A57905BC2A9534AA00647BF8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905BB2A9534AA00647BF8 /* Secrets.swift */; };
 		A57905BD2A9534AA00647BF8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905BB2A9534AA00647BF8 /* Secrets.swift */; };
 		A57905C42A960C8300647BF8 /* AppCommonsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905C02A960B9200647BF8 /* AppCommonsTest.swift */; };
@@ -60,8 +61,6 @@
 		A57905D02A9BCD0400647BF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905CE2A9BCD0400647BF8 /* AppDelegate.swift */; };
 		A57905D22A9BCD6800647BF8 /* AppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D12A9BCD6800647BF8 /* AppDelegateModel.swift */; };
 		A57905D32A9BCD6800647BF8 /* AppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D12A9BCD6800647BF8 /* AppDelegateModel.swift */; };
-		A57905D52A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */; };
-		A57905D62A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */; };
 		A57905D92A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */; };
 		A57905DA2A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D82A9BD6C800647BF8 /* MainCoordinatorTest.swift */; };
 		A57905DD2A9D15CA00647BF8 /* DateFormatterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905DC2A9D15CA00647BF8 /* DateFormatterTest.swift */; };
@@ -238,6 +237,7 @@
 			);
 			script = (
 				"sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`",
+				"",
 				"",
 				"",
 			);
@@ -1314,6 +1314,7 @@
 				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
 				"",
 				"",
+				"",
 			);
 		};
 		A58FC74F26E2814E007674F6 /* Setup Launch At Login */ = {
@@ -1328,6 +1329,7 @@
 			shellPath = /bin/sh;
 			shellScript = (
 				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
+				"",
 				"",
 				"",
 			);
@@ -1403,7 +1405,6 @@
 				A58C63F82A4CC65D004DE972 /* BaseCoordinatorProtocol.swift in Sources */,
 				A5EFE8B926E2B587001FC4EA /* Date+Formatter.swift in Sources */,
 				A58C63F52A4CC5E4004DE972 /* MainCoordinator.swift in Sources */,
-				A57905D62A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */,
 				A5942652283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
 				A58FC73C26E2814E007674F6 /* XPCAuthenticationProtocol.swift in Sources */,
 				A54F781A2D119AFD00AA5592 /* MacOSLockDetectManager.swift in Sources */,
@@ -1487,7 +1488,6 @@
 				A5C3E73626C1EA7B003D0BF5 /* ICloudNotifier.swift in Sources */,
 				A58C63F42A4CC5E4004DE972 /* MainCoordinator.swift in Sources */,
 				A5942651283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
-				A57905D52A9BD08600647BF8 /* MockAppDelegateModel.swift in Sources */,
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 				A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */,
 				A54F78192D119AFD00AA5592 /* MacOSLockDetectManager.swift in Sources */,
@@ -1528,6 +1528,7 @@
 				F3A0000100000008000000C1 /* TriggerManagerTest.swift in Sources */,
 				A57905DF2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift in Sources */,
 				A57905E52A9D281700647BF8 /* NSImageTextTest.swift in Sources */,
+				A57305612EE1DCE100C4D0F2 /* MockAppDelegateModel.swift in Sources */,
 				A57905FB2A9FB0A300647BF8 /* NetworkUtilTests.swift in Sources */,
 				A57905E72A9D28CC00647BF8 /* StringRegexTest.swift in Sources */,
 				A57905F42A9E791D00647BF8 /* LoggerTest.swift in Sources */,

@@ -10,6 +10,7 @@ import UserNotifications
 import XCTest
 @testable import Lock_Watcher
 
+@MainActor
 class AppDelegateModelTests: XCTestCase {
     var model: MockAppDelegateModel!
     

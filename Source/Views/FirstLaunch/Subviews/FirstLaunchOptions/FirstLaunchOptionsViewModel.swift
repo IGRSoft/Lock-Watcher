@@ -9,15 +9,20 @@
 import Combine
 import SwiftUI
 
-final class FirstLaunchOptionsViewModel: ObservableObject, @unchecked Sendable {
+/// ViewModel for the first launch options configuration.
+///
+/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
+/// Uses `@preconcurrency` for ObservableObject to avoid Swift 6 concurrency warnings.
+@MainActor
+final class FirstLaunchOptionsViewModel: @preconcurrency ObservableObject {
     let objectWillChange = PassthroughSubject<Void, Never>()
-    
-    @Published var settings: AppSettingsProtocol
-    
+
+    var settings: AppSettingsProtocol
+
     init(settings: AppSettingsProtocol) {
         self.settings = settings
     }
-    
+
     var isUseSnapshotOnWakeUp: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.triggers.isUseSnapshotOnWakeUp
@@ -26,7 +31,7 @@ final class FirstLaunchOptionsViewModel: ObservableObject, @unchecked Sendable {
             self.objectWillChange.send()
         })
     }
-    
+
     var isUseSnapshotOnLogin: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.triggers.isUseSnapshotOnLogin
@@ -35,7 +40,7 @@ final class FirstLaunchOptionsViewModel: ObservableObject, @unchecked Sendable {
             self.objectWillChange.send()
         })
     }
-    
+
     var addLocationToSnapshot: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.options.addLocationToSnapshot
@@ -44,7 +49,7 @@ final class FirstLaunchOptionsViewModel: ObservableObject, @unchecked Sendable {
             self.objectWillChange.send()
         })
     }
-    
+
     var isICloudSyncEnable: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.sync.isICloudSyncEnable

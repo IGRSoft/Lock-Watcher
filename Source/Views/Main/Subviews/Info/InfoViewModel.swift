@@ -9,13 +9,16 @@
 import SwiftUI
 
 /// A view model designed to manage the data and behaviors for the information section.
+///
+/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
+@MainActor
 final class InfoViewModel: ObservableObject {
     /// The thief manager responsible for handling thief-related actions and data.
-    var thiefManager: ThiefManagerProtocol
-    
+    let thiefManager: ThiefManagerProtocol
+
     /// A binding indicating whether the info section should be extended.
     @Binding var isInfoExtended: Bool
-    
+
     /// Initializes a new `InfoViewModel`.
     ///
     /// - Parameters:
@@ -25,26 +28,27 @@ final class InfoViewModel: ObservableObject {
         self.thiefManager = thiefManager
         _isInfoExtended = isInfoExtended
     }
-    
+
     /// Provides the title for the debug section.
     @ViewBuilder
     func debugTitle() -> Text {
         Text("Debug")
     }
-    
+
     /// Invokes the thief manager's detected trigger.
     func debugTrigger() {
-        thiefManager.detectedTrigger { _ in }
+        Task {
+            _ = await thiefManager.detectedTrigger()
+        }
     }
-    
+
     /// Provides the title for the open settings button.
     @ViewBuilder
     func openSettingsTitle() -> Text {
         Text("ButtonSettings")
     }
-    
+
     /// Opens the application's settings window.
-    @MainActor
     func openSettings() {
         NSApplication.displaySettingsWindow()
     }

@@ -7,7 +7,9 @@
 //
 
 import Foundation
+@testable import Lock_Watcher
 
+/// Mock app delegate model for unit tests.
 final class MockAppDelegateModel: AppDelegateModelProtocol {
     var invokedSettingsViewGetter = false
     var invokedSettingsViewGetterCount = 0

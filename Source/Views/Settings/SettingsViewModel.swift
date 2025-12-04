@@ -10,36 +10,39 @@ import Combine
 import SwiftUI
 
 /// ViewModel for handling the settings and configuration of the app.
-final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @unchecked Sendable {
+///
+/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
+/// Uses `@preconcurrency` for ObservableObject to avoid Swift 6 concurrency warnings.
+final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConstantProtocol {
     // MARK: - DomainViewConstantProtocol
-    
+
     /// Represents the constants related to the view settings.
     typealias DomainViewConstant = SettingsDomain
-    
+
     /// Contains the view settings for the domain.
     var viewSettings: SettingsDomain = .init()
-    
+
     // MARK: - Types
-    
+
     /// A closure type to handle trigger events.
     typealias SettingsTriggerWatchBlock = Commons.TriggerClosure
-    
+
     // MARK: - Dependency injection
-    
+
     /// A manager responsible for handling thief related functionalities.
     private var thiefManager: ThiefManagerProtocol
-    
+
     /// Represents the app's settings.
     private var settings: AppSettingsProtocol
-    
+
     // MARK: - Variables
-    
+
     /// Indicates if the information is hidden or shown.
-    @Published var isInfoHidden = true
-    
+    var isInfoHidden = true
+
     /// Indicates if access is granted to some resources.
-    @Published var isAccessGranted = true
-    
+    var isAccessGranted = true
+
     /// Notifies views to refresh whenever underlying data changes.
     let objectWillChange = PassthroughSubject<Void, Never>()
     
@@ -284,25 +287,29 @@ final class SettingsViewModel: ObservableObject, DomainViewConstantProtocol, @un
     init(settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol) {
         self.settings = settings
         self.thiefManager = thiefManager
-        
+
         watchDropboxUserNameUpdate()
     }
-    
+
     /// Requests the thief manager to restart watchers based on updated settings.
     func restartWatching() {
         thiefManager.restartWatching()
     }
-    
+
     /// Enables or disables the location manager in the thief manager.
     func setupLocationManager(enable: Bool) {
         thiefManager.setupLocationManager(enable: enable)
     }
-    
+
     /// Observes any updates to the Dropbox user's name and updates the setting accordingly.
     private func watchDropboxUserNameUpdate() {
-        thiefManager.watchDropboxUserNameUpdate { [weak self] name in
-            self?.settings.sync.dropboxName = name
-            self?.objectWillChange.send()
+        Task { [weak self] in
+            guard let self else { return }
+            for await name in thiefManager.dropboxUserNameUpdates {
+                // Already on MainActor, update directly
+                self.settings.sync.dropboxName = name
+                self.objectWillChange.send()
+            }
         }
     }
 }

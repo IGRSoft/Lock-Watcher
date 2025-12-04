@@ -10,7 +10,9 @@ import Combine
 import SwiftUI
 
 /// The view model for the first launch view.
-final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol, @unchecked Sendable {
+///
+/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
+final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
     // MARK: - DomainViewConstantProtocol
     
     /// The view's domain-specific constants.
@@ -71,13 +73,8 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol, 
         setupPublishers()
     }
     
-    /// Deinit cleans up any active timers.
-    deinit {
-        stopTimer()
-    }
-    
     /// Stops any active timers.
-    private func stopTimer() {
+    func stopTimer() {
         timer?.invalidate()
         timer = nil
     }
@@ -150,20 +147,14 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol, 
     
     /// Simulates a trigger for permissions and state changes.
     private func simulateTrigger() {
-        Task { @MainActor [weak self] in
-            guard let self else { return }
-            PermissionsUtils.updateCameraPermissions { [weak self] isGranted in
+        PermissionsUtils.updateCameraPermissions { [weak self] isGranted in
+            Task { @MainActor in
                 guard let self else { return }
                 if isGranted {
-                    self.thiefManager.detectedTrigger { [weak self] success in
-                        Task { @MainActor [weak self] in
-                            self?.state = success ? .success : .fault
-                        }
-                    }
+                    let success = await self.thiefManager.detectedTrigger()
+                    self.state = success ? .success : .fault
                 } else {
-                    Task { @MainActor [weak self] in
-                        self?.state = .fault
-                    }
+                    self.state = .fault
                 }
             }
         }
@@ -171,12 +162,15 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol, 
     
     /// Starts a timer to close the window after the success countdown is completed.
     private func startTimerToCloseWindow() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [unowned self] timer in
-            if successCountDown == .zero {
-                timer.invalidate()
-                closeClosure()
-            } else {
-                successCountDown -= 1
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                guard let self else { return }
+                if self.successCountDown == .zero {
+                    self.stopTimer()
+                    self.closeClosure()
+                } else {
+                    self.successCountDown -= 1
+                }
             }
         }
     }

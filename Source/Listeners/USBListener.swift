@@ -8,69 +8,79 @@
 import Cocoa
 import Foundation
 
-/// `USBListener` observes USB mount events on the system and triggers an action when a USB device is mounted.
-final class USBListener: BaseListenerProtocol, @unchecked Sendable {
+/// `USBListener` observes USB mount events on the system and emits events via AsyncStream.
+///
+/// This class is `@MainActor` isolated through `BaseListenerProtocol` conformance,
+/// ensuring all state mutations occur on the main thread.
+final class USBListener: NSObject, BaseListenerProtocol {
     // MARK: - Dependency injection
-    
+
     /// Logger instance used for recording and debugging.
     private let logger: LogProtocol
-    
+
     // MARK: - Variables
-    
-    /// Action to be triggered upon detecting a USB mount event.
-    var listenerAction: ListenerAction?
-    
+
     /// Indicates if the listener is currently monitoring USB mount events.
-    var isRunning: Bool = false
-    
+    private(set) var isRunning: Bool = false
+
+    /// Continuation for the AsyncStream to yield events.
+    private var continuation: AsyncStream<ListenerEvent>.Continuation?
+
     /// NotificationCenter to listen usb events
     private lazy var notificationCenter = NSWorkspace.shared.notificationCenter
-    
+
     // MARK: - Initializer
-    
+
     /// Initializes a `USBListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.usbListener` category.
     init(logger: LogProtocol = Log(category: .usbListener)) {
         self.logger = logger
     }
-    
+
     // MARK: - Public Methods
-    
+
     /// Starts monitoring for USB mount events.
-    /// - Parameter action: A closure that is called when a USB mount event is detected.
-    func start(_ action: @escaping ListenerAction) {
+    /// - Returns: An AsyncStream that emits events when USB mount is detected.
+    func start() -> AsyncStream<ListenerEvent> {
         logger.debug("started")
-        isRunning = true
-        listenerAction = action
-        
-        // Register to observe USB mount notifications.
-        notificationCenter.addObserver(self,
-                                       selector: #selector(receiveUSBNotification),
-                                       name: NSWorkspace.didMountNotification,
-                                       object: nil)
+
+        return AsyncStream { continuation in
+            self.continuation = continuation
+            self.isRunning = true
+
+            self.notificationCenter.addObserver(
+                self,
+                selector: #selector(self.receiveUSBNotification),
+                name: NSWorkspace.didMountNotification,
+                object: nil
+            )
+
+            continuation.onTermination = { [weak self] _ in
+                Task { @MainActor in
+                    self?.cleanup()
+                }
+            }
+        }
     }
-    
+
     /// Stops the listener from monitoring USB mount events.
     func stop() {
         logger.debug("stopped")
+        continuation?.finish()
+        cleanup()
+    }
+
+    // MARK: - Private Methods
+
+    private func cleanup() {
         isRunning = false
-        listenerAction = nil
-        
-        // Remove the observer for USB mount notifications.
+        continuation = nil
         notificationCenter.removeObserver(self, name: NSWorkspace.didMountNotification, object: nil)
     }
-    
-    // MARK: - Private Methods
-    
+
     /// Handles the USB mount event notification.
-    /// When called, prepares the data and triggers the action set by the `listenerAction`.
     @objc
     private func receiveUSBNotification() {
-        DispatchQueue.main.async(execute: fireAction)
-    }
-    
-    @Sendable
-    private func fireAction() {
-        listenerAction?(.onUSBConnectionListener, .usbConnected)
+        continuation?.yield((.onUSBConnectionListener, .usbConnected))
     }
 }

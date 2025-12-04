@@ -53,6 +53,20 @@ public class DeviceUtil: DeviceUtilProtocol {
         } else {
             nil
         }
-        return device?.contains("MacBook") == true ? .laptop : .nonLaptop
+        
+        return if device?.contains("MacBook") == true ||
+        device?.contains("Mac14,5") == true || device?.contains("Mac14,6") == true || device?.contains("Mac14,7") == true ||
+        device?.contains("Mac14,9") == true || device?.contains("Mac14,10") == true || device?.contains("Mac14,15") == true ||
+        device?.contains("Mac15,3") == true || device?.contains("Mac15,6") == true || device?.contains("Mac15,8") == true ||
+        device?.contains("Mac15,9") == true || device?.contains("Mac15,10") == true || device?.contains("Mac15,11") == true ||
+        device?.contains("Mac15,12") == true || device?.contains("Mac15,13") == true ||
+        device?.contains("Mac16,1") == true || device?.contains("Mac16,5") == true || device?.contains("Mac16,6") == true ||
+        device?.contains("Mac16,7") == true || device?.contains("Mac16,8") == true || device?.contains("Mac15,12") == true ||
+        device?.contains("Mac16,13") == true
+        {
+            .laptop
+        } else {
+            .nonLaptop
+        }
     }
 }

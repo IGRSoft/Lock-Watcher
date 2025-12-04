@@ -16,6 +16,7 @@ public enum TriggerType: String, Sendable {
     case onWakeUp
     case onWrongPassword
     case onBatteryPower
+    case onACPower
     case usbConnected
     case logedIn
     case debug
