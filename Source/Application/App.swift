@@ -1,9 +1,8 @@
 //
 //  App.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 03.12.2020.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 29.06.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import SwiftUI

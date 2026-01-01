@@ -1,9 +1,8 @@
 //
 //  NetworkUtil.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 03.01.2022.
-//  Copyright © 2022 IGR Soft. All rights reserved.
+//  Created on 03.01.2022.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Foundation

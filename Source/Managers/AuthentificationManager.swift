@@ -1,9 +1,8 @@
 //
 //  AuthentificationManager.swift
-//  Lock-Watcher
 //
-//  Created by Maksym Martyniuk on 21.07.2024.
-//  Copyright © 2024 IGR Soft. All rights reserved.
+//  Created on 21.07.2024.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import AppKit

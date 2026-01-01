@@ -1,9 +1,8 @@
 //
 //  FirstLaunchSuccessView.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 04.07.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 04.07.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import SwiftUI
@@ -12,10 +11,10 @@ import SwiftUI
 struct FirstLaunchSuccessView: View {
     /// A binding to the count-down timer value that informs the user about the time left before proceeding.
     @Binding var successCountDown: Int
-    
+
     /// The frame size for adjusting visual elements within this view.
     @State var frameSize: CGSize
-    
+
     /// The body property that returns the content of the view.
     var body: some View {
         VStack {
@@ -23,20 +22,24 @@ struct FirstLaunchSuccessView: View {
             Label("SetupSuccess", systemImage: "bolt.circle")
                 .font(.system(size: frameSize.height * 0.2))
                 .padding(.horizontal)
-                .foregroundColor(Color("success"))
-            
+                .foregroundColor(DesignSystem.Colors.success)
+                .accessibilityLabel(AccessibilityLabel.FirstLaunch.success)
+
             // Text that provides additional information or tips after the successful setup.
             Text("Tips0")
-                .font(.headline)
-                .foregroundColor(Color("success"))
-            
+                .font(DesignSystem.Typography.headline)
+                .foregroundColor(DesignSystem.Colors.success)
+
             // Image providing a visual tip or guide for the user after the successful setup.
             Image("tips0").aspectRatio(contentMode: .fit)
                 .frame(width: frameSize.width, alignment: .center)
-            
+                .accessibilityHidden(true)
+
             // Countdown timer text, showing the user how much time is left before moving on.
             Text(String(format: NSLocalizedString("SuccessTimer %d", comment: ""), successCountDown))
-                .font(.body)
+                .font(DesignSystem.Typography.body)
+                .accessibilityIdentifier(AccessibilityID.FirstLaunch.successCountdown)
+                .accessibilityLabel(AccessibilityLabel.FirstLaunch.countdown(successCountDown))
         }
     }
 }

@@ -1,9 +1,8 @@
 //
 //  FirstLaunchView.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 26.01.2022.
-//  Copyright © 2022 IGR Soft. All rights reserved.
+//  Created on 04.07.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import SwiftUI
@@ -12,19 +11,16 @@ import SwiftUI
 struct FirstLaunchView: View {
     /// An observable object that manages the state and behavior for this view.
     @StateObject private var viewModel: FirstLaunchViewModel
-    
+
     /// Initializes a new `FirstLaunchView` with the given view model.
     /// - Parameter viewModel: The view model that provides data and behavior for this view.
     init(viewModel: FirstLaunchViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
-#if DEBUG
-        // Prints changes for debug purposes.
-        let _ = Self._printChanges()
-#endif
-        VStack(alignment: .center, spacing: ViewConstants.spacing) {
+        let _ = Self.logViewChanges()
+        VStack(alignment: .center, spacing: DesignSystem.Spacing.sm) {
             switch viewModel.state {
             case .idle:
                 // Presents options to the user on the first launch.
@@ -34,16 +30,25 @@ struct FirstLaunchView: View {
                         Button(action: viewModel.openSettings, label: viewModel.openSettingsTitle)
                         Button(role: .cancel, action: {}, label: viewModel.cancelSettingsTitle)
                     }
+                    .accessibilityIdentifier(AccessibilityID.FirstLaunch.takeSnapshotButton)
+                    .accessibilityLabel(AccessibilityLabel.FirstLaunch.takeSnapshot)
+                    .accessibilityHint(AccessibilityHint.FirstLaunch.takeSnapshotHint)
             case .progress:
                 // Shows the progress state using a progress view.
                 FirstLaunchProgressView(viewModel: FirstLaunchProgressViewModel(frameSize: viewModel.safeArea))
+                    .accessibilityIdentifier(AccessibilityID.FirstLaunch.progressIndicator)
+                    .accessibilityLabel(AccessibilityLabel.FirstLaunch.progress)
             case .success:
                 // Displays a success message with a countdown.
                 FirstLaunchSuccessView(successCountDown: .constant(viewModel.successCountDown), frameSize: viewModel.safeArea)
+                    .accessibilityIdentifier(AccessibilityID.FirstLaunch.successView)
+                    .accessibilityLabel(AccessibilityLabel.FirstLaunch.success)
             case .fault:
                 // Displays an error message. If a restart is needed, it triggers the restart view.
                 if !viewModel.isNeedRestart {
                     FirstLaunchFaultViews(isHidden: $viewModel.isNeedRestart, frameSize: viewModel.safeArea)
+                        .accessibilityIdentifier(AccessibilityID.FirstLaunch.faultView)
+                        .accessibilityLabel(AccessibilityLabel.FirstLaunch.fault)
                 } else {
                     viewModel.restartView()
                 }
@@ -53,8 +58,9 @@ struct FirstLaunchView: View {
             }
         }
         // Provides padding and a frame for the content.
-        .padding(EdgeInsets(top: ViewConstants.doublePadding, leading: ViewConstants.doublePadding, bottom: ViewConstants.doublePadding, trailing: ViewConstants.doublePadding))
+        .padding(EdgeInsets(top: DesignSystem.Spacing.lg, leading: DesignSystem.Spacing.lg, bottom: DesignSystem.Spacing.lg, trailing: DesignSystem.Spacing.lg))
         .frame(width: viewModel.viewSettings.window.width, height: viewModel.viewSettings.window.height, alignment: .center)
+        .accessibilityIdentifier(AccessibilityID.FirstLaunch.container)
     }
 }
 

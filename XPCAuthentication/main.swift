@@ -1,8 +1,8 @@
 //
 //  main.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 28.03.2021.
+//  Created on 28.03.2021.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Foundation

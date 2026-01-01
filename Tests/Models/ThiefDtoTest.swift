@@ -1,9 +1,8 @@
 //
 //  ThiefDtoTest.swift
-//  Lock-WatcherTests
 //
-//  Created by Claude on 04.12.2024.
-//  Copyright © 2024 IGR Soft. All rights reserved.
+//  Created on 04.12.2025.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import CoreLocation

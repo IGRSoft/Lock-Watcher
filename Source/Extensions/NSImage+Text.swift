@@ -1,8 +1,8 @@
 //
 //  NSImage+Text.swift
-//  IGR Software
 //
-//  Created by Vitalii Parovishnyk on 10.08.2021.
+//  Created on 10.08.2021.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import AppKit
