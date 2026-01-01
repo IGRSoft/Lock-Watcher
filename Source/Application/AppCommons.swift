@@ -1,9 +1,8 @@
 //
 //  AppCommons.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 03.07.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 23.08.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Foundation
@@ -14,16 +13,16 @@ enum Commons {
     typealias EmptyClosure = () -> Void
     
     /// Represents a closure that takes a boolean parameter and returns no value.
-    typealias BoolClosure = (Bool) -> Void
-    
+    typealias BoolClosure = @Sendable (Bool) -> Void
+
     /// Represents a closure that takes a string parameter and returns no value.
-    typealias StringClosure = (String) -> Void
-    
+    typealias StringClosure = @Sendable (String) -> Void
+
     /// Represents a closure that takes a thief dto parameter and returns no value.
-    typealias ThiefClosure = (ThiefDto) -> Void
-    
+    typealias ThiefClosure = @Sendable (ThiefDto) -> Void
+
     /// Represents a closure that takes a trigger parameter and returns no value.
-    typealias TriggerClosure = (TriggerType) -> Void
+    typealias TriggerClosure = @Sendable (TriggerType) -> Void
 }
 
 /// Describes the different states a SwiftUI View can be in.

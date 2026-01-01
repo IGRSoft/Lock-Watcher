@@ -1,14 +1,17 @@
 //
 //  MockThiefManager.swift
-//  Lock-WatcherTests
 //
-//  Created by Vitalii Parovishnyk on 23.08.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 27.08.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Foundation
 @testable import Lock_Watcher
 
+/// Mock implementation of `ThiefManagerProtocol` for testing.
+///
+/// `@MainActor` isolation matches the protocol requirement.
+@MainActor
 final class MockThiefManager: ThiefManagerProtocol {
     var invokedDatabaseManagerSetter = false
     var invokedDatabaseManagerSetterCount = 0
@@ -34,14 +37,12 @@ final class MockThiefManager: ThiefManagerProtocol {
 
     var invokedDetectedTrigger = false
     var invokedDetectedTriggerCount = 0
-    var invokedDetectedTriggerParameters: (closure: Commons.BoolClosure, Void)?
-    var invokedDetectedTriggerParametersList = [(closure: Commons.BoolClosure, Void)]()
+    var stubbedDetectedTriggerResult: Bool = true
 
-    func detectedTrigger(_ closure: @escaping Commons.BoolClosure) {
+    func detectedTrigger() async -> Bool {
         invokedDetectedTrigger = true
         invokedDetectedTriggerCount += 1
-        invokedDetectedTriggerParameters = (closure, ())
-        invokedDetectedTriggerParametersList.append((closure, ()))
+        return stubbedDetectedTriggerResult
     }
 
     var invokedRestartWatching = false
@@ -80,23 +81,26 @@ final class MockThiefManager: ThiefManagerProtocol {
     var invokedCompleteDropboxAuthWithCount = 0
     var invokedCompleteDropboxAuthWithParameters: (url: URL, Void)?
     var invokedCompleteDropboxAuthWithParametersList = [(url: URL, Void)]()
+    var stubbedCompleteDropboxAuthWithResult: String = ""
 
-    func completeDropboxAuthWith(url: URL) {
+    func completeDropboxAuthWith(url: URL) async -> String {
         invokedCompleteDropboxAuthWith = true
         invokedCompleteDropboxAuthWithCount += 1
         invokedCompleteDropboxAuthWithParameters = (url, ())
         invokedCompleteDropboxAuthWithParametersList.append((url, ()))
+        return stubbedCompleteDropboxAuthWithResult
     }
 
-    var invokedWatchDropboxUserNameUpdate = false
-    var invokedWatchDropboxUserNameUpdateCount = 0
-    var invokedWatchDropboxUserNameUpdateParameters: (closure: Commons.StringClosure, Void)?
-    var invokedWatchDropboxUserNameUpdateParametersList = [(closure: Commons.StringClosure, Void)]()
+    private var dropboxUserNameContinuation: AsyncStream<String>.Continuation?
 
-    func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure) {
-        invokedWatchDropboxUserNameUpdate = true
-        invokedWatchDropboxUserNameUpdateCount += 1
-        invokedWatchDropboxUserNameUpdateParameters = (closure, ())
-        invokedWatchDropboxUserNameUpdateParametersList.append((closure, ()))
+    var dropboxUserNameUpdates: AsyncStream<String> {
+        AsyncStream { continuation in
+            self.dropboxUserNameContinuation = continuation
+        }
+    }
+
+    /// Emit a username update (for testing)
+    func emitDropboxUserName(_ name: String) {
+        dropboxUserNameContinuation?.yield(name)
     }
 }

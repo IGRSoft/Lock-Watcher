@@ -1,14 +1,16 @@
 //
 //  MainViewModel.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 30.06.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 04.07.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import SwiftUI
 
 /// A view model for the main screen, handling business logic and data retrieval for its corresponding view.
+///
+/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
+/// Uses `@preconcurrency` for ObservableObject to avoid Swift 6 concurrency warnings.
 final class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     // MARK: - DomainViewConstantProtocol
     

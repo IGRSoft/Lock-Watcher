@@ -1,15 +1,16 @@
 //
 //  MockLog.swift
-//  Lock-WatcherTests
 //
-//  Created by Vitalii Parovishnyk on 30.08.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 30.08.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import XCTest
 @testable import Lock_Watcher
 
-final class LogMock: LogProtocol {
+/// Mock logger for unit tests.
+/// Uses `@unchecked Sendable` because test mocks don't need thread safety guarantees.
+final class LogMock: LogProtocol, @unchecked Sendable {
     var debugMessage: String?
     var infoMessage: String?
     var errorMessage: String?

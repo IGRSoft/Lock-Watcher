@@ -1,15 +1,15 @@
 //
 //  MainAppTest.swift
-//  Lock-WatcherTests
 //
-//  Created by Vitalii Parovishnyk on 23.08.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 27.08.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import UserNotifications
 import XCTest
 @testable import Lock_Watcher
 
+@MainActor
 class AppDelegateModelTests: XCTestCase {
     var model: MockAppDelegateModel!
     

@@ -1,78 +1,86 @@
 //
 //  WakeUpListener.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 09.01.2021.
+//  Created on 09.01.2021.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Cocoa
 import Foundation
 
-/// `WakeUpListener` observes the system for screen wake up events and triggers a specified action when such events are detected.
-final class WakeUpListener: BaseListenerProtocol, @unchecked Sendable {
+/// `WakeUpListener` observes the system for screen wake up events and emits events via AsyncStream.
+///
+/// This class is `@MainActor` isolated through `BaseListenerProtocol` conformance,
+/// ensuring all state mutations occur on the main thread.
+final class WakeUpListener: NSObject, BaseListenerProtocol {
     // MARK: - Dependency injection
-    
+
     /// Logger instance used for recording and debugging purposes.
     private let logger: LogProtocol
-    
+
     // MARK: - Variables
-    
-    /// Action to be triggered upon detecting a screen wake up event.
-    var listenerAction: ListenerAction?
-    
+
     /// Indicates if the listener is currently monitoring screen wake up events.
-    var isRunning: Bool = false
-    
-    /// NotificationCenter to monitoring screen wake up events.
+    private(set) var isRunning: Bool = false
+
+    /// Continuation for the AsyncStream to yield events.
+    private var continuation: AsyncStream<ListenerEvent>.Continuation?
+
+    /// NotificationCenter to monitor screen wake up events.
     private lazy var notificationCenter = NSWorkspace.shared.notificationCenter
-    
+
     // MARK: - Initializer
-    
+
     /// Initializes a `WakeUpListener`.
     /// - Parameter logger: An instance of `Log` for logging purposes. Defaults to `.wakeUpListener` category.
-    init(logger:LogProtocol  = Log(category: .wakeUpListener)) {
+    init(logger: LogProtocol = Log(category: .wakeUpListener)) {
         self.logger = logger
     }
-    
+
     // MARK: - Public Methods
-    
+
     /// Starts monitoring for screen wake up events.
-    /// - Parameter action: A closure that is called when a screen wake up event is detected.
-    func start(_ action: @escaping ListenerAction) {
+    /// - Returns: An AsyncStream that emits events when screen wake up is detected.
+    func start() -> AsyncStream<ListenerEvent> {
         logger.debug("started")
-        
-        isRunning = true
-        listenerAction = action
-        
-        // Register to observe screen wake xup notifications.
-        notificationCenter.addObserver(self,
-                                       selector: #selector(receiveWakeNotification),
-                                       name: NSWorkspace.screensDidWakeNotification,
-                                       object: nil)
+
+        return AsyncStream { continuation in
+            self.continuation = continuation
+            self.isRunning = true
+
+            self.notificationCenter.addObserver(
+                self,
+                selector: #selector(self.receiveWakeNotification),
+                name: NSWorkspace.screensDidWakeNotification,
+                object: nil
+            )
+
+            continuation.onTermination = { [weak self] _ in
+                Task { @MainActor in
+                    self?.cleanup()
+                }
+            }
+        }
     }
-    
+
     /// Stops the listener from monitoring screen wake up events.
     func stop() {
         logger.debug("stopped")
-        
+        continuation?.finish()
+        cleanup()
+    }
+
+    // MARK: - Private Methods
+
+    private func cleanup() {
         isRunning = false
-        listenerAction = nil
-        
-        // Remove the observer for screen wake up notifications.
+        continuation = nil
         notificationCenter.removeObserver(self, name: NSWorkspace.screensDidWakeNotification, object: nil)
     }
-    
-    // MARK: - Private Methods
-    
+
     /// Handles the screen wake up event notification.
-    /// When called, prepares the data and triggers the action set by the `listenerAction`.
     @objc
     private func receiveWakeNotification() {
-        DispatchQueue.main.async(execute: fireAction)
-    }
-    
-    @Sendable
-    private func fireAction() {
-        listenerAction?(.onWakeUpListener, .onWakeUp)
+        continuation?.yield((.onWakeUpListener, .onWakeUp))
     }
 }

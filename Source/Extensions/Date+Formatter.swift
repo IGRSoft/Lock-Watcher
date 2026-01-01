@@ -1,8 +1,8 @@
 //
 //  Date+Formatter.swift
-//  IGR Software
 //
-//  Created by Vitalii Parovishnyk on 03.09.2021.
+//  Created on 03.09.2021.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Foundation

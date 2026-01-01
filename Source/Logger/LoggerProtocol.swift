@@ -1,15 +1,16 @@
 //
 //  LoggerProtocol.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 29.08.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 29.08.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Foundation
 
-/// `LogProtocol` provides structure for logging
-protocol LogProtocol {
+/// `LogProtocol` provides structure for logging.
+///
+/// Conforming types must be `Sendable` to allow safe use across actor boundaries.
+protocol LogProtocol: Sendable {
     /// Logs a debug message.
     /// - Parameter message: The message to be logged.
     func debug(_ message: String)

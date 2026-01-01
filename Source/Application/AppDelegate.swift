@@ -1,14 +1,16 @@
 //
 //  AppDelegate.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 27.08.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 27.08.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import AppKit
 
 /// Acts as the main delegate for the application, handling app lifecycle events and configurations.
+///
+/// `@MainActor` isolation ensures all UI operations occur on the main thread.
+@MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     /// Represents general settings for the application.
     let viewModel: AppDelegateModelProtocol

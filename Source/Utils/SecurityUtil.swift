@@ -1,9 +1,8 @@
 //
 //  SecurityUtil.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 02.02.2022.
-//  Copyright © 2022 IGR Soft. All rights reserved.
+//  Created on 02.02.2022.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import CryptoKit

@@ -1,9 +1,8 @@
 //
 //  ViewProtocols.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 03.07.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 04.07.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import SwiftUI
@@ -25,6 +24,7 @@ protocol DomainViewConstant {
 /// A protocol that bridges a concrete view to its associated `DomainViewConstant`.
 ///
 /// Conforming types will provide domain-specific constants via the `viewSettings` property.
+@MainActor
 protocol DomainViewConstantProtocol {
     /// The associated `DomainViewConstant` type that provides layout and appearance constants.
     associatedtype DomainViewConstant

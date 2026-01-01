@@ -1,9 +1,8 @@
 //
 //  DeviceUtil.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 23.05.2022.
-//  Copyright © 2022 IGR Soft. All rights reserved.
+//  Created on 23.05.2022.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Darwin.sys.sysctl
@@ -46,7 +45,26 @@ public class DeviceUtil: DeviceUtilProtocol {
         res = sysctlbyname(name, &ret, &size, nil, 0)
         
         // If successfully retrieved the name, check if it contains "MacBook", indicating it's a laptop.
-        let device = res == 0 ? String(cString: ret) : nil
-        return device?.contains("MacBook") == true ? .laptop : .nonLaptop
+        let device: String? = if res == 0 {
+            ret.withUnsafeBufferPointer { buffer in
+                buffer.baseAddress.map { String(cString: $0) }
+            }
+        } else {
+            nil
+        }
+        
+        return if device?.contains("MacBook") == true ||
+        device?.contains("Mac14,5") == true || device?.contains("Mac14,6") == true || device?.contains("Mac14,7") == true ||
+        device?.contains("Mac14,9") == true || device?.contains("Mac14,10") == true || device?.contains("Mac14,15") == true ||
+        device?.contains("Mac15,3") == true || device?.contains("Mac15,6") == true || device?.contains("Mac15,8") == true ||
+        device?.contains("Mac15,9") == true || device?.contains("Mac15,10") == true || device?.contains("Mac15,11") == true ||
+        device?.contains("Mac15,12") == true || device?.contains("Mac15,13") == true ||
+        device?.contains("Mac16,1") == true || device?.contains("Mac16,5") == true || device?.contains("Mac16,6") == true ||
+        device?.contains("Mac16,7") == true || device?.contains("Mac16,8") == true || device?.contains("Mac15,12") == true ||
+        device?.contains("Mac16,13") == true {
+            .laptop
+        } else {
+            .nonLaptop
+        }
     }
 }

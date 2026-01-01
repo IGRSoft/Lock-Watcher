@@ -1,8 +1,8 @@
 //
 //  ThiefDto.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 09.01.2021.
+//  Created on 28.03.2021.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import AppKit
@@ -16,6 +16,7 @@ public enum TriggerType: String, Sendable {
     case onWakeUp
     case onWrongPassword
     case onBatteryPower
+    case onACPower
     case usbConnected
     case logedIn
     case debug

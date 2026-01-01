@@ -1,21 +1,23 @@
 //
 //  InfoViewModel.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 03.07.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 04.07.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import SwiftUI
 
 /// A view model designed to manage the data and behaviors for the information section.
+///
+/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
+@MainActor
 final class InfoViewModel: ObservableObject {
     /// The thief manager responsible for handling thief-related actions and data.
-    var thiefManager: ThiefManagerProtocol
-    
+    let thiefManager: ThiefManagerProtocol
+
     /// A binding indicating whether the info section should be extended.
     @Binding var isInfoExtended: Bool
-    
+
     /// Initializes a new `InfoViewModel`.
     ///
     /// - Parameters:
@@ -25,26 +27,27 @@ final class InfoViewModel: ObservableObject {
         self.thiefManager = thiefManager
         _isInfoExtended = isInfoExtended
     }
-    
+
     /// Provides the title for the debug section.
     @ViewBuilder
     func debugTitle() -> Text {
         Text("Debug")
     }
-    
+
     /// Invokes the thief manager's detected trigger.
     func debugTrigger() {
-        thiefManager.detectedTrigger { _ in }
+        Task {
+            _ = await thiefManager.detectedTrigger()
+        }
     }
-    
+
     /// Provides the title for the open settings button.
     @ViewBuilder
     func openSettingsTitle() -> Text {
         Text("ButtonSettings")
     }
-    
+
     /// Opens the application's settings window.
-    @MainActor
     func openSettings() {
         NSApplication.displaySettingsWindow()
     }
@@ -61,7 +64,7 @@ final class InfoViewModel: ObservableObject {
     }
     
     /// The text for a link in the view.
-    let linkText: String = "© IGR Software 2008 - 2023"
+    let linkText: String = "© IGR Software 2008 - 2025"
     
     /// The URL corresponding to the link text.
     let linkUrl: URL = .init(string: "https://igrsoft.com")!

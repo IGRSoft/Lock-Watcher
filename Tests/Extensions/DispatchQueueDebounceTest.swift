@@ -1,14 +1,14 @@
 //
 //  DispatchQueueDebounceTest.swift
-//  Lock-WatcherTests
 //
-//  Created by Vitalii Parovishnyk on 28.08.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 28.08.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import XCTest
 @testable import Lock_Watcher
 
+@MainActor
 final class DispatchQueueDebounceTests: XCTestCase {
     func testDebounceExecutesActionAfterInterval() {
         // Create an expectation for a background download task to complete.

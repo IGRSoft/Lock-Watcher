@@ -1,40 +1,21 @@
 //
 //  MockListener.swift
-//  Lock-WatcherTests
 //
-//  Created by Vitalii Parovishnyk on 28.08.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 28.08.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Foundation
 @testable import Lock_Watcher
 
+/// Mock implementation of `BaseListenerProtocol` for testing.
+///
+/// `@MainActor` isolation matches the protocol requirement.
+@MainActor
 final class MockListener: BaseListenerProtocol {
-    var invokedListenerActionSetter = false
-    var invokedListenerActionSetterCount = 0
-    var invokedListenerAction: ListenerAction?
-    var invokedListenerActionList = [ListenerAction?]()
-    var invokedListenerActionGetter = false
-    var invokedListenerActionGetterCount = 0
-    var stubbedListenerAction: ListenerAction!
-
-    var listenerAction: ListenerAction? {
-        set {
-            invokedListenerActionSetter = true
-            invokedListenerActionSetterCount += 1
-            invokedListenerAction = newValue
-            invokedListenerActionList.append(newValue)
-        }
-        get {
-            invokedListenerActionGetter = true
-            invokedListenerActionGetterCount += 1
-            return stubbedListenerAction
-        }
-    }
-
     var invokedIsRunningGetter = false
     var invokedIsRunningGetterCount = 0
-    var stubbedIsRunning: Bool! = false
+    var stubbedIsRunning: Bool = false
 
     var isRunning: Bool {
         invokedIsRunningGetter = true
@@ -44,15 +25,25 @@ final class MockListener: BaseListenerProtocol {
 
     var invokedStart = false
     var invokedStartCount = 0
-    var stubbedStartActionResult: (ListenerName, ThiefDto)?
+    var stubbedStartResult: ListenerEvent?
+    private var continuation: AsyncStream<ListenerEvent>.Continuation?
 
-    func start(_ action: @escaping ListenerAction) {
+    func start() -> AsyncStream<ListenerEvent> {
         invokedStart = true
         invokedStartCount += 1
         stubbedIsRunning = true
-        if let result = stubbedStartActionResult {
-            action(result.0, result.1)
+
+        return AsyncStream { continuation in
+            self.continuation = continuation
+            if let result = self.stubbedStartResult {
+                continuation.yield(result)
+            }
         }
+    }
+
+    /// Emit an event to the stream (for testing)
+    func emit(_ event: ListenerEvent) {
+        continuation?.yield(event)
     }
 
     var invokedStop = false
@@ -62,5 +53,7 @@ final class MockListener: BaseListenerProtocol {
         invokedStop = true
         invokedStopCount += 1
         stubbedIsRunning = false
+        continuation?.finish()
+        continuation = nil
     }
 }

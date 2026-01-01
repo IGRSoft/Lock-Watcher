@@ -1,36 +1,47 @@
 //
 //  ThiefManager.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 06.01.2021.
+//  Created on 06.01.2021.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import AppKit
 import Combine
 import CoreLocation
-import Foundation
 import PhotoSnap
 import UserNotifications
 
 /// A protocol that outlines the responsibilities of the `ThiefManager` class.
-protocol ThiefManagerProtocol {
-    func detectedTrigger(_ closure: @escaping Commons.BoolClosure)
-    
+///
+/// - Important: `@MainActor` isolation is required because:
+///   - Interacts with `CLLocationManager` (requires main thread)
+///   - Implements `UNUserNotificationCenterDelegate` (requires main thread)
+///   - Manages `TriggerManager` which is `@MainActor`
+@MainActor
+protocol ThiefManagerProtocol: Sendable {
+    func detectedTrigger() async -> Bool
+
     func restartWatching()
-    
+
     var databaseManager: any DatabaseManagerProtocol { get }
-    
+
     func setupLocationManager(enable: Bool)
-    
+
     func showSnapshot(identifier: String)
-    
-    func completeDropboxAuthWith(url: URL)
-    
-    func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure)
+
+    func completeDropboxAuthWith(url: URL) async -> String
+
+    var dropboxUserNameUpdates: AsyncStream<String> { get }
 }
 
 /// The main class responsible for managing and responding to various triggers indicating potential unauthorized access.
-final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
+///
+/// This class is `@MainActor` isolated because:
+/// - It implements `CLLocationManagerDelegate` which must be called on main thread
+/// - It implements `UNUserNotificationCenterDelegate` which must be called on main thread
+/// - It manages `TriggerManager` which is `@MainActor` isolated
+@MainActor
+final class ThiefManager: NSObject, ThiefManagerProtocol {
     // MARK: - Typealiases
     
     typealias WatchBlock = Commons.ThiefClosure
@@ -65,9 +76,16 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
     ///
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
-    
-    /// update user name after login on DropBox
-    private var dropboxUserNameUpdateClosure: Commons.StringClosure?
+
+    /// AsyncStream for Dropbox username updates
+    private var dropboxUserNameContinuation: AsyncStream<String>.Continuation?
+
+    /// Provides an AsyncStream of Dropbox username updates
+    var dropboxUserNameUpdates: AsyncStream<String> {
+        AsyncStream { continuation in
+            self.dropboxUserNameContinuation = continuation
+        }
+    }
     
     // MARK: - initialiser
     
@@ -117,85 +135,85 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
         startWatching(watchBlock)
     }
     
-    @Sendable
     private func justDetectedTrigger() {
-        detectedTrigger()
+        Task {
+            _ = await detectedTrigger()
+        }
     }
-    
+
     /// Detects and processes any triggers.
-    func detectedTrigger(_ closure: @escaping Commons.BoolClosure = { _ in }) {
+    func detectedTrigger() async -> Bool {
         logger.debug("Detected triggered action: \(lastThiefDetection.rawValue)")
-        
+
         let ps = PhotoSnap()
         ps.photoSnapConfiguration.isSaveToFile = settings.sync.isSaveSnapshotToDisk
-        guard !AppSettings.isImageCaptureDebug else {
+
+        if AppSettings.isImageCaptureDebug {
             let img = NSImage(systemSymbolName: "swift", accessibilityDescription: nil)!
             let date = Date()
             lastThiefDetection = .debug
-            processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
-            DispatchQueue.main.debounce(interval: .seconds(1)) {
-                closure(true)
-            }()
-            
-            return
+            await processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
+            try? await Task.sleep(for: .seconds(1))
+            return true
         }
-        
-        ps.fetchSnapshot { [weak self] photoModel in
-            if let img = photoModel.images.last {
-                self?.logger.debug("\(img)")
-                let date = Date()
-                self?.processSnapshot(img, filename: ps.photoSnapConfiguration.dateFormatter.string(from: date), date: date)
-                
-                closure(true)
-            } else {
-                closure(false)
+
+        return await withCheckedContinuation { [weak self] continuation in
+            ps.fetchSnapshot { photoModel in
+                if let img = photoModel.images.last {
+                    self?.logger.debug("\(img)")
+                    let date = Date()
+                    let dateFormatter = ps.photoSnapConfiguration.dateFormatter
+                    // Already on MainActor through protocol, process snapshot directly
+                    Task { [self] in
+                        await self?.processSnapshot(img, filename: dateFormatter.string(from: date), date: date)
+                        continuation.resume(returning: true)
+                    }
+                } else {
+                    continuation.resume(returning: false)
+                }
             }
         }
     }
     
     /// Processes a given snapshot.
-    func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) {
+    func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) async {
         guard let filePath = fileSystemUtil.store(image: snapshot, forKey: filename) else {
             let msg = "wrong file path"
             logger.error(msg)
             assertionFailure(msg)
             return
         }
-        
-        /* lastThiefDetection.snapshot = snapshot
-        lastThiefDetection.date = date
-        lastThiefDetection.coordinate = coordinate
-        lastThiefDetection.filePath = filePath */
-        
-        let complete: (TriggerType, NSImage, URL, Date, CLLocationCoordinate2D?, String?, String?) -> Void = { [weak self] type, snapshot, filePath, date, coordinate, ipAddress, traceRoute in
-            let dto = ThiefDto(triggerType: type, coordinate: coordinate, ipAddress: ipAddress, traceRoute: traceRoute, snapshot: snapshot, filePath: filePath, date: date)
-            
-            _ = self?.notificationManager.send(dto)
-            _ = self?.databaseManager.send(dto)
-            
-            self?.watchBlock(dto)
-        }
-        
+
         let ipAddress: String? = if settings.options.addIPAddressToSnapshot {
             networkUtil.getIFAddresses()
         } else {
             nil
         }
-        
-        if settings.options.addTraceRouteToSnapshot {
-            networkUtil.getTraceRoute(host: settings.options.traceRouteServer) { [weak self] traceRouteLog in
-                guard let lastThiefDetection = self?.lastThiefDetection else {
-                    let msg = "wrong DTO"
-                    self?.logger.error(msg)
-                    assertionFailure(msg)
-                    return
+
+        let traceRoute: String? = if settings.options.addTraceRouteToSnapshot {
+            await withCheckedContinuation { continuation in
+                networkUtil.getTraceRoute(host: settings.options.traceRouteServer) { traceRouteLog in
+                    continuation.resume(returning: traceRouteLog)
                 }
-                
-                complete(lastThiefDetection, snapshot, filePath, date, self?.coordinate, ipAddress, traceRouteLog)
             }
         } else {
-            complete(lastThiefDetection, snapshot, filePath, date, coordinate, ipAddress, nil)
+            nil
         }
+
+        let dto = ThiefDto(
+            triggerType: lastThiefDetection,
+            coordinate: coordinate,
+            ipAddress: ipAddress,
+            traceRoute: traceRoute,
+            snapshot: snapshot,
+            filePath: filePath,
+            date: date
+        )
+
+        await notificationManager.send(dto)
+        _ = databaseManager.send(dto)
+
+        watchBlock(dto)
     }
     
     /// Opens a snapshot based on the given identifier.
@@ -217,26 +235,24 @@ final class ThiefManager: NSObject, ThiefManagerProtocol, @unchecked Sendable {
     
     private func triggered(_ type: TriggerType) {
         guard type != .setup else { return }
-        
+
         lastThiefDetection = type
-        DispatchQueue.main.async(execute: justDetectedTrigger)
+        // Already on MainActor, call directly
+        justDetectedTrigger()
     }
     
     /// Completes Dropbox authentication.
-    func completeDropboxAuthWith(url: URL) {
-        notificationManager.completeDropboxAuthWith(url: url) { [weak self] name in
-            self?.dropboxUserNameUpdateClosure?(name)
-        }
-    }
-    
-    /// Watches for Dropbox username updates.
-    func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure) {
-        dropboxUserNameUpdateClosure = closure
+    /// - Parameter url: The callback URL from Dropbox OAuth.
+    /// - Returns: The display name of the authenticated user, or empty string on failure.
+    func completeDropboxAuthWith(url: URL) async -> String {
+        let name = await notificationManager.completeDropboxAuthWith(url: url)
+        dropboxUserNameContinuation?.yield(name)
+        return name
     }
 }
 
 /// Location Manager Delegate Methods
-extension ThiefManager: CLLocationManagerDelegate {
+extension ThiefManager: @MainActor CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         coordinate = locations.last?.coordinate
     }
@@ -265,29 +281,32 @@ extension ThiefManager: CLLocationManagerDelegate {
 }
 
 /// User Notification Center Delegate Methods:
-extension ThiefManager: UNUserNotificationCenterDelegate {
+extension ThiefManager: @MainActor UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ centre: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let identifier = response.notification.request.identifier
         showSnapshot(identifier: identifier)
     }
 }
 
+/// Preview implementation of `ThiefManagerProtocol` for SwiftUI previews.
+@MainActor
 final class ThiefManagerPreview: ThiefManagerProtocol {
-    func watchDropboxUserNameUpdate(_ closure: @escaping Commons.StringClosure) {
-        closure("")
+    var dropboxUserNameUpdates: AsyncStream<String> {
+        AsyncStream { continuation in
+            continuation.yield("")
+            continuation.finish()
+        }
     }
-    
-    func completeDropboxAuthWith(url: URL) {}
-    
+
+    func completeDropboxAuthWith(url: URL) async -> String { "" }
+
     func showSnapshot(identifier: String) {}
-    
+
     func setupLocationManager(enable: Bool) {}
-    
-    func detectedTrigger(_ closure: @escaping Commons.BoolClosure) {
-        closure(true)
-    }
-    
+
+    func detectedTrigger() async -> Bool { true }
+
     func restartWatching() {}
-    
+
     var databaseManager: any DatabaseManagerProtocol = DatabaseManager(settings: AppSettingsPreview())
 }

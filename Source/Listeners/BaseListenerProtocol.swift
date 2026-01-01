@@ -1,8 +1,8 @@
 //
 //  BaseListenerProtocol.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 06.01.2021.
+//  Created on 06.01.2021.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Foundation
@@ -20,43 +20,34 @@ public enum ListenerName: Int, Sendable {
     case onLoginListener            // Triggered when a user logs in.
 }
 
+/// The event type emitted by listeners through AsyncStream.
+public typealias ListenerEvent = (ListenerName, TriggerType)
+
 /// A protocol defining the contract for listeners.
 ///
 /// Conformers to this protocol are expected to monitor specific
-/// events and notify via a callback when these events occur.
-public protocol BaseListenerProtocol {
-    /// A type alias for a closure that will be called when a listener is triggered.
-    ///
-    /// - Parameters:
-    ///   - ListenerName: The name of the triggered listener.
-    ///   - ThiefDto: A data transfer object containing details about the event or the  state
-    ///     when the listener was triggered. This object's definition is not provided in the code snippet.
-    typealias ListenerAction = (ListenerName, TriggerType) -> Void
-    
-    /// A callback that will be called when the listener detects its corresponding trigger.
-    ///
-    /// This is an optional property. If set, it will be executed when the
-    /// listener is triggered.
-    var listenerAction: ListenerAction? { get set }
-    
+/// events and emit them via an AsyncStream when these events occur.
+///
+/// - Important: All listeners are `@MainActor` isolated because they interact with
+///   system APIs (NotificationCenter, XPC) that require main thread access.
+@MainActor
+public protocol BaseListenerProtocol: Sendable {
     /// A boolean indicating whether the listener is currently running.
     ///
     /// This can be used to check if the listener is actively monitoring events.
     var isRunning: Bool { get }
-    
-    /// Starts the listener with a provided callback.
+
+    /// Starts the listener and returns an AsyncStream of events.
     ///
-    /// When the listener detects its corresponding event, the provided
-    /// callback will be executed. The callback is always executed on
-    /// the main thread.
+    /// When the listener detects its corresponding event, it yields
+    /// the event to the stream. Events are delivered on the main actor.
     ///
-    /// - Parameters:
-    ///   - action: The callback to be executed when the listener is triggered.
-    func start(_ action: @escaping ListenerAction)
-    
+    /// - Returns: An AsyncStream that emits `ListenerEvent` tuples when triggers are detected.
+    func start() -> AsyncStream<ListenerEvent>
+
     /// Stops the listener from monitoring its corresponding event.
     ///
     /// After calling this method, the listener will no longer detect its
-    /// trigger until `start` is called again.
+    /// trigger until `start` is called again. The AsyncStream will finish.
     func stop()
 }
