@@ -245,6 +245,7 @@
 				"",
 				"",
 				"",
+				"",
 			);
 		};
 /* End PBXBuildRule section */
@@ -1308,6 +1309,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		A5088F4F2F0720F400C09B58 /* Secrets */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			name = Secrets;
 			shellPath = /bin/sh;
 			shellScript = (
