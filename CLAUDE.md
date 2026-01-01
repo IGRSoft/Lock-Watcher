@@ -1,129 +1,224 @@
-# Swift/Apple Project Configuration
+# Lock-Watcher - macOS Surveillance Application
 
-> **Base Configuration**: This configuration extends `~/.claude/CLAUDE.md`
+## Overview
 
-## Project Context
+- **Type**: macOS menu bar surveillance application
+- **Stack**: Swift 6.2, SwiftUI with AppKit integration
+- **Architecture**: MVVM + Coordinator pattern with Listener/Notifier patterns
+- **Company**: IGR Soft (com.igrsoft)
 
-| Setting | Value |
-|---------|-------|
-| Platform | macOS |
-| Framework | SwiftUI with AppKit integration |
-| Language | Swift 6.2 |
-| Architecture | MVVM + Coordinator pattern |
-| Concurrency | Swift 6 strict concurrency |
+This CLAUDE.md is the authoritative source for development guidelines.
+Extends global configuration from `~/.claude/CLAUDE.md`.
 
-## Key Project Documents
+---
 
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System architecture, patterns, and component relationships
-- **[README.md](README.md)** - Project specifications, requirements, and getting started guide
-- **Source Documentation** - Module-specific documentation:
-  - [Source/Managers/](Source/Managers/) - Core business logic managers
-  - [Source/Listeners/](Source/Listeners/) - Event trigger listeners
-  - [Source/Notifiers/](Source/Notifiers/) - Output channel notifiers
-  - [Source/Views/](Source/Views/) - SwiftUI view layer
+## Universal Development Rules
 
-## Required Rules
+### Code Quality (MUST)
 
-These rules from `~/.claude/rules/` apply to this Swift/macOS project:
+- **MUST** use Swift 6 strict concurrency mode
+- **MUST** use `@MainActor` for all UI-related code (Coordinator, ViewModels, Views)
+- **MUST** ensure all data models conform to `Sendable` (ThiefDto, AppSettings, DatabaseDto)
+- **MUST** run SwiftFormat before committing: `swiftformat .`
+- **MUST NOT** commit secrets, API keys, or credentials
+- **MUST NOT** log sensitive data (session IDs, user credentials, location data)
 
-### Development Rules
+### Best Practices (SHOULD)
 
-| Rule | Description |
-|------|-------------|
-| `swift.md` | Swift best practices and modern patterns |
-| `swift6-concurrency.md` | Swift 6 concurrency, actors, Sendable compliance |
-| `swift-observation.md` | Observation framework patterns |
-| `mvvm.md` | MVVM + Coordinator architecture patterns |
-| `swiftformat.md` | Code formatting with SwiftFormat |
+- **SHOULD** follow Manager pattern for business logic (ThiefManager, TriggerManager)
+- **SHOULD** follow Listener pattern for event detection (WakeUpListener, USBListener)
+- **SHOULD** follow Notifier pattern for output channels (iCloudNotifier, DropboxNotifier)
+- **SHOULD** use protocol-based design for testability (BaseListenerProtocol, NotifierProtocol)
+- **SHOULD** write tests for all new managers and listeners
+- **SHOULD** use `@unchecked Sendable` for managers with internal synchronization
 
-### Critical Rules
+### Anti-Patterns (MUST NOT)
 
-| Rule | Priority | Description |
-|------|----------|-------------|
-| `permissions-guide.md` | **CRITICAL** | macOS permission handling (Camera, Location, Notifications) |
-| `security-privacy.md` | High | Security and privacy best practices for surveillance app |
+- **MUST NOT** use Singleton pattern - use dependency injection instead
+- **MUST NOT** suppress Swift warnings without documented justification
+- **MUST NOT** bypass macOS permission requirements (Camera, Location, Notifications)
+- **MUST NOT** implement backward compatibility - remove legacy APIs completely when modernizing
+- **MUST NOT** hardcode bundle identifiers - use xcconfig
 
-### Quality Rules
+---
 
-| Rule | Description |
-|------|-------------|
-| `testing-strategy.md` | Unit and UI testing approach |
-| `code-review.md` | Code review checklist |
+## Core Commands
 
-## Recommended Agents
+### Development
 
-For macOS development on this project, use these specialized agents:
+```bash
+# Build MAS version
+xcodebuild -project Lock-Watcher.xcodeproj -scheme Lock-Watcher -configuration Debug build
 
-### Primary Agent
+# Build Non-MAS version
+xcodebuild -project Lock-Watcher.xcodeproj -scheme Lock-Watcher-non-mas -configuration Debug build
 
-- `macos-developer` - macOS-specific: AppKit, menu bar apps, system integration, XPC services
+# Format code
+swiftformat .
 
-### Supporting Agents
+# Run tests
+xcodebuild test -project Lock-Watcher.xcodeproj -scheme Lock-Watcher -destination 'platform=macOS'
 
-| Agent | Use Case |
-|-------|----------|
-| `apple-developer` | Cross-platform Apple development guidance |
-| `security-auditor` | Security reviews for surveillance functionality |
-| `test-automator` | Test automation for managers and listeners |
-
-## Apple Documentation
-
-Reference documentation available in `~/.claude/docs/apple/`:
-- AppKit integration patterns
-- XPC service development
-- System event monitoring
-- Camera capture APIs
-
-## Project Customization
-
-### Bundle Identifiers
-
-```
-MAS: com.igrsoft.Lock-Watcher
-Non-MAS: com.igrsoft.Lock-Watcher-nonmas
+# Reset app permissions (development)
+tccutil reset All com.igrsoft.Lock-Watcher
 ```
 
-### Target Versions
+### Quality Gates (run before PR)
 
-```
-macOS 12.4+
-```
-
-### Build Configurations
-
-```
-MAS Build: Lock-Watcher.xcscheme
-  - App Store compliant
-  - Excludes: Mail notifier, Wrong password listener
-
-Non-MAS Build: Lock-Watcher-non-mas.xcscheme
-  - Direct distribution
-  - Includes: Mail notifier, Wrong password listener
+```bash
+swiftformat . && xcodebuild test -project Lock-Watcher.xcodeproj -scheme Lock-Watcher -destination 'platform=macOS'
 ```
 
-### Feature Flags
+---
 
-```
-#if MAS
-  // Mac App Store build - restricted features
-#else
-  // Non-MAS build - full features including mail and wrong password detection
-#endif
-```
+## Project Structure
+
+### Source Code
+
+- **`Source/Application/`** - App entry point (@main, AppDelegate)
+- **`Source/Coordinator/`** - Navigation coordination (MainCoordinator)
+- **`Source/Managers/`** - Core business logic
+  - TriggerManager - Listener orchestration
+  - ThiefManager - Capture orchestration
+  - DatabaseManager - Encrypted storage
+  - AuthentificationManager - Password/biometric auth
+- **`Source/Listeners/`** - Event trigger listeners
+  - WakeUpListener, PowerListener, USBListener, LoginListener
+  - WrongPasswordListener (Non-MAS only)
+- **`Source/Notifiers/`** - Output channels
+  - ICloudNotifier, DropboxNotifier, NotificationNotifier
+  - MailNotifier (Non-MAS only)
+- **`Source/Views/`** - SwiftUI interface (Settings, Main, FirstLaunch)
+- **`Source/Models/`** - Data structures (ThiefDto, AppSettings)
 
 ### XPC Services
 
-```
-XPCAuthentication - Swift-based authentication service
-XPCMail - Objective-C mail service (Non-MAS only)
-XPCPower - Power management service
+- **`XPCServices/XPCAuthentication/`** - Biometric auth (Swift)
+- **`XPCServices/XPCMail/`** - Email delivery (Obj-C, Non-MAS only)
+- **`XPCServices/XPCPower/`** - Power management
+
+### Resources
+
+- **`Resources/`** - Assets, Info.plist, entitlements
+- **`Configurations/`** - Build configs (MAS: `app/`, Non-MAS: `app-nomas/`)
+
+---
+
+## Quick Find Commands
+
+### Code Navigation
+
+```bash
+# Find managers
+rg -n "class.*Manager" Source/Managers
+
+# Find listeners
+rg -n "class.*Listener" Source/Listeners
+
+# Find notifiers
+rg -n "class.*Notifier" Source/Notifiers
+
+# Find @MainActor usage
+rg -n "@MainActor" Source/
+
+# Find Sendable conformance
+rg -n "Sendable" Source/
 ```
 
-### Project-Specific Patterns
+---
 
+## Build Configurations
+
+### MAS vs Non-MAS
+
+| Feature | MAS | Non-MAS |
+|---------|-----|---------|
+| Bundle ID | com.igrsoft.Lock-Watcher | com.igrsoft.Lock-Watcher-nonmas |
+| Scheme | Lock-Watcher | Lock-Watcher-non-mas |
+| Wrong Password Listener | No | Yes |
+| Mail Notifier | No | Yes |
+| XPCMail Service | No | Yes |
+
+### Conditional Compilation
+
+```swift
+#if MAS
+    // Mac App Store compliant code
+#else
+    // Non-MAS build - full features
+#endif
 ```
-Manager Pattern - Business logic orchestration (ThiefManager, TriggerManager)
-Listener Pattern - Event detection (WakeUpListener, USBListener, etc.)
-Notifier Pattern - Output channels (iCloudNotifier, DropboxNotifier, etc.)
-Coordinator Pattern - Navigation and view presentation (MainCoordinator)
-```
+
+---
+
+## Security Guidelines
+
+### Permissions (CRITICAL)
+
+- **Camera**: Required for photo capture - handle denial gracefully
+- **Location**: Required for GPS metadata - check before each use
+- **Notifications**: Required for alerts - provide clear guidance if denied
+
+### Secrets Management
+
+- **NEVER** commit tokens, API keys, or credentials
+- **NEVER** log sensitive data (use Logger with privacy levels)
+- Use Keychain for credential storage (via AuthentificationManager)
+- Configuration via `.xcconfig` files
+
+### Safe Operations
+
+- Review bash commands before execution
+- Confirm before: `git push --force`, `rm -rf`, any destructive operation
+
+---
+
+## Git Workflow
+
+- Branch from `main` for features: `feature/description`
+- Use Conventional Commits: `feat:`, `fix:`, `docs:`, `refactor:`
+- PRs require: passing tests, SwiftFormat, type checks
+- Squash commits on merge
+- Delete branches after merge
+
+---
+
+## Required Skills & Recommended Agents
+
+### Critical Skills (Use Proactively)
+
+| Skill | Usage |
+|-------|-------|
+| `apple-developer:skills` | Swift 6 language reference, SwiftUI/AppKit framework docs, concurrency patterns. **Use for all Swift syntax, API, and concurrency questions.** |
+
+### Recommended Agents
+
+| Task | Agent | When to Use |
+|------|-------|-------------|
+| macOS development | `macos-developer` | AppKit, menu bar apps, XPC services, system integration |
+| General Apple development | `apple-developer` | Entry point for all Apple ecosystem work |
+| Swift 6 concurrency | `swift-pro` | Swift 6+ with data race safety, actors, Sendable |
+| Security reviews | `security-auditor` | Security reviews for surveillance functionality |
+| Test automation | `test-automator` | Test automation for managers and listeners |
+
+### Recommended Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/apple-developer:code-review` | Comprehensive code review |
+| `/apple-developer:analyze-error` | Analyze and resolve errors |
+| `/apple-developer:code-refactor` | Refactor using SOLID principles |
+| `/apple-developer:dooc` | Generate DocC documentation |
+
+---
+
+## Platform Notes
+
+| Setting | Value |
+|---------|-------|
+| Platform | macOS 13.5+ |
+| Localization | English (en), Ukrainian (uk) |
+| Storage | EasyStash (encrypted local storage) |
+| Cloud | iCloud (CloudKit), Dropbox SDK |
+| Camera | PhotoSnap library |
+| Auto-Launch | LaunchAtLogin |
