@@ -101,6 +101,7 @@ struct LastThiefDetectionView: View {
                 // If there's no selected item or image data, display a message indicating that there's nothing to show.
                 Text("Nothing to show")
                     .font(.title2)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding()
             }
         }

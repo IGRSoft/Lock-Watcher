@@ -45,7 +45,7 @@ struct AddLocationToSnapshotView: View {
         Toggle(isOn: $addLocationToSnapshot) {
             Text("AddLocationToSnapshot")
         }
-        .onChange(of: addLocationToSnapshot) { value in
+        .onChange(of: addLocationToSnapshot) { _, value in
             if value {
                 PermissionsUtils.updateLocationPermissions { [self] isGranted in
                     Task { @MainActor in
