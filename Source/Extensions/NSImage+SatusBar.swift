@@ -1,9 +1,8 @@
 //
 //  NSImage+SatusBar.swift
-//  IGR Software
 //
-//  Created by Vitalii Parovishnyk on 29.06.2023.
-//  Copyright © 2023 IGR Soft. All rights reserved.
+//  Created on 30.06.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import AppKit

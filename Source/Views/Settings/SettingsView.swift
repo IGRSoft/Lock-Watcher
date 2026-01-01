@@ -1,32 +1,32 @@
 //
 //  SettingsView.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 03.12.2020.
+//  Created on 04.07.2023.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject private var viewModel: SettingsViewModel
-    
+
     init(viewModel: SettingsViewModel) {
         _viewModel = ObservedObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
-#if DEBUG
-        let _ = Self._printChanges()
-#endif
+        let _ = Self.logViewChanges()
         if viewModel.isAccessGranted {
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading, spacing: ViewConstants.spacing) {
+                    VStack(alignment: .leading, spacing: DesignSystem.Spacing.sm) {
                         LaunchAtLoginView()
                         ProtectionView(isProtectionEnable: viewModel.isProtected, authSettings: viewModel.authSettings, securityUtil: SecurityUtil())
-                    }.extended(viewModel.isSecurityInfoExpand, titleKey: "SettingsMenuSecurity")
+                    }
+                    .extended(viewModel.isSecurityInfoExpand, titleKey: "SettingsMenuSecurity")
                 }
-                
+                .accessibilityIdentifier(AccessibilityID.Settings.securitySection)
+
                 VStack(alignment: .leading) {
                     UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: viewModel.isUseSnapshotOnWakeUp)
                         .onChange(of: viewModel.isUseSnapshotOnWakeUp.wrappedValue) { _, _ in
@@ -54,39 +54,43 @@ struct SettingsView: View {
                         }
                 }
                 .extended(viewModel.isSnapshotInfoExpand, titleKey: "SettingsMenuSnapshot")
-                
+                .accessibilityIdentifier(AccessibilityID.Settings.snapshotSection)
+
                 VStack(alignment: .leading) {
                     KeepLastCountView(keepLastActionsCount: viewModel.keepLastActionsCount)
-                    
+
                     AddLocationToSnapshotView(addLocationToSnapshot: viewModel.addLocationToSnapshot)
                         .onChange(of: viewModel.addLocationToSnapshot.wrappedValue) { _, value in
                             viewModel.setupLocationManager(enable: value)
                         }
-                    
+
                     AddIPAddressToSnapshotView(addIPAddressToSnapshot: viewModel.addIPAddressToSnapshot)
-                    
+
                     TraceRouteToSnapshotView(isAddTraceRouteToSnapshot: viewModel.addTraceRouteToSnapshot, traceRouteServer: viewModel.traceRouteServer)
-                    
+
                     SaveSnapshotToDiskView(isSaveSnapshotToDisk: viewModel.isSaveSnapshotToDisk)
                 }
                 .extended(viewModel.isOptionsInfoExpand, titleKey: "SettingsMenuOptions")
-                
+                .accessibilityIdentifier(AccessibilityID.Settings.optionsSection)
+
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading, spacing: ViewConstants.spacing) {
+                    VStack(alignment: .leading, spacing: DesignSystem.Spacing.sm) {
                         if AppSettings.isMASBuild == false {
                             SendNotificationToMailView(isSendNotificationToMail: viewModel.isSendNotificationToMail, mailRecipient: viewModel.mailRecipient)
                         }
                         ICloudSyncView(isICloudSyncEnable: viewModel.isICloudSyncEnable)
-                        
+
                         DropboxView(isDropboxEnable: viewModel.isDropboxEnable, dropboxName: viewModel.dropboxName)
-                        
+
                         LocalNotificationView(isLocalNotificationEnable: viewModel.isUseSnapshotLocalNotification)
                     }
                 }
                 .extended(viewModel.isSyncInfoExpand, titleKey: "SettingsMenuSync")
+                .accessibilityIdentifier(AccessibilityID.Settings.syncSection)
             }
             .padding(viewModel.viewSettings.border)
             .frame(width: viewModel.viewSettings.window.width)
+            .accessibilityIdentifier(AccessibilityID.Settings.container)
         } else {
             Text("")
                 .onAppear {

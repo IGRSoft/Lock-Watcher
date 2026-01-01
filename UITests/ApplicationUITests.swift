@@ -1,8 +1,8 @@
 //
 //  ApplicationUITests.swift
-//  Lock-WatcherUITests
 //
-//  Created by Vitalii Parovishnyk on 03.12.2020.
+//  Created on 03.12.2020.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import XCTest

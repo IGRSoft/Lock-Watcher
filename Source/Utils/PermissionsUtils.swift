@@ -1,9 +1,8 @@
 //
 //  PermissionsUtils.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 26.05.2022.
-//  Copyright © 2022 IGR Soft. All rights reserved.
+//  Created on 26.05.2022.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import AppKit

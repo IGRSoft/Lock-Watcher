@@ -1,9 +1,8 @@
 //
-//  DispatchQueue+Debounce
-//  IGR Software
+//  DispatchQueue+Debounce.swift
 //
-//  Created by Vitalii Parovishnyk on 08.01.2022.
-//  Copyright © 2022 IGR Soft. All rights reserved.
+//  Created on 08.01.2022.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Foundation

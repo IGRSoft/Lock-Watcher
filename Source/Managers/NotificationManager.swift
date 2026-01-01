@@ -1,8 +1,8 @@
 //
 //  NotificationManager.swift
-//  Lock-Watcher
 //
-//  Created by Vitalii Parovishnyk on 06.01.2021.
+//  Created on 06.01.2021.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import AppKit
@@ -34,7 +34,7 @@ final class NotificationManager: NotificationManagerProtocol, @unchecked Sendabl
     /// Different notifiers to send notifications through various channels.
     private let mailNotifier: NotifierProtocol = MailNotifier()
     private let iCloudNotifier: NotifierProtocol = ICloudNotifier()
-    private let dropboxNotifier: DropboxNotifier = DropboxNotifier()
+    private let dropboxNotifier: DropboxNotifier = .init()
     private let notificationNotifier: NotifierProtocol = NotificationNotifier()
 
     // MARK: - initialiser

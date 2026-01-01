@@ -1,8 +1,8 @@
 //
 //  UserDefault+PropertyWrapper.swift
-//  IGR Software
 //
-//  Created by Vitalii Parovishnyk on 29.08.2021.
+//  Created on 29.08.2021.
+//  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
 import Combine

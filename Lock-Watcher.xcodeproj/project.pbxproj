@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94EEE5BD505D440EB2CA1079 /* View+DebugPrintChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231D6808D9A41A3B98349AD /* View+DebugPrintChanges.swift */; };
+		223ECA98AAED41D6ABEA0B10 /* View+DebugPrintChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231D6808D9A41A3B98349AD /* View+DebugPrintChanges.swift */; };
 		A519997A26D92D4400F482BC /* SwiftyDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = A519997926D92D4400F482BC /* SwiftyDropbox */; };
 		A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519997B26D92E6100F482BC /* DropboxNotifier.swift */; };
 		A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519998026DA41C700F482BC /* DatabaseManager.swift */; };
@@ -198,6 +200,8 @@
 		A5E49CC62A52EDE300C3740B /* SettingsDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E49CC42A52EDE300C3740B /* SettingsDomain.swift */; };
 		A5E49CC82A52FA1100C3740B /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E49CC72A52FA1100C3740B /* ViewProtocols.swift */; };
 		A5E49CC92A52FA1100C3740B /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E49CC72A52FA1100C3740B /* ViewProtocols.swift */; };
+		D2A137BBFFFA4103A659BA91 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC60C237B024E3BBF8B24A1 /* DesignSystem.swift */; };
+		88E296FF5E1B425E8DD45DF2 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC60C237B024E3BBF8B24A1 /* DesignSystem.swift */; };
 		A5E49CCB2A53582C00C3740B /* LastThiefDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E49CCA2A53582C00C3740B /* LastThiefDetectionView.swift */; };
 		A5E49CCC2A53582C00C3740B /* LastThiefDetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E49CCA2A53582C00C3740B /* LastThiefDetectionView.swift */; };
 		A5E49CCF2A535CB700C3740B /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E49CCE2A535CB700C3740B /* InfoViewModel.swift */; };
@@ -413,6 +417,7 @@
 		A5A252112A4E18FD00889F5C /* NSApplication+Dock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Dock.swift"; sourceTree = "<group>"; };
 		A5A252152A4E247400889F5C /* LastThiefDetectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastThiefDetectionViewModel.swift; sourceTree = "<group>"; };
 		A5A252182A4F416600889F5C /* View+ApplyIf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ApplyIf.swift"; sourceTree = "<group>"; };
+		7231D6808D9A41A3B98349AD /* View+DebugPrintChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+DebugPrintChanges.swift"; sourceTree = "<group>"; };
 		A5A2521C2A4F516B00889F5C /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A5A252202A52DDBE00889F5C /* AppCommons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCommons.swift; sourceTree = "<group>"; };
 		A5A565702A53653000D7E030 /* MainDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDomain.swift; sourceTree = "<group>"; };
@@ -450,6 +455,7 @@
 		A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+OpenWindow.swift"; sourceTree = "<group>"; };
 		A5E49CC42A52EDE300C3740B /* SettingsDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDomain.swift; sourceTree = "<group>"; };
 		A5E49CC72A52FA1100C3740B /* ViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
+		4FC60C237B024E3BBF8B24A1 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		A5E49CCA2A53582C00C3740B /* LastThiefDetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastThiefDetectionView.swift; sourceTree = "<group>"; };
 		A5E49CCE2A535CB700C3740B /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCPower.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -606,6 +612,7 @@
 				A56CFFBA27A48D6A00CB137B /* String+Regex.swift */,
 				A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */,
 				A5A252182A4F416600889F5C /* View+ApplyIf.swift */,
+				7231D6808D9A41A3B98349AD /* View+DebugPrintChanges.swift */,
 				A5D23E3227A1E4BA001C0370 /* View+OpenWindow.swift */,
 				A54F781B2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift */,
 			);
@@ -868,6 +875,7 @@
 				A5A565732A541BD000D7E030 /* FirstLaunch */,
 				A5A2521B2A4F515900889F5C /* Main */,
 				A5A2521F2A52DC8500889F5C /* Settings */,
+				4FC60C237B024E3BBF8B24A1 /* DesignSystem.swift */,
 				A5E49CC72A52FA1100C3740B /* ViewProtocols.swift */,
 			);
 			path = Views;
@@ -1363,6 +1371,7 @@
 				A5A565832A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */,
 				A58FC72F26E2814E007674F6 /* BaseListenerProtocol.swift in Sources */,
 				A5E49CC92A52FA1100C3740B /* ViewProtocols.swift in Sources */,
+				88E296FF5E1B425E8DD45DF2 /* DesignSystem.swift in Sources */,
 				A5AA31E92778D6E600A064B6 /* InfoViews.swift in Sources */,
 				A5A565892A54A15200D7E030 /* FirstLaunchProgressViewModel.swift in Sources */,
 				A58C63FC2A4D5B8B004DE972 /* Logger.swift in Sources */,
@@ -1420,6 +1429,7 @@
 				A58FC74026E2814E007674F6 /* XPCPowerProtocol.swift in Sources */,
 				A5A252172A4E247400889F5C /* LastThiefDetectionViewModel.swift in Sources */,
 				A5A2521A2A4F416600889F5C /* View+ApplyIf.swift in Sources */,
+				223ECA98AAED41D6ABEA0B10 /* View+DebugPrintChanges.swift in Sources */,
 				A54F781D2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift in Sources */,
 				A57905DA2A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */,
 				A5AA31E02778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
@@ -1445,6 +1455,7 @@
 				A5A565822A54854900D7E030 /* FirstLaunchOptionsViewModel.swift in Sources */,
 				A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */,
 				A5E49CC82A52FA1100C3740B /* ViewProtocols.swift in Sources */,
+				D2A137BBFFFA4103A659BA91 /* DesignSystem.swift in Sources */,
 				A5AA31E82778D6E600A064B6 /* InfoViews.swift in Sources */,
 				A5A565882A54A15200D7E030 /* FirstLaunchProgressViewModel.swift in Sources */,
 				A58C63FB2A4D5B8B004DE972 /* Logger.swift in Sources */,
@@ -1502,6 +1513,7 @@
 				A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */,
 				A5A252162A4E247400889F5C /* LastThiefDetectionViewModel.swift in Sources */,
 				A5A252192A4F416600889F5C /* View+ApplyIf.swift in Sources */,
+				94EEE5BD505D440EB2CA1079 /* View+DebugPrintChanges.swift in Sources */,
 				A54F781C2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift in Sources */,
 				A57905D92A9BD6C800647BF8 /* MainCoordinatorTest.swift in Sources */,
 				A5AA31DF2778D5BF00A064B6 /* DetectSnapshotViews.swift in Sources */,
