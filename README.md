@@ -171,7 +171,7 @@ xcodebuild test \
 Project uses **SwiftFormat** for consistent code formatting:
 
 ```bash
-swiftformat .
+swiftformat . 
 ```
 
 Configuration in `.swiftformat` file.
