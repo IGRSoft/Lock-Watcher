@@ -1,0 +1,975 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "AddIPAddressToSnapshot" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add IP Address info to snapshot"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Додати IP адресу на знімок"
+          }
+        }
+      }
+    },
+    "AddLocationToSnapshot" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add location info to snapshot"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Додати геопозицію на знімок"
+          }
+        }
+      }
+    },
+    "AddTraceRoute" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Trace Route info"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Додати Trace Route інфо"
+          }
+        }
+      }
+    },
+    "AppName" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock Watcher"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock Watcher"
+          }
+        }
+      }
+    },
+    "Auth_deviceAuthentificationFailed" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User authentication with biometry or Apple Watch failed."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка автентифікації користувача за допомогою біометрії або Apple Watch"
+          }
+        }
+      }
+    },
+    "Auth_passwordAuthentificationFailed" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password is wrong."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невірний пароль."
+          }
+        }
+      }
+    },
+    "AuthInfo" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "unlock access to database data"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "розблокувати доступ до даних бази даних"
+          }
+        }
+      }
+    },
+    "Authorize" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authorize"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підключити"
+          }
+        }
+      }
+    },
+    "BiometryAllowed" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authenticate with either biometry or Apple Watch"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Автентифікація за допомогою біометрії або Apple Watch"
+          }
+        }
+      }
+    },
+    "ButtonCancel" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відхилили"
+          }
+        }
+      }
+    },
+    "ButtonOk" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добре"
+          }
+        }
+      }
+    },
+    "ButtonSet" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Встановити"
+          }
+        }
+      }
+    },
+    "ButtonSettings" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштунки"
+          }
+        }
+      }
+    },
+    "EnterPassword" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter password"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введіть пароль"
+          }
+        }
+      }
+    },
+    "FirstLaunchSetup" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First launch setup"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перше налаштування"
+          }
+        }
+      }
+    },
+    "KeepLastN %d" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep last %d"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Залишити останні %d"
+          }
+        }
+      }
+    },
+    "LastSnapshot" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Snapshot:"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Останній знімок:"
+          }
+        }
+      }
+    },
+    "LastSnapshots" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Snapshots"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Останні знімки"
+          }
+        }
+      }
+    },
+    "LaunchAtLogin" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Launch at login"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запустити на логіні"
+          }
+        }
+      }
+    },
+    "Logout" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logout"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вийти"
+          }
+        }
+      }
+    },
+    "Notices" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legal Notice"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Офіційне повідомлення"
+          }
+        }
+      }
+    },
+    "OpenSettings" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please, update application permissions to use that option.\n\nOpen Privacy Settings?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Будь-ласка, оновіть права доступу для застосунку для для цієї опції.\n\nВідкрити налаштування конфіденційністі?"
+          }
+        }
+      }
+    },
+    "ProtectAccess" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Protect acces"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Захистити доступ"
+          }
+        }
+      }
+    },
+    "ProtectPassword" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "пароль"
+          }
+        }
+      }
+    },
+    "PushLocalNotification" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Push Local Notification"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Створити локальне повідомлення"
+          }
+        }
+      }
+    },
+    "Quit" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вихід"
+          }
+        }
+      }
+    },
+    "SaveSnapshotToDisk" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save snapshot to disk"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зберегти знімок на напичувач"
+          }
+        }
+      }
+    },
+    "SendToMail" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send to Mail"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Надіслати листа до"
+          }
+        }
+      }
+    },
+    "SettingsMenuOptions" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Options"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Options"
+          }
+        }
+      }
+    },
+    "SettingsMenuSecurity" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Security"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Security"
+          }
+        }
+      }
+    },
+    "SettingsMenuSnapshot" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snapshot"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snapshot"
+          }
+        }
+      }
+    },
+    "SettingsMenuSync" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync"
+          }
+        }
+      }
+    },
+    "SetupFault" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fault!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка"
+          }
+        }
+      }
+    },
+    "SetupFaultMessage" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "please, enable all permissions to app"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Будь-ласка, дайте доступ додатку"
+          }
+        }
+      }
+    },
+    "SetupOpenSettings" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вікрити налаштування"
+          }
+        }
+      }
+    },
+    "SetupSuccess" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Success!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вдало!"
+          }
+        }
+      }
+    },
+    "SnapshotAt" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snapshot at: %@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знімок о: %@"
+          }
+        }
+      }
+    },
+    "SnapshotOnLogin" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take Snapshot On Login"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок при вході"
+          }
+        }
+      }
+    },
+    "SnapshotOnSwitchToBatteryPower" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take Snapshot On Switch To Battery Power"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок при зміні живлення"
+          }
+        }
+      }
+    },
+    "SnapshotOnUSBMount" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take Snapshot On USB Mount"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок при підключенні в USB"
+          }
+        }
+      }
+    },
+    "SnapshotOnWakeUp" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take Snapshot On WakeUp"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок при пробудженні"
+          }
+        }
+      }
+    },
+    "SnapshotOnWrongPassword" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take Snapshot On Wrong Password"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок при невірному паролі"
+          }
+        }
+      }
+    },
+    "SuccessTimer %d" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "window will be close in %ds"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "вікно буде зачинено за %dс"
+          }
+        }
+      }
+    },
+    "SyncedWithDropbox %@" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync with Dropbox: %@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Синхронізовано з: %@"
+          }
+        }
+      }
+    },
+    "SyncWithDropbox" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync with Dropbox"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Синхронізувати з Dropbox"
+          }
+        }
+      }
+    },
+    "SyncWithiCloud" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync with iCloud"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Синхронізувати з iCloud"
+          }
+        }
+      }
+    },
+    "SyncWithiCloudHelp" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Need to login to iCloud to enable that option"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Треба увійти до iCloud, щоб увімкнути цю опцію"
+          }
+        }
+      }
+    },
+    "TakeSnapshotAndStart" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take snapshot and start use"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок та почати користуватися"
+          }
+        }
+      }
+    },
+    "Tips0" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use app from the Menu Bar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Користуйтесь додатком з Меню Бара"
+          }
+        }
+      }
+    },
+    "TriggerType_logedIn" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On login"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на вхід"
+          }
+        }
+      }
+    },
+    "TriggerType_onBatteryPower" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On removed power supply"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на отключение источника питания"
+          }
+        }
+      }
+    },
+    "TriggerType_onWakeUp" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On wake up"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на пробудження"
+          }
+        }
+      }
+    },
+    "TriggerType_onWrongPassword" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On entered wrong password:"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на введення невірного пароля"
+          }
+        }
+      }
+    },
+    "TriggerType_usbConnected" : {
+      "comment" : "Description was not specified",
+      "extractionState" : "migrated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On connected usb device"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на відключення джерела живлення"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}

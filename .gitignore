@@ -92,3 +92,7 @@ iOSInjectionProject/
 # Private
 Secrets.swift
 /tasks
+
+# Git worktrees (Crystal)
+/worktrees/
+/worktree-*/
