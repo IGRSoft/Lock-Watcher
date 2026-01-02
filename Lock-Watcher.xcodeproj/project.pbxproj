@@ -1087,7 +1087,6 @@
 				A58FC74426E2814E007674F6 /* Frameworks */,
 				A58FC74926E2814E007674F6 /* Resources */,
 				A58FC74C26E2814E007674F6 /* Embed XPC Services */,
-				A58FC74F26E2814E007674F6 /* Setup Launch At Login */,
 			);
 			buildRules = (
 			);
@@ -1117,7 +1116,6 @@
 				A5C6DBEB25796A90009DE750 /* Frameworks */,
 				A5C6DBEC25796A90009DE750 /* Resources */,
 				A5E6D76125A5BB6C00EEA7DD /* Embed XPC Services */,
-				A533D7C125A8FCD10046B7C8 /* Setup Launch At Login */,
 			);
 			buildRules = (
 			);
@@ -1306,42 +1304,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A533D7C125A8FCD10046B7C8 /* Setup Launch At Login */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			inputPaths = (
-				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
-				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper.zip",
-				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper-with-runtime.zip",
-			);
-			name = "Setup Launch At Login";
-			shellPath = /bin/sh;
-			shellScript = (
-				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
-				"",
-				"",
-				"",
-				"",
-			);
-		};
-		A58FC74F26E2814E007674F6 /* Setup Launch At Login */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			inputPaths = (
-				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
-				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper.zip",
-				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/LaunchAtLoginHelper-with-runtime.zip",
-			);
-			name = "Setup Launch At Login";
-			shellPath = /bin/sh;
-			shellScript = (
-				"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh",
-				"",
-				"",
-				"",
-				"",
-			);
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1938,12 +1900,12 @@
 				minimumVersion = 1.1.9;
 			};
 		};
-		A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+		A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.2;
+				minimumVersion = 1.0.0;
 			};
 		};
 		A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */ = {
@@ -1962,12 +1924,12 @@
 				minimumVersion = 0.2.0;
 			};
 		};
-		A58FC72626E2814E007674F6 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+		A58FC72626E2814E007674F6 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
+				minimumVersion = 1.0.0;
 			};
 		};
 		A58FC72826E2814E007674F6 /* XCRemoteSwiftPackageReference "SwiftyDropbox" */ = {
@@ -2017,7 +1979,7 @@
 		};
 		A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			package = A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
 			productName = LaunchAtLogin;
 		};
 		A535F5D127B9165F0096D0C3 /* SimpleTracer */ = {
@@ -2037,7 +1999,7 @@
 		};
 		A58FC72526E2814E007674F6 /* LaunchAtLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A58FC72626E2814E007674F6 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			package = A58FC72626E2814E007674F6 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
 			productName = LaunchAtLogin;
 		};
 		A58FC72726E2814E007674F6 /* SwiftyDropbox */ = {
