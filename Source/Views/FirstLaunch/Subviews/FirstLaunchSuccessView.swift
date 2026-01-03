@@ -9,11 +9,11 @@ import SwiftUI
 
 /// A SwiftUI view that presents a success message and visuals to the user when the initial setup completes successfully.
 struct FirstLaunchSuccessView: View {
-    /// A binding to the count-down timer value that informs the user about the time left before proceeding.
-    @State var successCountDown: Int
+    /// The count-down timer value that informs the user about the time left before proceeding.
+    let successCountDown: Int
 
     /// The frame size for adjusting visual elements within this view.
-    @State var frameSize: CGSize
+    let frameSize: CGSize
 
     /// The body property that returns the content of the view.
     var body: some View {
