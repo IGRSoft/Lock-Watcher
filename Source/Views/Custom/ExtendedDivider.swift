@@ -36,20 +36,19 @@ extension View {
 struct ExtendedDivider: View {
     /// Represents a single line (either horizontal or vertical) used within the extended divider.
     private struct ExtendedDividerLine: View {
-        @State var width: CGFloat = DesignSystem.Layout.borderWidth
-        @State var color: Color = .gray
-
-        var direction: Axis.Set = .horizontal // Direction of the line
+        let width: CGFloat
+        let color: Color
+        var direction: Axis.Set = .horizontal
 
         var body: some View {
             Rectangle()
                 .fill(color)
                 .applyIf(direction == .vertical) {
                     $0.frame(width: width)
-                        .edgesIgnoringSafeArea(.vertical)
+                        .ignoresSafeArea(.all, edges: .vertical)
                 } else: {
                     $0.frame(height: width)
-                        .edgesIgnoringSafeArea(.horizontal)
+                        .ignoresSafeArea(.all, edges: .horizontal)
                 }
         }
     }
@@ -95,11 +94,10 @@ struct ExtendedDivider: View {
     }
 }
 
-/// Preview provider for visual representation of the `ExtendedDivider` view.
-struct ExtendedDivider_Previews: PreviewProvider {
-    static var previews: some View {
-        ExtendedDivider(isExtended: .constant(true))
-        
-        ExtendedDivider(isExtended: .constant(false))
-    }
+#Preview("Extended") {
+    ExtendedDivider(isExtended: .constant(true))
+}
+
+#Preview("Collapsed") {
+    ExtendedDivider(isExtended: .constant(false))
 }

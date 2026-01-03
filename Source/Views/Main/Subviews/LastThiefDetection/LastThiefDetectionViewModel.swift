@@ -6,26 +6,31 @@
 //
 
 import Combine
+import Observation
 import SwiftUI
 
 /// A view model that manages the data related to the last detected thief and associated images.
-final class LastThiefDetectionViewModel: ObservableObject {
+@Observable
+@MainActor
+final class LastThiefDetectionViewModel {
     // MARK: - Dependency Injection
-    
+
     /// An object that conforms to `DatabaseManagerProtocol`, responsible for database interactions.
     var databaseManager: any DatabaseManagerProtocol
-    
+
     // MARK: - Variables
-    
+
     /// The selected item from the list of latest images.
-    @Published var selectedItem: DatabaseDto?
-    
+    var selectedItem: DatabaseDto?
+
     /// A list of the latest images related to the last detected thief.
-    @Published var latestImages: [DatabaseDto] = .init()
-    
+    var latestImages: [DatabaseDto] = .init()
+
     // MARK: - Combine
-    
+
     /// A collection of Combine cancellables for managing subscriptions.
+    /// Ignored by observation as it's internal infrastructure.
+    @ObservationIgnored
     private var cancellables = Set<AnyCancellable>()
     
     /// Initializes the view model with a given database manager.

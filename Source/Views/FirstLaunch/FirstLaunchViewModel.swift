@@ -6,59 +6,85 @@
 //
 
 import Combine
+import Observation
 import SwiftUI
 
 /// The view model for the first launch view.
-///
-/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
-final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
+@Observable
+@MainActor
+final class FirstLaunchViewModel: DomainViewConstantProtocol {
     // MARK: - DomainViewConstantProtocol
-    
+
     /// The view's domain-specific constants.
     var viewSettings: FirstLaunchDomain = .init()
-    
+
     /// The type of domain-specific constants associated with this view.
     typealias DomainViewConstant = FirstLaunchDomain
-    
+
     // MARK: - Dependency injection
-    
+
     /// The application's settings.
-    @Published private var settings: AppSettingsProtocol
-    
+    private var settings: AppSettingsProtocol
+
     /// The manager responsible for handling "thief" related operations.
-    @Published private var thiefManager: ThiefManagerProtocol
-    
+    private var thiefManager: ThiefManagerProtocol
+
     /// The closure to close the view.
+    @ObservationIgnored
     private var closeClosure: Commons.EmptyClosure
-    
+
     // MARK: - Variables
-    
+
     /// The current state of the view.
-    @Published private(set) var state: StateMode = .idle
-    
+    /// Uses `didSet` to trigger side effects when state changes.
+    private(set) var state: StateMode = .idle {
+        didSet {
+            handleStateChange(state)
+        }
+    }
+
     /// Countdown after success before closing the window.
-    @Published private(set) var successCountDown = AppSettings.firstLaunchSuccessCount
-    
+    private(set) var successCountDown = AppSettings.firstLaunchSuccessCount
+
     /// The safe area for the view.
+    @ObservationIgnored
     lazy var safeArea = CGSize(width: viewSettings.window.width - ViewConstants.padding, height: viewSettings.window.height - ViewConstants.padding)
-    
+
     /// Indicates if a restart is needed.
-    @Published var isNeedRestart: Bool = false
-    
+    var isNeedRestart: Bool = false
+
+    /// Binding for `isNeedRestart` to allow two-way data binding in views.
+    var isNeedRestartBinding: Binding<Bool> {
+        Binding(
+            get: { self.isNeedRestart },
+            set: { self.isNeedRestart = $0 }
+        )
+    }
+
     /// Indicates if an alert should be shown.
-    @Published var showingAlert = false
-    
+    var showingAlert = false
+
+    /// Binding for `showingAlert` to allow two-way data binding in views.
+    var showingAlertBinding: Binding<Bool> {
+        Binding(
+            get: { self.showingAlert },
+            set: { self.showingAlert = $0 }
+        )
+    }
+
     /// A timer for tracking time-based operations.
     private var timer: Timer?
-    
+
     /// View model for the first launch options.
+    @ObservationIgnored
     lazy var firstLaunchOptionsViewModel: FirstLaunchOptionsViewModel = {
         FirstLaunchOptionsViewModel(settings: settings)
     }()
-    
+
     // MARK: - Combine
-    
+
     /// Collection of cancellable publishers to clean up when done.
+    @ObservationIgnored
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initializer
@@ -68,8 +94,6 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
         self.settings = settings
         self.thiefManager = thiefManager
         self.closeClosure = closeClosure
-        
-        setupPublishers()
     }
     
     /// Stops any active timers.
@@ -124,24 +148,21 @@ final class FirstLaunchViewModel: ObservableObject, DomainViewConstantProtocol {
     }
     
     // MARK: - Private Methods
-    
-    /// Sets up publishers for state changes.
-    private func setupPublishers() {
-        $state.sink { [weak self] state in
-            switch state {
-            case .idle:
-                self?.isNeedRestart = false
-            case .progress:
-                self?.simulateTrigger()
-            case .success:
-                self?.startTimerToCloseWindow()
-            case .fault:
-                self?.showingAlert = true
-            case .anonymous, .authorised:
-                break
-            }
+
+    /// Handles state changes and triggers appropriate side effects.
+    private func handleStateChange(_ state: StateMode) {
+        switch state {
+        case .idle:
+            isNeedRestart = false
+        case .progress:
+            simulateTrigger()
+        case .success:
+            startTimerToCloseWindow()
+        case .fault:
+            showingAlert = true
+        case .anonymous, .authorised:
+            break
         }
-        .store(in: &cancellables)
     }
     
     /// Simulates a trigger for permissions and state changes.

@@ -18,9 +18,6 @@ struct LaunchAtLoginView: View {
     }
 }
 
-/// A preview provider for the `LaunchAtLoginView`, useful for visualizing the component in design tools and SwiftUI previews.
-struct LaunchAtLoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LaunchAtLoginView()
-    }
+#Preview("Launch At Login") {
+    LaunchAtLoginView()
 }

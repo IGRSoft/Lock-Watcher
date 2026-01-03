@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct FirstLaunchOptionsView: View {
-    @StateObject private var viewModel: FirstLaunchOptionsViewModel
-
-    init(viewModel: FirstLaunchOptionsViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    /// The view model that provides data and behavior.
+    
+    @Environment(FirstLaunchOptionsViewModel.self) var viewModel
 
     var body: some View {
         VStack(alignment: .leading, spacing: DesignSystem.Spacing.lg) {
@@ -28,8 +26,7 @@ struct FirstLaunchOptionsView: View {
     }
 }
 
-struct FirstLaunchOptionsView_Previews: PreviewProvider {
-    static var previews: some View {
-        FirstLaunchOptionsView(viewModel: FirstLaunchOptionsViewModel.preview)
-    }
+#Preview("Options View") {
+    FirstLaunchOptionsView()
+        .environment(FirstLaunchOptionsViewModel.preview)
 }

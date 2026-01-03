@@ -34,8 +34,11 @@ final class MainCoordinator: BaseCoordinatorProtocol {
         popover.behavior = .transient
         popover.animates = false
         popover.contentViewController = NSViewController()
-        popover.contentViewController?.view = NSHostingView(rootView: MainView(viewModel: mainViewModel))
-        
+        popover.contentViewController?.view = NSHostingView(
+            rootView: MainView()
+                .environment(mainViewModel)
+        )
+
         return popover
     }()
     
@@ -107,11 +110,18 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     func displayFirstLaunchWindowIfNeed(closeClosure: @escaping Commons.EmptyClosure) {
         if settings.options.isFirstLaunch {
             settings.options.isFirstLaunch = false
-            firstLaunchWindow = FirstLaunchView(viewModel: FirstLaunchViewModel(settings: settings, thiefManager: thiefManager, closeClosure: { [weak self] in
-                self?.firstLaunchWindow?.close()
-                closeClosure()
-            }))
-            .openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
+            let firstLaunchViewModel = FirstLaunchViewModel(
+                settings: settings,
+                thiefManager: thiefManager,
+                closeClosure: { [weak self] in
+                    self?.firstLaunchWindow?.close()
+                    closeClosure()
+                }
+            )
+            
+            firstLaunchWindow = FirstLaunchView()
+                .environment(firstLaunchViewModel)
+                .openInWindow(title: NSLocalizedString("FirstLaunchSetup", comment: ""), sender: self)
         }
     }
     

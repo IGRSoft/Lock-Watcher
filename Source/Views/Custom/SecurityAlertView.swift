@@ -70,9 +70,6 @@ struct SecurityAlertView: View {
     }
 }
 
-/// Provides a preview of the `SecurityAlertView`.
-struct SecurityAlertView_Previews: PreviewProvider {
-    static var previews: some View {
-        SecurityAlertView(password: .constant("1234"), isPresented: .constant(true))
-    }
+#Preview("Security Alert") {
+    SecurityAlertView(password: .constant("1234"), isPresented: .constant(true))
 }
