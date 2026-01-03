@@ -12,11 +12,12 @@ import SwiftUI
 struct MainApp: App {
     /// The application delegate to handle system-level events.
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+
     /// Defines the main scene for the application.
     var body: some Scene {
         Settings {
-            appDelegate.viewModel.settingsView
+            SettingsView()
+                .environment(appDelegate.viewModel.settingsViewModel)
         }
     }
 }

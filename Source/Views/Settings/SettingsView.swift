@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject private var viewModel: SettingsViewModel
-
-    init(viewModel: SettingsViewModel) {
-        _viewModel = ObservedObject(wrappedValue: viewModel)
-    }
+    /// The view model injected via environment.
+    @Environment(SettingsViewModel.self) var viewModel
 
     var body: some View {
         let _ = Self.logViewChanges()
@@ -100,11 +97,7 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        // ForEach(["en", "ru", "uk"], id: \.self) { id in
-        SettingsView(viewModel: SettingsViewModel.preview)
-        // .environment(\.locale, .init(identifier: id))
-        // }
-    }
+#Preview("Settings View") {
+    SettingsView()
+        .environment(SettingsViewModel.preview)
 }

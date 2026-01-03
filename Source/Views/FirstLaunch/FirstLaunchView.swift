@@ -9,14 +9,8 @@ import SwiftUI
 
 /// A view that presents the user with different states during the first launch of the application.
 struct FirstLaunchView: View {
-    /// An observable object that manages the state and behavior for this view.
-    @StateObject private var viewModel: FirstLaunchViewModel
-
-    /// Initializes a new `FirstLaunchView` with the given view model.
-    /// - Parameter viewModel: The view model that provides data and behavior for this view.
-    init(viewModel: FirstLaunchViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    /// The view model injected via environment.
+    @Environment(FirstLaunchViewModel.self) var viewModel
 
     var body: some View {
         let _ = Self.logViewChanges()
@@ -24,9 +18,11 @@ struct FirstLaunchView: View {
             switch viewModel.state {
             case .idle:
                 // Presents options to the user on the first launch.
-                FirstLaunchOptionsView(viewModel: viewModel.firstLaunchOptionsViewModel)
+                FirstLaunchOptionsView()
+                    .environment(viewModel.firstLaunchOptionsViewModel)
+                
                 Button(action: viewModel.takeSnapshot, label: viewModel.takeSnapshotTitle)
-                    .alert(viewModel.openSettingsAlertTitle(), isPresented: $viewModel.showingAlert) {
+                    .alert(viewModel.openSettingsAlertTitle(), isPresented: viewModel.showingAlertBinding) {
                         Button(action: viewModel.openSettings, label: viewModel.openSettingsTitle)
                         Button(role: .cancel, action: {}, label: viewModel.cancelSettingsTitle)
                     }
@@ -35,18 +31,19 @@ struct FirstLaunchView: View {
                     .accessibilityHint(AccessibilityHint.FirstLaunch.takeSnapshotHint)
             case .progress:
                 // Shows the progress state using a progress view.
-                FirstLaunchProgressView(viewModel: FirstLaunchProgressViewModel(frameSize: viewModel.safeArea))
+                FirstLaunchProgressView()
+                    .environment(FirstLaunchProgressViewModel(frameSize: viewModel.safeArea))
                     .accessibilityIdentifier(AccessibilityID.FirstLaunch.progressIndicator)
                     .accessibilityLabel(AccessibilityLabel.FirstLaunch.progress)
             case .success:
                 // Displays a success message with a countdown.
-                FirstLaunchSuccessView(successCountDown: .constant(viewModel.successCountDown), frameSize: viewModel.safeArea)
+                FirstLaunchSuccessView(successCountDown: viewModel.successCountDown, frameSize: viewModel.safeArea)
                     .accessibilityIdentifier(AccessibilityID.FirstLaunch.successView)
                     .accessibilityLabel(AccessibilityLabel.FirstLaunch.success)
             case .fault:
                 // Displays an error message. If a restart is needed, it triggers the restart view.
                 if !viewModel.isNeedRestart {
-                    FirstLaunchFaultViews(isHidden: $viewModel.isNeedRestart, frameSize: viewModel.safeArea)
+                    FirstLaunchFaultViews(isHidden: viewModel.isNeedRestartBinding, frameSize: viewModel.safeArea)
                         .accessibilityIdentifier(AccessibilityID.FirstLaunch.faultView)
                         .accessibilityLabel(AccessibilityLabel.FirstLaunch.fault)
                 } else {
@@ -64,9 +61,7 @@ struct FirstLaunchView: View {
     }
 }
 
-/// A preview provider for SwiftUI's design canvas.
-struct FirstLaunchView_Previews: PreviewProvider {
-    static var previews: some View {
-        FirstLaunchView(viewModel: FirstLaunchViewModel.preview)
-    }
+#Preview("First Launch") {
+    FirstLaunchView()
+        .environment(FirstLaunchViewModel.preview)
 }

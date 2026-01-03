@@ -103,4 +103,12 @@ final class MockThiefManager: ThiefManagerProtocol {
     func emitDropboxUserName(_ name: String) {
         dropboxUserNameContinuation?.yield(name)
     }
+
+    var invokedCleanAll = false
+    var invokedCleanAllCount = 0
+
+    func cleanAll() {
+        invokedCleanAll = true
+        invokedCleanAllCount += 1
+    }
 }

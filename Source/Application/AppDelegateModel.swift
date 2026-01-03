@@ -13,8 +13,8 @@ import UserNotifications
 /// `@MainActor` isolation is required because the model manages UI components.
 @MainActor
 protocol AppDelegateModelProtocol {
-    /// Represents the view model for application settings.
-    var settingsView: SettingsView { get }
+    /// The settings view model for injection into the settings view.
+    var settingsViewModel: SettingsViewModel { get }
 
     /// Setup and processes local notifications.
     func setup(with localNotification: Notification)
@@ -47,11 +47,8 @@ final class AppDelegateModel: AppDelegateModelProtocol {
         return MainCoordinator(settings: settings, thiefManager: thiefManager, statusBarButton: button, securityUtil: SecurityUtil())
     }()
 
-    /// Represents the view model for application settings.
-    private lazy var settingsViewModel: SettingsViewModel = .init(settings: settings, thiefManager: thiefManager)
-
-    /// Represents the main view for application settings.
-    private(set) lazy var settingsView = SettingsView(viewModel: settingsViewModel)
+    /// The settings view model for injection into the settings view.
+    private(set) lazy var settingsViewModel: SettingsViewModel = .init(settings: settings, thiefManager: thiefManager)
 
     /// Represents the status bar item used in the application.
     private lazy var statusBarItem: NSStatusItem = {

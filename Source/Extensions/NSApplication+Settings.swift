@@ -17,11 +17,7 @@ extension NSApplication {
     static func displaySettingsWindow() {
         // If the macOS version is 13.0 or newer, trigger the 'showSettingsWindow' selector,
         // otherwise, trigger the 'showPreferencesWindow' selector.
-        if #available(macOS 13.0, *) {
-            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
-        } else {
-            NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
-        }
+        NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
         
         // Activate the application, bringing it to the foreground.
         NSApp.activate(ignoringOtherApps: true)

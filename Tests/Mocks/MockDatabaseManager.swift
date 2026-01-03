@@ -56,4 +56,13 @@ final class MockDatabaseManager: DatabaseManagerProtocol {
         invokedRemoveParametersList.append((dto, ()))
         return stubbedRemoveResult
     }
+
+    var invokedCleanAll = false
+    var invokedCleanAllCount = 0
+
+    func cleanAll() {
+        invokedCleanAll = true
+        invokedCleanAllCount += 1
+        stubbedLatestImages = []
+    }
 }

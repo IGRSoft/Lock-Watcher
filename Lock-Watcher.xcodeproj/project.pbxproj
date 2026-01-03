@@ -230,6 +230,12 @@
 		F3A0000100000006000000C1 /* DatabaseDtoListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000002000000C1 /* DatabaseDtoListTest.swift */; };
 		F3A0000100000007000000C1 /* AppSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000003000000C1 /* AppSettingsTest.swift */; };
 		F3A0000100000008000000C1 /* TriggerManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000004000000C1 /* TriggerManagerTest.swift */; };
+		F3A000010000000B000000C1 /* InfoViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A000010000000C000000C1 /* InfoViewModelTests.swift */; };
+		F3A000010000000D000000C1 /* FirstLaunchProgressViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A000010000000E000000C1 /* FirstLaunchProgressViewModelTests.swift */; };
+		F3A000010000000F000000C1 /* LastThiefDetectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000010000000C1 /* LastThiefDetectionViewModelTests.swift */; };
+		F3A0000100000011000000C1 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000012000000C1 /* MainViewModelTests.swift */; };
+		F3A0000100000013000000C1 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000014000000C1 /* SettingsViewModelTests.swift */; };
+		F3A0000100000015000000C1 /* FirstLaunchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000016000000C1 /* FirstLaunchViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -242,7 +248,8 @@
 				"$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).h",
 			);
 			script = (
-				"sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`"
+				"sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`",
+				"",
 			);
 		};
 /* End PBXBuildRule section */
@@ -478,6 +485,12 @@
 		F3A0000100000002000000C1 /* DatabaseDtoListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDtoListTest.swift; sourceTree = "<group>"; };
 		F3A0000100000003000000C1 /* AppSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTest.swift; sourceTree = "<group>"; };
 		F3A0000100000004000000C1 /* TriggerManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerManagerTest.swift; sourceTree = "<group>"; };
+		F3A000010000000C000000C1 /* InfoViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModelTests.swift; sourceTree = "<group>"; };
+		F3A000010000000E000000C1 /* FirstLaunchProgressViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchProgressViewModelTests.swift; sourceTree = "<group>"; };
+		F3A0000100000010000000C1 /* LastThiefDetectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastThiefDetectionViewModelTests.swift; sourceTree = "<group>"; };
+		F3A0000100000012000000C1 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
+		F3A0000100000014000000C1 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		F3A0000100000016000000C1 /* FirstLaunchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -942,6 +955,7 @@
 		A5C6DC0325796A93009DE750 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				F3A0000100000017000000C1 /* ViewModels */,
 				F3A0000100000009000000C1 /* Models */,
 				F3A000010000000A000000C1 /* Managers */,
 				A57905F52A9FAB2D00647BF8 /* Utils */,
@@ -1041,6 +1055,19 @@
 				F3A0000100000004000000C1 /* TriggerManagerTest.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		F3A0000100000017000000C1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F3A000010000000C000000C1 /* InfoViewModelTests.swift */,
+				F3A000010000000E000000C1 /* FirstLaunchProgressViewModelTests.swift */,
+				F3A0000100000010000000C1 /* LastThiefDetectionViewModelTests.swift */,
+				F3A0000100000012000000C1 /* MainViewModelTests.swift */,
+				F3A0000100000014000000C1 /* SettingsViewModelTests.swift */,
+				F3A0000100000016000000C1 /* FirstLaunchViewModelTests.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1497,6 +1524,12 @@
 				F3A0000100000006000000C1 /* DatabaseDtoListTest.swift in Sources */,
 				F3A0000100000007000000C1 /* AppSettingsTest.swift in Sources */,
 				F3A0000100000008000000C1 /* TriggerManagerTest.swift in Sources */,
+				F3A000010000000B000000C1 /* InfoViewModelTests.swift in Sources */,
+				F3A000010000000D000000C1 /* FirstLaunchProgressViewModelTests.swift in Sources */,
+				F3A000010000000F000000C1 /* LastThiefDetectionViewModelTests.swift in Sources */,
+				F3A0000100000011000000C1 /* MainViewModelTests.swift in Sources */,
+				F3A0000100000013000000C1 /* SettingsViewModelTests.swift in Sources */,
+				F3A0000100000015000000C1 /* FirstLaunchViewModelTests.swift in Sources */,
 				A57905DF2A9D188C00647BF8 /* DispatchQueueDebounceTest.swift in Sources */,
 				A57905E52A9D281700647BF8 /* NSImageTextTest.swift in Sources */,
 				A57305612EE1DCE100C4D0F2 /* MockAppDelegateModel.swift in Sources */,
@@ -1629,11 +1662,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB76F2AA089D6005A0C88 /* app-no-mas-debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Detect persone who is trying get access to your user";
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
-				INFOPLIST_KEY_NSLocationUsageDescription = "Add location information to the snapshot to know where it was taken";
 			};
 			name = Debug;
 		};
@@ -1641,11 +1669,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Detect persone who is trying get access to your user";
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
-				INFOPLIST_KEY_NSLocationUsageDescription = "Add location information to the snapshot to know where it was taken";
 			};
 			name = Release;
 		};
@@ -1660,12 +1683,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
-				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Detect persone who is trying get access to your user";
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
-				INFOPLIST_KEY_NSLocationUsageDescription = "Add location information to the snapshot to know where it was taken";
 			};
 			name = "Release-non-mas";
 		};
@@ -1726,11 +1743,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Detect persone who is trying get access to your user";
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
-				INFOPLIST_KEY_NSLocationUsageDescription = "Add location information to the snapshot to know where it was taken";
 			};
 			name = "Release-non-mas";
 		};
@@ -1752,12 +1764,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63C92A4CBCA0004DE972 /* app-debug.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
-				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Detect persone who is trying get access to your user";
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
-				INFOPLIST_KEY_NSLocationUsageDescription = "Add location information to the snapshot to know where it was taken";
 			};
 			name = Debug;
 		};
@@ -1765,12 +1771,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CA2A4CBCA0004DE972 /* app-release.xcconfig */;
 			buildSettings = {
-				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
-				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Detect persone who is trying get access to your user";
-				INFOPLIST_KEY_NSFaceIDUsageDescription = "To unlock access to database data";
-				INFOPLIST_KEY_NSLocationUsageDescription = "Add location information to the snapshot to know where it was taken";
 			};
 			name = Release;
 		};

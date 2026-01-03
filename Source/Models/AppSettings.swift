@@ -116,24 +116,27 @@ struct SyncSettings: Codable {
 protocol AppSettingsProtocol {
     /// Flag to indicate if the app is built for Mac App Store.
     static var isMASBuild: Bool { get }
-    
+
     /// Flag to enable/disable image capture debugging.
     static var isImageCaptureDebug: Bool { get }
-    
+
     /// The count of successful launches to determine if it's the app's first launch.
     static var firstLaunchSuccessCount: Int { get }
-    
+
     /// Options/settings related to the application's behavior.
     var options: OptionsSettings { get set }
-    
+
     /// Settings to determine when snapshots should be captured.
     var triggers: TriggerSettings { get set }
-    
+
     /// Settings related to synchronization and storage of snapshots.
     var sync: SyncSettings { get set }
-    
+
     /// Settings to manage and store the state of user interface elements.
     var ui: UISettings { get set }
+
+    /// Resets all settings to their default values.
+    func resetToDefaults()
 }
 
 /// Class responsible for managing all settings of the application and storing them in UserDefaults.
@@ -165,22 +168,37 @@ final class AppSettings: AppSettingsProtocol {
     /// UI settings to remember the state of user interface elements.
     @UserDefault("UISettings", defaultValue: UISettings())
     var ui: UISettings
+
+    /// Resets all settings to their default values.
+    func resetToDefaults() {
+        options = OptionsSettings()
+        triggers = TriggerSettings()
+        sync = SyncSettings()
+        ui = UISettings()
+    }
 }
 
 /// class for Preview
 ///
 final class AppSettingsPreview: AppSettingsProtocol {
     static let isMASBuild: Bool = true
-    
+
     static let isImageCaptureDebug: Bool = true
-    
+
     static let firstLaunchSuccessCount: Int = 15
-    
+
     var options: OptionsSettings = .init()
-    
+
     var triggers: TriggerSettings = .init()
-    
+
     var sync: SyncSettings = .init()
-    
+
     var ui: UISettings = .init()
+
+    func resetToDefaults() {
+        options = OptionsSettings()
+        triggers = TriggerSettings()
+        sync = SyncSettings()
+        ui = UISettings()
+    }
 }

@@ -40,9 +40,6 @@ struct FirstLaunchFaultViews: View {
     }
 }
 
-/// A preview provider that assists developers in designing and testing `FirstLaunchFaultViews` within Xcode's canvas
-struct FirstLaunchFaultViews_Previews: PreviewProvider {
-    static var previews: some View {
-        FirstLaunchFaultViews(isHidden: .constant(false), frameSize: CGSize(width: 400, height: 300))
-    }
+#Preview("Fault View") {
+    FirstLaunchFaultViews(isHidden: .constant(false), frameSize: CGSize(width: 400, height: 300))
 }

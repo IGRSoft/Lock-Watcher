@@ -220,6 +220,7 @@ enum AccessibilityID {
     enum Info {
         static let container = "info.container"
         static let debugTriggerButton = "info.debugTriggerButton"
+        static let cleanButton = "info.cleanButton"
         static let openSettingsButton = "info.openSettingsButton"
         static let quitButton = "info.quitButton"
         static let websiteLink = "info.websiteLink"
