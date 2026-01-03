@@ -11,7 +11,7 @@ import SwiftUI
 
 /// Represents UI settings to manage and store the state of user interface elements.
 ///
-struct UISettings: Codable {
+struct UISettings: Codable, Equatable {
     /// Determines if the security information section is expanded.
     var isSecurityInfoExpand: Bool = true
     
@@ -27,7 +27,7 @@ struct UISettings: Codable {
 
 /// Represents the options/settings related to the application's behavior.
 ///
-struct OptionsSettings: Codable {
+struct OptionsSettings: Codable, Equatable {
     /// Indicates whether the application is being launched for the first time.
     var isFirstLaunch: Bool = true
     
@@ -54,7 +54,7 @@ struct OptionsSettings: Codable {
     var authSettings: AuthSettings = .init()
     }
 
-struct AuthSettings: Equatable, Codable {
+struct AuthSettings: Codable, Equatable {
     var biometrics = false
     var watch = false
     var devicePassword = false
@@ -70,7 +70,7 @@ struct AuthSettings: Equatable, Codable {
 
 /// Represents the triggers for capturing snapshots based on various events.
 ///
-struct TriggerSettings: Codable {
+struct TriggerSettings: Codable, Equatable {
     /// Capture a snapshot when the device wakes up.
     var isUseSnapshotOnWakeUp: Bool = true
     
@@ -89,7 +89,7 @@ struct TriggerSettings: Codable {
 
 /// Represents settings related to synchronization and storage of snapshots.
 ///
-struct SyncSettings: Codable {
+struct SyncSettings: Codable, Equatable {
     /// Determines if snapshots should be saved to disk.
     var isSaveSnapshotToDisk: Bool = false
     
