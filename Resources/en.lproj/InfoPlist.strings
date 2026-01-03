@@ -1,5 +1,0 @@
-/* Localized versions of Info.plist keys */
-
-CFBundleDisplayName = "Lock Watcher";
-NSCameraUsageDescription = "Detect persone who is trying get access to your user";
-NSLocationUsageDescription = "Add location information to the snapshot to know where it was taken";

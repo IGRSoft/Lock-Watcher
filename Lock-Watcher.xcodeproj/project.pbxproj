@@ -44,6 +44,10 @@
 		A54F781A2D119AFD00AA5592 /* MacOSLockDetectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F78182D119AFD00AA5592 /* MacOSLockDetectManager.swift */; };
 		A54F781C2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F781B2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift */; };
 		A54F781D2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54F781B2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift */; };
+		A55C088D2F07D0FD008D57DE /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A55C088C2F07D0FD008D57DE /* InfoPlist.xcstrings */; };
+		A55C088E2F07D0FD008D57DE /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A55C088C2F07D0FD008D57DE /* InfoPlist.xcstrings */; };
+		A55C08902F08020D008D57DE /* icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A55C088F2F08020D008D57DE /* icon.icon */; };
+		A55C08912F08020D008D57DE /* icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A55C088F2F08020D008D57DE /* icon.icon */; };
 		A56CFFBB27A48D6A00CB137B /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CFFBA27A48D6A00CB137B /* String+Regex.swift */; };
 		A56CFFBC27A48D6A00CB137B /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56CFFBA27A48D6A00CB137B /* String+Regex.swift */; };
 		A56D11E126DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */; };
@@ -240,12 +244,6 @@
 			script = (
 				"sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`",
 				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
 			);
 		};
 /* End PBXBuildRule section */
@@ -358,6 +356,8 @@
 		A54E4A572610AA3C00E7B1D4 /* XPCAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPCAuthentication.swift; sourceTree = "<group>"; };
 		A54F78182D119AFD00AA5592 /* MacOSLockDetectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSLockDetectManager.swift; sourceTree = "<group>"; };
 		A54F781B2D11A25900AA5592 /* CLLocationCoordinate2D+Sendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Sendable.swift"; sourceTree = "<group>"; };
+		A55C088C2F07D0FD008D57DE /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		A55C088F2F08020D008D57DE /* icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = icon.icon; sourceTree = "<group>"; };
 		A56CFFBA27A48D6A00CB137B /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+PropertyWrapper.swift"; sourceTree = "<group>"; };
 		A56F1A7C278A29630066CA78 /* DispatchQueue+Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Debounce.swift"; sourceTree = "<group>"; };
@@ -388,8 +388,6 @@
 		A57905F82A9FAB9E00647BF8 /* MockLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLog.swift; sourceTree = "<group>"; };
 		A57905FA2A9FB0A300647BF8 /* NetworkUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtilTests.swift; sourceTree = "<group>"; };
 		A57905FC2A9FBF5300647BF8 /* SecurityUtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityUtilTest.swift; sourceTree = "<group>"; };
-		A57FDCAE26DB99B600954ED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A57FDCB126DB99B800954ED7 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A58C63C02A4C5AF6004DE972 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A58C63C32A4C7C6E004DE972 /* NSApplication+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Settings.swift"; sourceTree = "<group>"; };
 		A58C63C82A4CBCA0004DE972 /* app.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = app.xcconfig; sourceTree = "<group>"; };
@@ -552,11 +550,12 @@
 		A519999926DA764A00F482BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A55C088F2F08020D008D57DE /* icon.icon */,
+				A55C088C2F07D0FD008D57DE /* InfoPlist.xcstrings */,
 				A58C63EE2A4CC2EC004DE972 /* Preview Content */,
 				A599EB3327AB1BF0003A69B5 /* policy.html */,
 				A5117E45278349C7001EC35F /* entitlements */,
 				A57305622EE2DC6700C4D0F2 /* Localizable.xcstrings */,
-				A57FDCAF26DB99B600954ED7 /* InfoPlist.strings */,
 				A519999D26DA764A00F482BC /* Assets.xcassets */,
 				A51999A126DA764A00F482BC /* Info.plist */,
 			);
@@ -1234,7 +1233,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A5C6DC4425796CCB009DE750 /* XCRemoteSwiftPackageReference "PhotoSnap" */,
-				A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+				A533D7BA25A8FCC20046B7C8 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 				A519997826D92D4400F482BC /* XCRemoteSwiftPackageReference "SwiftyDropbox" */,
 				A519998226DA4AD400F482BC /* XCRemoteSwiftPackageReference "EasyStash" */,
 				A599EB2B27AB0BE1003A69B5 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
@@ -1272,18 +1271,22 @@
 			isa = PBXResourcesBuildPhase;
 			files = (
 				A58FC74A26E2814E007674F6 /* Assets.xcassets in Resources */,
+				A55C088D2F07D0FD008D57DE /* InfoPlist.xcstrings in Resources */,
 				A57305642EE2DC6700C4D0F2 /* Localizable.xcstrings in Resources */,
 				A58C63F12A4CC2EC004DE972 /* Preview Assets.xcassets in Resources */,
 				A599EB3527AB1BF0003A69B5 /* policy.html in Resources */,
+				A55C08902F08020D008D57DE /* icon.icon in Resources */,
 			);
 		};
 		A5C6DBEC25796A90009DE750 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 				A51999A326DA764A00F482BC /* Assets.xcassets in Resources */,
+				A55C088E2F07D0FD008D57DE /* InfoPlist.xcstrings in Resources */,
 				A57305632EE2DC6700C4D0F2 /* Localizable.xcstrings in Resources */,
 				A58C63F02A4CC2EC004DE972 /* Preview Assets.xcassets in Resources */,
 				A599EB3427AB1BF0003A69B5 /* policy.html in Resources */,
+				A55C08912F08020D008D57DE /* icon.icon in Resources */,
 			);
 		};
 		A5C6DBFE25796A93009DE750 /* Resources */ = {
@@ -1302,9 +1305,6 @@
 			);
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A533D82225AA11F40046B7C8 /* Sources */ = {
@@ -1570,18 +1570,6 @@
 			targetProxy = A5E6D75B25A5BB6C00EEA7DD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		A57FDCAF26DB99B600954ED7 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A57FDCAE26DB99B600954ED7 /* en */,
-				A57FDCB126DB99B800954ED7 /* uk */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A533D83325AA11F40046B7C8 /* Debug configuration for PBXNativeTarget "XPCMail" */ = {
