@@ -148,7 +148,7 @@ final class AppSettings: AppSettingsProtocol {
 #endif
     
     /// Debug flag to check image capturing functionality.
-    static let isImageCaptureDebug: Bool = true
+    static let isImageCaptureDebug: Bool = false
     
     /// The default count for successful launches.
     static let firstLaunchSuccessCount = 15
