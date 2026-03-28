@@ -250,7 +250,6 @@
 			script = (
 				"sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`",
 				"",
-				"",
 			);
 		};
 /* End PBXBuildRule section */
