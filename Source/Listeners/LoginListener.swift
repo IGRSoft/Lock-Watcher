@@ -57,7 +57,7 @@ final class LoginListener: BaseListenerProtocol {
     /// Starts monitoring the login state.
     /// - Returns: An AsyncStream that emits events when login is detected.
     func start() -> AsyncStream<ListenerEvent> {
-        logger.debug("started")
+        logger.debug("LoginListener Started")
 
         return AsyncStream { continuation in
             self.continuation = continuation
@@ -77,7 +77,7 @@ final class LoginListener: BaseListenerProtocol {
 
     /// Stops monitoring login state and clears all active subscriptions.
     func stop() {
-        logger.debug("stopped")
+        logger.debug("LoginListener Stopped")
         continuation?.finish()
         cleanup()
     }

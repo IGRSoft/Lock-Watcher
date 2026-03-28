@@ -5,27 +5,23 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import Observation
 import SwiftUI
 
 /// A view model designed to manage the data and behaviors for the information section.
-///
-/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
+@Observable
 @MainActor
-final class InfoViewModel: ObservableObject {
+final class InfoViewModel {
     /// The thief manager responsible for handling thief-related actions and data.
     let thiefManager: ThiefManagerProtocol
-
-    /// A binding indicating whether the info section should be extended.
-    @Binding var isInfoExtended: Bool
 
     /// Initializes a new `InfoViewModel`.
     ///
     /// - Parameters:
     ///   - thiefManager: The thief manager for this view model.
     ///   - isInfoExtended: A binding to control whether the info is extended.
-    init(thiefManager: ThiefManagerProtocol, isInfoExtended: Binding<Bool>) {
+    init(thiefManager: ThiefManagerProtocol) {
         self.thiefManager = thiefManager
-        _isInfoExtended = isInfoExtended
     }
 
     /// Provides the title for the debug section.
@@ -39,6 +35,17 @@ final class InfoViewModel: ObservableObject {
         Task {
             _ = await thiefManager.detectedTrigger()
         }
+    }
+
+    /// Provides the title for the clean button.
+    @ViewBuilder
+    func cleanTitle() -> Text {
+        Text("Clean")
+    }
+
+    /// Cleans all data: resets database and app settings to defaults.
+    func cleanAll() {
+        thiefManager.cleanAll()
     }
 
     /// Provides the title for the open settings button.
@@ -64,7 +71,7 @@ final class InfoViewModel: ObservableObject {
     }
     
     /// The text for a link in the view.
-    let linkText: String = "© IGR Software 2008 - 2025"
+    let linkText: String = "© IGR Software 2008 - 2026"
     
     /// The URL corresponding to the link text.
     let linkUrl: URL = .init(string: "https://igrsoft.com")!

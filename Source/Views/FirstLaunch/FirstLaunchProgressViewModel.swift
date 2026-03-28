@@ -5,13 +5,13 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import Observation
 import SwiftUI
 
 /// A view model responsible for managing the progression of animation states during the first launch of the app.
-///
-/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
+@Observable
 @MainActor
-final class FirstLaunchProgressViewModel: ObservableObject {
+final class FirstLaunchProgressViewModel {
     /// Enumeration of the positions for the animation.
     ///
     /// Each case represents a different stage in the animation and is associated with a sun icon from SF Symbols.
@@ -20,19 +20,19 @@ final class FirstLaunchProgressViewModel: ObservableObject {
         case state1 = "sun.min.fill"
         case state2 = "sun.max"
         case state3 = "sun.max.fill"
-        
+
         /// An array of all available positions for the animation.
         static let allValues = [state0, state1, state2, state3]
     }
-    
+
     /// Private integer representing the index of the current animation position.
-    @Published private var pos: Int = .zero
-    
+    private var pos: Int = .zero
+
     /// The current animation position from the `Positions` enum.
-    @Published var position: Positions = .allValues[0]
-    
+    var position: Positions = .allValues[0]
+
     /// The frame size for the associated view, used to layout subviews appropriately.
-    @State var frameSize: CGSize
+    var frameSize: CGSize
     
     /// Initializes a new instance of the view model with the given frame size.
     /// - Parameter frameSize: The size of the frame in which the animations are displayed.

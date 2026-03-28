@@ -82,7 +82,7 @@ final class PowerListener: BaseListenerProtocol {
     /// Starts monitoring power mode changes.
     /// - Returns: An AsyncStream that emits events when power mode changes to battery.
     func start() -> AsyncStream<ListenerEvent> {
-        logger.debug("started")
+        logger.debug("PowerListener Started")
 
         return AsyncStream { continuation in
             self.continuation = continuation
@@ -105,7 +105,7 @@ final class PowerListener: BaseListenerProtocol {
 
     /// Stops the listener from monitoring power mode changes.
     func stop() {
-        logger.debug("stopped")
+        logger.debug("PowerListener Stopped")
         continuation?.finish()
         cleanup()
     }

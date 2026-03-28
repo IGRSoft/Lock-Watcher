@@ -13,6 +13,7 @@ import Foundation
 protocol DatabaseManagerProtocol: ObservableObject {
     func send(_ thiefDto: ThiefDto) -> DatabaseDtoList
     func remove(_ dto: DatabaseDto) -> DatabaseDtoList
+    func cleanAll()
     var latestImages: [DatabaseDto] { get }
     var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { get }
 }
@@ -85,23 +86,36 @@ final class DatabaseManager: DatabaseManagerProtocol {
     /// Removes a specific incident from the storage and updates the `latestImages`.
     func remove(_ dto: DatabaseDto) -> DatabaseDtoList {
         let images = readImages()
-        
+
         // Remove the specific incident based on the date
         images.dtos.removeAll { $0.date == dto.date }
-        
+
         // Save the updated data to the storage
         do {
             try storage?.save(object: images, forKey: kImagesKey)
         } catch {
             print(error)
         }
-        
+
         // Update the published images
         latestImages = images.dtos
-        
+
         return images
     }
-    
+
+    /// Removes all incidents from the storage and updates the `latestImages`.
+    func cleanAll() {
+        let emptyList = DatabaseDtoList(dtos: [])
+
+        do {
+            try storage?.save(object: emptyList, forKey: kImagesKey)
+        } catch {
+            print(error)
+        }
+
+        latestImages = []
+    }
+
     // MARK: - private
     
     /// Fetches and returns the images from the storage.
@@ -125,12 +139,14 @@ final class DatabaseManagerPreview: DatabaseManagerProtocol {
     func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
         .empty
     }
-    
+
     func remove(_ dto: DatabaseDto) -> DatabaseDtoList {
         .empty
     }
-    
+
+    func cleanAll() {}
+
     @Published private(set) var latestImages: [DatabaseDto] = .init()
-    
+
     var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { $latestImages }
 }

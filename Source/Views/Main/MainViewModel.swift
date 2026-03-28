@@ -5,46 +5,46 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import Observation
 import SwiftUI
 
 /// A view model for the main screen, handling business logic and data retrieval for its corresponding view.
-///
-/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
-/// Uses `@preconcurrency` for ObservableObject to avoid Swift 6 concurrency warnings.
-final class MainViewModel: ObservableObject, DomainViewConstantProtocol {
+@Observable
+@MainActor
+final class MainViewModel: DomainViewConstantProtocol {
     // MARK: - DomainViewConstantProtocol
-    
+
     /// Configuration settings specific to the main view.
     var viewSettings: MainDomain = .init()
-    
+
     /// A typealias for easier reference.
     typealias DomainViewConstant = MainDomain
-    
+
     // MARK: - Types
-    
+
     /// A typealias to represent a callback block which is triggered based on some event.
     typealias SettingsTriggerWatchBlock = Commons.TriggerClosure
-    
+
     // MARK: - Dependency injection
-    
+
     /// The manager responsible for operations related to potential security threats.
-    @Published var thiefManager: ThiefManagerProtocol
-    
+    var thiefManager: ThiefManagerProtocol
+
     /// The manager responsible for database operations.
-    @Published var databaseManager: any DatabaseManagerProtocol
-    
+    var databaseManager: any DatabaseManagerProtocol
+
     // MARK: - Variables
-    
+
     /// The view model responsible for displaying the last detected thief information.
-    @Published var lastThiefDetectionViewModel: LastThiefDetectionViewModel
-    
-    /// A boolean that denotes if additional information should be displayed on the main screen.
-    @Published var isInfoExtended: Bool = true
+    let lastThiefDetectionViewModel: LastThiefDetectionViewModel
+    let infoViewModel: InfoViewModel
     
     /// A boolean that represents whether the required access permissions are granted or not.
-    @Published var isAccessGranted = true
-    
+    var isAccessGranted = true
+
     /// A callback block that is invoked when the required access permissions are granted.
+    /// Ignored by observation as it's a callback infrastructure.
+    @ObservationIgnored
     var accessGrantedBlock: Commons.EmptyClosure?
     
     // MARK: - Initializer
@@ -56,8 +56,8 @@ final class MainViewModel: ObservableObject, DomainViewConstantProtocol {
     init(thiefManager: ThiefManagerProtocol, isInfoExtended: Bool = true) {
         self.thiefManager = thiefManager
         databaseManager = thiefManager.databaseManager
-        self.isInfoExtended = isInfoExtended
-        lastThiefDetectionViewModel = LastThiefDetectionViewModel(databaseManager: thiefManager.databaseManager)
+        lastThiefDetectionViewModel = .init(databaseManager: thiefManager.databaseManager)
+        infoViewModel = .init(thiefManager: thiefManager)
     }
 }
 

@@ -11,7 +11,7 @@ import SwiftUI
 
 /// Represents UI settings to manage and store the state of user interface elements.
 ///
-struct UISettings: Codable {
+struct UISettings: Codable, Equatable {
     /// Determines if the security information section is expanded.
     var isSecurityInfoExpand: Bool = true
     
@@ -27,7 +27,7 @@ struct UISettings: Codable {
 
 /// Represents the options/settings related to the application's behavior.
 ///
-struct OptionsSettings: Codable {
+struct OptionsSettings: Codable, Equatable {
     /// Indicates whether the application is being launched for the first time.
     var isFirstLaunch: Bool = true
     
@@ -52,9 +52,9 @@ struct OptionsSettings: Codable {
     /// Flag to indicate if the application settings/data is protected.
     var isProtected: Bool = false
     var authSettings: AuthSettings = .init()
-    }
+}
 
-struct AuthSettings: Equatable, Codable {
+struct AuthSettings: Codable, Equatable {
     var biometrics = false
     var watch = false
     var devicePassword = false
@@ -66,11 +66,11 @@ struct AuthSettings: Equatable, Codable {
     static var empty: Self {
         .init()
     }
-    }
+}
 
 /// Represents the triggers for capturing snapshots based on various events.
 ///
-struct TriggerSettings: Codable {
+struct TriggerSettings: Codable, Equatable {
     /// Capture a snapshot when the device wakes up.
     var isUseSnapshotOnWakeUp: Bool = true
     
@@ -89,7 +89,7 @@ struct TriggerSettings: Codable {
 
 /// Represents settings related to synchronization and storage of snapshots.
 ///
-struct SyncSettings: Codable {
+struct SyncSettings: Codable, Equatable {
     /// Determines if snapshots should be saved to disk.
     var isSaveSnapshotToDisk: Bool = false
     
@@ -134,6 +134,9 @@ protocol AppSettingsProtocol {
     
     /// Settings to manage and store the state of user interface elements.
     var ui: UISettings { get set }
+    
+    /// Resets all settings to their default values.
+    func resetToDefaults()
 }
 
 /// Class responsible for managing all settings of the application and storing them in UserDefaults.
@@ -165,6 +168,14 @@ final class AppSettings: AppSettingsProtocol {
     /// UI settings to remember the state of user interface elements.
     @UserDefault("UISettings", defaultValue: UISettings())
     var ui: UISettings
+    
+    /// Resets all settings to their default values.
+    func resetToDefaults() {
+        options = OptionsSettings()
+        triggers = TriggerSettings()
+        sync = SyncSettings()
+        ui = UISettings()
+    }
 }
 
 /// class for Preview
@@ -183,4 +194,11 @@ final class AppSettingsPreview: AppSettingsProtocol {
     var sync: SyncSettings = .init()
     
     var ui: UISettings = .init()
+    
+    func resetToDefaults() {
+        options = OptionsSettings()
+        triggers = TriggerSettings()
+        sync = SyncSettings()
+        ui = UISettings()
+    }
 }

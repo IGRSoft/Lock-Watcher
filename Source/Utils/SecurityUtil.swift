@@ -10,7 +10,7 @@ import Foundation
 import KeychainAccess
 
 /// `SecurityUtilProtocol` provides an interface for security-related utilities.
-protocol SecurityUtilProtocol {
+protocol SecurityUtilProtocol: Sendable {
     /// Save the hashed version of the password to the keychain.
     func save(password: String) async
     
@@ -22,7 +22,7 @@ protocol SecurityUtilProtocol {
 }
 
 /// `SecurityUtil` provides utilities for handling password-based functionalities, such as saving, validation, and checking existence in the keychain.
-public final class SecurityUtil: SecurityUtilProtocol {
+public final class SecurityUtil: SecurityUtilProtocol, @unchecked Sendable {
     /// id to construct keychain
     private let keychainId: String
     

@@ -1,7 +1,7 @@
 //
 //  TriggerManagerTest.swift
 //
-//  Created on 04.12.2025.
+//  Created on 01.01.2026.
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
@@ -188,6 +188,13 @@ final class MockAppSettings: AppSettingsProtocol {
         self.triggers = triggers
         self.sync = sync
         self.ui = ui
+    }
+
+    func resetToDefaults() {
+        options = OptionsSettings()
+        triggers = TriggerSettings()
+        sync = SyncSettings()
+        ui = UISettings()
     }
 
     static func withAllTriggersEnabled() -> MockAppSettings {

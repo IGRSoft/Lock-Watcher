@@ -84,7 +84,7 @@ final class WrongPasswordListener: NSObject, BaseListenerProtocol {
     /// Starts the listener to monitor unauthorized login attempts.
     /// - Returns: An AsyncStream that emits events when wrong password is detected.
     func start() -> AsyncStream<ListenerEvent> {
-        logger.debug("started")
+        logger.debug("WrongPasswordListener Started")
 
         return AsyncStream { continuation in
             self.continuation = continuation
@@ -107,7 +107,7 @@ final class WrongPasswordListener: NSObject, BaseListenerProtocol {
 
     /// Stops the listener from monitoring unauthorized login attempts.
     func stop() {
-        logger.debug("stopped")
+        logger.debug("WrongPasswordListener Stopped")
         continuation?.finish()
         cleanup()
     }

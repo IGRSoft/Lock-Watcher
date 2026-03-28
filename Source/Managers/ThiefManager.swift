@@ -32,6 +32,9 @@ protocol ThiefManagerProtocol: Sendable {
     func completeDropboxAuthWith(url: URL) async -> String
 
     var dropboxUserNameUpdates: AsyncStream<String> { get }
+
+    /// Cleans all data: resets database and app settings to defaults.
+    func cleanAll()
 }
 
 /// The main class responsible for managing and responding to various triggers indicating potential unauthorized access.
@@ -222,7 +225,14 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             NSWorkspace.shared.open(filePath)
         }
     }
-    
+
+    /// Cleans all data: resets database and app settings to defaults.
+    func cleanAll() {
+        databaseManager.cleanAll()
+        settings.resetToDefaults()
+        restartWatching()
+    }
+
     // MARK: - private
     
     /// Starts watching for triggers.
@@ -307,6 +317,8 @@ final class ThiefManagerPreview: ThiefManagerProtocol {
     func detectedTrigger() async -> Bool { true }
 
     func restartWatching() {}
+
+    func cleanAll() {}
 
     var databaseManager: any DatabaseManagerProtocol = DatabaseManager(settings: AppSettingsPreview())
 }

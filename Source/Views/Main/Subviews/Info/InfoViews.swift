@@ -10,15 +10,12 @@ import SwiftUI
 /// A SwiftUI view that displays informational controls and links for the application.
 struct InfoView: View {
     /// The view model which provides data and functions for the `InfoView`.
-    @ObservedObject private var viewModel: InfoViewModel
-
-    /// Initializes a new `InfoView` with the given view model.
-    ///
-    /// - Parameter viewModel: The view model associated with this view.
-    init(viewModel: InfoViewModel) {
-        _viewModel = ObservedObject(wrappedValue: viewModel)
-    }
-
+    @Environment(InfoViewModel.self) var viewModel: InfoViewModel
+    
+    /// A binding indicating whether the info section should be extended.
+    /// Stored as a Binding reference to maintain two-way data flow with parent.
+    @State var isInfoExtended = true
+    
     var body: some View {
         let _ = Self.logViewChanges()
         // Main content for the `InfoView`.
@@ -28,24 +25,22 @@ struct InfoView: View {
                 if AppSettings.isImageCaptureDebug {
                     Button(action: viewModel.debugTrigger, label: viewModel.debugTitle)
                         .accessibilityIdentifier(AccessibilityID.Info.debugTriggerButton)
+
+                    // Clean button to reset database and app settings (debug only).
+                    Button(action: viewModel.cleanAll, label: viewModel.cleanTitle)
+                        .accessibilityIdentifier(AccessibilityID.Info.cleanButton)
                 }
 
                 // Button to open the application's settings.
-                if #available(macOS 14.0, *) {
-                    SettingsLink(label: viewModel.openSettingsTitle)
-                        .accessibilityIdentifier(AccessibilityID.Info.openSettingsButton)
-                        .accessibilityLabel(AccessibilityLabel.Info.openSettings)
-                } else {
-                    Button(action: viewModel.openSettings, label: viewModel.openSettingsTitle)
-                        .accessibilityIdentifier(AccessibilityID.Info.openSettingsButton)
-                        .accessibilityLabel(AccessibilityLabel.Info.openSettings)
-                }
-
+                SettingsLink(label: viewModel.openSettingsTitle)
+                    .accessibilityIdentifier(AccessibilityID.Info.openSettingsButton)
+                    .accessibilityLabel(AccessibilityLabel.Info.openSettings)
+                
                 // Button to quit the application.
                 Button(action: viewModel.quitApp, label: viewModel.quitAppTitle)
                     .accessibilityIdentifier(AccessibilityID.Info.quitButton)
                     .accessibilityLabel(AccessibilityLabel.Info.quitApp)
-
+                
                 // Link to the IGR Software website.
                 Link(viewModel.linkText, destination: viewModel.linkUrl)
                     .frame(maxWidth: .infinity)
@@ -53,18 +48,16 @@ struct InfoView: View {
                     .accessibilityLabel(AccessibilityLabel.Info.visitWebsite)
             }
             // Extends the view's content based on the `isInfoExtended` property from the view model.
-            .extended($viewModel.isInfoExtended, font: DesignSystem.Typography.title)
+            .extended($isInfoExtended, font: DesignSystem.Typography.title)
         }
         .accessibilityIdentifier(AccessibilityID.Info.container)
     }
 }
 
-struct InfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Preview with `isInfoExtended` set to false.
-        InfoView(viewModel: InfoViewModel(thiefManager: ThiefManagerPreview(), isInfoExtended: .constant(false)))
-        
-        // Preview with `isInfoExtended` set to true.
-        InfoView(viewModel: InfoViewModel(thiefManager: ThiefManagerPreview(), isInfoExtended: .constant(true)))
-    }
+#Preview("Info Collapsed") {
+    InfoView(isInfoExtended: false).environment(InfoViewModel(thiefManager: ThiefManagerPreview()))
+}
+
+#Preview("Info Extended") {
+    InfoView(isInfoExtended: true).environment(InfoViewModel(thiefManager: ThiefManagerPreview()))
 }

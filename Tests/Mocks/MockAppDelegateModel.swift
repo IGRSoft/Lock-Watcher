@@ -10,14 +10,14 @@ import Foundation
 
 /// Mock app delegate model for unit tests.
 final class MockAppDelegateModel: AppDelegateModelProtocol {
-    var invokedSettingsViewGetter = false
-    var invokedSettingsViewGetterCount = 0
-    var stubbedSettingsView: SettingsView!
+    var invokedSettingsViewModelGetter = false
+    var invokedSettingsViewModelGetterCount = 0
+    var stubbedSettingsViewModel: SettingsViewModel!
 
-    var settingsView: SettingsView {
-        invokedSettingsViewGetter = true
-        invokedSettingsViewGetterCount += 1
-        return stubbedSettingsView
+    var settingsViewModel: SettingsViewModel {
+        invokedSettingsViewModelGetter = true
+        invokedSettingsViewModelGetterCount += 1
+        return stubbedSettingsViewModel
     }
 
     var invokedSetup = false

@@ -29,22 +29,29 @@ extension View {
         // Create a new window with the hosting controller as its content.
         let controller = NSHostingController(rootView: self)
         let window = NSWindow(contentViewController: controller)
-        
+
         // Define the window's style, making it closable and titled.
         window.styleMask = [.closable, .titled]
-        
+
         // Set the hosting controller as the window's content view controller.
         window.contentViewController = controller
-        
+
         // Set the window's title.
         window.title = title
-        
+
         // Ensure the window's resources are released when it's closed.
         window.isReleasedWhenClosed = true
-        
+
+        // Force layout to calculate SwiftUI content size before centering.
+        controller.view.layoutSubtreeIfNeeded()
+        window.setContentSize(controller.view.fittingSize)
+
+        // Center the window on screen.
+        window.center()
+
         // Bring the window to the front and activate it.
         window.makeKeyAndOrderFront(sender)
-        
+
         return window
     }
 }

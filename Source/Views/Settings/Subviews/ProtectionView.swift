@@ -74,13 +74,10 @@ struct ProtectionView: View {
     }
 }
 
-/// A preview provider for the `ProtectionView`, useful for visualizing the component in design tools and SwiftUI previews.
-struct ProtectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Preview with protection enabled.
-        ProtectionView(isProtectionEnable: .constant(true), authSettings: .constant(.biometricsOrWatch), securityUtil: SecurityUtil.preview)
-        
-        // Preview with protection disabled.
-        ProtectionView(isProtectionEnable: .constant(false), authSettings: .constant(.biometricsOrWatch), securityUtil: SecurityUtil.preview)
-    }
+#Preview("Protection Enabled") {
+    ProtectionView(isProtectionEnable: .constant(true), authSettings: .constant(.biometricsOrWatch), securityUtil: SecurityUtil.preview)
+}
+
+#Preview("Protection Disabled") {
+    ProtectionView(isProtectionEnable: .constant(false), authSettings: .constant(.biometricsOrWatch), securityUtil: SecurityUtil.preview)
 }

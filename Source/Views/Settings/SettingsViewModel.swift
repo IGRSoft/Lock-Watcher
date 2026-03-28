@@ -6,13 +6,13 @@
 //
 
 import Combine
+import Observation
 import SwiftUI
 
 /// ViewModel for handling the settings and configuration of the app.
-///
-/// `@MainActor` isolation ensures UI state is always accessed from the main thread.
-/// Uses `@preconcurrency` for ObservableObject to avoid Swift 6 concurrency warnings.
-final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConstantProtocol {
+@Observable
+@MainActor
+final class SettingsViewModel: DomainViewConstantProtocol {
     // MARK: - DomainViewConstantProtocol
 
     /// Represents the constants related to the view settings.
@@ -29,6 +29,7 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
     // MARK: - Dependency injection
 
     /// A manager responsible for handling thief related functionalities.
+    @ObservationIgnored
     private var thiefManager: ThiefManagerProtocol
 
     /// Represents the app's settings.
@@ -41,9 +42,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
 
     /// Indicates if access is granted to some resources.
     var isAccessGranted = true
-
-    /// Notifies views to refresh whenever underlying data changes.
-    let objectWillChange = PassthroughSubject<Void, Never>()
     
     // Following bindings allow the views to read and modify the underlying settings' values.
     
@@ -55,7 +53,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.ui.isSecurityInfoExpand
         }, set: {
             self.settings.ui.isSecurityInfoExpand = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -65,7 +62,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.options.isProtected
         }, set: {
             self.settings.options.isProtected = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -76,7 +72,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             },
             set: { [self] in
                 settings.options.authSettings = $0
-                objectWillChange.send()
             }
         )
     }
@@ -87,7 +82,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.ui.isSnapshotInfoExpand
         }, set: {
             self.settings.ui.isSnapshotInfoExpand = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -99,7 +93,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.triggers.isUseSnapshotOnWakeUp
         }, set: {
             self.settings.triggers.isUseSnapshotOnWakeUp = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -108,7 +101,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.triggers.isUseSnapshotOnLogin
         }, set: {
             self.settings.triggers.isUseSnapshotOnLogin = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -117,7 +109,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.triggers.isUseSnapshotOnWrongPassword
         }, set: {
             self.settings.triggers.isUseSnapshotOnWrongPassword = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -126,7 +117,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.triggers.isUseSnapshotOnSwitchToBatteryPower
         }, set: {
             self.settings.triggers.isUseSnapshotOnSwitchToBatteryPower = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -135,7 +125,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.triggers.isUseSnapshotOnUSBMount
         }, set: {
             self.settings.triggers.isUseSnapshotOnUSBMount = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -147,7 +136,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.ui.isOptionsInfoExpand
         }, set: {
             self.settings.ui.isOptionsInfoExpand = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -157,7 +145,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.options.keepLastActionsCount
         }, set: {
             self.settings.options.keepLastActionsCount = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -167,7 +154,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.options.addLocationToSnapshot
         }, set: {
             self.settings.options.addLocationToSnapshot = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -176,7 +162,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.options.addIPAddressToSnapshot
         }, set: {
             self.settings.options.addIPAddressToSnapshot = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -185,7 +170,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.options.addTraceRouteToSnapshot
         }, set: {
             self.settings.options.addTraceRouteToSnapshot = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -195,7 +179,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.options.traceRouteServer
         }, set: {
             self.settings.options.traceRouteServer = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -207,7 +190,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.sync.isSaveSnapshotToDisk
         }, set: {
             self.settings.sync.isSaveSnapshotToDisk = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -217,7 +199,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.ui.isSyncInfoExpand
         }, set: {
             self.settings.ui.isSyncInfoExpand = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -227,7 +208,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.sync.isSendNotificationToMail
         }, set: {
             self.settings.sync.isSendNotificationToMail = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -236,7 +216,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.sync.mailRecipient
         }, set: {
             self.settings.sync.mailRecipient = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -246,7 +225,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.sync.isICloudSyncEnable
         }, set: {
             self.settings.sync.isICloudSyncEnable = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -255,7 +233,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.sync.isDropboxEnable
         }, set: {
             self.settings.sync.isDropboxEnable = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -264,7 +241,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.sync.dropboxName
         }, set: {
             self.settings.sync.dropboxName = $0
-            self.objectWillChange.send()
         })
     }
     
@@ -273,11 +249,12 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             self.settings.sync.isUseSnapshotLocalNotification
         }, set: {
             self.settings.sync.isUseSnapshotLocalNotification = $0
-            self.objectWillChange.send()
         })
     }
     
     /// Closure to be executed when access is granted.
+    /// Ignored by observation as it's a callback infrastructure.
+    @ObservationIgnored
     var accessGrantedBlock: Commons.EmptyClosure?
     
     // MARK: - initialiser
@@ -307,7 +284,6 @@ final class SettingsViewModel: @preconcurrency ObservableObject, DomainViewConst
             for await name in thiefManager.dropboxUserNameUpdates {
                 // Already on MainActor, update directly
                 settings.sync.dropboxName = name
-                objectWillChange.send()
             }
         }
     }

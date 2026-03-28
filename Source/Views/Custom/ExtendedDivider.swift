@@ -18,9 +18,12 @@ struct ExtendedDividerModifier: ViewModifier {
 
     /// Modifies the provided content by adding an extended divider to it.
     func body(content: Content) -> some View {
-        ExtendedDivider(isExtended: isExtended, titleKey: titleKey, font: font, lineWidth: lineWidth, lineColor: lineColor)
-        if isExtended.wrappedValue {
-            content
+        Group {
+            ExtendedDivider(isExtended: isExtended, titleKey: titleKey, font: font, lineWidth: lineWidth, lineColor: lineColor)
+            if isExtended.wrappedValue {
+                content
+                    .clipped()
+            }
         }
     }
 }
@@ -36,20 +39,19 @@ extension View {
 struct ExtendedDivider: View {
     /// Represents a single line (either horizontal or vertical) used within the extended divider.
     private struct ExtendedDividerLine: View {
-        @State var width: CGFloat = DesignSystem.Layout.borderWidth
-        @State var color: Color = .gray
-
-        var direction: Axis.Set = .horizontal // Direction of the line
+        let width: CGFloat
+        let color: Color
+        var direction: Axis.Set = .horizontal
 
         var body: some View {
             Rectangle()
                 .fill(color)
                 .applyIf(direction == .vertical) {
                     $0.frame(width: width)
-                        .edgesIgnoringSafeArea(.vertical)
+                        .ignoresSafeArea(.all, edges: .vertical)
                 } else: {
                     $0.frame(height: width)
-                        .edgesIgnoringSafeArea(.horizontal)
+                        .ignoresSafeArea(.all, edges: .horizontal)
                 }
         }
     }
@@ -61,20 +63,33 @@ struct ExtendedDivider: View {
     @State var lineWidth: CGFloat = DesignSystem.Layout.borderWidth // Width of the divider line.
     @State var lineColor = DesignSystem.Colors.divider // Color of the divider line.
 
+    @State private var chevronRotation: Double = 0
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private var animation: Animation? {
+        reduceMotion ? nil : .easeInOut(duration: isExtended.wrappedValue ? 0.2 : 0.01)
+    }
+
+    private func toggle() {
+        withAnimation(animation) {
+            chevronRotation = isExtended.wrappedValue ? 180 : 0
+            isExtended.wrappedValue.toggle()
+        }
+    }
+
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             ExtendedDividerLine(width: lineWidth, color: lineColor)
-            Button(action: {
-                isExtended.wrappedValue.toggle()
-            }) {
+            Button(action: toggle) {
                 HStack {
                     if !titleKey.isEmpty {
                         Text(NSLocalizedString(titleKey, comment: ""))
                             .font(font)
                     }
-                    Image(systemName: isExtended.wrappedValue ? "chevron.compact.down" : "chevron.compact.up")
+                    Image(systemName: "chevron.compact.down")
                         .font(font)
                         .foregroundColor(isExtended.wrappedValue ? DesignSystem.Colors.extendedMenu : DesignSystem.Colors.defaultMenu)
+                        .rotationEffect(.degrees(chevronRotation))
                 }
             }
             .buttonStyle(BorderlessButtonStyle())
@@ -86,20 +101,20 @@ struct ExtendedDivider: View {
             )
             ExtendedDividerLine(width: lineWidth, color: lineColor)
         }
-        .onTapGesture {
-            isExtended.wrappedValue.toggle()
-        }
+        .onTapGesture(perform: toggle)
         .padding(DesignSystem.Spacing.xs)
         .accessibilityIdentifier(AccessibilityID.ExtendedDivider.container)
         .accessibilityElement(children: .combine)
+        .onAppear {
+            chevronRotation = isExtended.wrappedValue ? 0 : 180
+        }
     }
 }
 
-/// Preview provider for visual representation of the `ExtendedDivider` view.
-struct ExtendedDivider_Previews: PreviewProvider {
-    static var previews: some View {
-        ExtendedDivider(isExtended: .constant(true))
-        
-        ExtendedDivider(isExtended: .constant(false))
-    }
+#Preview("Extended") {
+    ExtendedDivider(isExtended: .constant(true))
+}
+
+#Preview("Collapsed") {
+    ExtendedDivider(isExtended: .constant(false))
 }

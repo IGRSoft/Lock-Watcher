@@ -42,7 +42,7 @@ final class WakeUpListener: NSObject, BaseListenerProtocol {
     /// Starts monitoring for screen wake up events.
     /// - Returns: An AsyncStream that emits events when screen wake up is detected.
     func start() -> AsyncStream<ListenerEvent> {
-        logger.debug("started")
+        logger.debug("WakeUpListener started")
 
         return AsyncStream { continuation in
             self.continuation = continuation
@@ -65,7 +65,7 @@ final class WakeUpListener: NSObject, BaseListenerProtocol {
 
     /// Stops the listener from monitoring screen wake up events.
     func stop() {
-        logger.debug("stopped")
+        logger.debug("WakeUpListener Stopped")
         continuation?.finish()
         cleanup()
     }

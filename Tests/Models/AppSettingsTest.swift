@@ -1,7 +1,7 @@
 //
 //  AppSettingsTest.swift
 //
-//  Created on 04.12.2025.
+//  Created on 01.01.2026.
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 

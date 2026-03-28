@@ -22,12 +22,7 @@ extension Date {
         formatter.timeStyle = .short
         
         formatter.locale = .init(identifier: "en")
-        
-        if #available(macOS 13, *) {
-            formatter.timeZone = .gmt
-        } else {
-            formatter.timeZone = TimeZone(abbreviation: "GMT")
-        }
+        formatter.timeZone = .gmt
         
         return formatter
     }()

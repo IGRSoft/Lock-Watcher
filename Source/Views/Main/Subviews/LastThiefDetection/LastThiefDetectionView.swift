@@ -9,14 +9,9 @@ import SwiftUI
 
 /// A SwiftUI View that displays the last detected thief's image and a list of related images.
 struct LastThiefDetectionView: View {
-    @StateObject private var viewModel: LastThiefDetectionViewModel
-
-    /// Initializes the view with a given view model.
-    ///
-    /// - Parameter viewModel: The view model to associate with this view.
-    init(viewModel: LastThiefDetectionViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    /// The view model that provides data and behavior.
+    /// Uses `@State` for @Observable view models that are owned by this view.
+    @Environment(LastThiefDetectionViewModel.self) var viewModel
 
     var body: some View {
         let _ = Self.logViewChanges()
@@ -148,8 +143,7 @@ struct LastThiefDetectionView: View {
     }
 }
 
-struct LastThiefDetectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        LastThiefDetectionView(viewModel: LastThiefDetectionViewModel(databaseManager: DatabaseManagerPreview()))
-    }
+#Preview("Last Thief Detection") {
+    LastThiefDetectionView()
+        .environment(LastThiefDetectionViewModel(databaseManager: DatabaseManagerPreview()))
 }

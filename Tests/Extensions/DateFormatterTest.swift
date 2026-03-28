@@ -14,11 +14,7 @@ final class DateExtensionTests: XCTestCase {
         XCTAssertEqual(Date.defaultFormat.dateStyle, .short)
         XCTAssertEqual(Date.defaultFormat.timeStyle, .short)
         XCTAssertEqual(Date.defaultFormat.locale, .init(identifier: "en"))
-        if #available(macOS 13, *) {
-            XCTAssertEqual(Date.defaultFormat.timeZone, .gmt)
-        } else {
-            XCTAssertEqual(Date.defaultFormat.timeZone, TimeZone(abbreviation: "GMT"))
-        }
+        XCTAssertEqual(Date.defaultFormat.timeZone, .gmt)
     }
 
     func testDefaultFormatFormatting() {
@@ -30,11 +26,7 @@ final class DateExtensionTests: XCTestCase {
         components.day = 1
         components.hour = 12
         components.minute = 34
-        if #available(macOS 13, *) {
-            components.timeZone = .gmt
-        } else {
-            components.timeZone = TimeZone(abbreviation: "GMT")
-        }
+        components.timeZone = .gmt
         
         guard let knownDate = Calendar.current.date(from: components) else {
             XCTFail("Failed to create a known date")
