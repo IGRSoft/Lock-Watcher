@@ -250,6 +250,7 @@
 			script = (
 				"sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`",
 				"",
+				"",
 			);
 		};
 /* End PBXBuildRule section */
@@ -1219,7 +1220,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 2640;
 				ORGANIZATIONNAME = "IGR Soft";
 				TargetAttributes = {
 					A533D82525AA11F40046B7C8 = {
@@ -1697,6 +1698,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D02A4CBCA0004DE972 /* uitest-release.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 			};
 			name = "Release-non-mas";
 		};
@@ -1792,6 +1795,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63CD2A4CBCA0004DE972 /* uitest-debug.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 			};
 			name = Debug;
 		};
@@ -1799,6 +1804,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A58C63D02A4CBCA0004DE972 /* uitest-release.xcconfig */;
 			buildSettings = {
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 			};
 			name = Release;
 		};
@@ -1925,7 +1932,7 @@
 			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.1.0;
 			};
 		};
 		A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */ = {
