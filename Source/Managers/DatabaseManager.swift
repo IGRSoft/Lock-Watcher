@@ -38,7 +38,9 @@ final class DatabaseManager: DatabaseManagerProtocol {
     // MARK: - Combine
     
     /// Publisher for `latestImages` property to allow observing its changes.
-    var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { $latestImages }
+    var latestImagesPublisher: Published<[DatabaseDto]>.Publisher {
+        $latestImages
+    }
     
     // MARK: - initialiser
     
@@ -148,5 +150,7 @@ final class DatabaseManagerPreview: DatabaseManagerProtocol {
 
     @Published private(set) var latestImages: [DatabaseDto] = .init()
 
-    var latestImagesPublisher: Published<[DatabaseDto]>.Publisher { $latestImages }
+    var latestImagesPublisher: Published<[DatabaseDto]>.Publisher {
+        $latestImages
+    }
 }

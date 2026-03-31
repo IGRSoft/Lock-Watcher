@@ -614,6 +614,165 @@
         }
       }
     },
+    "SnapshotQuality" : {
+      "comment" : "Label for snapshot quality picker",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quality"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Якість"
+          }
+        }
+      }
+    },
+    "SnapshotQualityHigh" : {
+      "comment" : "High quality option (75%)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Висока"
+          }
+        }
+      }
+    },
+    "SnapshotQualityLow" : {
+      "comment" : "Low quality option (25%)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Низька"
+          }
+        }
+      }
+    },
+    "SnapshotQualityMedium" : {
+      "comment" : "Medium quality option (50%)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Середня"
+          }
+        }
+      }
+    },
+    "SnapshotQualityOriginal" : {
+      "comment" : "Original quality option (100%)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Original"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оригінал"
+          }
+        }
+      }
+    },
+    "SnapshotResolution" : {
+      "comment" : "Label for snapshot resolution picker",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resolution"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Роздільність"
+          }
+        }
+      }
+    },
+    "SnapshotResolutionFull" : {
+      "comment" : "Full resolution option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повна"
+          }
+        }
+      }
+    },
+    "SnapshotResolutionHalf" : {
+      "comment" : "Half resolution option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1/2"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1/2"
+          }
+        }
+      }
+    },
+    "SnapshotResolutionQuarter" : {
+      "comment" : "Quarter resolution option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1/4"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1/4"
+          }
+        }
+      }
+    },
+    "AccessibilitySnapshotQuality" : {
+      "comment" : "Snapshot JPEG quality"
+    },
+    "AccessibilitySnapshotResolution" : {
+      "comment" : "Snapshot image resolution"
+    },
     "SendToMail" : {
       "comment" : "Description was not specified",
       "localizations" : {

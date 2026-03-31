@@ -9,6 +9,49 @@ import Combine
 import Foundation
 import SwiftUI
 
+/// Defines JPEG compression quality presets for snapshot encoding.
+///
+/// Raw values represent quality percentage (25–100%).
+enum SnapshotQuality: Int, Codable, CaseIterable, Sendable {
+    case low = 25
+    case medium = 50
+    case high = 75
+    case original = 100
+
+    /// The compression factor suitable for `NSBitmapImageRep` JPEG encoding (0.0–1.0).
+    var compressionFactor: CGFloat {
+        CGFloat(rawValue) / 100.0
+    }
+}
+
+/// Defines resolution scaling presets for captured snapshots.
+///
+/// Allows users to reduce image dimensions before encoding to save storage.
+enum SnapshotResolution: String, Codable, CaseIterable, Sendable {
+    case full
+    case half
+    case quarter
+
+    /// The scale factor to apply to the original image dimensions.
+    var scaleFactor: CGFloat {
+        switch self {
+        case .full: 1.0
+        case .half: 0.5
+        case .quarter: 0.25
+        }
+    }
+}
+
+/// Groups snapshot quality and resolution preferences.
+///
+struct SnapshotSettings: Codable, Equatable {
+    /// JPEG compression quality. Default: `.high` (75%).
+    var quality: SnapshotQuality = .high
+
+    /// Image resolution scaling. Default: `.full` (no scaling).
+    var resolution: SnapshotResolution = .full
+}
+
 /// Represents UI settings to manage and store the state of user interface elements.
 ///
 struct UISettings: Codable, Equatable {
@@ -131,7 +174,10 @@ protocol AppSettingsProtocol {
     
     /// Settings related to synchronization and storage of snapshots.
     var sync: SyncSettings { get set }
-    
+
+    /// Snapshot quality and resolution settings.
+    var snapshot: SnapshotSettings { get set }
+
     /// Settings to manage and store the state of user interface elements.
     var ui: UISettings { get set }
     
@@ -164,7 +210,11 @@ final class AppSettings: AppSettingsProtocol {
     /// Settings for syncing and storing snapshots.
     @UserDefault("SyncSettings", defaultValue: SyncSettings())
     var sync: SyncSettings
-    
+
+    /// Snapshot quality and resolution settings.
+    @UserDefault("SnapshotSettings", defaultValue: SnapshotSettings())
+    var snapshot: SnapshotSettings
+
     /// UI settings to remember the state of user interface elements.
     @UserDefault("UISettings", defaultValue: UISettings())
     var ui: UISettings
@@ -174,6 +224,7 @@ final class AppSettings: AppSettingsProtocol {
         options = OptionsSettings()
         triggers = TriggerSettings()
         sync = SyncSettings()
+        snapshot = SnapshotSettings()
         ui = UISettings()
     }
 }
@@ -182,23 +233,26 @@ final class AppSettings: AppSettingsProtocol {
 ///
 final class AppSettingsPreview: AppSettingsProtocol {
     static let isMASBuild: Bool = true
-    
+
     static let isImageCaptureDebug: Bool = true
-    
+
     static let firstLaunchSuccessCount: Int = 15
-    
+
     var options: OptionsSettings = .init()
-    
+
     var triggers: TriggerSettings = .init()
-    
+
     var sync: SyncSettings = .init()
-    
+
+    var snapshot: SnapshotSettings = .init()
+
     var ui: UISettings = .init()
-    
+
     func resetToDefaults() {
         options = OptionsSettings()
         triggers = TriggerSettings()
         sync = SyncSettings()
+        snapshot = SnapshotSettings()
         ui = UISettings()
     }
 }

@@ -126,6 +126,43 @@ struct SaveSnapshotToDiskView: View {
     }
 }
 
+/// A view component that allows the user to select the JPEG compression quality for snapshots.
+struct SnapshotQualityView: View {
+    @Binding var snapshotQuality: SnapshotQuality
+
+    var body: some View {
+        Picker(selection: $snapshotQuality) {
+            Text("SnapshotQualityLow").tag(SnapshotQuality.low)
+            Text("SnapshotQualityMedium").tag(SnapshotQuality.medium)
+            Text("SnapshotQualityHigh").tag(SnapshotQuality.high)
+            Text("SnapshotQualityOriginal").tag(SnapshotQuality.original)
+        } label: {
+            Text("SnapshotQuality")
+        }
+        .pickerStyle(.segmented)
+        .accessibilityIdentifier(AccessibilityID.Settings.snapshotQualityPicker)
+        .accessibilityLabel(AccessibilityLabel.Settings.snapshotQuality)
+    }
+}
+
+/// A view component that allows the user to select the resolution scaling for snapshots.
+struct SnapshotResolutionView: View {
+    @Binding var snapshotResolution: SnapshotResolution
+
+    var body: some View {
+        Picker(selection: $snapshotResolution) {
+            Text("SnapshotResolutionFull").tag(SnapshotResolution.full)
+            Text("SnapshotResolutionHalf").tag(SnapshotResolution.half)
+            Text("SnapshotResolutionQuarter").tag(SnapshotResolution.quarter)
+        } label: {
+            Text("SnapshotResolution")
+        }
+        .pickerStyle(.segmented)
+        .accessibilityIdentifier(AccessibilityID.Settings.snapshotResolutionPicker)
+        .accessibilityLabel(AccessibilityLabel.Settings.snapshotResolution)
+    }
+}
+
 /// A view component that allows the user to toggle iCloud synchronization.
 struct ICloudSyncView: View {
     @Binding var isICloudSyncEnable: Bool
