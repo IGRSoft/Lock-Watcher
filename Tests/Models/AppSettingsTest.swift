@@ -252,6 +252,79 @@ final class SyncSettingsTests: XCTestCase {
     }
 }
 
+// MARK: - SnapshotQuality Tests
+
+final class SnapshotQualityTests: XCTestCase {
+    func testCompressionFactors() {
+        XCTAssertEqual(SnapshotQuality.low.compressionFactor, 0.25)
+        XCTAssertEqual(SnapshotQuality.medium.compressionFactor, 0.50)
+        XCTAssertEqual(SnapshotQuality.high.compressionFactor, 0.75)
+        XCTAssertEqual(SnapshotQuality.original.compressionFactor, 1.0)
+    }
+
+    func testCaseIterable() {
+        XCTAssertEqual(SnapshotQuality.allCases.count, 4)
+    }
+
+    func testCodable() throws {
+        let original = SnapshotQuality.medium
+        let data = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(SnapshotQuality.self, from: data)
+        XCTAssertEqual(decoded, original)
+    }
+}
+
+// MARK: - SnapshotResolution Tests
+
+final class SnapshotResolutionTests: XCTestCase {
+    func testScaleFactors() {
+        XCTAssertEqual(SnapshotResolution.full.scaleFactor, 1.0)
+        XCTAssertEqual(SnapshotResolution.half.scaleFactor, 0.5)
+        XCTAssertEqual(SnapshotResolution.quarter.scaleFactor, 0.25)
+    }
+
+    func testCaseIterable() {
+        XCTAssertEqual(SnapshotResolution.allCases.count, 3)
+    }
+
+    func testCodable() throws {
+        let original = SnapshotResolution.quarter
+        let data = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(SnapshotResolution.self, from: data)
+        XCTAssertEqual(decoded, original)
+    }
+}
+
+// MARK: - SnapshotSettings Tests
+
+final class SnapshotSettingsTests: XCTestCase {
+    func testDefaultValues() {
+        let settings = SnapshotSettings()
+        XCTAssertEqual(settings.quality, .high)
+        XCTAssertEqual(settings.resolution, .full)
+    }
+
+    func testCustomValues() {
+        var settings = SnapshotSettings()
+        settings.quality = .low
+        settings.resolution = .quarter
+
+        XCTAssertEqual(settings.quality, .low)
+        XCTAssertEqual(settings.resolution, .quarter)
+    }
+
+    func testCodable() throws {
+        var original = SnapshotSettings()
+        original.quality = .medium
+        original.resolution = .half
+
+        let data = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(SnapshotSettings.self, from: data)
+
+        XCTAssertEqual(decoded, original)
+    }
+}
+
 // MARK: - AppSettingsProtocol Tests
 
 final class AppSettingsProtocolTests: XCTestCase {

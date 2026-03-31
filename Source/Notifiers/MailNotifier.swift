@@ -52,11 +52,9 @@ final class MailNotifier: NotifierProtocol, @unchecked Sendable {
     /// The remote service object that allows for communication with the XPCMail service.
     /// - Note: XPC proxies are thread-safe.
     private lazy var service: XPCMailProtocol = {
-        let service = connection.remoteObjectProxyWithErrorHandler { [weak self] error in
+        connection.remoteObjectProxyWithErrorHandler { [weak self] error in
             self?.logger.error("Received error: \(error.localizedDescription)")
         } as! XPCMailProtocol
-
-        return service
     }()
 
     // MARK: - Initializer

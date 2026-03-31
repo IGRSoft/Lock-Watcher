@@ -107,7 +107,7 @@ final class AuthentificationManager: @unchecked Sendable {
     }
     
     private func localAuthPolicy(for settings: AuthSettings) -> LAPolicy? {
-        let policy: LAPolicy? = if settings.devicePassword {
+        if settings.devicePassword {
             .deviceOwnerAuthentication
         } else {
             if settings.biometrics, settings.watch {
@@ -120,7 +120,6 @@ final class AuthentificationManager: @unchecked Sendable {
                 nil
             }
         }
-        return policy
     }
     }
 

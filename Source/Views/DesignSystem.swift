@@ -256,6 +256,8 @@ enum AccessibilityID {
         static let traceRouteToggle = "settings.traceRouteToggle"
         static let traceRouteServerField = "settings.traceRouteServerField"
         static let saveToDiskToggle = "settings.saveToDiskToggle"
+        static let snapshotQualityPicker = "settings.snapshotQualityPicker"
+        static let snapshotResolutionPicker = "settings.snapshotResolutionPicker"
 
         // Sync section
         static let syncSection = "settings.syncSection"
@@ -351,6 +353,8 @@ enum AccessibilityLabel {
         static let addIPAddress = NSLocalizedString("AccessibilityAddIP", comment: "Add IP address to snapshots")
         static let addTraceRoute = NSLocalizedString("AccessibilityAddTraceRoute", comment: "Add network trace route to snapshots")
         static let saveToDisk = NSLocalizedString("AccessibilitySaveToDisk", comment: "Save snapshots to disk")
+        static let snapshotQuality = NSLocalizedString("AccessibilitySnapshotQuality", comment: "Snapshot JPEG quality")
+        static let snapshotResolution = NSLocalizedString("AccessibilitySnapshotResolution", comment: "Snapshot image resolution")
 
         static let sendEmail = NSLocalizedString("AccessibilitySendEmail", comment: "Send snapshot notifications via email")
         static let syncICloud = NSLocalizedString("AccessibilitySyncICloud", comment: "Sync snapshots to iCloud")

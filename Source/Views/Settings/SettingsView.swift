@@ -73,6 +73,9 @@ struct SettingsView: View {
                         TraceRouteToSnapshotView(isAddTraceRouteToSnapshot: viewModel.addTraceRouteToSnapshot, traceRouteServer: viewModel.traceRouteServer)
 
                         SaveSnapshotToDiskView(isSaveSnapshotToDisk: viewModel.isSaveSnapshotToDisk)
+
+                        SnapshotQualityView(snapshotQuality: viewModel.snapshotQuality)
+                        SnapshotResolutionView(snapshotResolution: viewModel.snapshotResolution)
                     }
                     .extended(viewModel.isOptionsInfoExpand, titleKey: "SettingsMenuOptions")
                     .accessibilityIdentifier(AccessibilityID.Settings.optionsSection)

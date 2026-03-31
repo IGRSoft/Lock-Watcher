@@ -8,26 +8,50 @@
 import AppKit
 
 extension NSImage {
-    /// Represents the `NSImage` as JPEG data.
-    ///
-    /// This computed property attempts to convert the `NSImage` instance into JPEG data format.
-    /// The compression factor is set to 0.9, which indicates a relatively high-quality JPEG.
+    /// Represents the `NSImage` as JPEG data using the default high quality (75%).
     ///
     /// - Returns: Data representation of the image in JPEG format. If the conversion fails, it returns an empty Data instance.
     var jpegData: Data {
-        // Convert the NSImage into TIFF representation.
+        jpegData(quality: SnapshotQuality.high.compressionFactor)
+    }
+
+    /// Converts the `NSImage` to JPEG data with the specified compression quality.
+    ///
+    /// - Parameter quality: A value between 0.0 (maximum compression) and 1.0 (lossless) controlling JPEG quality.
+    /// - Returns: Data representation of the image in JPEG format. If the conversion fails, it returns an empty Data instance.
+    func jpegData(quality: CGFloat) -> Data {
         guard let tiffData = tiffRepresentation, let bitmap = NSBitmapImageRep(data: tiffData) else {
-            // Return empty data if conversion to TIFF representation fails.
             return Data()
         }
-        
-        // Convert the TIFF representation to JPEG data with a compression factor of 0.9.
-        guard let data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: 0.9]) else {
-            // Return empty data if conversion to JPEG data fails.
+
+        guard let data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: quality]) else {
             return Data()
         }
-        
-        // Return the JPEG data.
+
         return data
+    }
+
+    /// Returns a new image scaled by the given factor.
+    ///
+    /// - Parameter scaleFactor: The factor to scale by (e.g. 0.5 for half size). Values >= 1.0 return self unchanged.
+    /// - Returns: A resized `NSImage`, or `self` if no scaling is needed.
+    func resized(by scaleFactor: CGFloat) -> NSImage {
+        guard scaleFactor < 1.0, scaleFactor > 0 else { return self }
+
+        let currentSize = size
+        let newWidth = floor(currentSize.width * scaleFactor)
+        let newHeight = floor(currentSize.height * scaleFactor)
+        let newSize = NSSize(width: newWidth, height: newHeight)
+
+        let resizedImage = NSImage(size: newSize)
+        resizedImage.lockFocus()
+        NSGraphicsContext.current?.imageInterpolation = .high
+        draw(in: NSRect(origin: .zero, size: newSize),
+             from: NSRect(origin: .zero, size: currentSize),
+             operation: .copy,
+             fraction: 1.0)
+        resizedImage.unlockFocus()
+
+        return resizedImage
     }
 }

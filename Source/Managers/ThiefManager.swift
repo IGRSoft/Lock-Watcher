@@ -180,7 +180,10 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     /// Processes a given snapshot.
     func processSnapshot(_ snapshot: NSImage, filename: String, date: Date) async {
-        guard let filePath = fileSystemUtil.store(image: snapshot, forKey: filename) else {
+        let quality = settings.snapshot.quality.compressionFactor
+        let scaledSnapshot = snapshot.resized(by: settings.snapshot.resolution.scaleFactor)
+
+        guard let filePath = fileSystemUtil.store(image: scaledSnapshot, forKey: filename, quality: quality) else {
             let msg = "wrong file path"
             logger.error(msg)
             assertionFailure(msg)
@@ -208,8 +211,9 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             coordinate: coordinate,
             ipAddress: ipAddress,
             traceRoute: traceRoute,
-            snapshot: snapshot,
+            snapshot: scaledSnapshot,
             filePath: filePath,
+            compressionFactor: quality,
             date: date
         )
 
@@ -308,13 +312,17 @@ final class ThiefManagerPreview: ThiefManagerProtocol {
         }
     }
 
-    func completeDropboxAuthWith(url: URL) async -> String { "" }
+    func completeDropboxAuthWith(url: URL) async -> String {
+        ""
+    }
 
     func showSnapshot(identifier: String) {}
 
     func setupLocationManager(enable: Bool) {}
 
-    func detectedTrigger() async -> Bool { true }
+    func detectedTrigger() async -> Bool {
+        true
+    }
 
     func restartWatching() {}
 
