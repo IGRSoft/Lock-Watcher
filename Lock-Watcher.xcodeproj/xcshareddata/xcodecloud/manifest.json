@@ -1,0 +1,9 @@
+{
+  "id" : "3b933f36-b3b3-4984-a3fc-18ced089ad0c",
+  "targets" : [
+    {
+      "id" : "D8181D06-CBE9-4327-AA36-DCCD4A542D39",
+      "name" : "Lock-Watcher"
+    }
+  ]
+}
