@@ -15,8 +15,15 @@ protocol FileSystemUtilProtocol {
     /// - Parameters:
     ///   - image: The `NSImage` to be stored.
     ///   - key: A unique identifier for the image.
+    ///   - quality: JPEG compression factor (0.0–1.0). Default is 0.75.
     /// - Returns: The URL where the image is stored, or nil if there was an error.
-    func store(image: NSImage, forKey key: String) -> URL?
+    func store(image: NSImage, forKey key: String, quality: CGFloat) -> URL?
+}
+
+extension FileSystemUtilProtocol {
+    func store(image: NSImage, forKey key: String) -> URL? {
+        store(image: image, forKey: key, quality: SnapshotQuality.high.compressionFactor)
+    }
 }
 
 /// `FileSystemUtil` provides utilities for interacting with the local file system, specifically for storing images.
@@ -46,9 +53,10 @@ public final class FileSystemUtil: FileSystemUtilProtocol {
     /// - Parameters:
     ///   - image: The `NSImage` to be stored.
     ///   - key: A unique identifier for the image. This is used to name the jpeg file.
+    ///   - quality: JPEG compression factor (0.0–1.0). Default is 0.75.
     /// - Returns: The URL where the image is stored, or nil if there was an error.
-    func store(image: NSImage, forKey key: String) -> URL? {
-        let data = image.jpegData
+    func store(image: NSImage, forKey key: String, quality: CGFloat = SnapshotQuality.high.compressionFactor) -> URL? {
+        let data = image.jpegData(quality: quality)
         
         guard !data.isEmpty else {
             logger.debug("error saving empty data for key: \(key)")

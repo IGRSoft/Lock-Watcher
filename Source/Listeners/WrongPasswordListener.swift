@@ -58,11 +58,9 @@ final class WrongPasswordListener: NSObject, BaseListenerProtocol {
 
     /// Proxy to the XPC Authentication service.
     private lazy var service: XPCAuthenticationProtocol = { [weak self] in
-        let service = self?.connection.remoteObjectProxyWithErrorHandler { error in
+        return self?.connection.remoteObjectProxyWithErrorHandler { error in
             self?.logger.error("Received error: \(error.localizedDescription)")
         } as! XPCAuthenticationProtocol
-
-        return service
     }()
 
     // MARK: - Initializer

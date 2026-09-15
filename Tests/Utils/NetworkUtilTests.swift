@@ -24,7 +24,7 @@ final class NetworkUtilTests: XCTestCase {
         super.tearDown()
     }
 
-    // Test local network interface addresses (does not require network)
+    /// Test local network interface addresses (does not require network)
     func testGetIFAddresses() {
         let ipAddress = networkUtil.getIFAddresses()
 

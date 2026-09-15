@@ -21,7 +21,7 @@ final class NSImageExtensionTests: XCTestCase {
         sampleImage = image
     }
 
-    // Check if the returned image size remains the same after adding text.
+    /// Check if the returned image size remains the same after adding text.
     func testImageSizeAfterAddingText() {
         guard let newImage = sampleImage.imageWithText(text: "Test") else {
             XCTFail("Failed to generate image with text.")
@@ -30,7 +30,7 @@ final class NSImageExtensionTests: XCTestCase {
         XCTAssertEqual(sampleImage.size, newImage.size, "Image size should remain the same after adding text.")
     }
     
-    // Ensure that the function returns the original image if the conversion fails.
+    /// Ensure that the function returns the original image if the conversion fails.
     func testImageReturnOnFailure() {
         // Intentionally use an invalid image
         let invalidImage = NSImage()

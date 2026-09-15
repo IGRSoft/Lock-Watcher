@@ -56,17 +56,21 @@ public final class ThiefDto: Equatable, Sendable {
     
     /// The file location where the image is stored.
     let filePath: URL?
-    
+
+    /// The JPEG compression factor used when encoding this snapshot (0.0–1.0).
+    let compressionFactor: CGFloat
+
     /// The date and time when the trigger action occurred.
     let date: Date
-    
-    init(triggerType: TriggerType, coordinate: CLLocationCoordinate2D? = nil, ipAddress: String? = nil, traceRoute: String? = nil, snapshot: NSImage? = nil, filePath: URL? = nil, date: Date = .init()) {
+
+    init(triggerType: TriggerType, coordinate: CLLocationCoordinate2D? = nil, ipAddress: String? = nil, traceRoute: String? = nil, snapshot: NSImage? = nil, filePath: URL? = nil, compressionFactor: CGFloat = SnapshotQuality.high.compressionFactor, date: Date = .init()) {
         self.coordinate = coordinate
         self.ipAddress = ipAddress
         self.traceRoute = traceRoute
         self.triggerType = triggerType
         self.snapshot = snapshot
         self.filePath = filePath
+        self.compressionFactor = compressionFactor
         self.date = date
     }
     

@@ -22,7 +22,7 @@ final class Lock_WatcherUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
+    func testExample() {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()

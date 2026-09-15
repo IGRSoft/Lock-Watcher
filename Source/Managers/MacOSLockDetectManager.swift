@@ -5,8 +5,6 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
-import Foundation
-
 import Combine
 import CoreGraphics
 import Foundation
@@ -49,8 +47,6 @@ final class MacOSLockDetector: MacOSLockDetectorProtocol, @unchecked Sendable {
             return false
         }
         
-        let isLocked = sessionInfo["CGSSessionScreenIsLocked"] as? Bool ?? false
-        
-        return isLocked
+        return sessionInfo["CGSSessionScreenIsLocked"] as? Bool ?? false
     }
 }

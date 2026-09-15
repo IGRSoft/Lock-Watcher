@@ -25,7 +25,6 @@ final class InfoViewModel {
     }
 
     /// Provides the title for the debug section.
-    @ViewBuilder
     func debugTitle() -> Text {
         Text("Debug")
     }
@@ -38,7 +37,6 @@ final class InfoViewModel {
     }
 
     /// Provides the title for the clean button.
-    @ViewBuilder
     func cleanTitle() -> Text {
         Text("Clean")
     }
@@ -49,7 +47,6 @@ final class InfoViewModel {
     }
 
     /// Provides the title for the open settings button.
-    @ViewBuilder
     func openSettingsTitle() -> Text {
         Text("ButtonSettings")
     }
@@ -60,7 +57,6 @@ final class InfoViewModel {
     }
     
     /// Provides the title for the quit application button.
-    @ViewBuilder
     func quitAppTitle() -> Text {
         Text("Quit")
     }

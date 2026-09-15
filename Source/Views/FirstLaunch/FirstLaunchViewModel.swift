@@ -105,7 +105,6 @@ final class FirstLaunchViewModel: DomainViewConstantProtocol {
     // MARK: - ViewBuilder Methods
     
     /// Provides the text for taking a snapshot.
-    @ViewBuilder
     func takeSnapshotTitle() -> Text {
         Text("TakeSnapshotAndStart")
     }
@@ -116,13 +115,11 @@ final class FirstLaunchViewModel: DomainViewConstantProtocol {
     }
     
     /// Provides the title for the alert to open settings.
-    @ViewBuilder
     func openSettingsAlertTitle() -> Text {
         Text("OpenSettings")
     }
     
     /// Provides the button title to open settings.
-    @ViewBuilder
     func openSettingsTitle() -> Text {
         Text("ButtonSettings")
     }
@@ -133,13 +130,11 @@ final class FirstLaunchViewModel: DomainViewConstantProtocol {
     }
     
     /// Provides the cancel button title for the settings alert.
-    @ViewBuilder
     func cancelSettingsTitle() -> Text {
         Text("ButtonCancel")
     }
     
     /// Restarts the view to its initial state.
-    @ViewBuilder
     func restartView() -> some View {
         Text("")
             .onAppear { [weak self] in

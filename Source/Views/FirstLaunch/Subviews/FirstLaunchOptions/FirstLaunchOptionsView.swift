@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FirstLaunchOptionsView: View {
-    /// The view model that provides data and behavior.
+    // The view model that provides data and behavior.
     
     @Environment(FirstLaunchOptionsViewModel.self) var viewModel
 

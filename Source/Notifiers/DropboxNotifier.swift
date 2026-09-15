@@ -70,7 +70,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
             image = image?.imageWithText(text: info)
         }
 
-        guard let data = image?.jpegData, !data.isEmpty else {
+        guard let data = image?.jpegData(quality: thiefDto.compressionFactor), !data.isEmpty else {
             throw NotifierError.emptyData
         }
 

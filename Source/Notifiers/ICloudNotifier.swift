@@ -75,7 +75,7 @@ final class ICloudNotifier: NotifierProtocol, Sendable {
         logger.debug("send: \(thiefDto)")
 
         do {
-            guard let data = image?.jpegData else {
+            guard let data = image?.jpegData(quality: thiefDto.compressionFactor) else {
                 throw NotifierError.emptyData
             }
             try data.write(to: iCloudURL)

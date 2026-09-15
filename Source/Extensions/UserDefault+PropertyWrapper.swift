@@ -52,8 +52,7 @@ struct UserDefault<T: Codable> {
         get {
             if let data = userDefaults.object(forKey: key) as? Data {
                 do {
-                    let object = try JSONDecoder().decode(T.self, from: data)
-                    return object
+                    return try JSONDecoder().decode(T.self, from: data)
                 } catch {
                     print(error)
                     return defaultValue

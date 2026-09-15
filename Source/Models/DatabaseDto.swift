@@ -51,7 +51,7 @@ public final class DatabaseDto: Codable, Identifiable {
     /// - Parameter thiefDto: The `ThiefDto` object that provides the data.
     init(with thiefDto: ThiefDto) {
         date = thiefDto.date
-        data = thiefDto.snapshot!.jpegData
+        data = thiefDto.snapshot!.jpegData(quality: thiefDto.compressionFactor)
         path = thiefDto.filePath
     }
 }

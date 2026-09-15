@@ -47,7 +47,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     
     // MARK: - Bindings for UI settings
     
-    // Binding for expanding or collapsing security info section.
+    /// Binding for expanding or collapsing security info section.
     var isSecurityInfoExpand: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.ui.isSecurityInfoExpand
@@ -56,7 +56,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
     
-    // Binding for toggling app protection.
+    /// Binding for toggling app protection.
     var isProtected: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.options.isProtected
@@ -76,7 +76,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         )
     }
     
-    // Binding for expanding or collapsing snapshot info section.
+    /// Binding for expanding or collapsing snapshot info section.
     var isSnapshotInfoExpand: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.ui.isSnapshotInfoExpand
@@ -87,7 +87,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     
     // MARK: - Bindings for Trigger settings
     
-    // Each of these bindings represents a trigger for taking snapshots based on different events.
+    /// Each of these bindings represents a trigger for taking snapshots based on different events.
     var isUseSnapshotOnWakeUp: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.triggers.isUseSnapshotOnWakeUp
@@ -130,7 +130,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     
     // MARK: - Bindings for Options settings
     
-    // Binding for expanding or collapsing options info section.
+    /// Binding for expanding or collapsing options info section.
     var isOptionsInfoExpand: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.ui.isOptionsInfoExpand
@@ -139,7 +139,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
     
-    // Number of actions to keep in history.
+    /// Number of actions to keep in history.
     var keepLastActionsCount: Binding<Int> {
         Binding<Int>(get: {
             self.settings.options.keepLastActionsCount
@@ -148,7 +148,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
     
-    // Bindings for adding additional information to snapshots.
+    /// Bindings for adding additional information to snapshots.
     var addLocationToSnapshot: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.options.addLocationToSnapshot
@@ -173,7 +173,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
     
-    // Server for performing trace route.
+    /// Server for performing trace route.
     var traceRouteServer: Binding<String> {
         Binding<String>(get: {
             self.settings.options.traceRouteServer
@@ -184,7 +184,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     
     // MARK: - Bindings for Sync settings
     
-    // Binding for saving snapshots to disk.
+    /// Binding for saving snapshots to disk.
     var isSaveSnapshotToDisk: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.sync.isSaveSnapshotToDisk
@@ -193,7 +193,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
     
-    // Binding for expanding or collapsing sync info section.
+    /// Binding for expanding or collapsing sync info section.
     var isSyncInfoExpand: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.ui.isSyncInfoExpand
@@ -202,7 +202,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
     
-    // Binding for sending notifications to mail.
+    /// Binding for sending notifications to mail.
     var isSendNotificationToMail: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.sync.isSendNotificationToMail
@@ -219,7 +219,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
     
-    // Bindings related to different sync options.
+    /// Bindings related to different sync options.
     var isICloudSyncEnable: Binding<Bool> {
         Binding<Bool>(get: {
             self.settings.sync.isICloudSyncEnable
@@ -251,7 +251,25 @@ final class SettingsViewModel: DomainViewConstantProtocol {
             self.settings.sync.isUseSnapshotLocalNotification = $0
         })
     }
-    
+
+    // MARK: - Bindings for Snapshot settings
+
+    var snapshotQuality: Binding<SnapshotQuality> {
+        Binding<SnapshotQuality>(get: {
+            self.settings.snapshot.quality
+        }, set: {
+            self.settings.snapshot.quality = $0
+        })
+    }
+
+    var snapshotResolution: Binding<SnapshotResolution> {
+        Binding<SnapshotResolution>(get: {
+            self.settings.snapshot.resolution
+        }, set: {
+            self.settings.snapshot.resolution = $0
+        })
+    }
+
     /// Closure to be executed when access is granted.
     /// Ignored by observation as it's a callback infrastructure.
     @ObservationIgnored

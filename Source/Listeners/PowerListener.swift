@@ -56,11 +56,9 @@ final class PowerListener: BaseListenerProtocol {
 
     /// Proxy object for the XPC service.
     private lazy var service: XPCPowerProtocol = {
-        let service = connection.remoteObjectProxyWithErrorHandler { [weak self] error in
+        connection.remoteObjectProxyWithErrorHandler { [weak self] error in
             self?.logger.error("Received error: \(error.localizedDescription)")
         } as! XPCPowerProtocol
-
-        return service
     }()
 
     // MARK: - Initializer

@@ -29,9 +29,9 @@ class AppDelegateModelTests: XCTestCase {
         XCTAssertTrue(model.invokedSetupParameters?.localNotification == notification)
     }
     
-    func testCheckDropboxAuthWithURLs_valid() {
+    func testCheckDropboxAuthWithURLs_valid() throws {
         // Given
-        let validDropboxURL = URL(string: "scheme://dropboxKey")!
+        let validDropboxURL = try XCTUnwrap(URL(string: "scheme://dropboxKey"))
         
         // Execute & Assert for valid Dropbox URL
         let validDropboxURLs = [validDropboxURL]
@@ -40,10 +40,10 @@ class AppDelegateModelTests: XCTestCase {
         XCTAssertTrue(validDropboxURLs == model.invokedCheckDropboxAuthParameters?.urls, "Expected to recognise valid Dropbox URL.")
     }
     
-    func testCheckDropboxAuthWithURLs_invalid() {
+    func testCheckDropboxAuthWithURLs_invalid() throws {
         // Given
-        let validDropboxURL = URL(string: "scheme://dropboxKey")!
-        let invalidDropboxURL = URL(string: "scheme://invalidKey")!
+        let validDropboxURL = try XCTUnwrap(URL(string: "scheme://dropboxKey"))
+        let invalidDropboxURL = try XCTUnwrap(URL(string: "scheme://invalidKey"))
         
         // Execute & Assert for valid Dropbox URL
         let validDropboxURLs = [validDropboxURL]
