@@ -29,15 +29,15 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     private let logger: LogProtocol
     
     /// Popover displayed from the status bar icon.
+    @MainActor
     private lazy var mainPopover: NSPopover = {
         let popover = NSPopover()
         popover.behavior = .transient
         popover.animates = false
         popover.contentViewController = NSViewController()
-        popover.contentViewController?.view = NSHostingView(
-            rootView: MainView()
-                .environment(mainViewModel)
-        )
+        let root = MainView().environment(mainViewModel)
+        let hostingView = NSHostingView(rootView: root)
+        popover.contentViewController?.view = hostingView
 
         return popover
     }()
