@@ -1,5 +1,20 @@
 # Lock-Watcher — Changelog
 
+## v1.5.0 (Build 1501) — 2026-09-16
+
+### New
+- Snapshot quality setting (Low 25%, Medium 50%, High 75%, Original)
+- Snapshot resolution setting (Full, 1/2, 1/4) to save iCloud/Dropbox storage
+
+### Improved
+- macOS 27 support
+- Concurrency fix in status bar popover
+
+### Infrastructure
+- Xcode 27, Swift 6.4
+
+---
+
 ## v1.4.0 (Build 1401) — 2026-03-28
 
 ### New

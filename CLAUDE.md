@@ -3,7 +3,7 @@
 ## Overview
 
 - **Type**: macOS menu bar surveillance application
-- **Stack**: Swift 6.2, SwiftUI with AppKit integration
+- **Stack**: Swift 6.4, SwiftUI with AppKit integration
 - **Architecture**: MVVM + Coordinator pattern with Listener/Notifier patterns
 - **Company**: IGR Soft (com.igrsoft)
 
@@ -216,7 +216,7 @@ rg -n "Sendable" Source/
 
 | Setting | Value |
 |---------|-------|
-| Platform | macOS 13.5+ |
+| Platform | macOS 14.1+ |
 | Localization | English (en), Ukrainian (uk) |
 | Storage | EasyStash (encrypted local storage) |
 | Cloud | iCloud (CloudKit), Dropbox SDK |

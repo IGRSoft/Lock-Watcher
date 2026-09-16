@@ -38,6 +38,7 @@ Choose where your snapshots are saved:
 - Local encrypted database on your Mac
 - iCloud Drive for seamless sync across devices
 - Dropbox for cloud backup
+- Adjustable photo quality and resolution to save cloud storage
 - System notifications with snapshot preview
 
 PRIVACY & SECURITY
@@ -72,13 +73,13 @@ https://igrsoft.com/privacy
 
 ## What's New
 <!-- Max 4000 characters. See AppStore/changelog.md for history. -->
-Lock-Watcher v1.4.0 brings a polished experience:
+Lock-Watcher v1.5.0 puts you in control of your snapshots:
 
-- Smooth animations for expandable UI sections
-- Improved first-launch window positioning and countdown display
-- Updated app icon
-- Better launch-at-login reliability
-- Requires macOS 14.1 or later
+- New photo quality setting: Low, Medium, High, or Original
+- New resolution setting: Full, 1/2, or 1/4 size
+- Smaller uploads save iCloud and Dropbox storage
+- Support for macOS 27
+- Stability and performance improvements
 
 ## Age Rating
 4+
