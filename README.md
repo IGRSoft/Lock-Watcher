@@ -14,7 +14,7 @@ Turn your Mac into a powerful surveillance system with Lock-Watcher. Detect and 
 
 **Project Name**: Lock-Watcher
 **Bundle Identifier**: com.igrsoft.Lock-Watcher
-**Current Version**: 1.2.2 (Build 1222)
+**Current Version**: 1.5.0 (Build 1501)
 
 ### Project Description
 
@@ -24,6 +24,7 @@ Lock-Watcher transforms your Mac into a stealthy security guardian. It monitors 
 
 - **Camera Selection** - Choose between built-in or external cameras for surveillance
 - **High-Quality Capture** - Optimal photo capture with smart compression
+- **Snapshot Quality & Resolution** - Adjustable JPEG quality and image scale to save cloud storage
 - **Easy Configuration** - Simple setup for triggers and storage locations
 
 ### Security Triggers
@@ -58,7 +59,7 @@ Each capture includes:
 
 ## Technology Stack
 
-- **Language**: Swift 6.2
+- **Language**: Swift 6.4
 - **UI Framework**: SwiftUI with AppKit integration
 - **Minimum Platform**: macOS 14.1+
 - **Architecture**: MVVM + Coordinator pattern
@@ -72,8 +73,8 @@ Each capture includes:
 
 - **macOS**: 14.1 or later
 - **Hardware**: Mac with built-in or external camera
-- **Xcode**: 16.3+ (for development)
-- **Swift**: 6.2
+- **Xcode**: 27+ (for development)
+- **Swift**: 6.4
 
 ## Project Structure
 
