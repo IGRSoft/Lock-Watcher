@@ -10,14 +10,14 @@ Mac Security Camera Monitor
 
 ## Promotional Text
 <!-- Max 170 characters. Can be updated without a new app submission. -->
-Detect unauthorized access to your Mac instantly. Lock-Watcher captures photos on wake, login, USB, and more — stored securely in iCloud or Dropbox.
+Detect unauthorized access to your Mac instantly. Lock-Watcher captures a photo or a short video on wake, login, USB, and more — saved to iCloud or Dropbox.
 
 ## Description
 <!-- Max 4000 characters -->
-Turn your Mac into a powerful security system. Lock-Watcher silently monitors your computer and captures high-quality photos whenever suspicious activity is detected.
+Turn your Mac into a powerful security system. Lock-Watcher silently monitors your computer and captures a photo or a short video whenever suspicious activity is detected.
 
 HOW IT WORKS
-Lock-Watcher runs quietly in your menu bar, watching for events that may indicate unauthorized access. When triggered, it instantly takes a photo using your built-in or external camera and enriches it with location, IP address, and network trace-route data.
+Lock-Watcher runs quietly in your menu bar, watching for events that may indicate unauthorized access. When triggered, it instantly takes a photo or records a silent 1–5 second video using your built-in or external camera, and enriches it with location, IP address, and network trace-route data.
 
 SECURITY TRIGGERS
 - Wake-Up Detection — captures when your Mac exits sleep mode
@@ -25,6 +25,12 @@ SECURITY TRIGGERS
 - Power Switch — captures when switching from AC to battery (laptops)
 - USB Mount — captures when USB devices are connected
 - Wrong Password — captures on failed login attempts*
+
+PHOTO OR VIDEO
+- Choose a photo or a silent 1–5 second video for each detection
+- Choose the output size: Original, 1/2, or 1/4
+- Adjustable photo quality to save cloud storage
+- No microphone access — videos never record sound
 
 RICH SNAPSHOT DATA
 Every capture automatically includes:
@@ -34,12 +40,12 @@ Every capture automatically includes:
 - Precise timestamp
 
 FLEXIBLE STORAGE
-Choose where your snapshots are saved:
+Choose where your photos and videos are saved:
 - Local encrypted database on your Mac
 - iCloud Drive for seamless sync across devices
 - Dropbox for cloud backup
-- Adjustable photo quality and resolution to save cloud storage
 - System notifications with snapshot preview
+- "Keep files" removes old local captures after 1 year, 1 month, 1 week, or right after upload
 
 PRIVACY & SECURITY
 - All data stored locally or in your own cloud accounts
@@ -47,6 +53,7 @@ PRIVACY & SECURITY
 - No third-party analytics or tracking
 - Biometric authentication (Touch ID and Apple Watch)
 - Password protection for snapshots and settings
+- A notification tells you when camera access is denied
 
 EASY SETUP
 - Simple menu bar interface
