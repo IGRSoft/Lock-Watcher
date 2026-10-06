@@ -5,6 +5,7 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import CameraSnap
 import Combine
 import SwiftUI
 import XCTest
@@ -293,6 +294,102 @@ final class SettingsViewModelTests: XCTestCase {
     func testIsUseSnapshotLocalNotificationBindingWrites() {
         sut.isUseSnapshotLocalNotification.wrappedValue = true
         XCTAssertTrue(mockSettings.sync.isUseSnapshotLocalNotification)
+    }
+
+    // MARK: - Capture Output Binding Tests
+
+    func testOutputTypeBindingAndRowVisibility() {
+        XCTAssertEqual(sut.snapshotOutputType.wrappedValue, .photo)
+        XCTAssertTrue(sut.showsSnapshotQuality)
+        XCTAssertFalse(sut.showsVideoDuration)
+
+        sut.snapshotOutputType.wrappedValue = .video
+
+        XCTAssertEqual(mockSettings.snapshot.outputType, .video)
+        XCTAssertTrue(sut.showsVideoDuration)
+        XCTAssertFalse(sut.showsSnapshotQuality)
+    }
+
+    func testVideoDurationSetterClampsToRange() {
+        sut.snapshotVideoDuration.wrappedValue = 4
+        XCTAssertEqual(mockSettings.snapshot.videoDuration, 4)
+
+        sut.snapshotVideoDuration.wrappedValue = 9
+        XCTAssertEqual(mockSettings.snapshot.videoDuration, 5)
+
+        sut.snapshotVideoDuration.wrappedValue = 0
+        XCTAssertEqual(mockSettings.snapshot.videoDuration, 1)
+    }
+
+    func testOutputSizeBindingAndPickerLabels() {
+        sut.snapshotOutputSize.wrappedValue = .half
+
+        XCTAssertEqual(mockSettings.snapshot.outputSize, .half)
+        XCTAssertEqual(CameraSnapConfiguration.OutputSize.allCases.map(\.rawValue), ["Original", "1/2", "1/4"])
+    }
+
+    func testOutputTypeChangeIsObserved() {
+        let changed = expectation(description: "visibility re-evaluated")
+        withObservationTracking {
+            _ = sut.showsVideoDuration
+        } onChange: {
+            changed.fulfill()
+        }
+
+        sut.snapshotOutputType.wrappedValue = .video
+
+        wait(for: [changed], timeout: 1)
+    }
+
+    // MARK: - Keep Files Binding Tests
+
+    func testLongerPeriodAppliesAtOnce() {
+        sut.keepFiles.wrappedValue = .oneMonth
+
+        XCTAssertEqual(mockSettings.retention.keepFiles, .oneMonth)
+        XCTAssertNil(sut.pendingKeepFiles)
+        XCTAssertEqual(mockThiefManager.invokedApplyRetentionPolicyCount, 1)
+    }
+
+    func testUnchangedPeriodDoesNotPrune() {
+        sut.keepFiles.wrappedValue = .oneWeek
+
+        XCTAssertEqual(mockThiefManager.invokedApplyRetentionPolicyCount, 0)
+    }
+
+    func testShorterPeriodWaitsForConfirmation() {
+        sut.keepFiles.wrappedValue = .afterUpload
+
+        XCTAssertEqual(sut.pendingKeepFiles, .afterUpload)
+        XCTAssertEqual(mockSettings.retention.keepFiles, .oneWeek)
+        XCTAssertEqual(mockThiefManager.invokedApplyRetentionPolicyCount, 0)
+
+        sut.confirmKeepFiles(.afterUpload)
+
+        XCTAssertNil(sut.pendingKeepFiles)
+        XCTAssertEqual(mockSettings.retention.keepFiles, .afterUpload)
+        XCTAssertEqual(mockThiefManager.invokedApplyRetentionPolicyCount, 1)
+    }
+
+    func testConfirmCommitsPresentedPeriodEvenAfterDismissalClearedPending() {
+        sut.keepFiles.wrappedValue = .afterUpload
+        sut.cancelPendingKeepFiles()
+
+        sut.confirmKeepFiles(.afterUpload)
+
+        XCTAssertEqual(mockSettings.retention.keepFiles, .afterUpload)
+        XCTAssertEqual(mockThiefManager.invokedApplyRetentionPolicyCount, 1)
+    }
+
+    func testCancelledShorterPeriodKeepsSetting() {
+        mockSettings.retention.keepFiles = .oneYear
+
+        sut.keepFiles.wrappedValue = .oneWeek
+        sut.cancelPendingKeepFiles()
+
+        XCTAssertNil(sut.pendingKeepFiles)
+        XCTAssertEqual(mockSettings.retention.keepFiles, .oneYear)
+        XCTAssertEqual(mockThiefManager.invokedApplyRetentionPolicyCount, 0)
     }
 
     // MARK: - ThiefManager Delegation Tests

@@ -51,17 +51,27 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
         DropboxClientsManager.setupWithAppKeyDesktop(Secrets.dropboxKey)
     }
 
-    /// Sends an image notification based on the provided `ThiefDto` information.
+    /// Uploads the movie of a video record, then the still annotated with the record's details.
     ///
-    /// This function uploads the image with optional text derived from `thiefDto.description()`
-    /// to Dropbox.
-    ///
-    /// - Parameter thiefDto: The data object containing the details to be saved as an image.
     /// - Throws: `NotifierError` if the upload fails.
     func send(_ thiefDto: ThiefDto) async throws {
-        guard let filePath = thiefDto.filePath else {
+        guard let media = thiefDto.media else {
             logger.error("wrong file path")
             throw NotifierError.invalidFilePath
+        }
+
+        guard let client else {
+            throw NotifierError.authenticationRequired
+        }
+
+        logger.debug("send: \(thiefDto)")
+
+        if case .video(let movie, _) = media {
+            try await upload(path: "/\(movie.lastPathComponent)") { client.files.upload(path: $0, input: movie) }
+        }
+
+        guard let filePath = thiefDto.filePath else {
+            return
         }
 
         var image = NSImage(contentsOf: filePath)
@@ -74,16 +84,12 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
             throw NotifierError.emptyData
         }
 
-        logger.debug("send: \(thiefDto)")
+        try await upload(path: "/\(filePath.lastPathComponent)") { client.files.upload(path: $0, input: data) }
+    }
 
-        guard let client else {
-            throw NotifierError.authenticationRequired
-        }
-
-        let fileName = filePath.path.split(separator: "/").last.map(String.init) ?? "image.jpeg"
-
+    private func upload(path: String, request: (String) -> UploadRequest<Files.FileMetadataSerializer, Files.UploadErrorSerializer>) async throws {
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            client.files.upload(path: "/\(fileName)", input: data)
+            request(path)
                 .response { [weak self] response, error in
                     if let response {
                         self?.logger.debug("\(response)")
@@ -100,7 +106,7 @@ final class DropboxNotifier: NotifierProtocol, DropboxNotifierProtocol {
                 }
         }
     }
-    
+
     /// Initiates the Dropbox authentication flow.
     ///
     /// - Parameter controller: The view controller from which the authentication flow is started.

@@ -257,7 +257,11 @@ enum AccessibilityID {
         static let traceRouteServerField = "settings.traceRouteServerField"
         static let saveToDiskToggle = "settings.saveToDiskToggle"
         static let snapshotQualityPicker = "settings.snapshotQualityPicker"
-        static let snapshotResolutionPicker = "settings.snapshotResolutionPicker"
+        static let outputTypePicker = "settings.outputTypePicker"
+        static let videoDurationStepper = "settings.videoDurationStepper"
+        static let outputSizePicker = "settings.outputSizePicker"
+        static let keepFilesPicker = "settings.keepFilesPicker"
+        static let keepFilesFootnote = "settings.keepFilesFootnote"
 
         // Sync section
         static let syncSection = "settings.syncSection"
@@ -354,7 +358,13 @@ enum AccessibilityLabel {
         static let addTraceRoute = NSLocalizedString("AccessibilityAddTraceRoute", comment: "Add network trace route to snapshots")
         static let saveToDisk = NSLocalizedString("AccessibilitySaveToDisk", comment: "Save snapshots to disk")
         static let snapshotQuality = NSLocalizedString("AccessibilitySnapshotQuality", comment: "Snapshot JPEG quality")
-        static let snapshotResolution = NSLocalizedString("AccessibilitySnapshotResolution", comment: "Snapshot image resolution")
+        static let outputType = NSLocalizedString("AccessibilityOutputType", comment: "Capture a photo or a video")
+        static func videoDuration(_ seconds: Int) -> String {
+            String(format: NSLocalizedString("AccessibilityVideoDuration %d", comment: "Video length in seconds"), seconds)
+        }
+
+        static let outputSize = NSLocalizedString("AccessibilityOutputSize", comment: "Capture size for photos and videos")
+        static let keepFiles = NSLocalizedString("AccessibilityKeepFiles", comment: "How long local capture files are kept")
 
         static let sendEmail = NSLocalizedString("AccessibilitySendEmail", comment: "Send snapshot notifications via email")
         static let syncICloud = NSLocalizedString("AccessibilitySyncICloud", comment: "Sync snapshots to iCloud")

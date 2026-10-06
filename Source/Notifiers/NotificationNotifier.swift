@@ -42,7 +42,7 @@ final class NotificationNotifier: NotifierProtocol {
     /// - Parameter thiefDto: An instance containing details about the event.
     /// - Throws: `NotifierError` if the notification cannot be sent.
     func send(_ thiefDto: ThiefDto) async throws {
-        guard let localURL = thiefDto.filePath else {
+        guard let media = thiefDto.media else {
             logger.error("wrong file path")
             throw NotifierError.invalidFilePath
         }
@@ -59,7 +59,7 @@ final class NotificationNotifier: NotifierProtocol {
             throw NotifierError.authenticationRequired
         }
 
-        try await createNotification(thiefDto: thiefDto, at: localURL, to: notificationCenter)
+        try await createNotification(thiefDto: thiefDto, media: media, to: notificationCenter)
     }
 
     // MARK: - Private helper methods
@@ -68,9 +68,9 @@ final class NotificationNotifier: NotifierProtocol {
     ///
     /// - Parameters:
     ///   - thiefDto: An instance containing details about the event.
-    ///   - url: The local URL of the snapshot image.
+    ///   - media: The record's local files.
     ///   - notificationCenter: An instance of `UNUserNotificationCenter` to which the notification is to be added.
-    private func createNotification(thiefDto: ThiefDto, at url: URL, to notificationCenter: UNUserNotificationCenter) async throws {
+    private func createNotification(thiefDto: ThiefDto, media: CaptureMedia, to notificationCenter: UNUserNotificationCenter) async throws {
         let date = Date.defaultFormat.string(from: thiefDto.date)
 
         let content = UNMutableNotificationContent()
@@ -78,7 +78,7 @@ final class NotificationNotifier: NotifierProtocol {
         content.body = thiefDto.triggerType.name
         content.sound = UNNotificationSound.default
 
-        if let attachment = try? UNNotificationAttachment(identifier: UUID().uuidString, url: url, options: nil) {
+        if let attachment = makeAttachment(for: media) {
             content.attachments = [attachment]
         }
 
@@ -88,5 +88,37 @@ final class NotificationNotifier: NotifierProtocol {
         logger.debug("send: \(thiefDto)")
 
         try await notificationCenter.add(request)
+    }
+
+    /// The system moves an attachment's file into its own store, so it gets a copy and the record keeps its file.
+    private func makeAttachment(for media: CaptureMedia) -> UNNotificationAttachment? {
+        guard let source = MediaAttachmentPolicy.attachment(for: media, limitBytes: MediaAttachmentPolicy.notificationLimitBytes, logger: logger),
+              let copy = temporaryCopy(of: source)
+        else {
+            return nil
+        }
+
+        do {
+            return try UNNotificationAttachment(identifier: UUID().uuidString, url: copy, options: nil)
+        } catch {
+            logger.error("notification attachment rejected")
+            try? FileManager.default.removeItem(at: copy.deletingLastPathComponent())
+            return nil
+        }
+    }
+
+    /// Copies `url` into its own folder under the temporary directory.
+    func temporaryCopy(of url: URL) -> URL? {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        let copy = folder.appendingPathComponent(url.lastPathComponent)
+        do {
+            try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+            try FileManager.default.copyItem(at: url, to: copy)
+            return copy
+        } catch {
+            logger.error("notification attachment copy failed")
+            try? FileManager.default.removeItem(at: folder)
+            return nil
+        }
     }
 }

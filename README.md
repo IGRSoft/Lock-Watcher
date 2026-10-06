@@ -2,7 +2,7 @@
 
 **macOS Surveillance Application for Security Monitoring**
 
-Turn your Mac into a powerful surveillance system with Lock-Watcher. Detect and capture unauthorized access attempts discreetly, receiving high-quality photos from your built-in or external camera and securely storing them locally or in the cloud.
+Turn your Mac into a powerful surveillance system with Lock-Watcher. Detect and capture unauthorized access attempts discreetly, receiving high-quality photos or 1–5 second silent videos from your built-in or external camera and securely storing them locally or in the cloud.
 
 ## Company Information
 
@@ -23,8 +23,10 @@ Lock-Watcher transforms your Mac into a stealthy security guardian. It monitors 
 ## Features
 
 - **Camera Selection** - Choose between built-in or external cameras for surveillance
-- **High-Quality Capture** - Optimal photo capture with smart compression
-- **Snapshot Quality & Resolution** - Adjustable JPEG quality and image scale to save cloud storage
+- **Photo or Video Output** - Capture either high-quality photos or 1–5 second silent videos
+- **Output Size Control** - Adjustable image and video size (Original, 1/2, 1/4) to optimize storage
+- **JPEG Quality Settings** - Fine-tune photo compression for quality vs. storage balance
+- **File Retention Control** - Keep local captures for 1 year, 1 month, 1 week, or remove after upload
 - **Easy Configuration** - Simple setup for triggers and storage locations
 
 ### Security Triggers
@@ -66,8 +68,9 @@ Each capture includes:
 - **Concurrency**: Swift 6 strict concurrency
 - **Storage**: EasyStash (encrypted local storage)
 - **Cloud**: iCloud (CloudKit), Dropbox SDK
-- **Camera**: PhotoSnap library
+- **Camera**: CameraSnap library (photo or H.264 video capture)
 - **Auto-Launch**: LaunchAtLogin
+- **Privacy Manifest**: PrivacyInfo.xcprivacy with required API reason codes
 
 ## Requirements
 

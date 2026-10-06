@@ -14,8 +14,8 @@
 
 <ul>
     <li>
-        <p>PhotoSnap</p>
-        <p><a href="https://github.com/IGRSoft/PhotoSnap/blob/master/LICENSE">https://github.com/IGRSoft/PhotoSnap/blob/master/LICENSE</a></p>
+        <p>CameraSnap</p>
+        <p><a href="https://github.com/IGRSoft/CameraSnap/blob/master/LICENSE">https://github.com/IGRSoft/CameraSnap/blob/master/LICENSE</a></p>
     </li>
     <li>
         <p>SimpleTracer</p>
@@ -38,6 +38,61 @@
         <p><a href="https://github.com/kishikawakatsumi/KeychainAccess/blob/master/LICENSE">https://github.com/kishikawakatsumi/KeychainAccess/blob/master/LICENSE</a></p>
     </li>
 </ul>
+
+<h2>Camera Capture and Data Handling</h2>
+
+<p>Lock Watcher captures surveillance media when system triggers you enable are activated. This section describes what is captured, where it is stored, and how long it is kept.</p>
+
+<h3>What is Captured</h3>
+
+<p>Lock Watcher captures either a high-quality photo or a 1–5 second silent video without audio. When you enable location or network information in settings, each capture is annotated with:</p>
+
+<ul>
+    <li>Your device's geographic coordinates (GPS)</li>
+    <li>Your public IP address (queried from api.ipify.org)</li>
+    <li>Network trace-route information</li>
+</ul>
+
+<p>No audio is ever captured or recorded.</p>
+
+<h3>When Captures Occur</h3>
+
+<p>Captures are recorded only when triggers you have explicitly enabled in settings activate. Triggers include:</p>
+
+<ul>
+    <li>Mac wake-up from sleep</li>
+    <li>User login events</li>
+    <li>Battery/AC power switching (laptops)</li>
+    <li>USB device connection</li>
+    <li>Failed login attempts (Non-MAS builds only)</li>
+</ul>
+
+<h3>Where Captures Are Stored</h3>
+
+<p>All captured files are stored locally in your app's private container directory on your Mac. Captured media goes to your chosen channels only when you enable them:</p>
+
+<ul>
+    <li><strong>Local</strong> - Private app folder (default)</li>
+    <li><strong>iCloud</strong> - Your iCloud Drive (only if enabled)</li>
+    <li><strong>Dropbox</strong> - Your Dropbox account (only if enabled)</li>
+    <li><strong>Mail</strong> - Email recipients you specify (Non-MAS only, only if enabled)</li>
+    <li><strong>Notification Center</strong> - Local system notifications (only if enabled)</li>
+</ul>
+
+<p>IGR Soft collects no data from your device. No captures are sent to IGR Soft servers. Your media is yours alone.</p>
+
+<h3>How Long Files Are Kept</h3>
+
+<p>The "Keep files" setting controls how long your local captures are retained in the app folder. You can choose:</p>
+
+<ul>
+    <li><strong>1 year</strong> - Keeps local files for 1 year from the capture date</li>
+    <li><strong>1 month</strong> - Keeps local files for 1 month from the capture date</li>
+    <li><strong>1 week</strong> - Keeps local files for 1 week from the capture date (default)</li>
+    <li><strong>None (remove after upload)</strong> - Deletes local files after confirmed upload to iCloud or Dropbox; files are kept for 1 week if upload cannot be confirmed</li>
+</ul>
+
+<p>Important: The "Keep files" setting applies only to local files on your Mac. It does not affect copies stored in iCloud Drive, Dropbox, sent mail messages, or the history database. Remote copies are managed through their respective services. Thumbnail images stored in the history database are kept separately from the retention policy.</p>
 
 <h2>Privacy Policies</h2>
 

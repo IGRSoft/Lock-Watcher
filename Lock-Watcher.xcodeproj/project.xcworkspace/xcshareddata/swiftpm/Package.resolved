@@ -1,6 +1,15 @@
 {
-  "originHash" : "86617dd758e12f68da0440627c910ea8f25614de22f2150421be837ed29b7e6f",
+  "originHash" : "f1e3a82aedc809e1df0fcc63d353703892f8bdba7a0edf8e5add3201f34078dd",
   "pins" : [
+    {
+      "identity" : "camerasnap",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/IGRSoft/CameraSnap.git",
+      "state" : {
+        "revision" : "16dc3cc45bd7a310dc5aa54cd19012b7171c820c",
+        "version" : "0.3.1"
+      }
+    },
     {
       "identity" : "easystash",
       "kind" : "remoteSourceControl",
@@ -26,15 +35,6 @@
       "state" : {
         "revision" : "a04ec1c363be3627734f6dad757d82f5d4fa8fcc",
         "version" : "1.1.0"
-      }
-    },
-    {
-      "identity" : "photosnap",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/IGRSoft/PhotoSnap.git",
-      "state" : {
-        "revision" : "0b4834bd1a36bc7e7998d0cfa2e80842f784910c",
-        "version" : "0.2.2"
       }
     },
     {

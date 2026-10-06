@@ -12,13 +12,8 @@ final class NSImageExtensionTests: XCTestCase {
     var sampleImage: NSImage!
     
     override func setUpWithError() throws {
-        // Load a sample image that you can use for the tests.
-        // For simplicity, assuming "Sample" is an image in your test bundle.
-        guard let image = NSImage(named: "AppIcon") else {
-            XCTFail("Failed to load the sample image.")
-            return
-        }
-        sampleImage = image
+        // The asset catalog has no "AppIcon" image, so the fixture is drawn in code.
+        sampleImage = .testImage(size: NSSize(width: 64, height: 48))
     }
 
     /// Check if the returned image size remains the same after adding text.

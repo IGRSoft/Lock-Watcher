@@ -5,6 +5,7 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import AppKit
 import CoreLocation
 import XCTest
 @testable import Lock_Watcher
@@ -155,5 +156,54 @@ final class ThiefDtoTests: XCTestCase {
             let capturedDto = dto
             XCTAssertEqual(capturedDto.triggerType, .onWakeUp)
         }
+    }
+
+    // MARK: - Media Tests
+
+    func testPhotoRecordMedia() {
+        let still = URL(fileURLWithPath: "/tmp/a.jpeg")
+        let dto = ThiefDto(triggerType: .onWakeUp, filePath: still)
+
+        XCTAssertNil(dto.videoURL)
+        XCTAssertEqual(dto.media, .photo(still: still))
+    }
+
+    func testVideoRecordMediaKeepsPosterAsStill() {
+        let movie = URL(fileURLWithPath: "/tmp/a.mov")
+        let poster = URL(fileURLWithPath: "/tmp/a.jpeg")
+        let dto = ThiefDto(triggerType: .onWakeUp, filePath: poster, videoURL: movie)
+
+        XCTAssertEqual(dto.videoURL, movie)
+        XCTAssertEqual(dto.media, .video(movie: movie, poster: poster))
+    }
+
+    func testRecordWithoutFilesHasNoMedia() {
+        XCTAssertNil(ThiefDto(triggerType: .onWakeUp).media)
+    }
+
+    func testEqualityStillComparesDateOnly() {
+        let date = Date()
+        let photo = ThiefDto(triggerType: .onWakeUp, date: date)
+        let video = ThiefDto(triggerType: .logedIn, videoURL: URL(fileURLWithPath: "/tmp/a.mov"), date: date)
+
+        XCTAssertEqual(photo, video)
+    }
+
+    // MARK: - DatabaseDto Tests
+
+    func testDatabaseDtoForVideoUsesMoviePathAndPosterData() throws {
+        let movie = URL(fileURLWithPath: "/tmp/a.mov")
+        let dto = ThiefDto(triggerType: .onWakeUp, snapshot: .testImage(), filePath: URL(fileURLWithPath: "/tmp/a.jpeg"), videoURL: movie)
+
+        let record = try XCTUnwrap(DatabaseDto(with: dto))
+
+        XCTAssertEqual(record.path, movie)
+        XCTAssertFalse(record.data.isEmpty)
+    }
+
+    func testDatabaseDtoIsNilWithoutStill() {
+        let dto = ThiefDto(triggerType: .onWakeUp, videoURL: URL(fileURLWithPath: "/tmp/a.mov"))
+
+        XCTAssertNil(DatabaseDto(with: dto))
     }
 }
