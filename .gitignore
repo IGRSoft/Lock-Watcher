@@ -91,3 +91,6 @@ iOSInjectionProject/
 
 # Private
 Secrets.swift
+
+# asc (App Store Connect CLI) review artifacts
+.asc/
