@@ -14,7 +14,7 @@ Turn your Mac into a powerful surveillance system with Lock-Watcher. Detect and 
 
 **Project Name**: Lock-Watcher
 **Bundle Identifier**: com.igrsoft.Lock-Watcher
-**Current Version**: 1.5.0 (Build 1501)
+**Current Version**: 1.6.0 (Build 1601)
 
 ### Project Description
 
