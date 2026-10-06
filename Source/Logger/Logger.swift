@@ -30,6 +30,10 @@ struct Log {
         
         case thiefManager
         case triggerManager
+        case notificationManager
+        case database
+        case camera
+        case retention
         
         case mailNotifier
         case iCloudNotifier

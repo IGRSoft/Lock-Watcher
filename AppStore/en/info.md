@@ -73,12 +73,13 @@ https://igrsoft.com/privacy
 
 ## What's New
 <!-- Max 4000 characters. See AppStore/changelog.md for history. -->
-Lock-Watcher v1.5.0 puts you in control of your snapshots:
+Lock-Watcher v1.6.0 adds video capture:
 
-- New photo quality setting: Low, Medium, High, or Original
-- New resolution setting: Full, 1/2, or 1/4 size
-- Smaller uploads save iCloud and Dropbox storage
-- Support for macOS 27
+- Choose a photo or a silent 1–5 second video for each detection
+- Choose the output size: Original, 1/2, or 1/4
+- New "Keep files" setting removes old local captures after 1 year, 1 month, 1 week, or right after upload
+- Videos are delivered to iCloud, Dropbox, Mail and notifications
+- A notification tells you when camera access is denied
 - Stability and performance improvements
 
 ## Age Rating

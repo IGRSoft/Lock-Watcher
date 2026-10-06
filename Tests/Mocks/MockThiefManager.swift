@@ -111,4 +111,10 @@ final class MockThiefManager: ThiefManagerProtocol {
         invokedCleanAll = true
         invokedCleanAllCount += 1
     }
+
+    var invokedApplyRetentionPolicyCount = 0
+
+    func applyRetentionPolicy() {
+        invokedApplyRetentionPolicyCount += 1
+    }
 }

@@ -33,7 +33,7 @@ final class MockDatabaseManager: DatabaseManagerProtocol {
     var invokedSendCount = 0
     var invokedSendParameters: (thiefDto: ThiefDto, Void)?
     var invokedSendParametersList = [(thiefDto: ThiefDto, Void)]()
-    var stubbedSendResult: DatabaseDtoList!
+    var stubbedSendResult: DatabaseDtoList = .empty
 
     func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
         invokedSend = true

@@ -12,7 +12,7 @@ import XCTest
 final class DatabaseDtoTests: XCTestCase {
     // MARK: - Initialization Tests
 
-    func testDatabaseDtoInitWithThiefDto() {
+    func testDatabaseDtoInitWithThiefDto() throws {
         let testDate = Date()
         let testImage = NSImage(size: NSSize(width: 100, height: 100))
         let testURL = URL(fileURLWithPath: "/tmp/test.jpg")
@@ -24,7 +24,7 @@ final class DatabaseDtoTests: XCTestCase {
             date: testDate
         )
 
-        let databaseDto = DatabaseDto(with: thiefDto)
+        let databaseDto = try XCTUnwrap(DatabaseDto(with: thiefDto))
 
         XCTAssertEqual(databaseDto.date, testDate)
         XCTAssertEqual(databaseDto.path, testURL)
@@ -45,7 +45,7 @@ final class DatabaseDtoTests: XCTestCase {
             date: testDate
         )
 
-        let originalDto = DatabaseDto(with: thiefDto)
+        let originalDto = try XCTUnwrap(DatabaseDto(with: thiefDto))
 
         // Encode
         let encoder = JSONEncoder()
@@ -70,7 +70,7 @@ final class DatabaseDtoTests: XCTestCase {
             date: testDate
         )
 
-        let originalDto = DatabaseDto(with: thiefDto)
+        let originalDto = try XCTUnwrap(DatabaseDto(with: thiefDto))
 
         // Encode
         let encoder = JSONEncoder()
@@ -86,7 +86,7 @@ final class DatabaseDtoTests: XCTestCase {
 
     // MARK: - Equatable Tests
 
-    func testDatabaseDtoEquality_Equal() {
+    func testDatabaseDtoEquality_Equal() throws {
         let testDate = Date()
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
         let testURL = URL(fileURLWithPath: "/tmp/equality_test.jpg")
@@ -94,40 +94,40 @@ final class DatabaseDtoTests: XCTestCase {
         let thiefDto1 = ThiefDto(triggerType: .setup, snapshot: testImage, filePath: testURL, date: testDate)
         let thiefDto2 = ThiefDto(triggerType: .setup, snapshot: testImage, filePath: testURL, date: testDate)
 
-        let dto1 = DatabaseDto(with: thiefDto1)
-        let dto2 = DatabaseDto(with: thiefDto2)
+        let dto1 = try XCTUnwrap(DatabaseDto(with: thiefDto1))
+        let dto2 = try XCTUnwrap(DatabaseDto(with: thiefDto2))
 
         XCTAssertEqual(dto1, dto2)
     }
 
-    func testDatabaseDtoEquality_DifferentDate() {
+    func testDatabaseDtoEquality_DifferentDate() throws {
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
 
         let thiefDto1 = ThiefDto(triggerType: .setup, snapshot: testImage, date: Date())
         let thiefDto2 = ThiefDto(triggerType: .setup, snapshot: testImage, date: Date().addingTimeInterval(1))
 
-        let dto1 = DatabaseDto(with: thiefDto1)
-        let dto2 = DatabaseDto(with: thiefDto2)
+        let dto1 = try XCTUnwrap(DatabaseDto(with: thiefDto1))
+        let dto2 = try XCTUnwrap(DatabaseDto(with: thiefDto2))
 
         XCTAssertNotEqual(dto1, dto2)
     }
 
-    func testDatabaseDtoEquality_DifferentPath() {
+    func testDatabaseDtoEquality_DifferentPath() throws {
         let testDate = Date()
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
 
         let thiefDto1 = ThiefDto(triggerType: .setup, snapshot: testImage, filePath: URL(fileURLWithPath: "/tmp/path1.jpg"), date: testDate)
         let thiefDto2 = ThiefDto(triggerType: .setup, snapshot: testImage, filePath: URL(fileURLWithPath: "/tmp/path2.jpg"), date: testDate)
 
-        let dto1 = DatabaseDto(with: thiefDto1)
-        let dto2 = DatabaseDto(with: thiefDto2)
+        let dto1 = try XCTUnwrap(DatabaseDto(with: thiefDto1))
+        let dto2 = try XCTUnwrap(DatabaseDto(with: thiefDto2))
 
         XCTAssertNotEqual(dto1, dto2)
     }
 
     // MARK: - Comparable Tests
 
-    func testDatabaseDtoLessThan() {
+    func testDatabaseDtoLessThan() throws {
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
         let earlierDate = Date()
         let laterDate = earlierDate.addingTimeInterval(60)
@@ -135,8 +135,8 @@ final class DatabaseDtoTests: XCTestCase {
         let thiefDto1 = ThiefDto(triggerType: .setup, snapshot: testImage, date: earlierDate)
         let thiefDto2 = ThiefDto(triggerType: .setup, snapshot: testImage, date: laterDate)
 
-        let dto1 = DatabaseDto(with: thiefDto1)
-        let dto2 = DatabaseDto(with: thiefDto2)
+        let dto1 = try XCTUnwrap(DatabaseDto(with: thiefDto1))
+        let dto2 = try XCTUnwrap(DatabaseDto(with: thiefDto2))
 
         XCTAssertTrue(dto1 < dto2)
         XCTAssertFalse(dto2 < dto1)
@@ -144,15 +144,15 @@ final class DatabaseDtoTests: XCTestCase {
 
     // MARK: - Hashable Tests
 
-    func testDatabaseDtoHashable() {
+    func testDatabaseDtoHashable() throws {
         let testDate = Date()
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
 
         let thiefDto1 = ThiefDto(triggerType: .setup, snapshot: testImage, date: testDate)
         let thiefDto2 = ThiefDto(triggerType: .setup, snapshot: testImage, date: testDate)
 
-        let dto1 = DatabaseDto(with: thiefDto1)
-        let dto2 = DatabaseDto(with: thiefDto2)
+        let dto1 = try XCTUnwrap(DatabaseDto(with: thiefDto1))
+        let dto2 = try XCTUnwrap(DatabaseDto(with: thiefDto2))
 
         var set = Set<DatabaseDto>()
         set.insert(dto1)
@@ -164,11 +164,11 @@ final class DatabaseDtoTests: XCTestCase {
 
     // MARK: - Identifiable Tests
 
-    func testDatabaseDtoIdentifiable() {
+    func testDatabaseDtoIdentifiable() throws {
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
         let thiefDto = ThiefDto(triggerType: .setup, snapshot: testImage)
 
-        let dto = DatabaseDto(with: thiefDto)
+        let dto = try XCTUnwrap(DatabaseDto(with: thiefDto))
 
         // id should exist (default to ObjectIdentifier for classes without explicit id)
         _ = dto.id
@@ -185,13 +185,13 @@ final class DatabaseDtoListTests: XCTestCase {
         XCTAssertTrue(list.dtos.isEmpty)
     }
 
-    func testDatabaseDtoListInitWithDtos() {
+    func testDatabaseDtoListInitWithDtos() throws {
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
         let thiefDto1 = ThiefDto(triggerType: .setup, snapshot: testImage)
         let thiefDto2 = ThiefDto(triggerType: .onWakeUp, snapshot: testImage)
 
-        let dto1 = DatabaseDto(with: thiefDto1)
-        let dto2 = DatabaseDto(with: thiefDto2)
+        let dto1 = try XCTUnwrap(DatabaseDto(with: thiefDto1))
+        let dto2 = try XCTUnwrap(DatabaseDto(with: thiefDto2))
 
         let list = DatabaseDtoList(dtos: [dto1, dto2])
 
@@ -200,12 +200,12 @@ final class DatabaseDtoListTests: XCTestCase {
 
     // MARK: - Append Tests
 
-    func testDatabaseDtoListAppend() {
+    func testDatabaseDtoListAppend() throws {
         let list = DatabaseDtoList(dtos: [])
 
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
         let thiefDto = ThiefDto(triggerType: .setup, snapshot: testImage)
-        let dto = DatabaseDto(with: thiefDto)
+        let dto = try XCTUnwrap(DatabaseDto(with: thiefDto))
 
         list.append(dto)
 
@@ -213,14 +213,14 @@ final class DatabaseDtoListTests: XCTestCase {
         XCTAssertEqual(list.dtos.first, dto)
     }
 
-    func testDatabaseDtoListAppendMultiple() {
+    func testDatabaseDtoListAppendMultiple() throws {
         let list = DatabaseDtoList(dtos: [])
 
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
 
         for i in 0 ..< 5 {
             let thiefDto = ThiefDto(triggerType: .setup, snapshot: testImage, date: Date().addingTimeInterval(Double(i)))
-            let dto = DatabaseDto(with: thiefDto)
+            let dto = try XCTUnwrap(DatabaseDto(with: thiefDto))
             list.append(dto)
         }
 
@@ -242,8 +242,8 @@ final class DatabaseDtoListTests: XCTestCase {
         let thiefDto1 = ThiefDto(triggerType: .setup, snapshot: testImage, date: Date())
         let thiefDto2 = ThiefDto(triggerType: .onWakeUp, snapshot: testImage, date: Date().addingTimeInterval(1))
 
-        let dto1 = DatabaseDto(with: thiefDto1)
-        let dto2 = DatabaseDto(with: thiefDto2)
+        let dto1 = try XCTUnwrap(DatabaseDto(with: thiefDto1))
+        let dto2 = try XCTUnwrap(DatabaseDto(with: thiefDto2))
 
         let originalList = DatabaseDtoList(dtos: [dto1, dto2])
 
@@ -276,7 +276,7 @@ final class DatabaseDtoListTests: XCTestCase {
 
     // MARK: - ObservableObject Tests
 
-    func testDatabaseDtoListIsObservableObject() {
+    func testDatabaseDtoListIsObservableObject() throws {
         let list = DatabaseDtoList.empty
 
         // Verify @Published property exists and can be observed
@@ -285,7 +285,7 @@ final class DatabaseDtoListTests: XCTestCase {
 
         let testImage = NSImage(size: NSSize(width: 50, height: 50))
         let thiefDto = ThiefDto(triggerType: .setup, snapshot: testImage)
-        let dto = DatabaseDto(with: thiefDto)
+        let dto = try XCTUnwrap(DatabaseDto(with: thiefDto))
 
         list.append(dto)
 

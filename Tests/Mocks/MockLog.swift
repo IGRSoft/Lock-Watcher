@@ -14,16 +14,22 @@ final class LogMock: LogProtocol, @unchecked Sendable {
     var debugMessage: String?
     var infoMessage: String?
     var errorMessage: String?
-    
+
+    /// Every message in call order, for assertions that need more than the last one.
+    private(set) var messages: [String] = []
+
     func debug(_ message: String) {
         debugMessage = message
+        messages.append(message)
     }
-    
+
     func info(_ message: String) {
         infoMessage = message
+        messages.append(message)
     }
-    
+
     func error(_ message: String) {
         errorMessage = message
+        messages.append(message)
     }
 }

@@ -5,6 +5,7 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import CameraSnap
 import Combine
 import Foundation
 import SwiftUI
@@ -24,32 +25,85 @@ enum SnapshotQuality: Int, Codable, CaseIterable, Sendable {
     }
 }
 
-/// Defines resolution scaling presets for captured snapshots.
+/// Groups the capture preferences: output type, video length, output size and JPEG quality.
 ///
-/// Allows users to reduce image dimensions before encoding to save storage.
-enum SnapshotResolution: String, Codable, CaseIterable, Sendable {
-    case full
-    case half
-    case quarter
+struct SnapshotSettings: Codable, Equatable {
+    /// Video lengths, in seconds, that CameraSnap accepts.
+    static let videoDurationRange = 1 ... 5
 
-    /// The scale factor to apply to the original image dimensions.
-    var scaleFactor: CGFloat {
+    /// Photo or video. Default: `.photo`.
+    var outputType: CaptureOutputType = .photo
+
+    /// Video length in seconds; valid only inside `videoDurationRange`. Default: 3.
+    var videoDuration: Int = 3
+
+    /// Passed unchanged to CameraSnap as both the image and the video size. Default: `.original`.
+    var outputSize: CameraSnapConfiguration.OutputSize = .original
+
+    /// JPEG compression quality for photos. Default: `.high` (75%).
+    var quality: SnapshotQuality = .high
+}
+
+extension SnapshotSettings {
+    /// User-approved exception to the no-backward-compatibility rule: v1.5.0 JSON keeps its quality, absent or unreadable fields take defaults, and the legacy `resolution` key is ignored.
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let defaults = SnapshotSettings()
+        outputType = (try? container.decodeIfPresent(CaptureOutputType.self, forKey: .outputType)) ?? defaults.outputType
+        videoDuration = (try? container.decodeIfPresent(Int.self, forKey: .videoDuration)) ?? defaults.videoDuration
+        outputSize = (try? container.decodeIfPresent(CameraSnapConfiguration.OutputSize.self, forKey: .outputSize)) ?? defaults.outputSize
+        quality = (try? container.decodeIfPresent(SnapshotQuality.self, forKey: .quality)) ?? defaults.quality
+    }
+}
+
+/// How long local incident files are kept before the retention pruner deletes them.
+///
+/// Case order is the picker order, from the longest to the shortest period.
+enum RetentionPeriod: String, Codable, CaseIterable, Sendable {
+    case oneYear
+    case oneMonth
+    case oneWeek
+    /// Deletes a record's files once every enabled iCloud/Dropbox upload confirms; otherwise the 1-week rule applies.
+    case afterUpload
+
+    private static let day: TimeInterval = 24 * 60 * 60
+
+    /// Fixed day counts, so the sweep does not depend on the calendar or the time zone.
+    var maxAge: TimeInterval {
         switch self {
-        case .full: 1.0
-        case .half: 0.5
-        case .quarter: 0.25
+        case .oneYear: 365 * Self.day
+        case .oneMonth: 30 * Self.day
+        case .oneWeek, .afterUpload: 7 * Self.day
+        }
+    }
+
+    /// The localized picker title.
+    var title: String {
+        switch self {
+        case .oneYear: NSLocalizedString("KeepFilesOneYear", comment: "")
+        case .oneMonth: NSLocalizedString("KeepFilesOneMonth", comment: "")
+        case .oneWeek: NSLocalizedString("KeepFilesOneWeek", comment: "")
+        case .afterUpload: NSLocalizedString("KeepFilesAfterUpload", comment: "")
         }
     }
 }
 
-/// Groups snapshot quality and resolution preferences.
+/// Retention preference plus the one-time upgrade state that `RetentionManager` keeps.
 ///
-struct SnapshotSettings: Codable, Equatable {
-    /// JPEG compression quality. Default: `.high` (75%).
-    var quality: SnapshotQuality = .high
+struct RetentionSettings: Codable, Equatable {
+    /// The "Keep files" period. Default: one week.
+    var keepFiles: RetentionPeriod = .oneWeek
 
-    /// Image resolution scaling. Default: `.full` (no scaling).
-    var resolution: SnapshotResolution = .full
+    /// Set on the first launch of the retention-aware version; older files age from this date, not from their capture date.
+    var startDate: Date?
+
+    /// True once the upgrade notice was considered, so it shows at most once.
+    var isUpgradeNoticeShown = false
+
+    /// Resets the user's period but keeps the one-time upgrade state, so a reset never re-shows the notice.
+    func resettingPreference() -> RetentionSettings {
+        RetentionSettings(startDate: startDate, isUpgradeNoticeShown: isUpgradeNoticeShown)
+    }
 }
 
 /// Represents UI settings to manage and store the state of user interface elements.
@@ -175,8 +229,11 @@ protocol AppSettingsProtocol {
     /// Settings related to synchronization and storage of snapshots.
     var sync: SyncSettings { get set }
 
-    /// Snapshot quality and resolution settings.
+    /// Capture output settings.
     var snapshot: SnapshotSettings { get set }
+
+    /// Local file retention settings.
+    var retention: RetentionSettings { get set }
 
     /// Settings to manage and store the state of user interface elements.
     var ui: UISettings { get set }
@@ -211,9 +268,13 @@ final class AppSettings: AppSettingsProtocol {
     @UserDefault("SyncSettings", defaultValue: SyncSettings())
     var sync: SyncSettings
 
-    /// Snapshot quality and resolution settings.
+    /// Capture output settings.
     @UserDefault("SnapshotSettings", defaultValue: SnapshotSettings())
     var snapshot: SnapshotSettings
+
+    /// Local file retention settings; a separate key so older stored groups decode unchanged.
+    @UserDefault("RetentionSettings", defaultValue: RetentionSettings())
+    var retention: RetentionSettings
 
     /// UI settings to remember the state of user interface elements.
     @UserDefault("UISettings", defaultValue: UISettings())
@@ -225,6 +286,7 @@ final class AppSettings: AppSettingsProtocol {
         triggers = TriggerSettings()
         sync = SyncSettings()
         snapshot = SnapshotSettings()
+        retention = retention.resettingPreference()
         ui = UISettings()
     }
 }
@@ -246,6 +308,8 @@ final class AppSettingsPreview: AppSettingsProtocol {
 
     var snapshot: SnapshotSettings = .init()
 
+    var retention: RetentionSettings = .init()
+
     var ui: UISettings = .init()
 
     func resetToDefaults() {
@@ -253,6 +317,7 @@ final class AppSettingsPreview: AppSettingsProtocol {
         triggers = TriggerSettings()
         sync = SyncSettings()
         snapshot = SnapshotSettings()
+        retention = retention.resettingPreference()
         ui = UISettings()
     }
 }

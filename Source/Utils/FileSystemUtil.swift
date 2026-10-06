@@ -18,6 +18,12 @@ protocol FileSystemUtilProtocol {
     ///   - quality: JPEG compression factor (0.0–1.0). Default is 0.75.
     /// - Returns: The URL where the image is stored, or nil if there was an error.
     func store(image: NSImage, forKey key: String, quality: CGFloat) -> URL?
+
+    /// The folder that holds every incident file; nil when the Documents folder is unavailable.
+    var incidentDirectory: URL? { get }
+
+    /// The `<key>.mov` path in the incident folder, creating the folder if needed; writes no file.
+    func movieURL(forKey key: String) -> URL?
 }
 
 extension FileSystemUtilProtocol {
@@ -77,21 +83,30 @@ public final class FileSystemUtil: FileSystemUtilProtocol {
         return nil
     }
     
+    var incidentDirectory: URL? {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(dirName)
+    }
+
+    func movieURL(forKey key: String) -> URL? {
+        createdIncidentDirectory()?.appendingPathComponent(key, conformingTo: .quickTimeMovie)
+    }
+
     // MARK: - Private helper methods
-    
+
     /// Generate a file path based on a given trigger key. This file path points to a jpeg file under the "Lock-Watcher" directory in the user's documents.
     ///
     /// - Parameter key: The unique trigger key.
     /// - Returns: The URL for the jpeg file, or nil if there was an error.
     private func filePath(forKey key: String) -> URL? {
-        let fileManager = FileManager.default
-        guard let documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+        createdIncidentDirectory()?.appendingPathComponent(key, conformingTo: .jpeg)
+    }
+
+    private func createdIncidentDirectory() -> URL? {
+        guard let dirURL = incidentDirectory else {
             return nil
         }
-        
-        let dirURL = documentURL.appendingPathComponent(dirName)
-        
-        // Create the "Lock-Watcher" directory if it doesn't exist.
+
+        let fileManager = FileManager.default
         if fileManager.fileExists(atPath: dirURL.path) == false {
             do {
                 try fileManager.createDirectory(at: dirURL, withIntermediateDirectories: true)
@@ -100,8 +115,7 @@ public final class FileSystemUtil: FileSystemUtilProtocol {
                 return nil
             }
         }
-        
-        // Return the full file path for the jpeg image.
-        return dirURL.appendingPathComponent(key, conformingTo: .jpeg)
+
+        return dirURL
     }
 }

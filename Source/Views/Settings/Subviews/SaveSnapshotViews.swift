@@ -5,6 +5,7 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import CameraSnap
 import SwiftUI
 
 /// A view component that allows the user to determine the number of last actions to keep.
@@ -145,21 +146,94 @@ struct SnapshotQualityView: View {
     }
 }
 
-/// A view component that allows the user to select the resolution scaling for snapshots.
-struct SnapshotResolutionView: View {
-    @Binding var snapshotResolution: SnapshotResolution
+/// A view component that allows the user to choose between a photo and a video.
+struct SnapshotOutputTypeView: View {
+    @Binding var outputType: CaptureOutputType
 
     var body: some View {
-        Picker(selection: $snapshotResolution) {
-            Text("SnapshotResolutionFull").tag(SnapshotResolution.full)
-            Text("SnapshotResolutionHalf").tag(SnapshotResolution.half)
-            Text("SnapshotResolutionQuarter").tag(SnapshotResolution.quarter)
+        Picker(selection: $outputType) {
+            Text("OutputTypePhoto").tag(CaptureOutputType.photo)
+            Text("OutputTypeVideo").tag(CaptureOutputType.video)
         } label: {
-            Text("SnapshotResolution")
+            Text("OutputType")
         }
         .pickerStyle(.segmented)
-        .accessibilityIdentifier(AccessibilityID.Settings.snapshotResolutionPicker)
-        .accessibilityLabel(AccessibilityLabel.Settings.snapshotResolution)
+        .accessibilityIdentifier(AccessibilityID.Settings.outputTypePicker)
+        .accessibilityLabel(AccessibilityLabel.Settings.outputType)
+    }
+}
+
+/// A view component that allows the user to set the video length.
+struct VideoDurationView: View {
+    @Binding var videoDuration: Int
+
+    var body: some View {
+        Stepper(value: $videoDuration, in: SnapshotSettings.videoDurationRange) {
+            Text(String(format: NSLocalizedString("VideoDuration %d", comment: ""), videoDuration))
+        }
+        .accessibilityIdentifier(AccessibilityID.Settings.videoDurationStepper)
+        .accessibilityLabel(AccessibilityLabel.Settings.videoDuration(videoDuration))
+    }
+}
+
+/// A view component that allows the user to select the capture size for photos and videos.
+struct SnapshotOutputSizeView: View {
+    @Binding var outputSize: CameraSnapConfiguration.OutputSize
+
+    var body: some View {
+        Picker(selection: $outputSize) {
+            ForEach(CameraSnapConfiguration.OutputSize.allCases, id: \.self) { size in
+                Text(LocalizedStringKey(size.rawValue)).tag(size)
+            }
+        } label: {
+            Text("OutputSize")
+        }
+        .pickerStyle(.segmented)
+        .accessibilityIdentifier(AccessibilityID.Settings.outputSizePicker)
+        .accessibilityLabel(AccessibilityLabel.Settings.outputSize)
+    }
+}
+
+/// A view component that allows the user to choose how long local capture files are kept.
+struct KeepFilesView: View {
+    @Binding var keepFiles: RetentionPeriod
+    let pendingKeepFiles: RetentionPeriod?
+    let confirm: (RetentionPeriod) -> Void
+    let cancel: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: DesignSystem.Spacing.xs) {
+            Picker(selection: $keepFiles) {
+                ForEach(RetentionPeriod.allCases, id: \.self) { period in
+                    Text(period.title).tag(period)
+                }
+            } label: {
+                Text("KeepFiles")
+            }
+            .pickerStyle(.menu)
+            .accessibilityIdentifier(AccessibilityID.Settings.keepFilesPicker)
+            .accessibilityLabel(AccessibilityLabel.Settings.keepFiles)
+
+            Text("KeepFilesFootnote")
+                .font(DesignSystem.Typography.footnote)
+                .foregroundStyle(DesignSystem.Colors.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier(AccessibilityID.Settings.keepFilesFootnote)
+        }
+        .alert("KeepFilesConfirmTitle", isPresented: isConfirming, presenting: pendingKeepFiles) { period in
+            Button("KeepFilesConfirmButton", role: .destructive) { confirm(period) }
+            Button("ButtonCancel", role: .cancel, action: cancel)
+        } message: { period in
+            Text(String(format: NSLocalizedString("KeepFilesConfirmMessage %@", comment: ""), period.title))
+        }
+    }
+
+    private var isConfirming: Binding<Bool> {
+        Binding(get: { pendingKeepFiles != nil }, set: {
+            if !$0 {
+                cancel()
+            }
+        })
     }
 }
 
