@@ -46,13 +46,12 @@ public final class DatabaseDto: Codable, Identifiable {
         path = try container.decodeIfPresent(URL.self, forKey: .path)
     }
     
-    /// Initializes the `DatabaseDto` using a `ThiefDto` object.
-    ///
-    /// - Parameter thiefDto: The `ThiefDto` object that provides the data.
-    init(with thiefDto: ThiefDto) {
+    /// Fails when the record has no still, because history rows need image data; `path` prefers the movie.
+    init?(with thiefDto: ThiefDto) {
+        guard let snapshot = thiefDto.snapshot else { return nil }
         date = thiefDto.date
-        data = thiefDto.snapshot!.jpegData(quality: thiefDto.compressionFactor)
-        path = thiefDto.filePath
+        data = snapshot.jpegData(quality: thiefDto.compressionFactor)
+        path = thiefDto.videoURL ?? thiefDto.filePath
     }
 }
 

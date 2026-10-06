@@ -46,43 +46,52 @@ final class ICloudNotifier: NotifierProtocol, Sendable {
         // This method is left blank for future settings integrations.
     }
 
-    /// Sends an image notification based on the provided `ThiefDto` information.
+    /// Copies the movie of a video record, then writes the still annotated with the record's details.
     ///
-    /// This function saves the image with optional text derived from `thiefDto.description()`
-    /// to the iCloud's "Documents" folder.
-    ///
-    /// - Parameter thiefDto: The data object containing the details to be saved as an image.
-    /// - Throws: `NotifierError` if the image fails to save.
+    /// - Throws: `NotifierError` if a file fails to save.
     func send(_ thiefDto: ThiefDto) async throws {
-        guard let localURL = thiefDto.filePath else {
+        guard let media = thiefDto.media else {
             logger.error("wrong file path")
             throw NotifierError.invalidFilePath
         }
 
-        guard var iCloudURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent(documentsFolderName) else {
+        guard let iCloudURL = FileManager.default.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent(documentsFolderName) else {
             logger.error("wrong iCloud url")
             throw NotifierError.invalidCloudURL("iCloud")
         }
 
-        iCloudURL.appendPathComponent(localURL.lastPathComponent)
-
-        var image = thiefDto.snapshot
-        let info = thiefDto.description()
-        if !info.isEmpty {
-            image = image?.imageWithText(text: info)
-        }
-
         logger.debug("send: \(thiefDto)")
 
-        do {
-            guard let data = image?.jpegData(quality: thiefDto.compressionFactor) else {
+        if case .video(let movie, _) = media {
+            do {
+                try FileManager.default.copyItem(at: movie, to: iCloudURL.appendingPathComponent(movie.lastPathComponent))
+            } catch {
+                logger.error("movie copy failed")
+                throw NotifierError.uploadFailed(error)
+            }
+        }
+
+        guard let localURL = thiefDto.filePath, var image = thiefDto.snapshot else {
+            if case .photo = media {
                 throw NotifierError.emptyData
             }
-            try data.write(to: iCloudURL)
-        } catch let error as NotifierError {
-            throw error
+            return
+        }
+
+        let info = thiefDto.description()
+        if !info.isEmpty {
+            image = image.imageWithText(text: info) ?? image
+        }
+
+        let data = image.jpegData(quality: thiefDto.compressionFactor)
+        guard !data.isEmpty else {
+            throw NotifierError.emptyData
+        }
+
+        do {
+            try data.write(to: iCloudURL.appendingPathComponent(localURL.lastPathComponent))
         } catch {
-            logger.error(error.localizedDescription)
+            logger.error("still write failed")
             throw NotifierError.uploadFailed(error)
         }
     }

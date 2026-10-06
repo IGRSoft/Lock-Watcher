@@ -74,8 +74,18 @@ struct SettingsView: View {
 
                         SaveSnapshotToDiskView(isSaveSnapshotToDisk: viewModel.isSaveSnapshotToDisk)
 
-                        SnapshotQualityView(snapshotQuality: viewModel.snapshotQuality)
-                        SnapshotResolutionView(snapshotResolution: viewModel.snapshotResolution)
+                        SnapshotOutputTypeView(outputType: viewModel.snapshotOutputType)
+                        if viewModel.showsVideoDuration {
+                            VideoDurationView(videoDuration: viewModel.snapshotVideoDuration)
+                        }
+                        if viewModel.showsSnapshotQuality {
+                            SnapshotQualityView(snapshotQuality: viewModel.snapshotQuality)
+                        }
+                        SnapshotOutputSizeView(outputSize: viewModel.snapshotOutputSize)
+                        KeepFilesView(keepFiles: viewModel.keepFiles,
+                                      pendingKeepFiles: viewModel.pendingKeepFiles,
+                                      confirm: viewModel.confirmKeepFiles,
+                                      cancel: viewModel.cancelPendingKeepFiles)
                     }
                     .extended(viewModel.isOptionsInfoExpand, titleKey: "SettingsMenuOptions")
                     .accessibilityIdentifier(AccessibilityID.Settings.optionsSection)

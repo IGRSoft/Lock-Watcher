@@ -43,29 +43,4 @@ final class NSImageDataTest: XCTestCase {
         XCTAssertLessThanOrEqual(lowQuality.count, highQuality.count,
                                  "Lower quality should produce smaller or equal data.")
     }
-
-    /// Test that resized image has reduced dimensions
-    func testResizedImage() {
-        guard let image = NSImage(named: "MenuIcon") else {
-            XCTFail("Failed to load the sample image.")
-            return
-        }
-
-        let original = image.size
-        let resized = image.resized(by: 0.5)
-
-        XCTAssertEqual(resized.size.width, floor(original.width * 0.5), accuracy: 1)
-        XCTAssertEqual(resized.size.height, floor(original.height * 0.5), accuracy: 1)
-    }
-
-    /// Test that resized with scaleFactor >= 1.0 returns same image
-    func testResizedWithFullScale() {
-        guard let image = NSImage(named: "MenuIcon") else {
-            XCTFail("Failed to load the sample image.")
-            return
-        }
-
-        let result = image.resized(by: 1.0)
-        XCTAssertEqual(result.size, image.size)
-    }
 }

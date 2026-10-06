@@ -54,8 +54,11 @@ public final class ThiefDto: Equatable, Sendable {
     /// An image taken from the device's camera during the trigger action.
     let snapshot: NSImage?
     
-    /// The file location where the image is stored.
+    /// The file location where the image is stored; for a video record this is the poster still.
     let filePath: URL?
+
+    /// The recorded movie, when the output type is video.
+    let videoURL: URL?
 
     /// The JPEG compression factor used when encoding this snapshot (0.0–1.0).
     let compressionFactor: CGFloat
@@ -63,17 +66,26 @@ public final class ThiefDto: Equatable, Sendable {
     /// The date and time when the trigger action occurred.
     let date: Date
 
-    init(triggerType: TriggerType, coordinate: CLLocationCoordinate2D? = nil, ipAddress: String? = nil, traceRoute: String? = nil, snapshot: NSImage? = nil, filePath: URL? = nil, compressionFactor: CGFloat = SnapshotQuality.high.compressionFactor, date: Date = .init()) {
+    init(triggerType: TriggerType, coordinate: CLLocationCoordinate2D? = nil, ipAddress: String? = nil, traceRoute: String? = nil, snapshot: NSImage? = nil, filePath: URL? = nil, videoURL: URL? = nil, compressionFactor: CGFloat = SnapshotQuality.high.compressionFactor, date: Date = .init()) {
         self.coordinate = coordinate
         self.ipAddress = ipAddress
         self.traceRoute = traceRoute
         self.triggerType = triggerType
         self.snapshot = snapshot
         self.filePath = filePath
+        self.videoURL = videoURL
         self.compressionFactor = compressionFactor
         self.date = date
     }
     
+    /// The record's local files, or nil when nothing was stored.
+    var media: CaptureMedia? {
+        if let videoURL {
+            return .video(movie: videoURL, poster: filePath)
+        }
+        return filePath.map { .photo(still: $0) }
+    }
+
     /// Provides a textual description of the ThiefDto object.
     /// It's useful for logging or presenting the data to the user in a readable format.
     ///

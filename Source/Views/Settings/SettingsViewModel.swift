@@ -5,6 +5,7 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import CameraSnap
 import Combine
 import Observation
 import SwiftUI
@@ -262,12 +263,78 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
 
-    var snapshotResolution: Binding<SnapshotResolution> {
-        Binding<SnapshotResolution>(get: {
-            self.settings.snapshot.resolution
+    var snapshotOutputType: Binding<CaptureOutputType> {
+        Binding<CaptureOutputType>(get: {
+            self.settings.snapshot.outputType
         }, set: {
-            self.settings.snapshot.resolution = $0
+            self.settings.snapshot.outputType = $0
         })
+    }
+
+    var snapshotVideoDuration: Binding<Int> {
+        Binding<Int>(get: {
+            self.settings.snapshot.videoDuration
+        }, set: {
+            let range = SnapshotSettings.videoDurationRange
+            self.settings.snapshot.videoDuration = min(max($0, range.lowerBound), range.upperBound)
+        })
+    }
+
+    var snapshotOutputSize: Binding<CameraSnapConfiguration.OutputSize> {
+        Binding<CameraSnapConfiguration.OutputSize>(get: {
+            self.settings.snapshot.outputSize
+        }, set: {
+            self.settings.snapshot.outputSize = $0
+        })
+    }
+
+    var showsVideoDuration: Bool {
+        settings.snapshot.outputType == .video
+    }
+
+    var showsSnapshotQuality: Bool {
+        settings.snapshot.outputType == .photo
+    }
+
+    // MARK: - Bindings for Retention settings
+
+    /// A shorter period is held in `pendingKeepFiles` until confirmed, because applying it deletes older files at once.
+    var keepFiles: Binding<RetentionPeriod> {
+        Binding<RetentionPeriod>(get: {
+            self.settings.retention.keepFiles
+        }, set: {
+            self.requestKeepFiles($0)
+        })
+    }
+
+    /// A shorter "Keep files" period waiting for the user's confirmation.
+    var pendingKeepFiles: RetentionPeriod?
+
+    /// Takes the period the dialog presented, so the alert's own dismissal clearing `pendingKeepFiles` first cannot drop it.
+    func confirmKeepFiles(_ period: RetentionPeriod) {
+        pendingKeepFiles = nil
+        guard period != settings.retention.keepFiles else { return }
+        commitKeepFiles(period)
+    }
+
+    func cancelPendingKeepFiles() {
+        pendingKeepFiles = nil
+    }
+
+    private func requestKeepFiles(_ period: RetentionPeriod) {
+        let current = settings.retention.keepFiles
+        guard period != current else { return }
+        let order = RetentionPeriod.allCases
+        if let newIndex = order.firstIndex(of: period), let currentIndex = order.firstIndex(of: current), newIndex > currentIndex {
+            pendingKeepFiles = period
+        } else {
+            commitKeepFiles(period)
+        }
+    }
+
+    private func commitKeepFiles(_ period: RetentionPeriod) {
+        settings.retention.keepFiles = period
+        thiefManager.applyRetentionPolicy()
     }
 
     /// Closure to be executed when access is granted.

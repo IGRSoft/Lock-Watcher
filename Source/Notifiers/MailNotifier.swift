@@ -77,12 +77,14 @@ final class MailNotifier: NotifierProtocol, @unchecked Sendable {
 
     /// Sends a mail notification based on the provided `ThiefDto` information.
     ///
-    /// This function communicates with the XPCMail service to dispatch the mail.
+    /// This function communicates with the XPCMail service to dispatch the mail; a movie over the size limit is replaced by the still.
     ///
     /// - Parameter thiefDto: The data object containing the details to be included in the mail.
     /// - Throws: `NotifierError` if required configuration is missing.
     func send(_ thiefDto: ThiefDto) async throws {
-        guard let filePath = thiefDto.filePath?.path else {
+        guard let media = thiefDto.media,
+              let filePath = MediaAttachmentPolicy.attachment(for: media, limitBytes: MediaAttachmentPolicy.mailLimitBytes, logger: logger)?.path
+        else {
             logger.error("wrong file path")
             throw NotifierError.invalidFilePath
         }

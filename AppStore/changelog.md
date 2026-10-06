@@ -1,5 +1,27 @@
 # Lock-Watcher — Changelog
 
+## v1.6.0 (Build 1601) — 2026-10-06
+
+### New
+- Output type setting: photo or a silent 1–5 s video
+- Output size setting for photo and video: Original, 1/2, 1/4
+- "Keep files" setting: 1 year, 1 month, 1 week (default), or None (remove after upload)
+- Video delivery to iCloud, Dropbox, Mail and notifications, with a still image when a video is too large
+- Notification when camera access is denied
+
+### Improved
+- Upgrade grace period: captures made before the upgrade are kept for the full "Keep files" period
+- Shortening "Keep files" asks for confirmation
+- Stored JPEG quality is kept on upgrade from v1.5.0
+- Trace route works again with SimpleTracer 0.1.3
+
+### Infrastructure
+- Camera library switched from PhotoSnap to CameraSnap 0.3.1
+- SimplePing 0.1.2, SimpleTracer 0.1.3
+- Privacy manifest (PrivacyInfo.xcprivacy)
+
+---
+
 ## v1.5.0 (Build 1501) — 2026-09-16
 
 ### New

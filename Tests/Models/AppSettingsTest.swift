@@ -274,54 +274,76 @@ final class SnapshotQualityTests: XCTestCase {
     }
 }
 
-// MARK: - SnapshotResolution Tests
-
-final class SnapshotResolutionTests: XCTestCase {
-    func testScaleFactors() {
-        XCTAssertEqual(SnapshotResolution.full.scaleFactor, 1.0)
-        XCTAssertEqual(SnapshotResolution.half.scaleFactor, 0.5)
-        XCTAssertEqual(SnapshotResolution.quarter.scaleFactor, 0.25)
-    }
-
-    func testCaseIterable() {
-        XCTAssertEqual(SnapshotResolution.allCases.count, 3)
-    }
-
-    func testCodable() throws {
-        let original = SnapshotResolution.quarter
-        let data = try JSONEncoder().encode(original)
-        let decoded = try JSONDecoder().decode(SnapshotResolution.self, from: data)
-        XCTAssertEqual(decoded, original)
-    }
-}
-
 // MARK: - SnapshotSettings Tests
 
 final class SnapshotSettingsTests: XCTestCase {
     func testDefaultValues() {
         let settings = SnapshotSettings()
+        XCTAssertEqual(settings.outputType, .photo)
+        XCTAssertEqual(settings.videoDuration, 3)
+        XCTAssertEqual(settings.outputSize, .original)
         XCTAssertEqual(settings.quality, .high)
-        XCTAssertEqual(settings.resolution, .full)
     }
 
-    func testCustomValues() {
-        var settings = SnapshotSettings()
-        settings.quality = .low
-        settings.resolution = .quarter
-
-        XCTAssertEqual(settings.quality, .low)
-        XCTAssertEqual(settings.resolution, .quarter)
-    }
-
-    func testCodable() throws {
+    func testCodableRoundTrip() throws {
         var original = SnapshotSettings()
+        original.outputType = .video
+        original.videoDuration = 5
+        original.outputSize = .quarter
         original.quality = .medium
-        original.resolution = .half
 
         let data = try JSONEncoder().encode(original)
         let decoded = try JSONDecoder().decode(SnapshotSettings.self, from: data)
 
         XCTAssertEqual(decoded, original)
+    }
+
+    func testUnreadableFieldFallsBackAloneToItsDefault() throws {
+        let json = Data(#"{"outputType":"hologram","videoDuration":4,"outputSize":"1/2","quality":25}"#.utf8)
+
+        let decoded = try JSONDecoder().decode(SnapshotSettings.self, from: json)
+
+        XCTAssertEqual(decoded.outputType, .photo)
+        XCTAssertEqual(decoded.videoDuration, 4)
+        XCTAssertEqual(decoded.outputSize, .half)
+        XCTAssertEqual(decoded.quality, .low)
+    }
+}
+
+// MARK: - RetentionSettings Tests
+
+final class RetentionSettingsTests: XCTestCase {
+    func testDefaultValues() {
+        let settings = RetentionSettings()
+        XCTAssertEqual(settings.keepFiles, .oneWeek)
+        XCTAssertNil(settings.startDate)
+        XCTAssertFalse(settings.isUpgradeNoticeShown)
+    }
+
+    func testPickerOrderAndMaxAge() {
+        let day: TimeInterval = 86_400
+        XCTAssertEqual(RetentionPeriod.allCases, [.oneYear, .oneMonth, .oneWeek, .afterUpload])
+        XCTAssertEqual(RetentionPeriod.allCases.map(\.maxAge), [365 * day, 30 * day, 7 * day, 7 * day])
+    }
+
+    func testResetKeepsUpgradeState() {
+        let start = Date(timeIntervalSince1970: 1000)
+        let settings = RetentionSettings(keepFiles: .oneYear, startDate: start, isUpgradeNoticeShown: true)
+
+        let reset = settings.resettingPreference()
+
+        XCTAssertEqual(reset, RetentionSettings(keepFiles: .oneWeek, startDate: start, isUpgradeNoticeShown: true))
+    }
+
+    func testAppSettingsPreviewResetKeepsRetentionStartDate() {
+        let settings = AppSettingsPreview()
+        let start = Date(timeIntervalSince1970: 2000)
+        settings.retention = RetentionSettings(keepFiles: .oneMonth, startDate: start, isUpgradeNoticeShown: true)
+
+        settings.resetToDefaults()
+
+        XCTAssertEqual(settings.retention.keepFiles, .oneWeek)
+        XCTAssertEqual(settings.retention.startDate, start)
     }
 }
 

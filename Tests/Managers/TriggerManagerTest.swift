@@ -177,6 +177,7 @@ final class MockAppSettings: AppSettingsProtocol {
     var triggers: TriggerSettings
     var sync: SyncSettings
     var snapshot: SnapshotSettings
+    var retention: RetentionSettings
     var ui: UISettings
 
     init(
@@ -184,12 +185,14 @@ final class MockAppSettings: AppSettingsProtocol {
         triggers: TriggerSettings = .init(),
         sync: SyncSettings = .init(),
         snapshot: SnapshotSettings = .init(),
+        retention: RetentionSettings = .init(),
         ui: UISettings = .init()
     ) {
         self.options = options
         self.triggers = triggers
         self.sync = sync
         self.snapshot = snapshot
+        self.retention = retention
         self.ui = ui
     }
 
@@ -198,6 +201,7 @@ final class MockAppSettings: AppSettingsProtocol {
         triggers = TriggerSettings()
         sync = SyncSettings()
         snapshot = SnapshotSettings()
+        retention = retention.resettingPreference()
         ui = UISettings()
     }
 

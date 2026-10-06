@@ -23,6 +23,8 @@ final class DatabaseManager: DatabaseManagerProtocol {
     
     /// Holds the application settings.
     private var settings: AppSettingsProtocol
+
+    private let logger: LogProtocol
     
     // MARK: - Variables
     
@@ -45,8 +47,9 @@ final class DatabaseManager: DatabaseManagerProtocol {
     // MARK: - initialiser
     
     /// Initializes the database manager with app settings and configures storage options.
-    init(settings: AppSettingsProtocol) {
+    init(settings: AppSettingsProtocol, logger: LogProtocol = Log(category: .database)) {
         self.settings = settings
+        self.logger = logger
         
         var options = Options()
         options.folder = "Thiefs"
@@ -61,11 +64,13 @@ final class DatabaseManager: DatabaseManagerProtocol {
     
     /// Stores the thief incident information in the storage and updates the `latestImages`.
     func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
-        // Convert the received data to the desired format
-        let dto = DatabaseDto(with: thiefDto)
-        
         // Read the current images from the storage
         let images = readImages()
+
+        guard let dto = DatabaseDto(with: thiefDto) else {
+            logger.error("Record has no still image; not stored in history")
+            return images
+        }
         
         // Append the new data and keep only the latest specified number of incidents
         images.append(dto)

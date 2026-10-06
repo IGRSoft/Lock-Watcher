@@ -25,12 +25,13 @@ final class FileSystemUtilTests: XCTestCase {
     }
     
     func testStoreImage_success() throws {
-        let image = try XCTUnwrap(NSImage(named: NSImage.Name("AppIcon"))) // Replace with an actual image name
+        let image = NSImage.testImage(size: NSSize(width: 64, height: 48))
         let key = "uniqueSuccessKey"
         
         let url = fileSystemUtil.store(image: image, forKey: key)
         
         XCTAssertNotNil(url, "The URL should not be nil when storing an image successfully.")
+        XCTAssertTrue(try FileManager.default.fileExists(atPath: XCTUnwrap(url).path))
         XCTAssertNil(mockLogger.debugMessage, "No debug log should be generated when storing an image successfully.")
         
         // Clean up (optional)

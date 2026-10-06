@@ -70,14 +70,14 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     /// Displays the main window after showing a security access alert.
     func displayMainWindow() {
         Task { @MainActor in
-            if await authentificateIfNeeded() {
+            if await authenticateIfNeeded() {
                 statusBarButton.image = .statusBarIcon()
                 showPopover(for: statusBarButton)
             }
         }
     }
     
-    private func authentificateIfNeeded() async -> Bool {
+    private func authenticateIfNeeded() async -> Bool {
         if !settings.options.isProtected {
             return true
         } else {

@@ -30,28 +30,4 @@ extension NSImage {
 
         return data
     }
-
-    /// Returns a new image scaled by the given factor.
-    ///
-    /// - Parameter scaleFactor: The factor to scale by (e.g. 0.5 for half size). Values >= 1.0 return self unchanged.
-    /// - Returns: A resized `NSImage`, or `self` if no scaling is needed.
-    func resized(by scaleFactor: CGFloat) -> NSImage {
-        guard scaleFactor < 1.0, scaleFactor > 0 else { return self }
-
-        let currentSize = size
-        let newWidth = floor(currentSize.width * scaleFactor)
-        let newHeight = floor(currentSize.height * scaleFactor)
-        let newSize = NSSize(width: newWidth, height: newHeight)
-
-        let resizedImage = NSImage(size: newSize)
-        resizedImage.lockFocus()
-        NSGraphicsContext.current?.imageInterpolation = .high
-        draw(in: NSRect(origin: .zero, size: newSize),
-             from: NSRect(origin: .zero, size: currentSize),
-             operation: .copy,
-             fraction: 1.0)
-        resizedImage.unlockFocus()
-
-        return resizedImage
-    }
 }

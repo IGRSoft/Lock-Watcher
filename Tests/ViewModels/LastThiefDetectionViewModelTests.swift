@@ -36,7 +36,7 @@ final class LastThiefDetectionViewModelTests: XCTestCase {
     private func createTestDatabaseDto(date: Date = Date()) -> DatabaseDto {
         let testImage = NSImage(size: NSSize(width: 100, height: 100))
         let thiefDto = ThiefDto(triggerType: .debug, snapshot: testImage, date: date)
-        return DatabaseDto(with: thiefDto)
+        return DatabaseDto(with: thiefDto)!
     }
 
     // MARK: - Initialization Tests

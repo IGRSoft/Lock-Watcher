@@ -93,14 +93,14 @@ swiftformat . && xcodebuild test -project Lock-Watcher.xcodeproj -scheme Lock-Wa
 
 ### XPC Services
 
-- **`XPCServices/XPCAuthentication/`** - Biometric auth (Swift)
-- **`XPCServices/XPCMail/`** - Email delivery (Obj-C, Non-MAS only)
-- **`XPCServices/XPCPower/`** - Power management
+- **`XPCAuthentication/`** - Biometric auth (Swift)
+- **`XPCMail/`** - Email delivery (Obj-C, Non-MAS only)
+- **`XPCPower/`** - Power management
 
 ### Resources
 
-- **`Resources/`** - Assets, Info.plist, entitlements
-- **`Configurations/`** - Build configs (MAS: `app/`, Non-MAS: `app-nomas/`)
+- **`Resources/`** - Assets, Info.plist, entitlements, privacy manifest
+- **`Configurations/`** - Build configs (MAS: `Configurations/app/`, Non-MAS: `Configurations/app-nomas/`)
 
 ---
 
@@ -155,9 +155,9 @@ rg -n "Sendable" Source/
 
 ### Permissions (CRITICAL)
 
-- **Camera**: Required for photo capture - handle denial gracefully
+- **Camera**: Required for photo or video capture - handle denial gracefully (no microphone entitlement exists)
 - **Location**: Required for GPS metadata - check before each use
-- **Notifications**: Required for alerts - provide clear guidance if denied
+- **Notifications**: Required for alerts and upgrade notice - provide clear guidance if denied
 
 ### Secrets Management
 
@@ -175,7 +175,7 @@ rg -n "Sendable" Source/
 
 ## Git Workflow
 
-- Branch from `main` for features: `feature/description`
+- Branch from `develop` for features: `feature/<description>`
 - Use Conventional Commits: `feat:`, `fix:`, `docs:`, `refactor:`
 - PRs require: passing tests, SwiftFormat, type checks
 - Squash commits on merge
@@ -220,5 +220,6 @@ rg -n "Sendable" Source/
 | Localization | English (en), Ukrainian (uk) |
 | Storage | EasyStash (encrypted local storage) |
 | Cloud | iCloud (CloudKit), Dropbox SDK |
-| Camera | PhotoSnap library |
+| Camera | CameraSnap library (0.3.1+, photo or H.264 video) |
+| Privacy Manifest | PrivacyInfo.xcprivacy (NSPrivacyAccessedAPICategoryFileTimestamp C617.1, NSPrivacyAccessedAPICategoryUserDefaults CA92.1) |
 | Auto-Launch | LaunchAtLogin |

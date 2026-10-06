@@ -42,6 +42,10 @@ public final class NetworkUtil: NetworkUtilProtocol {
         self.logger = logger
     }
     
+    deinit {
+        simpleTracer?.stop()
+    }
+    
     // MARK: - Public methods
     
     /// Fetch the device's public IP address from ipify.org.
@@ -67,7 +71,9 @@ public final class NetworkUtil: NetworkUtilProtocol {
     func getTraceRoute(host: String, complete: @escaping Commons.StringClosure) {
         var traceRoute = ""
         
-        simpleTracer = SimpleTracer.trace(host: host, maxTraceTTL: 16) { result in
+        // SimpleTracer keeps no shared instance, so the tracer lives only as long as this reference.
+        simpleTracer?.stop()
+        simpleTracer = SimpleTracer(host: host, maxTraceTTL: 16) { result in
             switch result {
             case .finished(_, let ip, _):
                 traceRoute += "\(ip)}"
@@ -83,5 +89,6 @@ public final class NetworkUtil: NetworkUtilProtocol {
                 traceRoute += "- * * *\n"
             }
         }
+        simpleTracer?.start()
     }
 }
