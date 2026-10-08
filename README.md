@@ -229,7 +229,7 @@ docs: improve README
 
 ## Documentation
 
-- [CLAUDE.md](CLAUDE.md) - AI development guidelines and agent configuration
+- [AGENTS.md](AGENTS.md) - AI development guidelines and agent configuration
 
 ## License
 
