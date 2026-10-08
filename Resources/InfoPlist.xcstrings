@@ -95,13 +95,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add location information to the snapshot to know where it was taken"
+            "value" : "Add location information to snapshots and take a snapshot when the Mac moves while locked"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Додати геопозіцію вашого пристрою до фотографії щоб знати де вона була зроблена"
+            "value" : "Додати геопозицію до знімків і зробити знімок, коли Mac переміщується під час блокування"
           }
         }
       }

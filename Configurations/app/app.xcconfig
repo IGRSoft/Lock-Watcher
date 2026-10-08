@@ -36,4 +36,4 @@ SWIFT_EMIT_LOC_STRINGS = YES
 
 INFOPLIST_KEY_NSFaceIDUsageDescription = To unlock access to database data
 INFOPLIST_KEY_NSCameraUsageDescription = Detect persone who is trying get access to your user
-INFOPLIST_KEY_NSLocationUsageDescription = Add location information to the snapshot to know where it was taken
+INFOPLIST_KEY_NSLocationUsageDescription = Add location information to snapshots and take a snapshot when the Mac moves while locked

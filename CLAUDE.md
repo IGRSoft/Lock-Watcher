@@ -84,6 +84,7 @@ swiftformat . && xcodebuild test -project Lock-Watcher.xcodeproj -scheme Lock-Wa
   - AuthentificationManager - Password/biometric auth
 - **`Source/Listeners/`** - Event trigger listeners
   - WakeUpListener, PowerListener, USBListener, LoginListener
+  - DisplayListener, GeofenceListener, LockedInputListener (fire only while locked, via LockGraceGate)
   - WrongPasswordListener (Non-MAS only)
 - **`Source/Notifiers/`** - Output channels
   - ICloudNotifier, DropboxNotifier, NotificationNotifier

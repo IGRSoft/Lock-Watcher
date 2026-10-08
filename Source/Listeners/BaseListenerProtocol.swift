@@ -12,12 +12,15 @@ import Foundation
 /// This enum identifies each listener that can be installed to monitor
 /// specific system events, such as waking up from sleep or detecting
 /// a USB connection.
-public enum ListenerName: Int, Sendable {
+public enum ListenerName: Int, CaseIterable, Sendable {
     case onWakeUpListener           // Triggered when the system wakes up.
     case onWrongPassword            // Triggered when a wrong password is entered.
     case onBatteryPowerListener     // Triggered when the system switches to battery power.
     case onUSBConnectionListener    // Triggered when a USB device is connected.
     case onLoginListener            // Triggered when a user logs in.
+    case onDisplayListener          // Triggered when a display is attached while locked.
+    case onGeofenceListener         // Triggered when the Mac moves while locked.
+    case onLockedInputListener      // Triggered by keyboard or mouse input while locked.
 }
 
 /// The event type emitted by listeners through AsyncStream.
@@ -50,4 +53,17 @@ public protocol BaseListenerProtocol: Sendable {
     /// After calling this method, the listener will no longer detect its
     /// trigger until `start` is called again. The AsyncStream will finish.
     func stop()
+
+    /// `true` when the listener re-arms itself after an event, so `TriggerManager` keeps the instance instead of replacing it.
+    var keepsRunningAfterEvent: Bool { get }
 }
+
+extension BaseListenerProtocol {
+    public var keepsRunningAfterEvent: Bool {
+        false
+    }
+}
+
+// MARK: - Test Info
+
+// @test-file: Tests/Listeners/ListenerProtocolTest.swift

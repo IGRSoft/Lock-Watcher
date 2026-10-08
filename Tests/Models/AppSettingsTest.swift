@@ -198,6 +198,66 @@ final class TriggerSettingsTests: XCTestCase {
         XCTAssertEqual(decoded.isUseSnapshotOnWakeUp, original.isUseSnapshotOnWakeUp)
         XCTAssertEqual(decoded.isUseSnapshotOnWrongPassword, original.isUseSnapshotOnWrongPassword)
     }
+
+    func testNewTriggerFlagsDefaultOff() {
+        let settings = TriggerSettings()
+
+        XCTAssertFalse(settings.isUseSnapshotOnDisplayAttach)
+        XCTAssertFalse(settings.isUseSnapshotOnLocationChange)
+        XCTAssertFalse(settings.isUseSnapshotOnLockedInput)
+    }
+
+    func testStoredV160SettingsKeepTheirFlags() throws {
+        let json = #"{"isUseSnapshotOnWakeUp":false,"isUseSnapshotOnLogin":true,"isUseSnapshotOnWrongPassword":true,"isUseSnapshotOnSwitchToBatteryPower":true,"isUseSnapshotOnUSBMount":true}"#
+
+        let decoded = try JSONDecoder().decode(TriggerSettings.self, from: Data(json.utf8))
+
+        XCTAssertFalse(decoded.isUseSnapshotOnWakeUp)
+        XCTAssertTrue(decoded.isUseSnapshotOnLogin)
+        XCTAssertTrue(decoded.isUseSnapshotOnWrongPassword)
+        XCTAssertTrue(decoded.isUseSnapshotOnSwitchToBatteryPower)
+        XCTAssertTrue(decoded.isUseSnapshotOnUSBMount)
+        XCTAssertFalse(decoded.isUseSnapshotOnDisplayAttach)
+        XCTAssertFalse(decoded.isUseSnapshotOnLocationChange)
+        XCTAssertFalse(decoded.isUseSnapshotOnLockedInput)
+        XCTAssertEqual(decoded.lockedInputDelay, 10)
+    }
+
+    func testLockedInputDelayDefaultsToTen() {
+        XCTAssertEqual(TriggerSettings().lockedInputDelay, 10)
+        XCTAssertEqual(TriggerSettings.lockedInputDelayRange, 0 ... 10)
+    }
+
+    func testStoredLockedInputDelayIsClampedIntoRange() throws {
+        let high = try JSONDecoder().decode(TriggerSettings.self, from: Data(#"{"lockedInputDelay":42}"#.utf8))
+        let low = try JSONDecoder().decode(TriggerSettings.self, from: Data(#"{"lockedInputDelay":-3}"#.utf8))
+        let valid = try JSONDecoder().decode(TriggerSettings.self, from: Data(#"{"lockedInputDelay":0}"#.utf8))
+
+        XCTAssertEqual(high.lockedInputDelay, 10)
+        XCTAssertEqual(low.lockedInputDelay, 0)
+        XCTAssertEqual(valid.lockedInputDelay, 0)
+    }
+
+    func testUnreadableTriggerFlagFallsBackAloneToItsDefault() throws {
+        let json = #"{"isUseSnapshotOnWakeUp":"yes","isUseSnapshotOnUSBMount":true,"isUseSnapshotOnLockedInput":true}"#
+
+        let decoded = try JSONDecoder().decode(TriggerSettings.self, from: Data(json.utf8))
+
+        XCTAssertTrue(decoded.isUseSnapshotOnWakeUp)
+        XCTAssertTrue(decoded.isUseSnapshotOnUSBMount)
+        XCTAssertTrue(decoded.isUseSnapshotOnLockedInput)
+    }
+
+    func testNewTriggerFlagsRoundTrip() throws {
+        var original = TriggerSettings()
+        original.isUseSnapshotOnDisplayAttach = true
+        original.isUseSnapshotOnLocationChange = true
+        original.isUseSnapshotOnLockedInput = true
+
+        let decoded = try JSONDecoder().decode(TriggerSettings.self, from: JSONEncoder().encode(original))
+
+        XCTAssertEqual(decoded, original)
+    }
 }
 
 // MARK: - SyncSettings Tests
@@ -395,3 +455,7 @@ final class AppSettingsProtocolTests: XCTestCase {
         XCTAssertFalse(settings.ui.isSecurityInfoExpand)
     }
 }
+
+// MARK: - Source Info
+
+// @source-file: Source/Models/AppSettings.swift

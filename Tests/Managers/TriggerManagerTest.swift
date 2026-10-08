@@ -164,6 +164,212 @@ final class TriggerManagerTests: XCTestCase {
 
         XCTAssertNotNil(manager)
     }
+
+    // MARK: - Factory Wiring Tests
+
+    /// Builds a manager whose factory hands out `MockListener`s and records every instance per name.
+    private func makeFactoryManager() -> (TriggerManager, StubValue<[ListenerName: [MockListener]]>) {
+        let made = StubValue<[ListenerName: [MockListener]]>([:])
+        let manager = TriggerManager(logger: LogMock(), lockDetector: MockLockDetector()) { name, _, _ in
+            let listener = MockListener()
+            made.value[name, default: []].append(listener)
+            return listener
+        }
+        return (manager, made)
+    }
+
+    func testNewFlagsStartOnlyTheirListeners() {
+        let (manager, made) = makeFactoryManager()
+        var triggers = TriggerSettings()
+        triggers.isUseSnapshotOnWakeUp = false
+        triggers.isUseSnapshotOnLogin = false
+        triggers.isUseSnapshotOnDisplayAttach = true
+        triggers.isUseSnapshotOnLocationChange = true
+        triggers.isUseSnapshotOnLockedInput = true
+
+        manager.start(settings: MockAppSettings(triggers: triggers)) { _ in }
+
+        for name: ListenerName in [.onDisplayListener, .onGeofenceListener, .onLockedInputListener] {
+            XCTAssertEqual(made.value[name]?.first?.invokedStartCount, 1, "\(name)")
+        }
+        for name: ListenerName in [.onWakeUpListener, .onLoginListener, .onUSBConnectionListener, .onBatteryPowerListener] {
+            XCTAssertEqual(made.value[name]?.first?.invokedStartCount, 0, "\(name)")
+        }
+        manager.stop()
+    }
+
+    func testDisabledFlagStopsRunningListener() {
+        let (manager, made) = makeFactoryManager()
+        let settings = MockAppSettings()
+        settings.triggers.isUseSnapshotOnDisplayAttach = true
+        manager.start(settings: settings) { _ in }
+
+        settings.triggers.isUseSnapshotOnDisplayAttach = false
+        manager.start(settings: settings) { _ in }
+
+        let listener = made.value[.onDisplayListener]?.first
+        XCTAssertEqual(listener?.invokedStopCount, 1)
+        XCTAssertEqual(listener?.isRunning, false)
+        manager.stop()
+    }
+
+    func testDisabledFlagStopsOpenListenerThatIsNotRunning() {
+        let made = StubValue<[ListenerName: [MockListener]]>([:])
+        let manager = TriggerManager(logger: LogMock(), lockDetector: MockLockDetector()) { name, _, _ in
+            let listener = MockListener()
+            listener.stubbedIsRunningAfterStart = name != .onGeofenceListener
+            made.value[name, default: []].append(listener)
+            return listener
+        }
+        let settings = MockAppSettings()
+        settings.triggers.isUseSnapshotOnLocationChange = true
+        manager.start(settings: settings) { _ in }
+
+        let listener = made.value[.onGeofenceListener]?.first
+        XCTAssertEqual(listener?.invokedStartCount, 1)
+        XCTAssertEqual(listener?.isRunning, false)
+
+        settings.triggers.isUseSnapshotOnLocationChange = false
+        manager.start(settings: settings) { _ in }
+
+        XCTAssertEqual(listener?.invokedStopCount, 1)
+        manager.stop()
+    }
+
+    func testFactoryCreatesOneListenerPerName() {
+        let (manager, made) = makeFactoryManager()
+        manager.start(settings: nil) { _ in }
+
+        XCTAssertEqual(Set(made.value.keys), Set(ListenerName.allCases))
+        XCTAssertTrue(made.value.values.allSatisfy { $0.count == 1 })
+        manager.stop()
+    }
+
+    func testYieldTriggersBlockAndRestartsWithFreshListener() async throws {
+        let (manager, made) = makeFactoryManager()
+        let received = StubValue<[TriggerType]>([])
+        let settings = MockAppSettings()
+        settings.triggers.isUseSnapshotOnLockedInput = true
+        manager.start(settings: settings) { received.value.append($0) }
+
+        made.value[.onLockedInputListener]?.first?.emit((.onLockedInputListener, .lockedInput))
+        for _ in 0 ..< 50 where (made.value[.onLockedInputListener]?.count ?? 0) < 2 {
+            try await Task.sleep(nanoseconds: 10_000_000)
+        }
+
+        XCTAssertEqual(received.value, [.lockedInput])
+        XCTAssertEqual(made.value[.onLockedInputListener]?.count, 2)
+        XCTAssertEqual(made.value[.onLockedInputListener]?.last?.invokedStartCount, 1)
+        manager.stop()
+    }
+
+    func testDefaultFactoryBuildsTheNewListeners() {
+        let detector = MockLockDetector()
+        XCTAssertTrue(TriggerManager.defaultListener(.onDisplayListener, detector, TriggerSettings()) is DisplayListener)
+        XCTAssertTrue(TriggerManager.defaultListener(.onLockedInputListener, detector, TriggerSettings()) is LockedInputListener)
+        XCTAssertTrue(TriggerManager.defaultListener(.onGeofenceListener, detector, TriggerSettings()) is GeofenceListener)
+        XCTAssertEqual(TriggerManager.defaultListener(.onWrongPassword, detector, TriggerSettings()) == nil, AppSettings.isMASBuild)
+    }
+
+    // MARK: - Locked Input Delay Tests
+
+    func testDefaultFactoryPassesConfiguredDelay() {
+        var triggers = TriggerSettings()
+        triggers.lockedInputDelay = 3
+
+        let listener = TriggerManager.defaultListener(.onLockedInputListener, MockLockDetector(), triggers) as? LockedInputListener
+
+        XCTAssertEqual(listener?.grace, 3)
+    }
+
+    func testChangedDelayReplacesLockedInputListener() {
+        let delays = StubValue<[Int]>([])
+        let made = StubValue<[MockListener]>([])
+        let manager = TriggerManager(logger: LogMock(), lockDetector: MockLockDetector()) { name, _, triggers in
+            let listener = MockListener()
+            if name == .onLockedInputListener {
+                delays.value.append(triggers.lockedInputDelay)
+                made.value.append(listener)
+            }
+            return listener
+        }
+        let settings = MockAppSettings()
+        settings.triggers.isUseSnapshotOnLockedInput = true
+        settings.triggers.lockedInputDelay = 3
+        manager.start(settings: settings) { _ in }
+
+        settings.triggers.lockedInputDelay = 7
+        manager.start(settings: settings) { _ in }
+
+        XCTAssertEqual(delays.value, [3, 7])
+        XCTAssertEqual(made.value.first?.invokedStopCount, 1)
+        XCTAssertEqual(made.value.last?.invokedStartCount, 1)
+        manager.stop()
+    }
+
+    func testLockedInputListenerRearmsThroughTheEventPath() async throws {
+        let detector = MockLockDetector()
+        let clock = StubValue(Date(timeIntervalSince1970: 1_000_000))
+        let idle = StubValue<TimeInterval>(1000)
+        let built = StubValue(0)
+        let manager = TriggerManager(logger: LogMock(), lockDetector: detector) { name, detector, _ in
+            guard name == .onLockedInputListener else { return MockListener() }
+            built.value += 1
+            return LockedInputListener(logger: LogMock(), lockDetector: detector, secondsSinceInput: { idle.value }, now: { clock.value }, grace: 0, lockStartWindow: 5, rearmCooldown: 30)
+        }
+        let received = StubValue<[TriggerType]>([])
+        let settings = MockAppSettings()
+        settings.triggers.isUseSnapshotOnLockedInput = true
+        manager.start(settings: settings) { received.value.append($0) }
+
+        func tick(_ locked: Bool, after seconds: TimeInterval = 1) {
+            clock.value = clock.value.addingTimeInterval(seconds)
+            idle.value += seconds
+            detector.tick(locked: locked)
+        }
+
+        tick(false)
+        tick(true)
+        tick(true, after: 6)
+        idle.value = 0
+        tick(true)
+        tick(true)
+        for _ in 0 ..< 50 where received.value.isEmpty {
+            try await Task.sleep(nanoseconds: 10_000_000)
+        }
+        XCTAssertEqual(received.value, [.lockedInput])
+
+        for _ in 0 ..< 31 {
+            tick(true)
+        }
+        idle.value = 0
+        tick(true)
+        tick(true)
+        for _ in 0 ..< 50 where received.value.count < 2 {
+            try await Task.sleep(nanoseconds: 10_000_000)
+        }
+
+        XCTAssertEqual(received.value, [.lockedInput, .lockedInput])
+        XCTAssertEqual(built.value, 1)
+        manager.stop()
+    }
+
+    func testUnchangedDelayKeepsLockedInputListener() {
+        let delays = StubValue<[Int]>([])
+        let manager = TriggerManager(logger: LogMock(), lockDetector: MockLockDetector()) { name, _, triggers in
+            if name == .onLockedInputListener {
+                delays.value.append(triggers.lockedInputDelay)
+            }
+            return MockListener()
+        }
+        let settings = MockAppSettings()
+        settings.triggers.isUseSnapshotOnLockedInput = true
+        manager.start(settings: settings) { _ in }
+        manager.start(settings: settings) { _ in }
+
+        XCTAssertEqual(delays.value, [10])
+        manager.stop()
+    }
 }
 
 // MARK: - Mock Settings for Testing
@@ -225,3 +431,7 @@ final class MockAppSettings: AppSettingsProtocol {
         return MockAppSettings(triggers: triggers)
     }
 }
+
+// MARK: - Source Info
+
+// @source-file: Source/Managers/TriggerManager.swift
