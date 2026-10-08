@@ -172,6 +172,89 @@ final class SettingsViewModelTests: XCTestCase {
         XCTAssertTrue(mockSettings.triggers.isUseSnapshotOnUSBMount)
     }
 
+    func testNewTriggerBindingsReadAndWrite() {
+        sut.isUseSnapshotOnDisplayAttach.wrappedValue = true
+        sut.isUseSnapshotOnLocationChange.wrappedValue = true
+        sut.isUseSnapshotOnLockedInput.wrappedValue = true
+        XCTAssertTrue(mockSettings.triggers.isUseSnapshotOnDisplayAttach)
+        XCTAssertTrue(mockSettings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertTrue(mockSettings.triggers.isUseSnapshotOnLockedInput)
+
+        mockSettings.triggers.isUseSnapshotOnDisplayAttach = false
+        mockSettings.triggers.isUseSnapshotOnLocationChange = false
+        mockSettings.triggers.isUseSnapshotOnLockedInput = false
+        XCTAssertFalse(sut.isUseSnapshotOnDisplayAttach.wrappedValue)
+        XCTAssertFalse(sut.isUseSnapshotOnLocationChange.wrappedValue)
+        XCTAssertFalse(sut.isUseSnapshotOnLockedInput.wrappedValue)
+    }
+
+    func testLockedInputDelayBindingReadsWritesAndClamps() {
+        XCTAssertEqual(sut.lockedInputDelay.wrappedValue, 10)
+
+        sut.lockedInputDelay.wrappedValue = 4
+        XCTAssertEqual(mockSettings.triggers.lockedInputDelay, 4)
+
+        sut.lockedInputDelay.wrappedValue = 25
+        XCTAssertEqual(mockSettings.triggers.lockedInputDelay, 10)
+
+        sut.lockedInputDelay.wrappedValue = -1
+        XCTAssertEqual(mockSettings.triggers.lockedInputDelay, 0)
+
+        mockSettings.triggers.lockedInputDelay = 6
+        XCTAssertEqual(sut.lockedInputDelay.wrappedValue, 6)
+    }
+
+    // MARK: - Geofence Permission Tests
+
+    private func geofenceViewModel(granted: Bool, requests: StubValue<Int>) -> SettingsViewModel {
+        SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager) { completion in
+            requests.value += 1
+            completion(granted)
+        }
+    }
+
+    private func waitForRestart(count: Int) async throws {
+        for _ in 0 ..< 50 where mockThiefManager.invokedRestartWatchingCount < count {
+            try await Task.sleep(nanoseconds: 10_000_000)
+        }
+    }
+
+    func testDeniedLocationTurnsGeofenceFlagOff() async throws {
+        let requests = StubValue(0)
+        let viewModel = geofenceViewModel(granted: false, requests: requests)
+        viewModel.isUseSnapshotOnLocationChange.wrappedValue = true
+
+        viewModel.updateGeofenceTrigger(enabled: true)
+        try await waitForRestart(count: 1)
+
+        XCTAssertFalse(mockSettings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 1)
+        XCTAssertEqual(requests.value, 1)
+    }
+
+    func testGrantedLocationKeepsGeofenceFlagOn() async throws {
+        let requests = StubValue(0)
+        let viewModel = geofenceViewModel(granted: true, requests: requests)
+        viewModel.isUseSnapshotOnLocationChange.wrappedValue = true
+
+        viewModel.updateGeofenceTrigger(enabled: true)
+        try await waitForRestart(count: 1)
+
+        XCTAssertTrue(mockSettings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 1)
+    }
+
+    func testDisablingGeofenceSkipsPermissionRequest() async {
+        let requests = StubValue(0)
+        let viewModel = geofenceViewModel(granted: false, requests: requests)
+
+        viewModel.updateGeofenceTrigger(enabled: false)
+        await Task.yield()
+
+        XCTAssertEqual(requests.value, 0)
+        XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 1)
+    }
+
     // MARK: - Options Bindings Tests
 
     func testKeepLastActionsCountBindingReads() {
@@ -448,3 +531,7 @@ final class SettingsViewModelTests: XCTestCase {
         XCTAssertEqual(mockSettings.sync.dropboxName, "UpdatedUser")
     }
 }
+
+// MARK: - Source Info
+
+// @source-file: Source/Views/Settings/SettingsViewModel.swift

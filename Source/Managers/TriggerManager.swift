@@ -23,6 +23,9 @@ protocol TriggerManagerProtocol: Sendable {
     func stop()
 }
 
+/// Builds the listener for a name, or `nil` when the build does not ship it.
+typealias ListenerFactory = @MainActor (ListenerName, MacOSLockDetectorProtocol, TriggerSettings) -> BaseListenerProtocol?
+
 /// Manages trigger listeners and coordinates event dispatching.
 ///
 /// This class is `@MainActor` isolated because it manages `@MainActor` listeners
@@ -40,30 +43,47 @@ final class TriggerManager: TriggerManagerProtocol {
     /// The trigger block to call when events occur.
     private var triggerBlock: MainActorTriggerClosure?
 
-    private let lockDetector: MacOSLockDetectorProtocol = MacOSLockDetector()
+    private let lockDetector: MacOSLockDetectorProtocol
+
+    private let makeListener: ListenerFactory
 
     /// Tasks consuming listener streams.
     private var listenerTasks: [ListenerName: Task<Void, Never>] = [:]
 
-    /// Holds a set of listeners that are configured based on certain conditions.
-    private lazy var listeners: [ListenerName: BaseListenerProtocol] = {
-        var listeners: [ListenerName: BaseListenerProtocol] = [
-            .onWakeUpListener: WakeUpListener(),
-            .onBatteryPowerListener: PowerListener(),
-            .onUSBConnectionListener: USBListener(),
-            .onLoginListener: LoginListener(lockDetector: lockDetector)
-        ]
+    /// The delay the current locked-input listener was built with.
+    private var lockedInputDelayInUse: Int?
 
-        if !AppSettings.isMASBuild {
-            listeners[.onWrongPassword] = WrongPasswordListener()
+    private var currentTriggers: TriggerSettings {
+        settings?.triggers ?? TriggerSettings()
+    }
+
+    /// One listener per name the build ships.
+    private lazy var listeners: [ListenerName: BaseListenerProtocol] = Dictionary(
+        uniqueKeysWithValues: ListenerName.allCases.compactMap { name in
+            buildListener(name).map { (name, $0) }
         }
+    )
 
-        return listeners
-    }()
-
-    /// Initializer that configures the logger.
-    init(logger: LogProtocol = Log(category: .triggerManager)) {
+    init(logger: LogProtocol = Log(category: .triggerManager),
+         lockDetector: MacOSLockDetectorProtocol = MacOSLockDetector(),
+         makeListener: @escaping ListenerFactory = TriggerManager.defaultListener)
+    {
         self.logger = logger
+        self.lockDetector = lockDetector
+        self.makeListener = makeListener
+    }
+
+    static func defaultListener(_ name: ListenerName, _ lockDetector: MacOSLockDetectorProtocol, _ triggers: TriggerSettings) -> BaseListenerProtocol? {
+        switch name {
+        case .onWakeUpListener: WakeUpListener()
+        case .onWrongPassword: AppSettings.isMASBuild ? nil : WrongPasswordListener()
+        case .onBatteryPowerListener: PowerListener()
+        case .onUSBConnectionListener: USBListener()
+        case .onLoginListener: LoginListener(lockDetector: lockDetector)
+        case .onDisplayListener: DisplayListener(lockDetector: lockDetector)
+        case .onGeofenceListener: GeofenceListener(lockDetector: lockDetector)
+        case .onLockedInputListener: LockedInputListener(lockDetector: lockDetector, grace: TimeInterval(triggers.lockedInputDelay))
+        }
     }
 
     // MARK: - public
@@ -75,11 +95,16 @@ final class TriggerManager: TriggerManagerProtocol {
         self.settings = settings
         self.triggerBlock = triggerBlock
 
+        applyLockedInputDelay()
+
         startListener(.onWakeUpListener, enabled: settings?.triggers.isUseSnapshotOnWakeUp == true)
         startListener(.onWrongPassword, enabled: settings?.triggers.isUseSnapshotOnWrongPassword == true)
         startListener(.onBatteryPowerListener, enabled: settings?.triggers.isUseSnapshotOnSwitchToBatteryPower == true)
         startListener(.onUSBConnectionListener, enabled: settings?.triggers.isUseSnapshotOnUSBMount == true)
         startListener(.onLoginListener, enabled: settings?.triggers.isUseSnapshotOnLogin == true)
+        startListener(.onDisplayListener, enabled: settings?.triggers.isUseSnapshotOnDisplayAttach == true)
+        startListener(.onGeofenceListener, enabled: settings?.triggers.isUseSnapshotOnLocationChange == true)
+        startListener(.onLockedInputListener, enabled: settings?.triggers.isUseSnapshotOnLockedInput == true)
     }
 
     /// Stops all active listeners.
@@ -98,48 +123,69 @@ final class TriggerManager: TriggerManagerProtocol {
 
     // MARK: - private
 
+    /// A listener can hold an open stream while `isRunning` is false (geofence without
+    /// authorization), so a disabled flag stops any listener that still has a task.
     private func startListener(_ name: ListenerName, enabled: Bool) {
         guard let listener = listeners[name] else { return }
 
         if enabled {
-            if !listener.isRunning {
-                let stream = listener.start()
-                let task = Task { [weak self] in
-                    for await (listenerName, triggerType) in stream {
-                        // Already on MainActor, call directly
-                        if triggerType != .onACPower {
-                            self?.triggerBlock?(triggerType)
-                        }
-                        self?.restartListener(type: listenerName)
-                    }
-                }
-                listenerTasks[name] = task
-            }
-        } else if listener.isRunning {
+            guard !listener.isRunning else { return }
+
+            let stream = listener.start()
             listenerTasks[name]?.cancel()
-            listenerTasks[name] = nil
-            listener.stop()
+            listenerTasks[name] = Task { [weak self] in
+                for await (listenerName, triggerType) in stream {
+                    // Already on MainActor, call directly
+                    if triggerType != .onACPower {
+                        self?.triggerBlock?(triggerType)
+                    }
+                    self?.listenerDidFire(listenerName)
+                }
+            }
+        } else {
+            let task = listenerTasks.removeValue(forKey: name)
+            task?.cancel()
+            if task != nil || listener.isRunning {
+                listener.stop()
+            }
         }
     }
 
-    /// Restarts a listener based on its type.
+    /// A fresh instance stays unarmed until the next lock, which bounds most listeners to one fire per lock period;
+    /// a listener that re-arms itself is kept, so its own state rules out a second fire for one input.
+    private func listenerDidFire(_ name: ListenerName) {
+        guard listeners[name]?.keepsRunningAfterEvent != true else { return }
+        restartListener(type: name)
+    }
+
+    /// Replaces a listener with a fresh instance after it yields.
     private func restartListener(type: ListenerName) {
         listenerTasks[type]?.cancel()
         listenerTasks[type] = nil
+        listeners[type]?.stop()
 
-        if let l = listeners[type] {
-            l.stop()
-        }
-
-        let listener: BaseListenerProtocol = switch type {
-        case .onWakeUpListener: WakeUpListener()
-        case .onWrongPassword: WrongPasswordListener()
-        case .onBatteryPowerListener: PowerListener()
-        case .onUSBConnectionListener: USBListener()
-        case .onLoginListener: LoginListener(lockDetector: lockDetector)
-        }
-
-        listeners[type] = listener
+        listeners[type] = buildListener(type)
         startListener(type, enabled: true)
     }
+
+    private func buildListener(_ name: ListenerName) -> BaseListenerProtocol? {
+        let triggers = currentTriggers
+        if name == .onLockedInputListener {
+            lockedInputDelayInUse = triggers.lockedInputDelay
+        }
+        return makeListener(name, lockDetector, triggers)
+    }
+
+    /// The delay is fixed per listener instance, so a changed value replaces the listener; `startListener` then starts it if enabled.
+    private func applyLockedInputDelay() {
+        guard let inUse = lockedInputDelayInUse, inUse != currentTriggers.lockedInputDelay else { return }
+
+        listenerTasks.removeValue(forKey: .onLockedInputListener)?.cancel()
+        listeners[.onLockedInputListener]?.stop()
+        listeners[.onLockedInputListener] = buildListener(.onLockedInputListener)
+    }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Managers/TriggerManagerTest.swift

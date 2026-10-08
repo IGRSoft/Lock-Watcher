@@ -29,10 +29,12 @@ final class ListenerTests: XCTestCase {
         XCTAssertEqual(ListenerName.onBatteryPowerListener.rawValue, 2)
         XCTAssertEqual(ListenerName.onUSBConnectionListener.rawValue, 3)
         XCTAssertEqual(ListenerName.onLoginListener.rawValue, 4)
+        XCTAssertEqual(ListenerName.onDisplayListener.rawValue, 5)
+        XCTAssertEqual(ListenerName.onGeofenceListener.rawValue, 6)
+        XCTAssertEqual(ListenerName.onLockedInputListener.rawValue, 7)
+        XCTAssertEqual(ListenerName.allCases.count, 8)
 
-        let names: [ListenerName] = [.onWakeUpListener, .onWrongPassword, .onBatteryPowerListener, .onUSBConnectionListener, .onLoginListener]
-
-        for name in names {
+        for name in ListenerName.allCases {
             switch name {
             case .onWakeUpListener:
                 XCTAssertTrue(true)
@@ -43,6 +45,12 @@ final class ListenerTests: XCTestCase {
             case .onUSBConnectionListener:
                 XCTAssertTrue(true)
             case .onLoginListener:
+                XCTAssertTrue(true)
+            case .onDisplayListener:
+                XCTAssertTrue(true)
+            case .onGeofenceListener:
+                XCTAssertTrue(true)
+            case .onLockedInputListener:
                 XCTAssertTrue(true)
             }
         }
@@ -96,3 +104,7 @@ final class ListenerTests: XCTestCase {
         XCTAssertEqual(receivedEvent, expectedEvent)
     }
 }
+
+// MARK: - Source Info
+
+// @source-file: Source/Listeners/BaseListenerProtocol.swift

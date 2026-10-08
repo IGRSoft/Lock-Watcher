@@ -7,8 +7,7 @@
 - **Architecture**: MVVM + Coordinator pattern with Listener/Notifier patterns
 - **Company**: IGR Soft (com.igrsoft)
 
-This CLAUDE.md is the authoritative source for development guidelines.
-Extends global configuration from `~/.claude/CLAUDE.md`.
+This AGENTS.md is the authoritative source for repository development guidelines.
 
 ---
 
@@ -84,6 +83,7 @@ swiftformat . && xcodebuild test -project Lock-Watcher.xcodeproj -scheme Lock-Wa
   - AuthentificationManager - Password/biometric auth
 - **`Source/Listeners/`** - Event trigger listeners
   - WakeUpListener, PowerListener, USBListener, LoginListener
+  - DisplayListener, GeofenceListener, LockedInputListener (fire only while locked, via LockGraceGate)
   - WrongPasswordListener (Non-MAS only)
 - **`Source/Notifiers/`** - Output channels
   - ICloudNotifier, DropboxNotifier, NotificationNotifier

@@ -26,12 +26,14 @@ final class MockListener: BaseListenerProtocol {
     var invokedStart = false
     var invokedStartCount = 0
     var stubbedStartResult: ListenerEvent?
+    /// `false` mimics a listener whose stream is open but not monitoring yet (unauthorized geofence).
+    var stubbedIsRunningAfterStart = true
     private var continuation: AsyncStream<ListenerEvent>.Continuation?
 
     func start() -> AsyncStream<ListenerEvent> {
         invokedStart = true
         invokedStartCount += 1
-        stubbedIsRunning = true
+        stubbedIsRunning = stubbedIsRunningAfterStart
 
         return AsyncStream { continuation in
             self.continuation = continuation
@@ -57,3 +59,7 @@ final class MockListener: BaseListenerProtocol {
         continuation = nil
     }
 }
+
+// MARK: - Source Info
+
+// @source-file: Source/Listeners/BaseListenerProtocol.swift

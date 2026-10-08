@@ -34,7 +34,10 @@ Lock-Watcher transforms your Mac into a stealthy security guardian. It monitors 
 - **On WakeUp** - Captures when Mac exits sleep mode
 - **On Login** - Captures on user login events
 - **On Battery Power Switch** - Captures when switching between AC and battery (laptops)
-- **On USB Mount** - Captures when USB devices are connected
+- **On USB Mount** - Captures when a removable or external drive is connected (disk images, network shares and internal volumes are ignored)
+- **On Display Attach** - Captures when a display is connected while the Mac is locked
+- **On Location Change** - Captures once when the Mac moves 500 m or more while locked
+- **On Locked Input** - Captures on keyboard or mouse input while the Mac is locked
 - **On Wrong Password** - Captures on failed login attempts (Non-MAS only)
 
 ### Snapshot Information
@@ -226,7 +229,7 @@ docs: improve README
 
 ## Documentation
 
-- [CLAUDE.md](CLAUDE.md) - AI development guidelines and agent configuration
+- [AGENTS.md](AGENTS.md) - AI development guidelines and agent configuration
 
 ## License
 
