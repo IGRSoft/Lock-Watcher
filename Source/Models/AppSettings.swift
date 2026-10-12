@@ -182,6 +182,41 @@ struct TriggerSettings: Codable, Equatable {
     
     /// Capture a snapshot when a USB device is mounted.
     var isUseSnapshotOnUSBMount: Bool = false
+
+    /// Capture a snapshot when a display is attached while the session is locked.
+    var isUseSnapshotOnDisplayAttach: Bool = false
+
+    /// Capture a snapshot when the Mac moves while the session is locked.
+    var isUseSnapshotOnLocationChange: Bool = false
+
+    /// Capture a snapshot on keyboard or mouse input while the session is locked.
+    var isUseSnapshotOnLockedInput: Bool = false
+
+    /// Seconds the session must stay locked after locked input before the snapshot; valid only inside `lockedInputDelayRange`.
+    var lockedInputDelay: Int = 10
+
+    static let lockedInputDelayRange = 0 ... 10
+
+    static func clampedLockedInputDelay(_ seconds: Int) -> Int {
+        min(max(seconds, lockedInputDelayRange.lowerBound), lockedInputDelayRange.upperBound)
+    }
+}
+
+extension TriggerSettings {
+    /// User-approved exception to the no-backward-compatibility rule: v1.6.0 JSON keeps its five flags, and absent or unreadable keys take defaults.
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let defaults = TriggerSettings()
+        isUseSnapshotOnWakeUp = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotOnWakeUp)) ?? defaults.isUseSnapshotOnWakeUp
+        isUseSnapshotOnLogin = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotOnLogin)) ?? defaults.isUseSnapshotOnLogin
+        isUseSnapshotOnWrongPassword = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotOnWrongPassword)) ?? defaults.isUseSnapshotOnWrongPassword
+        isUseSnapshotOnSwitchToBatteryPower = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotOnSwitchToBatteryPower)) ?? defaults.isUseSnapshotOnSwitchToBatteryPower
+        isUseSnapshotOnUSBMount = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotOnUSBMount)) ?? defaults.isUseSnapshotOnUSBMount
+        isUseSnapshotOnDisplayAttach = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotOnDisplayAttach)) ?? defaults.isUseSnapshotOnDisplayAttach
+        isUseSnapshotOnLocationChange = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotOnLocationChange)) ?? defaults.isUseSnapshotOnLocationChange
+        isUseSnapshotOnLockedInput = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotOnLockedInput)) ?? defaults.isUseSnapshotOnLockedInput
+        lockedInputDelay = Self.clampedLockedInputDelay((try? container.decodeIfPresent(Int.self, forKey: .lockedInputDelay)) ?? defaults.lockedInputDelay)
+    }
 }
 
 /// Represents settings related to synchronization and storage of snapshots.
@@ -321,3 +356,7 @@ final class AppSettingsPreview: AppSettingsProtocol {
         ui = UISettings()
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Models/AppSettingsTest.swift

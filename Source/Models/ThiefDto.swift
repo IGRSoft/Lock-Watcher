@@ -19,6 +19,9 @@ public enum TriggerType: String, Sendable {
     case onACPower
     case usbConnected
     case logedIn
+    case displayAttached
+    case locationChanged
+    case lockedInput
     case debug
 }
 
@@ -117,3 +120,7 @@ public final class ThiefDto: Equatable, Sendable {
         return objects.joined(separator: "\n")
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Models/ThiefDtoTest.swift

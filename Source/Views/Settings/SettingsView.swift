@@ -56,6 +56,22 @@ struct SettingsView: View {
                             .onChange(of: viewModel.isUseSnapshotOnUSBMount.wrappedValue) { _, _ in
                                 viewModel.restartWatching()
                             }
+                        UseSnapshotOnDisplayAttachView(isUseSnapshotOnDisplayAttach: viewModel.isUseSnapshotOnDisplayAttach)
+                            .onChange(of: viewModel.isUseSnapshotOnDisplayAttach.wrappedValue) { _, _ in
+                                viewModel.restartWatching()
+                            }
+                        UseSnapshotOnLocationChangeView(isUseSnapshotOnLocationChange: viewModel.isUseSnapshotOnLocationChange)
+                            .onChange(of: viewModel.isUseSnapshotOnLocationChange.wrappedValue) { _, value in
+                                viewModel.updateGeofenceTrigger(enabled: value)
+                            }
+                        UseSnapshotOnLockedInputView(isUseSnapshotOnLockedInput: viewModel.isUseSnapshotOnLockedInput,
+                                                     lockedInputDelay: viewModel.lockedInputDelay)
+                            .onChange(of: viewModel.isUseSnapshotOnLockedInput.wrappedValue) { _, _ in
+                                viewModel.restartWatching()
+                            }
+                            .onChange(of: viewModel.lockedInputDelay.wrappedValue) { _, _ in
+                                viewModel.restartWatching()
+                            }
                     }
                     .extended(viewModel.isSnapshotInfoExpand, titleKey: "SettingsMenuSnapshot")
                     .accessibilityIdentifier(AccessibilityID.Settings.snapshotSection)
