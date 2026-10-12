@@ -1,7 +1,14 @@
+//
+//  wins.swift
+//
+//  Created on 08.10.2026.
+//  Copyright © 2026 IGR Soft. All rights reserved.
+//
+
 import CoreGraphics
 import Foundation
 
-// One line per on-screen window of the capture build: id layer x y w h name
+/// One line per on-screen window of the capture build: id layer x y w h name
 let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] ?? []
 for w in list {
     let want = CommandLine.arguments.count > 1 ? Int32(CommandLine.arguments[1]) : nil
