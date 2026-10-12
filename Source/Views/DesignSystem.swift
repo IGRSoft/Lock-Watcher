@@ -247,6 +247,10 @@ enum AccessibilityID {
         static let wrongPasswordToggle = "settings.wrongPasswordToggle"
         static let batteryToggle = "settings.batteryToggle"
         static let usbToggle = "settings.usbToggle"
+        static let displayAttachToggle = "settings.displayAttachToggle"
+        static let locationChangeToggle = "settings.locationChangeToggle"
+        static let lockedInputToggle = "settings.lockedInputToggle"
+        static let lockedInputDelayStepper = "settings.lockedInputDelayStepper"
 
         // Options section
         static let optionsSection = "settings.optionsSection"
@@ -348,6 +352,13 @@ enum AccessibilityLabel {
         static let snapshotOnWrongPassword = NSLocalizedString("AccessibilitySnapshotWrongPassword", comment: "Take snapshot on wrong password")
         static let snapshotOnBattery = NSLocalizedString("AccessibilitySnapshotBattery", comment: "Take snapshot when switching to battery")
         static let snapshotOnUSB = NSLocalizedString("AccessibilitySnapshotUSB", comment: "Take snapshot when USB device is connected")
+        static let snapshotOnDisplayAttach = NSLocalizedString("AccessibilitySnapshotDisplayAttach", comment: "Take snapshot when a display is attached while locked")
+        static let snapshotOnLocationChange = NSLocalizedString("AccessibilitySnapshotLocationChange", comment: "Take snapshot when the Mac moves while locked")
+        static func snapshotOnLockedInput(_ delay: Int) -> String {
+            String(format: NSLocalizedString("AccessibilitySnapshotLockedInput %d", comment: "Take snapshot on keyboard or mouse input while locked, after N seconds"), delay)
+        }
+
+        static let lockedInputDelay = NSLocalizedString("AccessibilityLockedInputDelay", comment: "Delay before the locked-input snapshot")
 
         static func keepLast(_ count: Int) -> String {
             String(format: NSLocalizedString("AccessibilityKeepLast %d", comment: "Keep last N snapshots"), count)

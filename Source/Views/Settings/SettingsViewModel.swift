@@ -36,6 +36,10 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     /// Represents the app's settings.
     private var settings: AppSettingsProtocol
 
+    /// Reports `false` only for a denied or restricted location authorization.
+    @ObservationIgnored
+    private let requestLocationPermission: (@escaping Commons.BoolClosure) -> Void
+
     // MARK: - Variables
 
     /// Indicates if the information is hidden or shown.
@@ -126,6 +130,38 @@ final class SettingsViewModel: DomainViewConstantProtocol {
             self.settings.triggers.isUseSnapshotOnUSBMount
         }, set: {
             self.settings.triggers.isUseSnapshotOnUSBMount = $0
+        })
+    }
+
+    var isUseSnapshotOnDisplayAttach: Binding<Bool> {
+        Binding<Bool>(get: {
+            self.settings.triggers.isUseSnapshotOnDisplayAttach
+        }, set: {
+            self.settings.triggers.isUseSnapshotOnDisplayAttach = $0
+        })
+    }
+
+    var isUseSnapshotOnLocationChange: Binding<Bool> {
+        Binding<Bool>(get: {
+            self.settings.triggers.isUseSnapshotOnLocationChange
+        }, set: {
+            self.settings.triggers.isUseSnapshotOnLocationChange = $0
+        })
+    }
+
+    var isUseSnapshotOnLockedInput: Binding<Bool> {
+        Binding<Bool>(get: {
+            self.settings.triggers.isUseSnapshotOnLockedInput
+        }, set: {
+            self.settings.triggers.isUseSnapshotOnLockedInput = $0
+        })
+    }
+
+    var lockedInputDelay: Binding<Int> {
+        Binding<Int>(get: {
+            self.settings.triggers.lockedInputDelay
+        }, set: {
+            self.settings.triggers.lockedInputDelay = TriggerSettings.clampedLockedInputDelay($0)
         })
     }
     
@@ -345,9 +381,13 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     // MARK: - initialiser
     
     /// Initializer for the SettingsViewModel.
-    init(settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol) {
+    init(settings: AppSettingsProtocol,
+         thiefManager: ThiefManagerProtocol,
+         requestLocationPermission: @escaping (@escaping Commons.BoolClosure) -> Void = PermissionsUtils.updateLocationPermissions)
+    {
         self.settings = settings
         self.thiefManager = thiefManager
+        self.requestLocationPermission = requestLocationPermission
 
         watchDropboxUserNameUpdate()
     }
@@ -355,6 +395,24 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     /// Requests the thief manager to restart watchers based on updated settings.
     func restartWatching() {
         thiefManager.restartWatching()
+    }
+
+    /// Asks for location access before the geofence trigger turns on; a refusal turns the flag back off.
+    func updateGeofenceTrigger(enabled: Bool) {
+        guard enabled else {
+            restartWatching()
+            return
+        }
+
+        requestLocationPermission { [weak self] isGranted in
+            Task { @MainActor in
+                guard let self else { return }
+                if !isGranted {
+                    self.settings.triggers.isUseSnapshotOnLocationChange = false
+                }
+                self.restartWatching()
+            }
+        }
     }
 
     /// Enables or disables the location manager in the thief manager.
@@ -380,3 +438,7 @@ extension SettingsViewModel {
         SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview())
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/ViewModels/SettingsViewModelTests.swift

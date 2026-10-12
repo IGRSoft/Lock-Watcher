@@ -27,7 +27,10 @@ struct Log {
         case wrongPasswordListener
         case usbListener
         case loginListener
-        
+        case displayListener
+        case geofenceListener
+        case lockedInputListener
+
         case thiefManager
         case triggerManager
         case notificationManager

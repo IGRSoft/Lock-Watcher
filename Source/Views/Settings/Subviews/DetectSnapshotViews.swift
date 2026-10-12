@@ -81,3 +81,62 @@ struct UseSnapshotOnUSBMountView: View {
         .accessibilityHint(AccessibilityHint.Settings.toggleHint)
     }
 }
+
+/// A toggle for taking a snapshot when a display is attached while the Mac is locked.
+struct UseSnapshotOnDisplayAttachView: View {
+    @Binding var isUseSnapshotOnDisplayAttach: Bool
+
+    var body: some View {
+        Toggle(isOn: $isUseSnapshotOnDisplayAttach) {
+            Text("SnapshotOnDisplayAttach")
+        }
+        .accessibilityIdentifier(AccessibilityID.Settings.displayAttachToggle)
+        .accessibilityLabel(AccessibilityLabel.Settings.snapshotOnDisplayAttach)
+        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
+    }
+}
+
+/// A toggle for taking a snapshot when the Mac moves while locked.
+struct UseSnapshotOnLocationChangeView: View {
+    @Binding var isUseSnapshotOnLocationChange: Bool
+
+    var body: some View {
+        Toggle(isOn: $isUseSnapshotOnLocationChange) {
+            Text("SnapshotOnLocationChange")
+        }
+        .help(Text("SnapshotOnLocationChangeHelp"))
+        .accessibilityIdentifier(AccessibilityID.Settings.locationChangeToggle)
+        .accessibilityLabel(AccessibilityLabel.Settings.snapshotOnLocationChange)
+        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
+    }
+}
+
+/// A toggle for taking a snapshot on keyboard or mouse input while the Mac is locked.
+struct UseSnapshotOnLockedInputView: View {
+    @Binding var isUseSnapshotOnLockedInput: Bool
+    @Binding var lockedInputDelay: Int
+
+    var body: some View {
+        HStack(spacing: DesignSystem.Spacing.sm) {
+            Toggle(isOn: $isUseSnapshotOnLockedInput) {
+                Text(String(format: NSLocalizedString("SnapshotOnLockedInput %d", comment: ""), lockedInputDelay))
+            }
+            .accessibilityIdentifier(AccessibilityID.Settings.lockedInputToggle)
+            .accessibilityLabel(AccessibilityLabel.Settings.snapshotOnLockedInput(lockedInputDelay))
+            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
+
+            Stepper(value: $lockedInputDelay, in: TriggerSettings.lockedInputDelayRange) {
+                EmptyView()
+            }
+            .labelsHidden()
+            .disabled(!isUseSnapshotOnLockedInput)
+            .accessibilityIdentifier(AccessibilityID.Settings.lockedInputDelayStepper)
+            .accessibilityLabel(AccessibilityLabel.Settings.lockedInputDelay)
+            .accessibilityValue(String(format: NSLocalizedString("AccessibilityLockedInputDelayValue %d", comment: ""), lockedInputDelay))
+        }
+    }
+}
+
+// MARK: - Test Info
+
+// @test-file: Tests/ViewModels/SettingsViewModelTests.swift

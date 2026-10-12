@@ -1,5 +1,21 @@
 # Lock-Watcher — Changelog
 
+## v1.7.0 (Build TBD) — TBD
+
+### New
+- Display attached while locked trigger (off by default)
+- Location change while locked trigger: the Mac moved 500 m or more since the last unlock, using significant location changes (off by default)
+- Keyboard or mouse input while locked trigger, with a delay of 0–10 s (default 10 s) set by a stepper; re-arms 30 s after a capture, so repeated attempts in one lock are captured (off by default)
+- New triggers fire only while the Mac is locked
+
+### Improved
+- USB trigger classifies volumes: disk images, network shares and internal volumes no longer trigger; physical external drives still do
+- Saved settings carry over on upgrade
+- Ukrainian localization completed and corrected
+- No new permissions, no data collected (privacy label stays Data Not Collected)
+
+---
+
 ## v1.6.0 (Build 1601) — 2026-10-06
 
 ### New

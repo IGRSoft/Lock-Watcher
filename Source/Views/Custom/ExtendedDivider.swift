@@ -18,12 +18,11 @@ struct ExtendedDividerModifier: ViewModifier {
 
     /// Modifies the provided content by adding an extended divider to it.
     func body(content: Content) -> some View {
-        Group {
-            ExtendedDivider(isExtended: isExtended, titleKey: titleKey, font: font, lineWidth: lineWidth, lineColor: lineColor)
-            if isExtended.wrappedValue {
-                content
-                    .clipped()
-            }
+        ExtendedDivider(isExtended: isExtended, titleKey: titleKey, font: font, lineWidth: lineWidth, lineColor: lineColor)
+
+        if isExtended.wrappedValue {
+            content
+                .clipped()
         }
     }
 }
