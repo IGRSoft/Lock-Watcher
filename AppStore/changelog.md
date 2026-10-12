@@ -22,7 +22,7 @@
 - Output type setting: photo or a silent 1–5 s video
 - Output size setting for photo and video: Original, 1/2, 1/4
 - "Keep files" setting: 1 year, 1 month, 1 week (default), or None (remove after upload)
-- Video delivery to iCloud, Dropbox, Mail and notifications, with a still image when a video is too large
+- Video delivery to iCloud, Dropbox and notifications, with a still image when a video is too large
 - Notification when camera access is denied
 
 ### Improved
