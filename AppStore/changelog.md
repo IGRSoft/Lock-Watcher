@@ -1,6 +1,6 @@
 # Lock-Watcher — Changelog
 
-## v1.7.0 (Build TBD) — TBD
+## v1.7.0 (Build 1701) — 2026-10-12
 
 ### New
 - Display attached while locked trigger (off by default)

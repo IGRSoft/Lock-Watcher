@@ -112,7 +112,7 @@ slightly soft under close zoom and reads cleanly at App Store size.
 
 ## Publish a new version
 
-From the repo root, with `<v>` the marketing version (for example `1.6.0`):
+From the repo root, with `<v>` the marketing version (for example `1.7.0`):
 
 1. Create the version in App Store Connect if it does not exist:
    `asc versions create --app 1583462846 --version <v> --platform MAC_OS`
@@ -131,8 +131,8 @@ From the repo root, with `<v>` the marketing version (for example `1.6.0`):
    ```
    asc screenshots validate --path AppStore/screenshots/en-US/APP_DESKTOP --device-type APP_DESKTOP
    asc screenshots validate --path AppStore/screenshots/uk/APP_DESKTOP --device-type APP_DESKTOP
-   asc screenshots upload --app 1583462846 --version <v> --locale en-US --path AppStore/screenshots/en-US/APP_DESKTOP --device-type APP_DESKTOP
-   asc screenshots upload --app 1583462846 --version <v> --locale uk --path AppStore/screenshots/uk/APP_DESKTOP --device-type APP_DESKTOP
+   asc screenshots upload --app 1583462846 --version <v> --platform MAC_OS --locale en-US --path AppStore/screenshots/en-US/APP_DESKTOP --device-type APP_DESKTOP --replace --confirm
+   asc screenshots upload --app 1583462846 --version <v> --platform MAC_OS --locale uk --path AppStore/screenshots/uk/APP_DESKTOP --device-type APP_DESKTOP --replace --confirm
    ```
 6. Check readiness, attach the build and submit:
    ```
