@@ -112,6 +112,7 @@ struct UseSnapshotOnLocationChangeView: View {
 }
 
 /// A toggle for taking a snapshot on keyboard or mouse input while the Mac is locked.
+@MainActor
 struct UseSnapshotOnLockedInputView: View {
     @Binding var isUseSnapshotOnLockedInput: Bool
     @Binding var lockedInputDelay: Int
@@ -119,7 +120,7 @@ struct UseSnapshotOnLockedInputView: View {
     var body: some View {
         HStack(spacing: DesignSystem.Spacing.sm) {
             Toggle(isOn: $isUseSnapshotOnLockedInput) {
-                Text(PluralLocalization.string("SnapshotOnLockedInput %d", count: lockedInputDelay))
+                StableCountLabel(key: "SnapshotOnLockedInput %d", count: lockedInputDelay, range: TriggerSettings.lockedInputDelayRange)
             }
             .accessibilityIdentifier(AccessibilityID.Settings.lockedInputToggle)
             .accessibilityLabel(AccessibilityLabel.Settings.snapshotOnLockedInput(lockedInputDelay))

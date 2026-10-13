@@ -8,13 +8,33 @@
 import CameraSnap
 import SwiftUI
 
+@MainActor
+struct StableCountLabel: View {
+    let key: String
+    let count: Int
+    let range: ClosedRange<Int>
+    var bundle: Bundle = .main
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            ForEach(Array(range), id: \.self) { candidate in
+                Text(PluralLocalization.string(key, count: candidate, bundle: bundle))
+                    .hidden()
+                    .accessibilityHidden(true)
+            }
+            Text(PluralLocalization.string(key, count: count, bundle: bundle))
+        }
+    }
+}
+
 /// A view component that allows the user to determine the number of last actions to keep.
+@MainActor
 struct KeepLastCountView: View {
     @Binding var keepLastActionsCount: Int
 
     var body: some View {
         Stepper(value: $keepLastActionsCount, in: 1 ... 30) {
-            Text(PluralLocalization.string("KeepLastN %d", count: keepLastActionsCount))
+            StableCountLabel(key: "KeepLastN %d", count: keepLastActionsCount, range: 1 ... 30)
         }
         .accessibilityIdentifier(AccessibilityID.Settings.keepLastStepper)
         .accessibilityLabel(AccessibilityLabel.Settings.keepLast(keepLastActionsCount))
@@ -164,12 +184,13 @@ struct SnapshotOutputTypeView: View {
 }
 
 /// A view component that allows the user to set the video length.
+@MainActor
 struct VideoDurationView: View {
     @Binding var videoDuration: Int
 
     var body: some View {
         Stepper(value: $videoDuration, in: SnapshotSettings.videoDurationRange) {
-            Text(PluralLocalization.string("VideoDuration %d", count: videoDuration))
+            StableCountLabel(key: "VideoDuration %d", count: videoDuration, range: SnapshotSettings.videoDurationRange)
         }
         .accessibilityIdentifier(AccessibilityID.Settings.videoDurationStepper)
         .accessibilityLabel(AccessibilityLabel.Settings.videoDuration(videoDuration))
