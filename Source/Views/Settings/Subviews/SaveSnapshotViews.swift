@@ -14,7 +14,7 @@ struct KeepLastCountView: View {
 
     var body: some View {
         Stepper(value: $keepLastActionsCount, in: 1 ... 30) {
-            Text(String(format: NSLocalizedString("KeepLastN %d", comment: ""), keepLastActionsCount))
+            Text(PluralLocalization.string("KeepLastN %d", count: keepLastActionsCount))
         }
         .accessibilityIdentifier(AccessibilityID.Settings.keepLastStepper)
         .accessibilityLabel(AccessibilityLabel.Settings.keepLast(keepLastActionsCount))
@@ -169,7 +169,7 @@ struct VideoDurationView: View {
 
     var body: some View {
         Stepper(value: $videoDuration, in: SnapshotSettings.videoDurationRange) {
-            Text(String(format: NSLocalizedString("VideoDuration %d", comment: ""), videoDuration))
+            Text(PluralLocalization.string("VideoDuration %d", count: videoDuration))
         }
         .accessibilityIdentifier(AccessibilityID.Settings.videoDurationStepper)
         .accessibilityLabel(AccessibilityLabel.Settings.videoDuration(videoDuration))
@@ -306,3 +306,8 @@ struct LocalNotificationView: View {
         .accessibilityHint(AccessibilityHint.Settings.toggleHint)
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Utils/PluralLocalizationTests.swift
+// @test-coverage: Visible keep-last and video-duration labels share count forms with VoiceOver.
