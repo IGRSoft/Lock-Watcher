@@ -119,7 +119,7 @@ struct UseSnapshotOnLockedInputView: View {
     var body: some View {
         HStack(spacing: DesignSystem.Spacing.sm) {
             Toggle(isOn: $isUseSnapshotOnLockedInput) {
-                Text(String(format: NSLocalizedString("SnapshotOnLockedInput %d", comment: ""), lockedInputDelay))
+                Text(PluralLocalization.string("SnapshotOnLockedInput %d", count: lockedInputDelay))
             }
             .accessibilityIdentifier(AccessibilityID.Settings.lockedInputToggle)
             .accessibilityLabel(AccessibilityLabel.Settings.snapshotOnLockedInput(lockedInputDelay))
@@ -132,11 +132,13 @@ struct UseSnapshotOnLockedInputView: View {
             .disabled(!isUseSnapshotOnLockedInput)
             .accessibilityIdentifier(AccessibilityID.Settings.lockedInputDelayStepper)
             .accessibilityLabel(AccessibilityLabel.Settings.lockedInputDelay)
-            .accessibilityValue(String(format: NSLocalizedString("AccessibilityLockedInputDelayValue %d", comment: ""), lockedInputDelay))
+            .accessibilityValue(PluralLocalization.string("AccessibilityLockedInputDelayValue %d", count: lockedInputDelay))
         }
     }
 }
 
 // MARK: - Test Info
 
-// @test-file: Tests/ViewModels/SettingsViewModelTests.swift
+// @test-file: Tests/Utils/PluralLocalizationTests.swift
+// @related-tests: Tests/ViewModels/SettingsViewModelTests.swift
+// @test-coverage: Locked-input visible, spoken, and stepper-value counts use plural variants.
