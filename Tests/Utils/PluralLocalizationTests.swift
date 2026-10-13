@@ -1,10 +1,11 @@
 //
 //  PluralLocalizationTests.swift
 //
-//  Created on 12.10.2026.
+//  Created on 13.10.2026.
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import SwiftUI
 import XCTest
 @testable import Lock_Watcher
 
@@ -78,6 +79,31 @@ final class PluralLocalizationTests: XCTestCase {
             Expected(key: "SnapshotOnLockedInput %d", one: "Зробити знімок при введенні, через 1 секунду", two: "Зробити знімок при введенні, через 2 секунди", five: "Зробити знімок при введенні, через 5 секунд"),
             Expected(key: "SuccessTimer %d", one: "Вікно закриється через 1 секунду", two: "Вікно закриється через 2 секунди", five: "Вікно закриється через 5 секунд"),
         ], bundle: bundle, locale: Locale(identifier: "uk"))
+    }
+
+    func testChangingCountKeepsLocalizedLabelWidth() throws {
+        let cases: [(key: String, range: ClosedRange<Int>, values: [Int])] = [
+            ("KeepLastN %d", 1 ... 30, [9, 10]),
+            ("VideoDuration %d", SnapshotSettings.videoDurationRange, [1, 2]),
+            ("SnapshotOnLockedInput %d", TriggerSettings.lockedInputDelayRange, [9, 10]),
+        ]
+
+        for language in ["en", "uk"] {
+            let bundle = try languageBundle(language)
+            for item in cases {
+                let widths = item.values.map { count in
+                    let host = NSHostingView(rootView: StableCountLabel(key: item.key, count: count, range: item.range, bundle: bundle))
+                    return host.fittingSize.width
+                }
+                XCTAssertEqual(widths[0], widths[1], accuracy: 1, "\(language): \(item.key)")
+            }
+        }
+    }
+
+    func testEnglishRetainedCountAtNineAndTen() throws {
+        let bundle = try languageBundle("en")
+        XCTAssertEqual(PluralLocalization.string("KeepLastN %d", count: 9, bundle: bundle), "Keep last 9 snapshots")
+        XCTAssertEqual(PluralLocalization.string("KeepLastN %d", count: 10, bundle: bundle), "Keep last 10 snapshots")
     }
 }
 
