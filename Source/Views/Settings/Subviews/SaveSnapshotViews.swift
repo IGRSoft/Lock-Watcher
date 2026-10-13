@@ -44,8 +44,10 @@ struct SendNotificationToMailView: View {
 }
 
 /// A view component that allows the user to toggle whether to add location information to the snapshot.
+@MainActor
 struct AddLocationToSnapshotView: View {
     @Binding var addLocationToSnapshot: Bool
+    let requestAuthorization: @MainActor (@escaping @MainActor (Bool) -> Void) -> Void
 
     @State private var showingAlert = false
 
@@ -55,10 +57,8 @@ struct AddLocationToSnapshotView: View {
         }
         .onChange(of: addLocationToSnapshot) { _, value in
             if value {
-                PermissionsUtils.updateLocationPermissions { [self] isGranted in
-                    Task { @MainActor in
-                        showingAlert = !isGranted
-                    }
+                requestAuthorization { isGranted in
+                    showingAlert = !isGranted
                 }
             }
         }
@@ -310,4 +310,5 @@ struct LocalNotificationView: View {
 // MARK: - Test Info
 
 // @test-file: Tests/Utils/PluralLocalizationTests.swift
+// @related-tests: Tests/ViewModels/SettingsViewModelTests.swift
 // @test-coverage: Visible keep-last and video-duration labels share count forms with VoiceOver.
