@@ -864,18 +864,18 @@
       }
     },
     "AccessibilityVisitWebsite" : {
-      "comment" : "Visit IGR Software website",
+      "comment" : "Visit Agnidia website",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visit IGR Software website"
+            "value" : "Visit Agnidia website"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Відвідати вебсайт IGR Software"
+            "value" : "Відвідати вебсайт Agnidia"
           }
         }
       }
