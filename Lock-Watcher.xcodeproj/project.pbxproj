@@ -1326,7 +1326,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 2700;
-				ORGANIZATIONNAME = "IGR Soft";
+				ORGANIZATIONNAME = "Agnidia";
 				TargetAttributes = {
 					A533D82525AA11F40046B7C8 = {
 						CreatedOnToolsVersion = 12.3;
@@ -2084,7 +2084,7 @@
 		};
 		A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/IGRSoft/SimpleTracer";
+			repositoryURL = "https://github.com/Agnidia/SimpleTracer";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.1.1;
@@ -2092,7 +2092,7 @@
 		};
 		A58FC72426E2814E007674F6 /* XCRemoteSwiftPackageReference "CameraSnap" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/IGRSoft/CameraSnap.git";
+			repositoryURL = "https://github.com/Agnidia/CameraSnap.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.3.1;
@@ -2132,7 +2132,7 @@
 		};
 		A5C6DC4425796CCB009DE750 /* XCRemoteSwiftPackageReference "CameraSnap" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/IGRSoft/CameraSnap.git";
+			repositoryURL = "https://github.com/Agnidia/CameraSnap.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.3.1;

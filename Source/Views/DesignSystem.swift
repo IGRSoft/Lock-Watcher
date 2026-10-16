@@ -334,7 +334,7 @@ enum AccessibilityLabel {
     enum Info {
         static let openSettings = NSLocalizedString("AccessibilityOpenSettings", comment: "Open application settings")
         static let quitApp = NSLocalizedString("AccessibilityQuitApp", comment: "Quit Lock-Watcher")
-        static let visitWebsite = NSLocalizedString("AccessibilityVisitWebsite", comment: "Visit IGR Software website")
+        static let visitWebsite = NSLocalizedString("AccessibilityVisitWebsite", comment: "Visit Agnidia website")
         static let expandSection = NSLocalizedString("AccessibilityExpandInfo", comment: "Expand information section")
         static let collapseSection = NSLocalizedString("AccessibilityCollapseInfo", comment: "Collapse information section")
     }
